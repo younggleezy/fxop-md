@@ -5,7 +5,7 @@ const connect = require('./lib/connection')
 const { loadSession } = require('baileys')
 const io = require('socket.io-client')
 const { getandRequirePlugins } = require('./source/database/plugins')
-const fetchFiles = require('./lib/Misc')
+const { fetchFiles } = require('./lib/Misc')
 async function initialize() {
  try {
   if (config.SESSION_ID && !fs.existsSync('session')) {
