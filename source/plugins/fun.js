@@ -1,4 +1,4 @@
-const { bot, isPrivate, XKCDComic, getJson } = require("../../lib");
+const { bot, mode, XKCDComic, getJson } = require("../../lib");
 const axios = require("axios");
 
 let triviaGames = {};
@@ -6,7 +6,7 @@ let triviaGames = {};
 bot(
   {
     pattern: "trivia",
-    fromMe: isPrivate,
+    fromMe: mode,
     desc: "Start a trivia game.",
     type: "game",
   },
@@ -33,7 +33,7 @@ bot(
 bot(
   {
     on: "text",
-    fromMe: isPrivate,
+    fromMe: mode,
     pattern: false,
     dontAddCommandList: true,
   },
@@ -143,7 +143,7 @@ async function endTriviaGame(message, userId) {
 bot(
   {
     pattern: "xkcd",
-    fromMe: isPrivate,
+    fromMe: mode,
     desc: "Send a random XKCD comic.",
     type: "misc",
   },
@@ -171,7 +171,7 @@ bot(
 bot(
   {
     pattern: "joke",
-    fromMe: isPrivate,
+    fromMe: mode,
     desc: "Fetch a random joke",
     dontAddCommandList: false,
   },

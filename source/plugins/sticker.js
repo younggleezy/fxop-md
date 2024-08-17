@@ -1,10 +1,10 @@
 const config = require("../../config");
-const { bot, isPrivate, toAudio } = require("../../lib/");
+const { bot, mode, toAudio } = require("../../lib/");
 const { webp2mp4, textToImg } = require("../../lib/functions");
 bot(
   {
     pattern: "sticker",
-    fromMe: isPrivate,
+    fromMe: mode,
     desc: "Converts Photo/video/text to sticker",
     type: "converter",
   },
@@ -30,7 +30,7 @@ bot(
 bot(
   {
     pattern: "take",
-    fromMe: isPrivate,
+    fromMe: mode,
     desc: "Converts Photo or video to sticker",
     type: "converter",
   },
@@ -47,7 +47,7 @@ bot(
 bot(
   {
     pattern: "photo",
-    fromMe: isPrivate,
+    fromMe: mode,
     desc: "Changes sticker to Photo",
     type: "converter",
   },
@@ -62,7 +62,7 @@ bot(
 bot(
   {
     pattern: "mp3",
-    fromMe: isPrivate,
+    fromMe: mode,
     desc: "converts video/voice to mp3",
     type: "downloader",
   },
@@ -83,7 +83,7 @@ bot(
 bot(
   {
     pattern: "mp4",
-    fromMe: isPrivate,
+    fromMe: mode,
     desc: "converts video/voice to mp4",
     type: "downloader",
   },
@@ -112,7 +112,7 @@ bot(
 bot(
   {
     pattern: "img",
-    fromMe: isPrivate,
+    fromMe: mode,
     desc: "Converts Sticker to image",
     type: "converter",
   },

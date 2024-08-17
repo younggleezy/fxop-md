@@ -1,5 +1,5 @@
 const { DELETED_LOG_CHAT, DELETED_LOG } = require("../../config");
-const { bot, isPrivate, serialize } = require("../../lib");
+const { bot, mode, serialize } = require("../../lib");
 const { loadMessage, getName } = require("../database/StoreDb");
 bot(
   {

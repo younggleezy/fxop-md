@@ -1,6 +1,6 @@
 const {
   bot,
-  isPrivate,
+  mode,
   isUrl,
   AddMp3Meta,
   getBuffer,
@@ -13,7 +13,7 @@ const { yta, ytv, ytsdl } = require("../../lib/ytdl");
 bot(
   {
     pattern: "yta",
-    fromMe: isPrivate,
+    fromMe: mode,
     desc: "Download audio from youtube",
   },
   async (message, match) => {
@@ -42,7 +42,7 @@ bot(
 bot(
   {
     pattern: "ytv",
-    fromMe: isPrivate,
+    fromMe: mode,
     desc: "Download audio from youtube",
   },
   async (message, match) => {
@@ -86,7 +86,7 @@ bot(
 bot(
   {
     pattern: "song",
-    fromMe: isPrivate,
+    fromMe: mode,
     desc: "Download audio from youtube",
   },
   async (message, match) => {
@@ -110,7 +110,7 @@ bot(
 bot(
   {
     pattern: "video",
-    fromMe: isPrivate,
+    fromMe: mode,
     desc: "Download video from youtube",
   },
   async (message, match) => {

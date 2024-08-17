@@ -1,10 +1,10 @@
-const { bot, isPrivate } = require("../../lib/");
+const { bot, mode } = require("../../lib/");
 const { listall } = require("../../lib/fancy");
 
 bot(
   {
     pattern: "fancy",
-    fromMe: isPrivate,
+    fromMe: mode,
     desc: "converts text to fancy text",
     type: "converter",
   },

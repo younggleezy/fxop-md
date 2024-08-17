@@ -1,10 +1,10 @@
-const { bot, isPrivate, serialize } = require("../../lib/");
+const { bot, mode, serialize } = require("../../lib/");
 const { loadMessage } = require("../database/StoreDb");
 
 bot(
   {
     pattern: "quoted",
-    fromMe: isPrivate,
+    fromMe: mode,
     desc: "quoted message",
   },
   async (message, match) => {

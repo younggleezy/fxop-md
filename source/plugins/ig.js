@@ -3,13 +3,13 @@ const {
   getUrl,
   igdl,
   isIgUrl,
-  isPrivate,
+  mode,
   getJson,
 } = require("../../lib/");
 bot(
   {
     pattern: "insta",
-    fromMe: isPrivate,
+    fromMe: mode,
     desc: "To download instagram media",
     type: "user",
   },

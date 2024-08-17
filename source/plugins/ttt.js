@@ -1,8 +1,8 @@
-const { bot, isAdmin, parseJid, isPrivate } = require("../../lib");
+const { bot, isAdmin, parseJid, mode } = require("../../lib");
 bot(
   {
     pattern: "delttt",
-    fromMe: isPrivate,
+    fromMe: mode,
     desc: "delete TicTacToe running game.",
     type: "game",
     dontAddCommandList:true

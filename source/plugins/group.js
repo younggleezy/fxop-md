@@ -1,4 +1,4 @@
-const { bot, isPrivate } = require("../../lib/");
+const { bot, mode } = require("../../lib/");
 const { isAdmin, parsedJid } = require("../../lib");
 
 bot(

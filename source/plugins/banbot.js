@@ -1,4 +1,4 @@
-const { bot, isPrivate } = require("../../lib/");
+const { bot, mode } = require("../../lib/");
 const { parsedJid } = require("../../lib/functions");
 const { banUser, unbanUser, isBanned } = require("../database/ban");
 bot(

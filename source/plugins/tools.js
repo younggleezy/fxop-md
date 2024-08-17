@@ -1,4 +1,4 @@
-const { bot, qrcode, Bitly, isPrivate, isUrl, readQr } = require('../../lib/')
+const { bot, qrcode, Bitly, mode, isUrl, readQr } = require('../../lib/')
 
 const { downloadMediaMessage } = require('baileys')
 const { getLyrics } = require('../../lib/functions')
@@ -6,7 +6,7 @@ const config = require('../../config')
 bot(
  {
   pattern: 'vv',
-  fromMe: isPrivate,
+  fromMe: mode,
   desc: 'Forwards The View once messsage',
   type: 'tool',
  },
@@ -43,7 +43,7 @@ bot(
 bot(
  {
   pattern: 'qr',
-  fromMe: isPrivate,
+  fromMe: mode,
   desc: 'Read/Write Qr.',
   type: 'Tool',
  },
@@ -72,7 +72,7 @@ bot(
 bot(
  {
   pattern: 'bitly',
-  fromMe: isPrivate,
+  fromMe: mode,
   desc: 'Converts Url to bitly',
   type: 'tool',
  },
@@ -88,7 +88,7 @@ bot(
 bot(
  {
   pattern: 'lyric',
-  fromMe: isPrivate,
+  fromMe: mode,
   desc: 'Searches for lyrics based on the format: song;artist',
   type: 'tools',
  },

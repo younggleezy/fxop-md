@@ -1,12 +1,12 @@
 const plugins = require("../../lib/plugins");
-const { bot, isPrivate, clockString } = require("../../lib");
+const { bot, mode, clockString } = require("../../lib");
 const { BOT_INFO } = require("../../config");
 const { hostname } = require("os");
 
 bot(
   {
     pattern: "menu",
-    fromMe: isPrivate,
+    fromMe: mode,
     desc: "Show All Commands",
     dontAddCommandList: true,
     type: "user",
@@ -75,7 +75,7 @@ Description: ${i.desc}\`\`\``);
 bot(
   {
     pattern: "list",
-    fromMe: isPrivate,
+    fromMe: mode,
     desc: "Show All Commands",
     type: "user",
     dontAddCommandList: true,
