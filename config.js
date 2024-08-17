@@ -16,6 +16,7 @@ module.exports = {
  WELCOME_MSG: process.env.WELCOME_MSG || 'Hi @user Welcome to @gname',
  GOODBYE_MSG: process.env.GOODBYE_MSG || 'Hi @user It was Nice Seeing you',
  AUTHOR: process.env.AUTHOR || 'Astro',
+ LABS: process.env.ELEVENLABS_API_KEY || 'sk_6c6fe122e56c4cff8d0f636facc534bba7219ac0903316c5',
  HEROKU_APP_NAME: process.env.HEROKU_APP_NAME || '',
  HEROKU_API_KEY: process.env.HEROKU_API_KEY || '',
  HEROKU: toBool(process.env.HEROKU) || false,
