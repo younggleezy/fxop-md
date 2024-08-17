@@ -11,6 +11,6 @@ bot(
   await message.reply('processing')
   const facebook = new Facebook(match)
   const hdVideo = await facebook.getHdVideo()
-  await message.sendMessage(message.jid, { url: hdVideo }, {}, 'video')
+  await message.sendMessage(message.jid, hdVideo, {}, 'video')
  }
 )
