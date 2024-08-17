@@ -1,6 +1,6 @@
 const plugins = require("../../lib/plugins");
-const { command, isPrivate, clockString, pm2Uptime } = require("../../lib");
-const { OWNER_NAME, BOT_NAME } = require("../../config");
+const { command, isPrivate, clockString } = require("../../lib");
+const { BOT_INFO } = require("../../config");
 const { hostname } = require("os");
 
 command(
@@ -29,8 +29,8 @@ Description: ${i.desc}\`\`\``);
       let [date, time] = new Date()
         .toLocaleString("en-IN", { timeZone: "Asia/Kolkata" })
         .split(",");
-      let menu = `╭━━━━━ᆫ ${BOT_NAME} ᄀ━━━
-┃ ⎆  *OWNER*:  ${OWNER_NAME}
+      let menu = `╭━━━━━ᆫ ${BOT_INFO.split(',')[1]} ᄀ━━━
+┃ ⎆  *OWNER*:  ${BOT_INFO.split(',')[0]}
 ┃ ⎆  *PREFIX*: ${prefix}
 ┃ ⎆  *HOST NAME*: ${hostname().split("-")[0]}
 ┃ ⎆  *DATE*: ${date}
