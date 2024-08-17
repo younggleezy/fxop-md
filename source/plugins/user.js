@@ -2,31 +2,8 @@ const { parsedJid } = require('../../lib')
 const { exec } = require('child_process')
 const { PausedChats, WarnDB } = require('../database')
 const { WARN_COUNT } = require('../../config')
+const { formatTime } = require('../../lib/utils')
 const { saveWarn, resetWarn } = WarnDB
-const runtime = function (seconds) {
- const days = Math.floor(seconds / 86400)
- const hours = Math.floor((seconds % 86400) / 3600)
- const minutes = Math.floor((seconds % 3600) / 60)
- const seconds = seconds % 60
-
- let runtime = ''
-
- if (days > 0) {
-  runtime += `${days}d `
- }
- if (hours > 0) {
-  runtime += `${hours}h `
- }
- if (minutes > 0) {
-  runtime += `${minutes}m `
- }
- if (seconds > 0) {
-  runtime += `${seconds}s`
- }
-
- return runtime.trim()
-}
-exports.runtime = runtime
 try {
  bot(
   {
@@ -236,13 +213,13 @@ try {
 
  bot(
   {
-   pattern: 'uptime',
+   pattern: 'runtime',
    fromMe: true,
    desc: 'Check uptime of bot',
    type: 'user',
   },
   async (message, match) => {
-   message.reply(`Running Since: ${runtime(process.uptime())}`)
+   message.reply(`Running Since: ${formatTime(process.uptime())}`)
   }
  )
 
