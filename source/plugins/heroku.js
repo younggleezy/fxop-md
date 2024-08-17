@@ -7,7 +7,7 @@ const baseURI = "/apps/" + Config.HEROKU_APP_NAME;
 const { secondsToDHMS } = require("../../lib/functions");
 const { delay } = require("baileys");
 
-command(
+bot(
   {
     pattern: "restart",
     fromMe: true,
@@ -40,7 +40,7 @@ command(
     }
   }
 );
-command(
+bot(
   {
     pattern: "shutdown",
     fromMe: true,
@@ -76,7 +76,7 @@ command(
   }
 );
 
-command(
+bot(
   {
     pattern: "dyno",
     fromMe: true,

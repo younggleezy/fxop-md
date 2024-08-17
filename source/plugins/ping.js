@@ -1,6 +1,6 @@
 const { fromBuffer, mimeTypes } = require("file-type");
 const { command, isPrivate } = require("../../lib/");
-command(
+bot(
   {
     pattern: "ping",
     fromMe: isPrivate,

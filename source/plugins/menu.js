@@ -3,7 +3,7 @@ const { command, isPrivate, clockString } = require("../../lib");
 const { BOT_INFO } = require("../../config");
 const { hostname } = require("os");
 
-command(
+bot(
   {
     pattern: "menu",
     fromMe: isPrivate,
@@ -72,7 +72,7 @@ Description: ${i.desc}\`\`\``);
 );
 
 
-command(
+bot(
   {
     pattern: "list",
     fromMe: isPrivate,

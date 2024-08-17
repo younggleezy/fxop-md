@@ -1,7 +1,7 @@
 const { command, isPrivate, serialize } = require("../../lib/");
 const { loadMessage } = require("../database/StoreDb");
 
-command(
+bot(
   {
     pattern: "quoted",
     fromMe: isPrivate,

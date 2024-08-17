@@ -1,7 +1,7 @@
 const { getFilter, setFilter, deleteFilter } = require("../database/filters");
 const { command} = require("../../lib");
 
-command(
+bot(
   {
     pattern: "filter",
     fromMe: true,
@@ -37,7 +37,7 @@ command(
   }
 );
 
-command(
+bot(
   {
     pattern: "stop",
     fromMe: true,
@@ -57,7 +57,7 @@ command(
   }
 );
 
-command(
+bot(
   { on: "text", fromMe: false, dontAddCommandList: true },
   async (message, match) => {
     var filtreler = await getFilter(message.jid);

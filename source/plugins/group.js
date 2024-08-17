@@ -1,7 +1,7 @@
 const { command, isPrivate } = require("../../lib/");
 const { isAdmin, parsedJid } = require("../../lib");
 
-command(
+bot(
   {
     pattern: "add",
     fromMe: true,
@@ -28,7 +28,7 @@ command(
   }
 );
 
-command(
+bot(
   {
     pattern: "kick",
     fromMe: true,
@@ -54,7 +54,7 @@ command(
     });
   }
 );
-command(
+bot(
   {
     pattern: "promote",
     fromMe: true,
@@ -80,7 +80,7 @@ command(
     });
   }
 );
-command(
+bot(
   {
     pattern: "demote",
     fromMe: true,
@@ -110,7 +110,7 @@ command(
   }
 );
 
-command(
+bot(
   {
     pattern: "mute",
     fromMe: true,
@@ -127,7 +127,7 @@ command(
   }
 );
 
-command(
+bot(
   {
     pattern: "unmute",
     fromMe: true,
@@ -144,7 +144,7 @@ command(
   }
 );
 
-command(
+bot(
   {
     pattern: "gjid",
     fromMe: true,
@@ -165,7 +165,7 @@ command(
   }
 );
 
-command(
+bot(
   {
     pattern: "tagall",
     fromMe: true,
@@ -185,7 +185,7 @@ command(
   }
 );
 
-command(
+bot(
   {
     pattern: "tag",
     fromMe: true,

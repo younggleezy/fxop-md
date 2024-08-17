@@ -10,7 +10,7 @@ const {
 } = require("../../lib");
 const { yta, ytv, ytsdl } = require("../../lib/ytdl");
 
-command(
+bot(
   {
     pattern: "yta",
     fromMe: isPrivate,
@@ -39,7 +39,7 @@ command(
   }
 );
 
-command(
+bot(
   {
     pattern: "ytv",
     fromMe: isPrivate,
@@ -83,7 +83,7 @@ command(
   }
 );
 
-command(
+bot(
   {
     pattern: "song",
     fromMe: isPrivate,
@@ -107,7 +107,7 @@ command(
   }
 );
 
-command(
+bot(
   {
     pattern: "video",
     fromMe: isPrivate,

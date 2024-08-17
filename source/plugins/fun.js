@@ -3,7 +3,7 @@ const axios = require("axios");
 
 let triviaGames = {};
 
-command(
+bot(
   {
     pattern: "trivia",
     fromMe: isPrivate,
@@ -30,7 +30,7 @@ command(
   }
 );
 
-command(
+bot(
   {
     on: "text",
     fromMe: isPrivate,
@@ -140,7 +140,7 @@ async function endTriviaGame(message, userId) {
 /**
  *
  */
-command(
+bot(
   {
     pattern: "xkcd",
     fromMe: isPrivate,
@@ -168,7 +168,7 @@ command(
  *
  */
 
-command(
+bot(
   {
     pattern: "joke",
     fromMe: isPrivate,

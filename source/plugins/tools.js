@@ -3,7 +3,7 @@ const { command, qrcode, Bitly, isPrivate, isUrl, readQr } = require('../../lib/
 const { downloadMediaMessage } = require('baileys')
 const { getLyrics } = require('../../lib/functions')
 const config = require('../../config')
-command(
+bot(
  {
   pattern: 'vv',
   fromMe: isPrivate,
@@ -17,7 +17,7 @@ command(
 )
 
 // STATUS SAVER ( MAKE fromMe: false TO USE AS PUBLIC )
-command(
+bot(
  {
   on: 'text',
   fromMe: !config.STATUS_SAVER,
@@ -40,7 +40,7 @@ command(
  }
 )
 
-command(
+bot(
  {
   pattern: 'qr',
   fromMe: isPrivate,
@@ -69,7 +69,7 @@ command(
  }
 )
 
-command(
+bot(
  {
   pattern: 'bitly',
   fromMe: isPrivate,
@@ -85,7 +85,7 @@ command(
  }
 )
 
-command(
+bot(
  {
   pattern: 'lyric',
   fromMe: isPrivate,

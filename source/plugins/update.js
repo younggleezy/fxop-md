@@ -6,7 +6,7 @@ const simplegit = require("simple-git");
 const git = simplegit();
 var branch = config.BRANCH;
 
-command(
+bot(
   {
     pattern: "update",
     fromMe: true,

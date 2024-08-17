@@ -1,5 +1,5 @@
 const { command, isAdmin, parseJid, isPrivate } = require("../../lib");
-command(
+bot(
   {
     pattern: "delttt",
     fromMe: isPrivate,
@@ -26,7 +26,7 @@ command(
   }
 );
 
-command(
+bot(
   {
     pattern: "ttt",
     fromMe: false,
@@ -96,7 +96,7 @@ Current turn: @${room.game.currentTurn.split("@")[0]}
   }
 );
 
-command(
+bot(
   {
     on: "text",
     fromMe: false,

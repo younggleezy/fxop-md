@@ -1,6 +1,6 @@
 const { command, parsedJid,isPrivate } = require("../../lib/");
 
-command(
+bot(
   {
     pattern: "fd",
     fromMe: isPrivate,

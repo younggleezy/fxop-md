@@ -6,7 +6,7 @@ const {
   isPrivate,
   getJson,
 } = require("../../lib/");
-command(
+bot(
   {
     pattern: "insta",
     fromMe: isPrivate,

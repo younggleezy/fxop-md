@@ -1,6 +1,6 @@
 const { command, isPrivate } = require("../../lib");
 
-command(
+bot(
   {
     pattern: "button",
     fromMe: true,

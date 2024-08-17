@@ -5,7 +5,7 @@ const { WARN_COUNT } = require("../../config");
 const { secondsToDHMS } = require("../../lib/functions");
 const { saveWarn, resetWarn } = WarnDB;
 
-command(
+bot(
   {
     pattern: "pause",
     fromMe: true,
@@ -24,7 +24,7 @@ command(
   }
 );
 
-command(
+bot(
   {
     pattern: "shutdown",
     fromMe: true,
@@ -42,7 +42,7 @@ command(
   }
 );
 
-command(
+bot(
   {
     pattern: "resume",
     fromMe: true,
@@ -70,7 +70,7 @@ command(
   }
 );
 
-command(
+bot(
   {
     pattern: "setpp",
     fromMe: true,
@@ -86,7 +86,7 @@ command(
   }
 );
 
-command(
+bot(
   {
     pattern: "setname",
     fromMe: true,
@@ -100,7 +100,7 @@ command(
   }
 );
 
-command(
+bot(
   {
     pattern: "block",
     fromMe: true,
@@ -122,7 +122,7 @@ command(
   }
 );
 
-command(
+bot(
   {
     pattern: "unblock",
     fromMe: true,
@@ -148,7 +148,7 @@ command(
   }
 );
 
-command(
+bot(
   {
     pattern: "jid",
     fromMe: true,
@@ -163,7 +163,7 @@ command(
   }
 );
 
-command(
+bot(
   {
     pattern: "dlt",
     fromMe: true,
@@ -177,7 +177,7 @@ command(
   }
 );
 
-command(
+bot(
   {
     pattern: "warn",
     fromMe: true,
@@ -215,7 +215,7 @@ command(
   }
 );
 
-command(
+bot(
   {
     pattern: "resetwarn",
     fromMe: true,
@@ -234,7 +234,7 @@ command(
   }
 );
 
-command(
+bot(
   {
     pattern: "uptime",
     fromMe: true,

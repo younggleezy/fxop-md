@@ -2,7 +2,7 @@ const { command } = require("../../lib");
 const { setMessage, getMessage, delMessage, getStatus, toggleStatus } =
   require("../database").Greetings;
 
-command(
+bot(
   {
     pattern: "welcome",
     fromMe: true,
@@ -53,7 +53,7 @@ command(
   }
 );
 
-command(
+bot(
   {
     pattern: "goodbye",
     fromMe: true,

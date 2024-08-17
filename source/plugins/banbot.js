@@ -1,7 +1,7 @@
 const { command, isPrivate } = require("../../lib/");
 const { parsedJid } = require("../../lib/functions");
 const { banUser, unbanUser, isBanned } = require("../database/ban");
-command(
+bot(
   {
     on: "message",
     fromMe: true,
@@ -21,9 +21,9 @@ command(
   }
 );
 
-command(
+bot(
   {
-    pattern: "banbot",
+    pattern: "ban",
     fromMe: true,
     desc: "ban bot from a chat",
     type: "",
@@ -39,9 +39,9 @@ command(
   }
 );
 
-command(
+bot(
   {
-    pattern: "unbanbot",
+    pattern: "unban",
     fromMe: true,
     desc: "Unban bot from a chat",
     type: "user",

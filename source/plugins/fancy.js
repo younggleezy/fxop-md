@@ -1,7 +1,7 @@
 const { command, isPrivate } = require("../../lib/");
 const { listall } = require("../../lib/fancy");
 
-command(
+bot(
   {
     pattern: "fancy",
     fromMe: isPrivate,
