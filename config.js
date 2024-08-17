@@ -11,7 +11,7 @@ module.exports = {
  LANG: process.env.LANG || 'EN',
  HANDLERS: process.env.HANDLER || '.',
  RMBG_KEY: process.env.RMBG_KEY || false,
- BRANCH: 'main',
+ BRANCH: 'master',
  WARN_COUNT: 3,
  PACKNAME: process.env.PACKNAME || 'FXOP-MD',
  WELCOME_MSG: process.env.WELCOME_MSG || 'Hi @user Welcome to @gname',
