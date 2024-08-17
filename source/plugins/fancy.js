@@ -1,4 +1,4 @@
-const { command, isPrivate } = require("../../lib/");
+const { bot, isPrivate } = require("../../lib/");
 const { listall } = require("../../lib/fancy");
 
 bot(

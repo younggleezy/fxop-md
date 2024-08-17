@@ -1,4 +1,4 @@
-const { command, isPrivate, serialize } = require("../../lib/");
+const { bot, isPrivate, serialize } = require("../../lib/");
 const { loadMessage } = require("../database/StoreDb");
 
 bot(

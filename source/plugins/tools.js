@@ -1,4 +1,4 @@
-const { command, qrcode, Bitly, isPrivate, isUrl, readQr } = require('../../lib/')
+const { bot, qrcode, Bitly, isPrivate, isUrl, readQr } = require('../../lib/')
 
 const { downloadMediaMessage } = require('baileys')
 const { getLyrics } = require('../../lib/functions')

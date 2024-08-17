@@ -1,5 +1,5 @@
 const config = require("../../config");
-const { command, isPrivate, toAudio } = require("../../lib/");
+const { bot, isPrivate, toAudio } = require("../../lib/");
 const { webp2mp4, textToImg } = require("../../lib/functions");
 bot(
   {

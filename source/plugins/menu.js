@@ -1,5 +1,5 @@
 const plugins = require("../../lib/plugins");
-const { command, isPrivate, clockString } = require("../../lib");
+const { bot, isPrivate, clockString } = require("../../lib");
 const { BOT_INFO } = require("../../config");
 const { hostname } = require("os");
 

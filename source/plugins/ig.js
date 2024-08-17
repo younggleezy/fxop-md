@@ -1,5 +1,5 @@
 const {
-  command,
+  bot,
   getUrl,
   igdl,
   isIgUrl,

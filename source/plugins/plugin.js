@@ -1,4 +1,4 @@
-const { command } = require("../../lib");
+const { bot } = require("../../lib");
 const axios = require("axios");
 const fs = require("fs");
 const { PluginDB, installPlugin } = require("../database").Plugins;

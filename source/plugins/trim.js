@@ -1,5 +1,5 @@
 const { fromBuffer } = require("file-type");
-const { command, isPrivate } = require("../../lib/");
+const { bot, isPrivate } = require("../../lib/");
 const { ffmpeg, parseTimeToSeconds } = require("../../lib/functions");
 bot(
   {

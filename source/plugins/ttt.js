@@ -1,4 +1,4 @@
-const { command, isAdmin, parseJid, isPrivate } = require("../../lib");
+const { bot, isAdmin, parseJid, isPrivate } = require("../../lib");
 bot(
   {
     pattern: "delttt",

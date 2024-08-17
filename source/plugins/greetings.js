@@ -1,4 +1,4 @@
-const { command } = require("../../lib");
+const { bot } = require("../../lib");
 const { setMessage, getMessage, delMessage, getStatus, toggleStatus } =
   require("../database").Greetings;
 

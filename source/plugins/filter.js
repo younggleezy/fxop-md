@@ -1,5 +1,5 @@
 const { getFilter, setFilter, deleteFilter } = require("../database/filters");
-const { command} = require("../../lib");
+const { bot} = require("../../lib");
 
 bot(
   {
