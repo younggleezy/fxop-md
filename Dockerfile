@@ -7,7 +7,7 @@ RUN apt-get update && \
     apt-get upgrade -y && \
     rm -rf /var/lib/apt/lists/*
 
-RUN git clone https://github.com/FXastro/fx-md.git /xasena
-WORKDIR /xasena
+RUN git clone https://github.com/FXastro/fx-md.git /root/bot
+WORKDIR /root/bot
 RUN npm install
 CMD ["node", "index.js"]
