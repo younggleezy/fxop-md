@@ -4,7 +4,7 @@ const toBool = x => x === 'true'
 const DATABASE_URL = process.env.DATABASE_URL || './database.db'
 module.exports = {
  BASE_API: process.env.BASE_API || 'https://astro-api-guru.onrender.com',
- SESSION_ID: process.env.SESSION_ID || null,
+ SESSION_ID: process.env.SESSION_ID || '',
  BOT_INFO: process.env.BOT_INFO || 'Astro,FXOP-MD',
  SUDO: process.env.SUDO || '2348039607375,2349027862116',
  HANDLERS: process.env.HANDLER || '.',

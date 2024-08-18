@@ -1,6 +1,6 @@
 const path = require('path')
 const config = require('./config')
-const connect = require('./lib/connection')
+const connect = require('./lib/client')
 const io = require('socket.io-client')
 const { getandRequirePlugins } = require('./source/database/plugins')
 const { fetchFiles } = require('./lib/Misc')
