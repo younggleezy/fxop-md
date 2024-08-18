@@ -6,27 +6,24 @@ const { exec } = require('child_process')
 const { formatTime } = require('../../lib/utils')
 const config = require('../../config')
 const { PROCESSNAME } = require('../../config')
-const { bot } = require('../../lib/')
-const { exec } = require('child_process')
 const simplegit = require('simple-git')
 const git = simplegit()
 var branch = config.BRANCH
 
-bot(
- {
-  pattern: 'ping ?(.*)',
-  fromMe: mode,
-  desc: 'Bot response in milliseconds.',
-  type: 'system',
+bot({
+   pattern: 'ping ?(.*)',
+   fromMe: mode,
+   desc: 'Bot response in milliseconds.',
+   type: 'system',
  },
  async message => {
-  const start = new Date().getTime()
-  const msg = await message.reply('*ᴩɪɴɢ...*')
-  const end = new Date().getTime()
-  const responseTime = end - start
-  await message.reply(`*pong!*\nʟᴀᴛᴇɴᴄʏ: ${responseTime} ms`)
- }
-)
+   const start = new Date().getTime();
+   const msg = await message.reply('*ᴩɪɴɢ...*');
+   const end = new Date().getTime();
+   const responseTime = end - start;
+   await msg.edit(`*ᴩɪɴɢ:* ${responseTime}ms`);
+ });
+ 
 
 bot(
  {
