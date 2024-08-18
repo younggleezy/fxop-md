@@ -9,5 +9,5 @@ RUN apt-get update && \
 
 RUN git clone https://github.com/FXastro/fx-md.git /root/bot
 WORKDIR /root/bot
-RUN npm install
+RUN yarn install
 CMD ["node", "index.js"]
