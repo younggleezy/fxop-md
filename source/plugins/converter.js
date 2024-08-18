@@ -10,7 +10,7 @@ bot(
   desc: 'Converts Photo/video/text to sticker',
   type: 'converter',
  },
- async (message, match, m) => {
+ async (message, m) => {
   if (!message.reply_message && (!message.reply_message.video || !message.reply_message.sticker || !message.reply_message.text)) return await message.reply('_Reply to photo/video/text_')
   var buff
   if (message.reply_message.text) {
@@ -46,7 +46,7 @@ bot(
   desc: 'Changes sticker to Photo',
   type: 'converter',
  },
- async (message, match, m) => {
+ async (message, m) => {
   if (!message.reply_message.sticker) return await message.reply('_Not a sticker_')
   let buff = await m.quoted.download()
   return await message.sendMessage(message.jid, buff, {}, 'image')

@@ -2,6 +2,7 @@ const { bot, mode, parsedJid, serialize } = require('../../lib/')
 const config = require('../../config')
 const { DELETED_LOG_CHAT, DELETED_LOG } = require('../../config')
 const { loadMessage, getName } = require('../database/StoreDb')
+const { PausedChats } = require('../database')
 
 bot(
  {
@@ -15,8 +16,6 @@ bot(
   return await message.sendFile(buff)
  }
 )
-
-const { PausedChats } = require('../database')
 
 bot(
  {
@@ -208,7 +207,7 @@ bot(
   pattern: 'quoted',
   fromMe: mode,
   desc: 'quoted message',
-  type: 'whatsapp'
+  type: 'whatsapp',
  },
  async message => {
   if (!message.reply_message) return await message.reply('*Reply to a message*')
