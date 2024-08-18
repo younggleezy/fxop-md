@@ -1,4 +1,4 @@
-const { Function } = require('../../lib/')
+const { bot } = require('../../lib/')
 
 var AFK = {
  isAfk: false,
@@ -18,7 +18,7 @@ function secondsToHms(d) {
  return hDisplay + mDisplay + sDisplay
 }
 
-Function(
+bot(
  {
   on: 'text',
   fromMe: false,
@@ -48,7 +48,7 @@ Function(
  }
 )
 
-Function(
+bot(
  {
   on: 'text',
   fromMe: true,
@@ -63,7 +63,7 @@ Function(
  }
 )
 
-Function(
+bot(
  {
   pattern: 'afk ?(.*)',
   fromMe: true,

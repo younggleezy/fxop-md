@@ -1,4 +1,4 @@
-const { bot, mode, parsedJid, serialize } = require('../../lib/')
+const { bot, mode, parsedJid, serialize, isAdmin } = require('../../lib/')
 const config = require('../../config')
 const { DELETED_LOG_CHAT, DELETED_LOG } = require('../../config')
 const { loadMessage, getName } = require('../database/StoreDb')
@@ -174,15 +174,26 @@ bot(
 
 bot(
  {
-  pattern: 'del',
-  fromMe: true,
-  desc: 'deletes a message',
+  pattern: 'del$',
+  fromMe: mode,
+  desc: 'Delete message sent by the bot or a participant',
   type: 'whatsapp',
  },
- async (message, client) => {
-  if (message.isGroup) {
-   client.sendMessage(message.jid, { delete: message.reply_message.key })
+ async message => {
+  if (!message.reply_message) {
+   return await message.reply('_Reply to a message to delete it_')
   }
+  const replyMessage = message.reply_message
+  if (!replyMessage.fromMe && !message.isAdmin) {
+   return await message.reply("You need to be an admin to delete others' messages")
+  }
+  const deleteObj = {
+   remoteJid: message.jid,
+   id: replyMessage.id,
+   participant: replyMessage.sender,
+  }
+  await message.client.sendMessage(message.jid, { delete: deleteObj })
+  await message.reply('Message deleted successfully.')
  }
 )
 
