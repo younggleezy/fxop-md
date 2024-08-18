@@ -3,8 +3,10 @@
   "version": "1.0.1",
   "description": "Whatsapp Bot",
   "main": "index.js",
-  "scripts": {
-    "start": "pm2 start . --attach --name fxop-md"
+   "scripts": {
+    "start": "pm2 start . --attach --name fxop-md",
+    "stop": "pm2 stop fxop-md",
+    "restart": "pm2 restart fxop-md"
   },
   "dependencies": {
     "@adiwajshing/keyed-db": "^0.2.4",
@@ -37,5 +39,8 @@
     "socket.io-client": "^4.7.5",
     "sqlite3": "^5.1.7",
     "stream-buffers": "^3.0.3"
+  },
+  "engines": {
+    "node": "22.6.0"
   }
 }
