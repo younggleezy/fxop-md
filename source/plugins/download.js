@@ -1,5 +1,35 @@
 const { bot, mode, isUrl, getBuffer, getJson, validateQuality } = require('../../lib')
-const { yta, ytv, ytsdl } = require('../../lib/ytdl')
+const { Facebook, Instagram } = require('../../lib/Misc')
+const { ytsdl } = require('../../lib/ytdl')
+bot(
+ {
+  pattern: 'facebook',
+  info: 'Download Facebook Media',
+  type: 'downloader',
+ },
+ async (message, match) => {
+  if (!match) return await message.reply('_Provide Facebook link!_')
+  await message.reply('processing')
+  const facebook = new Facebook(match)
+  const hdVideo = await facebook.getHdVideo()
+  await message.sendMessage(message.jid, hdVideo, {}, 'video')
+ }
+)
+
+bot(
+ {
+  pattern: 'instagram',
+  info: 'Download Instagram Media',
+  type: 'downloader',
+ },
+ async (message, match) => {
+  if (!match) return await message.reply('_Provide Instagram Link!_')
+  await message.reply('_Downloading_')
+  const insta = new Instagram()
+  const result = await insta.download(match)
+  await message.sendMessage(message.jid, result, {}, 'video')
+ }
+)
 
 bot(
  {
