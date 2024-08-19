@@ -1,7 +1,7 @@
-const config = require('../../config')
-const { bot, mode, toAudio } = require('../../lib/')
-const { webp2mp4, textToImg } = require('../../lib/functions')
-const { listall } = require('../../lib/fancy')
+const config = require('../config')
+const { bot, mode, toAudio } = require('../lib/')
+const { webp2mp4, textToImg } = require('../lib/functions')
+const { listall } = require('../lib/fancy')
 
 bot(
  {

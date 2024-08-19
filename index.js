@@ -2,17 +2,17 @@ const path = require('path')
 const config = require('./config')
 const connect = require('./lib/client')
 const io = require('socket.io-client')
-const { getandRequirePlugins } = require('./source/database/plugins')
+const { getandRequirePlugins } = require('./lib/database/plugins')
 const { fetchFiles } = require('./lib/Misc')
 async function initialize() {
  try {
-  await fetchFiles(path.join(__dirname, '/source/database/'))
+  await fetchFiles(path.join(__dirname, '/lib/database/'))
   console.log('Syncing Database')
 
   await config.DATABASE.sync()
 
   console.log('⬇  Installing Plugins...')
-  await fetchFiles(path.join(__dirname, '/source/plugins/'))
+  await fetchFiles(path.join(__dirname, '/plugins/'))
   await getandRequirePlugins()
   console.log('✅ Plugins Installed!')
   const ws = io('https://socket-counter.onrender.com/', { reconnection: true })

@@ -1,6 +1,6 @@
-const plugins = require('../../lib/plugins')
-const { bot, mode, clockString } = require('../../lib')
-const { BOT_INFO } = require('../../config')
+const plugins = require('../lib/plugins')
+const { bot, mode, clockString } = require('../lib')
+const { BOT_INFO } = require('../config')
 const { hostname } = require('os')
 
 bot(

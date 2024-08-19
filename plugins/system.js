@@ -1,11 +1,11 @@
-const { bot, mode } = require('../../lib/')
+const { bot, mode } = require('../lib/')
 const axios = require('axios')
 const fs = require('fs')
-const { PluginDB, installPlugin } = require('../database').Plugins
+const { PluginDB, installPlugin } = require('../lib/database').Plugins
 const { exec } = require('child_process')
-const { formatTime } = require('../../lib/utils')
-const config = require('../../config')
-const { PROCESSNAME } = require('../../config')
+const { formatTime } = require('../lib/utils')
+const config = require('../config')
+const { PROCESSNAME } = require('../config')
 const simplegit = require('simple-git')
 const git = simplegit()
 var branch = config.BRANCH

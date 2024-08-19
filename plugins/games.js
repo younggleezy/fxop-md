@@ -1,4 +1,4 @@
-const { bot, mode, XKCDComic, getJson, isAdmin, parseJid } = require('../../lib')
+const { bot, mode, XKCDComic, getJson, isAdmin, parseJid } = require('../lib')
 const axios = require('axios')
 
 let triviaGames = {}
@@ -198,7 +198,7 @@ bot(
  },
  async (message, match, m) => {
   {
-   let TicTacToe = require('../../lib/tictactoe')
+   let TicTacToe = require('../lib/tictactoe')
    this.game = this.game ? this.game : {}
    if (Object.values(this.game).find(room => room.id.startsWith('tictactoe') && [room.game.playerX, room.game.playerO].includes(m.sender))) return message.reply("_You're still in the game_")
    let room = Object.values(this.game).find(room => room.state === 'WAITING' && (match ? room.name === match : true))

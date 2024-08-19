@@ -1,15 +1,15 @@
 const got = require('got')
 const Heroku = require('heroku-client')
-const { bot, mode } = require('../../lib/')
-const Config = require('../../config')
+const { bot } = require('../lib/')
+const Config = require('../config')
 const heroku = new Heroku({ token: Config.HEROKU_API_KEY })
 const baseURI = '/apps/' + Config.HEROKU_APP_NAME
-const { secondsToDHMS } = require('../../lib/functions')
+const { secondsToDHMS } = require('../lib/functions')
 const { delay } = require('baileys')
 
 bot(
  {
-  pattern: 'restart',
+  pattern: 'reboot',
   fromMe: true,
   type: 'heroku',
   desc: 'Restart Dyno',

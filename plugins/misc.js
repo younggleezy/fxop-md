@@ -1,10 +1,10 @@
-const { bot, qrcode, Bitly, mode, isUrl, readQr } = require('../../lib/')
-const { getLyrics } = require('../../lib/functions')
+const { bot, qrcode, Bitly, mode, isUrl, readQr } = require('../lib/')
+const { getLyrics } = require('../lib/functions')
 const { fromBuffer } = require('file-type')
-const { ffmpeg, parseTimeToSeconds } = require('../../lib/functions')
-const { removeBg } = require('../../lib/functions')
-const config = require('../../config')
-const { Socket } = require('../../lib/Misc')
+const { ffmpeg, parseTimeToSeconds } = require('../lib/functions')
+const { removeBg } = require('../lib/functions')
+const config = require('../config')
+const { Socket } = require('../lib/Misc')
 
 bot(
  {

@@ -1,9 +1,8 @@
-const { bot } = require('../../lib/')
-const { isAdmin, parsedJid } = require('../../lib')
-const { setMessage, getMessage, delMessage, getStatus, toggleStatus } = require('../database').Greetings
-const { banUser, unbanUser, isBanned } = require('../database/ban')
-const { PausedChats, WarnDB } = require('../database')
-const { WARN_COUNT } = require('../../config')
+const { bot, isAdmin, parsedJid } = require('../lib/')
+const { setMessage, getMessage, delMessage, getStatus, toggleStatus } = require('../lib/database').Greetings
+const { banUser, unbanUser, isBanned } = require('../lib/database/ban')
+const { WarnDB } = require('../lib/database')
+const { WARN_COUNT } = require('../config')
 const { saveWarn, resetWarn, delWarn } = WarnDB
 
 bot(

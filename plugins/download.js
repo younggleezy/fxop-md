@@ -1,6 +1,6 @@
-const { bot, mode, isUrl, getBuffer, getJson, validateQuality } = require('../../lib')
-const { Facebook, Instagram } = require('../../lib/Misc')
-const { ytsdl } = require('../../lib/ytdl')
+const { bot, mode, isUrl, getBuffer, getJson, validateQuality } = require('../lib')
+const { Facebook, Instagram } = require('../lib/Misc')
+const { ytsdl } = require('../lib/ytdl')
 bot(
  {
   pattern: 'facebook',

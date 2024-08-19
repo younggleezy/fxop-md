@@ -1,4 +1,4 @@
-const { bot } = require('../../lib/')
+const { bot } = require('../lib/')
 
 var AFK = {
  isAfk: false,

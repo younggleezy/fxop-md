@@ -1,8 +1,8 @@
-const { bot, mode, parsedJid, serialize, isAdmin } = require('../../lib/')
-const config = require('../../config')
-const { DELETED_LOG_CHAT, DELETED_LOG } = require('../../config')
-const { loadMessage, getName } = require('../database/StoreDb')
-const { PausedChats } = require('../database')
+const { bot, mode, parsedJid, serialize } = require('../lib/')
+const config = require('../config')
+const { DELETED_LOG_CHAT, DELETED_LOG } = require('../config')
+const { loadMessage, getName } = require('../lib/database/StoreDb')
+const { PausedChats } = require('../lib/database')
 
 bot(
  {
