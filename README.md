@@ -2,7 +2,8 @@
 
 ### A Simple WhatsApp Bot
 
-**FXOP-MD** is a WhatsApp bot made to automate tasks on WhatsApp. It is built using Node.js and uses the [Baileys](https://github.com/adiwajshing/Baileys) library, facilitating seamless integration with the WhatsApp Web API. [Read Wiki](https://github.com/FXastro/fxop-md/wiki)
+**FXOP-MD** is a WhatsApp bot made to automate tasks on WhatsApp. It is built using Node.js and uses the [Baileys](https://github.com/adiwajshing/Baileys) library.
+[Read Wiki](https://github.com/FXastro/fxop-md/wiki)
 
 ---
 
