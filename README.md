@@ -6,7 +6,7 @@
 
 ---
 
-### Running on Your Local Machine (Yarn Required)
+### Run on local Machine
 
 1. **Clone the Repository**:
 
