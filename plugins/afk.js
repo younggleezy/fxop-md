@@ -6,7 +6,7 @@ var AFK = {
  lastseen: 0,
 }
 
-function secondsToHms(d) {
+function parseSecs(d) {
  d = Number(d)
  var h = Math.floor(d / 3600)
  var m = Math.floor((d % 3600) / 60)
@@ -28,19 +28,19 @@ bot(
    if (message.jid.includes('@g.us') && message.mention !== false && message.mention.length !== 0) {
     message.mention.map(async jid => {
      if (message.client.user.jid.split('@')[0] === jid.split('@')[0]) {
-      await message.send("I'm currently away from keyboard." + (AFK.reason !== false ? '\n*Reason:* ```' + AFK.reason + '```' : '') + (AFK.lastseen !== 0 ? '\n*Last Seen:* ```' + secondsToHms(Math.round(new Date().getTime() / 1000) - AFK.lastseen) + ' ago```' : ''), {
+      await message.send("I'm currently away from keyboard." + (AFK.reason !== false ? '\n*Reason:* ```' + AFK.reason + '```' : '') + (AFK.lastseen !== 0 ? '\n*Last Seen:* ```' + parseSecs(Math.round(new Date().getTime() / 1000) - AFK.lastseen) + ' ago```' : ''), {
        quoted: message.data,
       })
      }
     })
    } else if (message.jid.includes('@g.us') && message.reply_message !== false) {
     if (message.reply_message.jid.split('@')[0] === message.client.user.jid.split('@')[0]) {
-     await message.send("I'm currently away from keyboard." + (AFK.reason !== false ? '\n*Reason:* ```' + AFK.reason + '```' : '') + (AFK.lastseen !== 0 ? '\n*Last Seen:* ```' + secondsToHms(Math.round(new Date().getTime() / 1000) - AFK.lastseen) + ' ago```' : ''), {
+     await message.send("I'm currently away from keyboard." + (AFK.reason !== false ? '\n*Reason:* ```' + AFK.reason + '```' : '') + (AFK.lastseen !== 0 ? '\n*Last Seen:* ```' + parseSecs(Math.round(new Date().getTime() / 1000) - AFK.lastseen) + ' ago```' : ''), {
       quoted: message.data,
      })
     }
    } else {
-    await message.send("I'm currently away from keyboard." + (AFK.reason !== false ? '\n*Reason:* ```' + AFK.reason + '```' : '') + (AFK.lastseen !== 0 ? '\n*Last Seen:* ```' + secondsToHms(Math.round(new Date().getTime() / 1000) - AFK.lastseen) + ' ago```' : ''), {
+    await message.send("I'm currently away from keyboard." + (AFK.reason !== false ? '\n*Reason:* ```' + AFK.reason + '```' : '') + (AFK.lastseen !== 0 ? '\n*Last Seen:* ```' + parseSecs(Math.round(new Date().getTime() / 1000) - AFK.lastseen) + ' ago```' : ''), {
      quoted: message.data,
     })
    }
@@ -83,5 +83,5 @@ bot(
 )
 
 module.exports = {
- secondsToHms,
+ secondsToHms: parseSecs,
 }
