@@ -234,23 +234,23 @@ bot(
  }
 )
 
-bot(
- {
-  pattern: 'forward',
-  fromMe: true,
-  desc: 'Forwards the replied message',
-  type: 'whatsapp',
- },
- async (message, match) => {
-  if (!message.quoted) return await message.reply('Reply to message')
-  if (!match) return await message.reply("*Provide a JID; use 'jid' command to get JID*")
-  let jids = parsedJid(match)
-  for (let jid of jids) {
-   await message.client.forward(jid, message.reply_message.message)
-  }
-  await message.reply('_Message forwarded_')
- }
-)
+// bot(
+//  {
+//   pattern: 'forward',
+//   fromMe: true,
+//   desc: 'Forwards the replied message',
+//   type: 'whatsapp',
+//  },
+//  async (message, match) => {
+//   if (!message.quoted) return await message.reply('Reply to message')
+//   if (!match) return await message.reply("*Provide a JID; use 'jid' command to get JID*")
+//   let jids = parsedJid(match)
+//   for (let jid of jids) {
+//    await message.client.forward(jid, message.reply_message.message)
+//   }
+//   await message.reply('_Message forwarded_')
+//  }
+// )
 
 bot(
  {

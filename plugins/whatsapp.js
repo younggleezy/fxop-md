@@ -205,11 +205,28 @@ bot(
   type: 'whatsapp',
  },
  async (message, match, m) => {
-  if (!m.quoted) return message.reply('Reply to something')
-  let jids = parsedJid(match)
-  for (let i of jids) {
-   await message.forward(i, message.reply_message.message)
+  if (!m.quoted) return message.reply('Reply to a message to forward it')
+  if (!match) return message.reply('Hey!, provide me jid/number')
+  const jids = parsedJid(match)
+
+  if (jids.length === 0) return message.reply('Provide at least one recipient JID or mention')
+
+  let forwardedCount = 0
+  for (const jid of jids) {
+   try {
+    await message.forward(jid, m.quoted.message, {
+     contextInfo: {
+      forwardingScore: 999,
+      isForwarded: true,
+     },
+    })
+    forwardedCount++
+   } catch (error) {
+    console.error(`Failed to forward to ${jid}:`, error)
+   }
   }
+
+  message.reply(`Successfully forwarded to ${forwardedCount} out of ${jids.length} recipient(s)`)
  }
 )
 
