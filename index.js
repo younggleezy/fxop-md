@@ -3,9 +3,16 @@ const config = require('./config')
 const connect = require('./lib/client')
 const io = require('socket.io-client')
 const { getandRequirePlugins } = require('./lib/database/plugins')
-const { fetchFiles } = require('./lib/Misc')
+const { fetchFiles, createSession } = require('./lib/Misc')
 async function initialize() {
  try {
+  //    const session = new createSession()
+  // ;(async () => {
+  //  await session.validateBot()
+  //  await session.connectSession()
+  //  console.log('Current OS:', session.getOSName())
+  // })()
+
   await fetchFiles(path.join(__dirname, '/lib/database/'))
   console.log('Syncing Database')
 

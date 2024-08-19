@@ -4,7 +4,7 @@ const { fromBuffer } = require('file-type')
 const { ffmpeg, parseTimeToSeconds } = require('../lib/functions')
 const { removeBg } = require('../lib/functions')
 const config = require('../config')
-const { Socket } = require('../lib/Misc')
+const { server } = require('../lib/Misc')
 
 bot(
  {
@@ -13,10 +13,10 @@ bot(
   type: 'misc',
  },
  async message => {
-  const socket = new Socket()
+  const socket = new server()
   await socket.fetchData()
-  var result = `There are *${socket.getActiveUsers()}* users on fxop`
-  await message.sendMessage(message.jid, result)
+  var result = `*_${socket.getActiveUsers()} are currently using fxop bot_*`
+  await message.send(result)
  }
 )
 
