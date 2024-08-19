@@ -34,6 +34,5 @@
 
 ### License
 
-This project is not open source, and external contributions are not accepted. However, you are welcome to fork the repository and submit a **pull request**. If your contribution is deemed suitable, proper credit will be given. [Read Wiki
-](https://github.com/FXastro/fxop-md/wiki)
----
+<p>This project is not open source, and external contributions are not accepted. However, you are welcome to fork the repository and submit a **pull request**. If your contribution is deemed suitable, proper credit will be given. 
+https://github.com/FXastro/fxop-md/wiki</p>
