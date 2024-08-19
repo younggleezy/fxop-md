@@ -41,6 +41,6 @@
     "stream-buffers": "^3.0.3"
   },
   "engines": {
-    "node": "22.6.0"
+    "node": "20.16.0"
   }
 }

@@ -1,6 +1,6 @@
 FROM debian:bullseye-slim
 
-ENV NODE_VERSION 22.6.0
+ENV NODE_VERSION 20.16.0
 
 RUN apt-get update && \
     apt-get install -y \
