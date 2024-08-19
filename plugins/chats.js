@@ -142,7 +142,7 @@ bot(
 
 bot(
  {
-  pattern: 'pin ?(.*)',
+  pattern: 'pin',
   fromMe: true,
   desc: 'pin a chat',
   type: 'whatsapp',

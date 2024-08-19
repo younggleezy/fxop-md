@@ -3,7 +3,7 @@
   "version": "1.0.1",
   "description": "Whatsapp Bot",
   "main": "index.js",
-   "scripts": {
+  "scripts": {
     "start": "pm2 start . --attach --name fxop-md",
     "stop": "pm2 stop fxop-md",
     "restart": "pm2 restart fxop-md"
@@ -16,6 +16,7 @@
     "bitly": "^4.1.1",
     "browser-id3-writer": "^4.4.0",
     "cheerio": "^1.0.0-rc.12",
+    "crypto": "^1.0.1",
     "dotenv": "^16.4.5",
     "file-type": "^16.5.3",
     "fluent-ffmpeg": "^2.1.2",
