@@ -1,18 +1,19 @@
 const { bot, mode, isUrl, getBuffer, getJson, validateQuality } = require('../lib')
 const { Facebook, Instagram } = require('../lib/Misc')
+const { Twitter } = require('../lib/Misc/scraper')
 const { ytsdl } = require('../lib/ytdl')
 bot(
  {
   pattern: 'facebook',
   info: 'Download Facebook Media',
-  type: 'downloader',
+  type: 'download',
  },
  async (message, match) => {
   if (!match) return await message.reply('_Provide Facebook link!_')
   await message.reply('processing')
   const facebook = new Facebook(match)
   const hdVideo = await facebook.getHdVideo()
-  await message.sendMessage(message.jid, hdVideo, {}, 'video')
+  await message.send(hdVideo, {}, 'video')
  }
 )
 
@@ -20,14 +21,29 @@ bot(
  {
   pattern: 'instagram',
   info: 'Download Instagram Media',
-  type: 'downloader',
+  type: 'download',
  },
  async (message, match) => {
   if (!match) return await message.reply('_Provide Instagram Link!_')
   await message.reply('_Downloading_')
   const insta = new Instagram()
   const result = await insta.download(match)
-  await message.sendMessage(message.jid, result, {}, 'video')
+  await message.send(result, {}, 'video')
+ }
+)
+
+bot(
+ {
+  pattern: 'twitter',
+  info: 'Downloads twitter media',
+  type: 'download',
+ },
+ async (message, match) => {
+  if (!match) return await message.sendReply('_provide x url_')
+  await message.sendReply('_Downloading_')
+  const twitter = new Twitter()
+  const result = await twitter.download(match)
+  await message.send(result, {}, 'video')
  }
 )
 
@@ -36,6 +52,7 @@ bot(
   pattern: 'yta',
   fromMe: mode,
   desc: 'Download audio from youtube',
+  type: 'download',
  },
  async (message, match) => {
   match = match || message.reply_message.text
@@ -61,6 +78,7 @@ bot(
   pattern: 'ytv',
   fromMe: mode,
   desc: 'Download audio from youtube',
+  type: 'download',
  },
  async (message, match) => {
   match = match || message.reply_message.text
@@ -94,6 +112,7 @@ bot(
   pattern: 'song',
   fromMe: mode,
   desc: 'Download audio from youtube',
+  type: 'download',
  },
  async (message, match) => {
   match = match || message.reply_message.text
@@ -118,6 +137,7 @@ bot(
   pattern: 'video',
   fromMe: mode,
   desc: 'Download video from youtube',
+  type: 'download',
  },
  async (message, match) => {
   match = match || message.reply_message.text
