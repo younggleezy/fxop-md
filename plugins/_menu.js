@@ -63,9 +63,9 @@ Description: ${command.desc}\`\`\``)
     menuContent += `\n\t〔 *${tiny(category)}* 〕\n`
     const filteredCommands = commandsList.filter(({ commandType }) => commandType === category)
     filteredCommands.forEach(({ commandName }) => {
-     menuContent += `\n││◦  ${tiny(commandName.trim())} `
+     menuContent += `╭──────────────\n││◦  ${tiny(commandName.trim())} `
     })
-    menuContent += `│╰────────────┈⊷
+    menuContent += `\n│╰────────────┈⊷
 ╰─────────────┈⊷`
    })
    menuContent += `_🔖Send ${prefix}menu <command name> to get detailed information about a specific command._\n*📍Eg:* _${prefix}menu plugin_`
