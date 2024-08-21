@@ -8,6 +8,7 @@
     "stop": "pm2 stop fxop-md",
     "restart": "pm2 restart fxop-md"
   },
+  "author": "FXastro",
   "dependencies": {
     "@adiwajshing/keyed-db": "^0.2.4",
     "@neeraj-x0/ytsearch": "^1.0.0",
