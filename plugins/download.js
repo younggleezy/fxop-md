@@ -42,7 +42,7 @@ bot(
   await message.sendReply('_Downloading_')
   const twitter = new Twitter()
   const file = await twitter.download(match)
-  await message.send(file)
+  await message.send(file, {}, 'video')
  }
 )
 
