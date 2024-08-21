@@ -60,15 +60,14 @@ Description: ${command.desc}\`\`\``)
    categories.sort()
 
    categories.forEach(category => {
-    menuContent += `\n╭─────────────┈⊷\n│*${category.toUpperCase()}* ╰┬────────────┈⊷\n┌┤\n`
+    menuContent += `\n\t〔 *${tiny(category)}* 〕\n`
     const filteredCommands = commandsList.filter(({ commandType }) => commandType === category)
     filteredCommands.forEach(({ commandName }) => {
      menuContent += `\n││◦  ${tiny(commandName.trim())} `
     })
-    menuContent += `\n`
+    menuContent += `│╰────────────┈⊷
+╰─────────────┈⊷`
    })
-
-   menuContent += `\n`
    menuContent += `_🔖Send ${prefix}menu <command name> to get detailed information about a specific command._\n*📍Eg:* _${prefix}menu plugin_`
 
    return await message.send(menuContent)
