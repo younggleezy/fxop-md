@@ -60,10 +60,10 @@ Description: ${command.desc}\`\`\``)
    categories.sort()
 
    categories.forEach(category => {
-    menuContent += `\n\t〔 *${tiny(category)}* 〕\n`
+    menuContent += `\n\t〔 *${tiny(category)}* 〕\n│╭──────────────`
     const filteredCommands = commandsList.filter(({ commandType }) => commandType === category)
     filteredCommands.forEach(({ commandName }) => {
-     menuContent += `╭──────────────\n││◦  ${tiny(commandName.trim())} `
+     menuContent += `\n││◦  ${tiny(commandName.trim())} `
     })
     menuContent += `\n│╰────────────┈⊷
 ╰─────────────┈⊷`
