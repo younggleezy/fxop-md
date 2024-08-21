@@ -9,7 +9,7 @@
 
 ---
 
-### Run on local Machine
+#### Run Locally
 
 1. **Clone the Repository**:
 
@@ -21,18 +21,21 @@
 2. **Install Dependencies**:
 
    ```bash
-   yarn install
+   npm install
    ```
 
 3. **Configuration**:
 
-   - Create a `.env` file in the root directory with your configuration settings.
-   - Ensure you add your `SESSION_ID` and any other necessary environment variables.
+   - Copy & Paste the lines below
+
+   ```bash
+   echo SESSION_ID = "your session here"
+   ```
 
 4. **Start the Bot**:
 
    ```bash
-   yarn start
+   npm start
    ```
 
 ### License
