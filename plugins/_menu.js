@@ -25,16 +25,14 @@ Description: ${command.desc}\`\`\``)
   } else {
    const { prefix } = message
    let menuContent = `╭━━━〔 ${BOT_INFO.split(',')[1]} 〕━━━┈⊷
-┃✺╭──────────────
-┃✺│ Owner : ${BOT_INFO.split(',')[0]}
-┃✺│ User : ${message.pushName.replace(/[\r\n]+/gm, '')}
-┃✺│ Plugins : ${commands.length}
-┃✺│ Runtime : ${runtime(process.uptime())}
-┃✺│ Mode : ${WORK_TYPE}
-┃✺│ Platform : ${getOSName()}
-┃✺│ Ram : ${formatBytes(os.totalmem() - os.freemem())} / ${formatBytes(os.totalmem())}
-┃✺│ Version : ${version}
-┃✺╰──────────────
+│ Owner : ${BOT_INFO.split(',')[0]}
+│ User : ${message.pushName.replace(/[\r\n]+/gm, '')}
+│ Plugins : ${commands.length}
+│ Runtime : ${runtime(process.uptime())}
+│ Mode : ${WORK_TYPE}
+│ Platform : ${getOSName()}
+│ Ram : ${formatBytes(os.totalmem() - os.freemem())} / ${formatBytes(os.totalmem())}
+│ Version : ${version}
 ╰━━━━━━━━━━━━━━━┈⊷\n`
 
    const commandsList = []
@@ -60,17 +58,16 @@ Description: ${command.desc}\`\`\``)
    categories.sort()
 
    categories.forEach(category => {
-    menuContent += `\n\t〔 *${tiny(category)}* 〕\n│╭──────────────`
+    menuContent += `\n〔 *${tiny(category)}* 〕\n│╭──────────────`
     const filteredCommands = commandsList.filter(({ commandType }) => commandType === category)
     filteredCommands.forEach(({ commandName }) => {
-     menuContent += `\n││◦  ${tiny(commandName.trim())} `
+     menuContent += `\n│◦  ${tiny(commandName.trim())} `
     })
     menuContent += `\n│╰────────────┈⊷
 ╰─────────────┈⊷`
    })
    menuContent += `_🔖Send ${prefix}menu <command name> to get detailed information about a specific command._\n*📍Eg:* _${prefix}menu plugin_`
-
-   return await message.send(menuContent)
+   return await message.send(`\`\`\`${menuContent}\`\`\``)
   }
  }
 )
