@@ -41,8 +41,8 @@ bot(
   if (!match) return await message.sendReply('_provide x url_')
   await message.sendReply('_Downloading_')
   const twitter = new Twitter()
-  const result = await twitter.download(match)
-  await message.send(result, {}, 'video')
+  const file = await twitter.download(match)
+  await message.send(file)
  }
 )
 
