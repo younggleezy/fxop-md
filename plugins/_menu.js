@@ -1,7 +1,9 @@
 var { commands } = require('../lib/plugins')
-const { bot, mode, clockString } = require('../lib')
-const { BOT_INFO } = require('../config')
-const { hostname } = require('os')
+const { bot, mode, formatBytes } = require('../lib')
+const { BOT_INFO, WORK_TYPE } = require('../config')
+const os = require('os')
+const version = require('../package.json').version
+const { tiny } = require('../lib/fancy')
 
 bot(
  {
@@ -22,16 +24,18 @@ Description: ${command.desc}\`\`\``)
    }
   } else {
    const { prefix } = message
-   const [date, time] = new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }).split(',')
-   let menuContent = `╭━━━━━ᆫ ${BOT_INFO.split(',')[1]} ᄀ━━━
-┃ ⎆  *OWNER*:  ${BOT_INFO.split(',')[0]}
-┃ ⎆  *PREFIX*: ${prefix}
-┃ ⎆  *HOST NAME*: ${hostname().split('-')[0]}
-┃ ⎆  *DATE*: ${date}
-┃ ⎆  *TIME*: ${time}
-┃ ⎆  *COMMANDS*: ${commands.length} 
-┃ ⎆  *UPTIME*: ${clockString(process.uptime())} 
-╰━━━━━━━━━━━━━━━\n`
+   let menuContent = `╭━━━〔 ${BOT_INFO.split(',')[1]} 〕━━━┈⊷
+┃✺╭──────────────
+┃✺│ Owner : ${BOT_INFO.split(',')[0]}
+┃✺│ User : ${message.pushName.replace(/[\r\n]+/gm, '')}
+┃✺│ Plugins : ${commands.length}
+┃✺│ Runtime : ${runtime(process.uptime())}
+┃✺│ Mode : ${WORK_TYPE}
+┃✺│ Platform : ${getOSName()}
+┃✺│ Ram : ${formatBytes(os.totalmem() - os.freemem())} / ${formatBytes(os.totalmem())}
+┃✺│ Version : ${version}
+┃✺╰──────────────
+╰━━━━━━━━━━━━━━━┈⊷\n`
 
    const commandsList = []
    const categories = []
@@ -56,10 +60,10 @@ Description: ${command.desc}\`\`\``)
    categories.sort()
 
    categories.forEach(category => {
-    menuContent += `\n\t⦿---- *${category.toUpperCase()}* ----⦿\n`
+    menuContent += `\n╭─────────────┈⊷\n│*${category.toUpperCase()}* ╰┬────────────┈⊷\n┌┤\n`
     const filteredCommands = commandsList.filter(({ commandType }) => commandType === category)
     filteredCommands.forEach(({ commandName }) => {
-     menuContent += `\n⛥  _${commandName.trim()}_ `
+     menuContent += `\n││◦  ${tiny(commandName.trim())} `
     })
     menuContent += `\n`
    })
@@ -79,7 +83,7 @@ bot(
   desc: 'Display All Commands',
   dontAddCommandList: true,
  },
- async (message, match, { prefix }) => {
+ async message => {
   let commandListContent = '\t\t```Command List```\n'
 
   const commandList = []
@@ -108,3 +112,28 @@ bot(
   return await message.sendReply(commandListContent)
  }
 )
+
+const getOSName = function () {
+ const platform = os.platform()
+ const osNames = {
+  win32: 'Windows',
+  linux: 'Linux',
+  darwin: 'macOS',
+ }
+ return osNames[platform] || 'VPS Container'
+}
+
+const runtime = function (seconds) {
+ seconds = Number(seconds)
+ var d = Math.floor(seconds / (3600 * 24))
+ var h = Math.floor((seconds % (3600 * 24)) / 3600)
+ var m = Math.floor((seconds % 3600) / 60)
+ var s = Math.floor(seconds % 60)
+ var dDisplay = d > 0 ? d + (d == 1 ? ' d ' : ' d ') : ''
+ var hDisplay = h > 0 ? h + (h == 1 ? ' h ' : ' h ') : ''
+ var mDisplay = m > 0 ? m + (m == 1 ? ' m ' : ' m ') : ''
+ var sDisplay = s > 0 ? s + (s == 1 ? ' s' : ' s') : ''
+ return dDisplay + hDisplay + mDisplay + sDisplay
+}
+
+exports.runtime = runtime
