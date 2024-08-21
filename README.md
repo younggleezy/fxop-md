@@ -27,7 +27,7 @@
 3. **Configuration**:
 
    ```bash
-   echo SESSION_ID = "your session here"
+   echo 'SESSION_ID="your session id here"' > .env
    ```
 
 4. **Start the Bot**:
