@@ -14,7 +14,7 @@ bot(
   const userId = message.sender
 
   if (triviaGames[userId]) {
-   return message.reply('You already have a trivia game in progress.')
+   return message.sendReply('You already have a trivia game in progress.')
   }
 
   const triviaQuestion = await fetchTriviaQuestion()
@@ -51,12 +51,12 @@ bot(
 
      if (selectedOption === correctAnswerIndex) {
       userTriviaGame.correctAnswers++
-      message.reply(`Correct answer \n\n Your Points : ${userTriviaGame.correctAnswers}`)
+      message.sendReply(`Correct answer \n\n Your Points : ${userTriviaGame.correctAnswers}`)
       userTriviaGame.currentQuestion = await fetchTriviaQuestion()
 
       return sendTriviaQuestion(message, userId)
      } else {
-      message.reply(`Incorrect answer. The correct answer is option ${correctAnswerIndex} ${userTriviaGame.currentQuestion.correctAnswer}.`)
+      message.sendReply(`Incorrect answer. The correct answer is option ${correctAnswerIndex} ${userTriviaGame.currentQuestion.correctAnswer}.`)
       return await endTriviaGame(message, userId)
      }
     }
@@ -100,12 +100,12 @@ function sendTriviaQuestion(message, userId) {
  const userTriviaGame = triviaGames[userId]
  const currentQuestion = userTriviaGame.currentQuestion
  const optionsString = currentQuestion.options.map((option, index) => `${index + 1}. ${option}`).join('\n')
- message.reply(`Question: ${currentQuestion.text}\nOptions:\n${optionsString}`)
+ message.sendReply(`Question: ${currentQuestion.text}\nOptions:\n${optionsString}`)
 }
 
 async function endTriviaGame(message, userId) {
  const userTriviaGame = triviaGames[userId]
- await message.reply(`Trivia game ended. You answered ${userTriviaGame.correctAnswers} questions correctly.`)
+ await message.sendReply(`Trivia game ended. You answered ${userTriviaGame.correctAnswers} questions correctly.`)
  delete triviaGames[userId]
 }
 
@@ -125,7 +125,7 @@ bot(
    message.sendMessage(message.jid, result.imageUrl, { quoted: message.data }, 'image')
   } catch (error) {
    console.error('Error:', error.message)
-   message.reply('Error fetching XKCD comic.')
+   message.sendReply('Error fetching XKCD comic.')
   }
  }
 )
@@ -158,11 +158,11 @@ bot(
     message.sendMessage(message.jid, jokeMessage)
    } else {
     console.error('Error fetching joke:', jokeData)
-    message.reply('Failed to fetch a joke. Please try again later.')
+    message.sendReply('Failed to fetch a joke. Please try again later.')
    }
   } catch (error) {
    console.error('Error fetching joke:', error)
-   message.reply('Failed to fetch a joke. Please try again later.')
+   message.sendReply('Failed to fetch a joke. Please try again later.')
   }
  }
 )
@@ -178,13 +178,13 @@ bot(
  async (message, match, m) => {
   let isadmin = await isAdmin(message.jid, message.user, message.client)
 
-  if (!isadmin) return message.reply('This command is only for Group Admin and my owner.')
+  if (!isadmin) return message.sendReply('This command is only for Group Admin and my owner.')
   this.game = this.game ? this.game : false
   if (Object.values(this.game).find(room => room.id.startsWith('tictactoe'))) {
    delete this.game
-   return message.reply(`_Successfully Deleted running TicTacToe game._`)
+   return message.sendReply(`_Successfully Deleted running TicTacToe game._`)
   } else {
-   return message.reply(`No TicTacToe game🎮 is running.`)
+   return message.sendReply(`No TicTacToe game🎮 is running.`)
   }
  }
 )
@@ -200,7 +200,7 @@ bot(
   {
    let TicTacToe = require('../lib/tictactoe')
    this.game = this.game ? this.game : {}
-   if (Object.values(this.game).find(room => room.id.startsWith('tictactoe') && [room.game.playerX, room.game.playerO].includes(m.sender))) return message.reply("_You're still in the game_")
+   if (Object.values(this.game).find(room => room.id.startsWith('tictactoe') && [room.game.playerX, room.game.playerO].includes(m.sender))) return message.sendReply("_You're still in the game_")
    let room = Object.values(this.game).find(room => room.state === 'WAITING' && (match ? room.name === match : true))
    if (room) {
     room.o = message.jid
@@ -242,7 +242,7 @@ Current turn: @${room.game.currentTurn.split('@')[0]}
      state: 'WAITING',
     }
     if (match) room.name = match
-    message.reply('_Waiting for partner_ ')
+    message.sendReply('_Waiting for partner_ ')
     this.game[room.id] = room
    }
   }
@@ -271,7 +271,7 @@ bot(
     if (!isSurrender) return !0
    }
    if (!isSurrender && 1 > (ok = room.game.turn(m.sender === room.game.playerO, parseInt(match) - 1))) {
-    message.reply(
+    message.sendReply(
      {
       '-3': 'The game is over',
       '-2': 'Invalid',

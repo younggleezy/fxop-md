@@ -1,6 +1,5 @@
 const { bot, mode, isUrl, getBuffer, getJson, validateQuality } = require('../lib')
-const { Facebook, Instagram } = require('../lib/Misc')
-const { Twitter } = require('../lib/Misc/scraper')
+const { Facebook, Instagram, Twitter } = require('../lib/Misc')
 const { ytsdl } = require('../lib/ytdl')
 bot(
  {
@@ -9,11 +8,11 @@ bot(
   type: 'download',
  },
  async (message, match) => {
-  if (!match) return await message.reply('_Provide Facebook link!_')
-  await message.reply('processing')
+  if (!match) return await message.sendReply('_Provide Facebook link!_')
+  await message.sendReply('processing')
   const facebook = new Facebook(match)
   const hdVideo = await facebook.getHdVideo()
-  await message.send(hdVideo, {}, 'video')
+  await message.sendMessage(message.jid, hdVideo, {}, 'video')
  }
 )
 
@@ -24,8 +23,8 @@ bot(
   type: 'download',
  },
  async (message, match) => {
-  if (!match) return await message.reply('_Provide Instagram Link!_')
-  await message.reply('_Downloading_')
+  if (!match) return await message.sendReply('_Provide Instagram Link!_')
+  await message.sendReply('_Downloading_')
   const insta = new Instagram()
   const result = await insta.download(match)
   await message.send(result, {}, 'video')
@@ -56,10 +55,10 @@ bot(
  },
  async (message, match) => {
   match = match || message.reply_message.text
-  if (!match) return await message.reply('Give me a youtube link')
-  if (!isUrl(match)) return await message.reply('Give me a youtube link')
+  if (!match) return await message.sendReply('Give me a youtube link')
+  if (!isUrl(match)) return await message.sendReply('Give me a youtube link')
   let { dlink, title } = (await getJson(`https://api.thexapi.xyz/api/v1/download/youtube/audio?url=${match}`)).data
-  await message.reply(`_Downloading ${title}_`)
+  await message.sendReply(`_Downloading ${title}_`)
   let buff = await getBuffer(dlink)
   return await message.sendMessage(
    message.jid,
@@ -83,18 +82,18 @@ bot(
  async (message, match) => {
   match = match || message.reply_message.text
   let url = getUrl(match)[0]
-  if (!url) return await message.reply('Give me a youtube link\n\nExample: ytv youtube.com/watch?v=xxxxx 480p')
+  if (!url) return await message.sendReply('Give me a youtube link\n\nExample: ytv youtube.com/watch?v=xxxxx 480p')
   let quality = match.split(';')[1]
   if (quality && !validateQuality(quality)) {
-   return await message.reply('Invalid Resolution \nSupported: 144p, 240p, 360p, 480p, 720p, 1080p, 1440p, 2160p')
+   return await message.sendReply('Invalid Resolution \nSupported: 144p, 240p, 360p, 480p, 720p, 1080p, 1440p, 2160p')
   } else if (!quality) quality = '360p'
-  if (!match) return await message.reply('Give me a youtube link\n\nExample: ytv youtube.com/watch?v=xxxxx 480p')
-  if (!isUrl(match)) return await message.reply('Give me a youtube link\n\nExample: ytv youtube.com/watch?v=xxxxx 480p')
+  if (!match) return await message.sendReply('Give me a youtube link\n\nExample: ytv youtube.com/watch?v=xxxxx 480p')
+  if (!isUrl(match)) return await message.sendReply('Give me a youtube link\n\nExample: ytv youtube.com/watch?v=xxxxx 480p')
   let requrl = `https://api.thexapi.xyz/api/v1/download/youtube/video?url=${url}&quality=${quality}`
   let response = (await getJson(requrl)).data
   const { dlink, title } = response
   console.log(response)
-  await message.reply(`_Downloading ${title}_`)
+  await message.sendReply(`_Downloading ${title}_`)
   return await message.sendMessage(
    message.jid,
    dlink,
@@ -116,9 +115,9 @@ bot(
  },
  async (message, match) => {
   match = match || message.reply_message.text
-  if (!match) return await message.reply('Give me a query')
+  if (!match) return await message.sendReply('Give me a query')
   let { dlink, title } = await ytsdl(match)
-  await message.reply(`_Downloading ${title}_`)
+  await message.sendReply(`_Downloading ${title}_`)
   let buff = await getBuffer(dlink)
   return await message.sendMessage(
    message.jid,
@@ -141,9 +140,9 @@ bot(
  },
  async (message, match) => {
   match = match || message.reply_message.text
-  if (!match) return await message.reply('Give me a query')
+  if (!match) return await message.sendReply('Give me a query')
   let { dlink, title } = await ytsdl(match, 'video')
-  await message.reply(`_Downloading ${title}_`)
+  await message.sendReply(`_Downloading ${title}_`)
   return await message.sendMessage(
    message.jid,
    dlink,

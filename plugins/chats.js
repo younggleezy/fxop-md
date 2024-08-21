@@ -19,18 +19,18 @@ bot(
   if (!match) {
    filtreler = await getFilter(message.jid)
    if (filtreler === false) {
-    await message.reply('No filters are currently set in this chat.')
+    await message.sendReply('No filters are currently set in this chat.')
    } else {
     var mesaj = 'Your active filters for this chat:' + '\n\n'
     filtreler.map(filter => (mesaj += `✒ ${filter.dataValues.pattern}\n`))
     mesaj += 'use : .filter keyword:message\nto set a filter'
-    await message.reply(mesaj)
+    await message.sendReply(mesaj)
    }
   } else if (!text || !msg) {
-   return await message.reply('```use : .filter keyword:message\nto set a filter```')
+   return await message.sendReply('```use : .filter keyword:message\nto set a filter```')
   } else {
    await setFilter(message.jid, text, msg, true)
-   return await message.reply(`_Sucessfully set filter for ${text}_`)
+   return await message.sendReply(`_Sucessfully set filter for ${text}_`)
   }
  }
 )
@@ -44,13 +44,13 @@ bot(
   type: 'filter',
  },
  async (message, match) => {
-  if (!match) return await message.reply('\n*Example:* ```.stop hello```')
+  if (!match) return await message.sendReply('\n*Example:* ```.stop hello```')
 
   del = await deleteFilter(message.jid, match)
-  await message.reply(`_Filter ${match} deleted_`)
+  await message.sendReply(`_Filter ${match} deleted_`)
 
   if (!del) {
-   await message.reply('No existing filter matches the provided input.')
+   await message.sendReply('No existing filter matches the provided input.')
   }
  }
 )
@@ -61,7 +61,7 @@ bot({ on: 'text', fromMe: false, dontAddCommandList: true }, async (message, mat
  filtreler.map(async filter => {
   pattern = new RegExp(filter.dataValues.regex ? filter.dataValues.pattern : '\\b(' + filter.dataValues.pattern + ')\\b', 'gm')
   if (pattern.test(match)) {
-   return await message.reply(filter.dataValues.text, {
+   return await message.sendReply(filter.dataValues.text, {
     quoted: message,
    })
   }
@@ -88,7 +88,7 @@ bot(
    },
    message.jid
   )
-  await message.reply('_Cleared.._')
+  await message.sendReply('_Cleared.._')
  }
 )
 
@@ -112,7 +112,7 @@ bot(
    },
    message.jid
   )
-  await message.reply('_Archived.._')
+  await message.sendReply('_Archived.._')
  }
 )
 
@@ -136,7 +136,7 @@ bot(
    },
    message.jid
   )
-  await message.reply('_Unarchived.._')
+  await message.sendReply('_Unarchived.._')
  }
 )
 
@@ -154,7 +154,7 @@ bot(
    },
    message.jid
   )
-  await message.reply('_Pined.._')
+  await message.sendReply('_Pined.._')
  }
 )
 
@@ -172,7 +172,7 @@ bot(
    },
    message.jid
   )
-  await message.reply('_Unpined.._')
+  await message.sendReply('_Unpined.._')
  }
 )
 
@@ -186,7 +186,7 @@ bot(
  async message => {
   let jid = message.quoted ? message.reply_message.sender : message.jid
   await message.client.updateBlockStatus(jid, 'block')
-  await message.reply('_*Blocked!*_')
+  await message.sendReply('_*Blocked!*_')
  }
 )
 
@@ -200,7 +200,7 @@ bot(
  async message => {
   let jid = message.quoted ? message.reply_message.sender : message.jid
   await message.client.updateBlockStatus(jid, 'unblock')
-  await message.reply('_*Unblocked!*_')
+  await message.sendReply('_*Unblocked!*_')
  }
 )
 
@@ -215,7 +215,7 @@ bot(
   match = match || message.reply_message.text
   if (!match) return await message.send('*Need Status!*\n*Example: setbio Hey there! I am using WhatsApp*.')
   await message.client.updateProfileStatus(match)
-  await message.reply('_Profile bio updated_')
+  await message.sendReply('_Profile bio updated_')
  }
 )
 
@@ -230,7 +230,7 @@ bot(
   match = match || message.reply_message.text
   if (!match) return await message.send('*Need Name!*\n*Example: setname your name*.')
   await message.client.updateProfileName(match)
-  await message.reply('_Profile name updated_')
+  await message.sendReply('_Profile name updated_')
  }
 )
 
@@ -242,13 +242,13 @@ bot(
 //   type: 'whatsapp',
 //  },
 //  async (message, match) => {
-//   if (!message.quoted) return await message.reply('Reply to message')
-//   if (!match) return await message.reply("*Provide a JID; use 'jid' command to get JID*")
+//   if (!message.quoted) return await message.sendReply('Reply to message')
+//   if (!match) return await message.sendReply("*Provide a JID; use 'jid' command to get JID*")
 //   let jids = parsedJid(match)
 //   for (let jid of jids) {
 //    await message.client.forward(jid, message.reply_message.message)
 //   }
-//   await message.reply('_Message forwarded_')
+//   await message.sendReply('_Message forwarded_')
 //  }
 // )
 
@@ -260,8 +260,8 @@ bot(
   type: 'whatsapp',
  },
  async (message, match) => {
-  if (!message.reply_message.video && !message.reply_message.image && !message.image && !message.video) return await message.reply('*_Reply to an image or video_*')
-  if (!match) return await message.reply('*Need a query, e.g., .caption Hello*')
+  if (!message.reply_message.video && !message.reply_message.image && !message.image && !message.video) return await message.sendReply('*_Reply to an image or video_*')
+  if (!match) return await message.sendReply('*Need a query, e.g., .caption Hello*')
   await message.client.forward(message.jid, message.quoted ? message.reply_message.message : message.message, { caption: match })
  }
 )

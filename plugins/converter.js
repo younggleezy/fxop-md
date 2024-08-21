@@ -11,7 +11,7 @@ bot(
   type: 'converter',
  },
  async (message, m) => {
-  if (!message.reply_message && (!message.reply_message.video || !message.reply_message.sticker || !message.reply_message.text)) return await message.reply('_Reply to photo/video/text_')
+  if (!message.reply_message && (!message.reply_message.video || !message.reply_message.sticker || !message.reply_message.text)) return await message.sendReply('_Reply to photo/video/text_')
   var buff
   if (message.reply_message.text) {
    buff = await textToImg(message.reply_message.text)
@@ -31,7 +31,7 @@ bot(
   type: 'converter',
  },
  async (message, match, m) => {
-  if (!message.reply_message.sticker) return await message.reply('_Reply to a sticker_')
+  if (!message.reply_message.sticker) return await message.sendReply('_Reply to a sticker_')
   const packname = match.split(';')[0] || config.PACKNAME
   const author = match.split(';')[1] || config.AUTHOR
   let buff = await m.quoted.download()
@@ -47,7 +47,7 @@ bot(
   type: 'converter',
  },
  async (message, m) => {
-  if (!message.reply_message.sticker) return await message.reply('_Not a sticker_')
+  if (!message.reply_message.sticker) return await message.sendReply('_Not a sticker_')
   let buff = await m.quoted.download()
   return await message.sendMessage(message.jid, buff, {}, 'image')
  }
@@ -77,7 +77,7 @@ bot(
   type: 'converter',
  },
  async (message, match, m) => {
-  if (!message.reply_message.video || !message.reply_message.sticker || !message.reply_message.audio) return await message.reply('_Reply to a sticker/audio/video_')
+  if (!message.reply_message.video || !message.reply_message.sticker || !message.reply_message.audio) return await message.sendReply('_Reply to a sticker/audio/video_')
   let buff = await m.quoted.download()
   if (message.reply_message.sticker) {
    buff = await webp2mp4(buff)
@@ -96,7 +96,7 @@ bot(
   type: 'converter',
  },
  async (message, match, m) => {
-  if (!message.reply_message.sticker) return await message.reply('_Reply to a sticker_')
+  if (!message.reply_message.sticker) return await message.sendReply('_Reply to a sticker_')
   let buff = await m.quoted.download()
   return await message.sendMessage(message.jid, buff, {}, 'image')
  }
@@ -114,26 +114,26 @@ bot(
   let replyMessageText = message.reply_message && message.reply_message.text
 
   if (replyMessageText) {
-   if (!isNaN(match)) return await message.reply(styleText(replyMessageText, match))
+   if (!isNaN(match)) return await message.sendReply(styleText(replyMessageText, match))
 
    let fancyTexts = listAllFancyTexts(replyMessageText)
-   return await message.reply(fancyTexts)
+   return await message.sendReply(fancyTexts)
   }
 
   if (!text) {
    let fancyTexts = listAllFancyTexts('Fancy')
-   return await message.reply(fancyTexts)
+   return await message.sendReply(fancyTexts)
   }
 
   if (!isNaN(match)) {
    if (match > listAllFancyTexts('Fancy').length) {
     return await message.sendMessage('Invalid number')
    }
-   return await message.reply(styleText(text, match))
+   return await message.sendReply(styleText(text, match))
   }
 
   let fancyTexts = listAllFancyTexts(match)
-  return await message.reply(fancyTexts)
+  return await message.sendReply(fancyTexts)
  }
 )
 

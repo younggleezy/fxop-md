@@ -28,10 +28,10 @@ bot(
   const chatId = message.key.remoteJid
   try {
    await PausedChats.savePausedChat(chatId)
-   message.reply('Chat paused successfully.')
+   message.sendReply('Chat paused successfully.')
   } catch (error) {
    console.error(error)
-   message.reply('Error pausing the chat.')
+   message.sendReply('Error pausing the chat.')
   }
  }
 )
@@ -53,13 +53,13 @@ bot(
 
    if (pausedChat) {
     await pausedChat.destroy()
-    message.reply('Chat resumed successfully.')
+    message.sendReply('Chat resumed successfully.')
    } else {
-    message.reply('Chat is not paused.')
+    message.sendReply('Chat is not paused.')
    }
   } catch (error) {
    console.error(error)
-   message.reply('Error resuming the chat.')
+   message.sendReply('Error resuming the chat.')
   }
  }
 )
@@ -95,10 +95,10 @@ bot(
   type: 'user',
  },
  async (message, m) => {
-  if (!message.reply_message.image) return await message.reply('_Reply to a photo_')
+  if (!message.reply_message.image) return await message.sendReply('_Reply to a photo_')
   let buff = await m.quoted.download()
   await message.setPP(message.user, buff)
-  return await message.reply('_Profile Picture Updated_')
+  return await message.sendReply('_Profile Picture Updated_')
  }
 )
 
@@ -110,9 +110,9 @@ bot(
   type: 'user',
  },
  async (message, match) => {
-  if (!match) return await message.reply('_Enter name_')
+  if (!match) return await message.sendReply('_Enter name_')
   await message.updateName(match)
-  return await message.reply(`_Username Updated : ${match}_`)
+  return await message.sendReply(`_Username Updated : ${match}_`)
  }
 )
 
@@ -126,14 +126,14 @@ bot(
  async message => {
   if (message.isGroup) {
    let jid = message.mention[0] || message.reply_message.jid
-   if (!jid) return await message.reply('_Reply to a person or mention_')
+   if (!jid) return await message.sendReply('_Reply to a person or mention_')
    await message.block(jid)
    return await message.sendMessage(`_@${jid.split('@')[0]} Blocked_`, {
     mentions: [jid],
    })
   } else {
    await message.block(message.jid)
-   return await message.reply('_User blocked_')
+   return await message.sendReply('_User blocked_')
   }
  }
 )
@@ -148,14 +148,14 @@ bot(
  async message => {
   if (message.isGroup) {
    let jid = message.mention[0] || message.reply_message.jid
-   if (!jid) return await message.reply('_Reply to a person or mention_')
+   if (!jid) return await message.sendReply('_Reply to a person or mention_')
    await message.block(jid)
    return await message.sendMessage(message.jid, `_@${jid.split('@')[0]} unblocked_`, {
     mentions: [jid],
    })
   } else {
    await message.unblock(message.jid)
-   return await message.reply('_User unblocked_')
+   return await message.sendReply('_User unblocked_')
   }
  }
 )
@@ -181,11 +181,11 @@ bot(
  },
  async message => {
   if (!message.reply_message) {
-   return await message.reply('_Reply to a message to delete it_')
+   return await message.sendReply('_Reply to a message to delete it_')
   }
   const replyMessage = message.reply_message
   if (!replyMessage.fromMe && !message.isAdmin) {
-   return await message.reply("You need to be an admin to delete others' messages")
+   return await message.sendReply("You need to be an admin to delete others' messages")
   }
   const deleteObj = {
    remoteJid: message.jid,
@@ -193,7 +193,7 @@ bot(
    participant: replyMessage.sender,
   }
   await message.client.sendMessage(message.jid, { delete: deleteObj })
-  await message.reply('Message deleted successfully.')
+  await message.sendReply('Message deleted successfully.')
  }
 )
 
@@ -205,11 +205,11 @@ bot(
   type: 'whatsapp',
  },
  async (message, match, m) => {
-  if (!m.quoted) return message.reply('Reply to a message to forward it')
-  if (!match) return message.reply('Hey!, provide me jid/number')
+  if (!m.quoted) return message.sendReply('Reply to a message to forward it')
+  if (!match) return message.sendReply('Hey!, provide me jid/number')
   const jids = parsedJid(match)
 
-  if (jids.length === 0) return message.reply('Provide at least one recipient JID or mention')
+  if (jids.length === 0) return message.sendReply('Provide at least one recipient JID or mention')
 
   let forwardedCount = 0
   for (const jid of jids) {
@@ -226,7 +226,7 @@ bot(
    }
   }
 
-  message.reply(`Successfully forwarded to ${forwardedCount} out of ${jids.length} recipient(s)`)
+  message.sendReply(`Successfully forwarded to ${forwardedCount} out of ${jids.length} recipient(s)`)
  }
 )
 
@@ -238,12 +238,12 @@ bot(
   type: 'whatsapp',
  },
  async message => {
-  if (!message.reply_message) return await message.reply('*Reply to a message*')
+  if (!message.reply_message) return await message.sendReply('*Reply to a message*')
   let key = message.reply_message.key
   let msg = await loadMessage(key.id)
-  if (!msg) return await message.reply('_Message not found maybe bot might not be running at that time_')
+  if (!msg) return await message.sendReply('_Message not found maybe bot might not be running at that time_')
   msg = await serialize(JSON.parse(JSON.stringify(msg.message)), message.client)
-  if (!msg.quoted) return await message.reply('No quoted message found')
+  if (!msg.quoted) return await message.sendReply('No quoted message found')
   await message.forward(message.jid, msg.quoted.message)
  }
 )
@@ -260,7 +260,7 @@ bot(
   let msg = await loadMessage(message.messageId)
   if (!msg) return
   msg = await serialize(JSON.parse(JSON.stringify(msg.message)), message.client)
-  if (!msg) return await message.reply('No deleted message found')
+  if (!msg) return await message.sendReply('No deleted message found')
   let deleted = await message.forward(DELETED_LOG_CHAT, msg.message)
   var name
   if (!msg.from.endsWith('@g.us')) {

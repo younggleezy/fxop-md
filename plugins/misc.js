@@ -58,10 +58,10 @@ bot(
  },
  async (message, match) => {
   match = match || message.reply_message.text
-  if (!match) return await message.reply('_Reply to a url or enter a url_')
-  if (!isUrl(match)) return await message.reply('_Not a url_')
+  if (!match) return await message.sendReply('_Reply to a url or enter a url_')
+  if (!isUrl(match)) return await message.sendReply('_Not a url_')
   let short = await Bitly(match)
-  return await message.reply(short.link)
+  return await message.sendReply(short.link)
  }
 )
 
@@ -75,17 +75,17 @@ bot(
  async (message, match) => {
   const [song, artist] = match.split(';').map(item => item.trim())
   if (!song || !artist) {
-   await message.reply('Search with this format: \n\t_lyric song;artist_')
+   await message.sendReply('Search with this format: \n\t_lyric song;artist_')
   } else {
    try {
     const data = await getLyrics(song, artist)
     if (data) {
-     return await message.reply(`*Artist:* ${data.artist_name}\n*Song:* ${data.song}\n*Lyrics:*\n${data.lyrics.trim()}`)
+     return await message.sendReply(`*Artist:* ${data.artist_name}\n*Song:* ${data.song}\n*Lyrics:*\n${data.lyrics.trim()}`)
     } else {
-     return await message.reply('No lyrics found for this song by this artist.')
+     return await message.sendReply('No lyrics found for this song by this artist.')
     }
    } catch (error) {
-    return await message.reply('An error occurred while fetching lyrics.')
+    return await message.sendReply('An error occurred while fetching lyrics.')
    }
   }
  }
@@ -125,10 +125,10 @@ bot(
  },
  async (message, match, m) => {
   if (!config.REMOVEBG) return await message.sendMessage(message.jid, 'Set RemoveBg API Key in config.js \n Get it from https://www.remove.bg/api')
-  if (!message.reply_message && !message.reply_message.image) return await message.reply('Reply to an image')
+  if (!message.reply_message && !message.reply_message.image) return await message.sendReply('Reply to an image')
   let buff = await m.quoted.download()
   let buffer = await removeBg(buff)
-  if (!buffer) return await message.reply('An error occured')
+  if (!buffer) return await message.sendReply('An error occured')
   await message.sendMessage(
    message.jid,
    buffer,

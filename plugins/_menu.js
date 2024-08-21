@@ -16,7 +16,7 @@ bot(
    for (let i of plugins.commands) {
     if (i.pattern instanceof RegExp && i.pattern.test(message.prefix + match)) {
      const cmdName = i.pattern.toString().split(/\W+/)[1]
-     message.reply(`\`\`\`Command: ${message.prefix}${cmdName.trim()}
+     message.sendReply(`\`\`\`Command: ${message.prefix}${cmdName.trim()}
 Description: ${i.desc}\`\`\``)
     }
    }
@@ -94,6 +94,6 @@ bot(
    if (desc) menu += `Use: \`\`\`${desc}\`\`\`\n\n`
   })
   menu += ``
-  return await message.reply(menu)
+  return await message.sendReply(menu)
  }
 )

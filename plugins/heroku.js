@@ -16,16 +16,16 @@ bot(
   type: 'heroku',
  },
  async message => {
-  await message.reply(`_Restarting_`)
+  await message.sendReply(`_Restarting_`)
   if (Config.HEROKU) {
    if (Config.HEROKU_APP_NAME === '') {
-    return await message.reply('Add `HEROKU_APP_NAME` env variable')
+    return await message.sendReply('Add `HEROKU_APP_NAME` env variable')
    }
    if (Config.HEROKU_API_KEY === '') {
-    return await message.reply('Add `HEROKU_API_KEY` env variable')
+    return await message.sendReply('Add `HEROKU_API_KEY` env variable')
    }
    await heroku.delete(baseURI + '/dynos').catch(async error => {
-    await message.reply(`HEROKU : ${error.body.message}`)
+    await message.sendReply(`HEROKU : ${error.body.message}`)
    })
   } else {
    require('child_process').exec('pm2 restart ' + Config.PROCESSNAME, (error, stdout, stderr) => {
@@ -48,15 +48,15 @@ bot(
  async message => {
   if (Config.HEROKU) {
    if (Config.HEROKU_APP_NAME === '') {
-    return await message.reply('Add `HEROKU_APP_NAME` env variable')
+    return await message.sendReply('Add `HEROKU_APP_NAME` env variable')
    }
    if (Config.HEROKU_API_KEY === '') {
-    return await message.reply('Add `HEROKU_API_KEY` env variable')
+    return await message.sendReply('Add `HEROKU_API_KEY` env variable')
    }
    await heroku
     .get(baseURI + '/formation')
     .then(async formation => {
-     await message.reply(`_Shutting down._`)
+     await message.sendReply(`_Shutting down._`)
      await heroku.patch(baseURI + '/formation/' + formation[0].id, {
       body: {
        quantity: 0,
@@ -64,10 +64,10 @@ bot(
      })
     })
     .catch(async error => {
-     await message.reply(`HEROKU : ${error.body.message}`)
+     await message.sendReply(`HEROKU : ${error.body.message}`)
     })
   } else {
-   await message.reply(`_Shutting down._`)
+   await message.sendReply(`_Shutting down._`)
    await delay(1000).then(() => process.exit(0))
   }
  }
@@ -81,10 +81,10 @@ bot(
   type: 'heroku',
  },
  async message => {
-  if (!Config.HEROKU) return await message.reply('You are not using Heroku as your server.')
+  if (!Config.HEROKU) return await message.sendReply('You are not using Heroku as your server.')
 
-  if (Config.HEROKU_APP_NAME === '') return await message.reply('Add `HEROKU_APP_NAME` env variable')
-  if (Config.HEROKU_API_KEY === '') return await message.reply('Add `HEROKU_API_KEY env variable')
+  if (Config.HEROKU_APP_NAME === '') return await message.sendReply('Add `HEROKU_APP_NAME` env variable')
+  if (Config.HEROKU_API_KEY === '') return await message.sendReply('Add `HEROKU_API_KEY env variable')
 
   try {
    heroku
@@ -104,13 +104,13 @@ bot(
      const quota = `Total Quota : ${secondsToDHMS(total_quota)}
 Used  Quota : ${secondsToDHMS(quota_used)}
 Remaning    : ${secondsToDHMS(remaining)}`
-     await message.reply('```' + quota + '```')
+     await message.sendReply('```' + quota + '```')
     })
     .catch(async error => {
-     return await message.reply(`HEROKU : ${error.body.message}`)
+     return await message.sendReply(`HEROKU : ${error.body.message}`)
     })
   } catch (error) {
-   await message.reply(error)
+   await message.sendReply(error)
   }
  }
 )

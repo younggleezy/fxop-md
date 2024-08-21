@@ -10,20 +10,21 @@ const simplegit = require('simple-git')
 const git = simplegit()
 var branch = config.BRANCH
 
-bot({
-   pattern: 'ping ?(.*)',
-   fromMe: mode,
-   desc: 'Bot response in milliseconds.',
-   type: 'system',
+bot(
+ {
+  pattern: 'ping ?(.*)',
+  fromMe: mode,
+  desc: 'Bot response in milliseconds.',
+  type: 'system',
  },
  async message => {
-   const start = new Date().getTime();
-   const msg = await message.reply('*ᴩɪɴɢ...*');
-   const end = new Date().getTime();
-   const responseTime = end - start;
-   await msg.edit(`*ᴩɪɴɢ:* ${responseTime}ms`);
- });
- 
+  const start = new Date().getTime()
+  const msg = await message.reply('*ᴩɪɴɢ...*')
+  const end = new Date().getTime()
+  const responseTime = (end - start) / 1000
+  await msg.edit(`*ʀᴇsᴘᴏɴsᴇ ʀᴀᴛᴇ ${responseTime} secs*`)
+ }
+)
 
 bot(
  {
@@ -33,7 +34,7 @@ bot(
   type: 'system',
  },
  async message => {
-  message.reply(`Uptime: ${formatTime(process.uptime())}`)
+  message.sendReply(`Uptime: ${formatTime(process.uptime())}`)
  }
 )
 
@@ -45,7 +46,7 @@ bot(
   type: 'system',
  },
  async (message, match) => {
-  if (!match) return await message.reply('_Send a plugin url_')
+  if (!match) return await message.sendReply('_Send a plugin url_')
   try {
    var url = new URL(match)
   } catch (e) {
@@ -191,15 +192,15 @@ bot(
     await message.sendMessage(message.jid, '*Restarting...*')
     let dependancy = await updatedDependencies()
     if (dependancy) {
-     await message.reply('*Dependancies changed installing new dependancies *')
-     await message.reply('*Restarting...*')
+     await message.sendReply('*Dependancies changed installing new dependancies *')
+     await message.sendReply('*Restarting...*')
      exec('npm install && pm2 restart ' + PROCESSNAME, async (err, stdout, stderr) => {
       if (err) {
        return await message.sendMessage(message.jid, '```' + stderr + '```')
       }
      })
     } else {
-     await message.reply('*Restarting...*')
+     await message.sendReply('*Restarting...*')
      exec('pm2 restart ' + PROCESSNAME, async (err, stdout, stderr) => {
       if (err) {
        return await message.sendMessage(message.jid, '```' + stderr + '```')
