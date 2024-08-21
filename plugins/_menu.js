@@ -58,7 +58,7 @@ Description: ${command.desc}\`\`\``)
    categories.sort()
 
    categories.forEach(category => {
-    menuContent += `\`\`\`\n〔 *${tiny(category)}* 〕\n│╭──────────────\`\`\``
+    menuContent += `\`\`\`\n〔 ${tiny(category)} 〕\n│╭──────────────\`\`\``
     const filteredCommands = commandsList.filter(({ commandType }) => commandType === category)
     filteredCommands.forEach(({ commandName }) => {
      menuContent += `\`\`\`\n│◦  ${tiny(commandName.trim())} \`\`\``
