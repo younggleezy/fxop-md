@@ -1,4 +1,4 @@
-const { getPlugins } = require('../lib/plugins')
+var { commands } = require('../lib/plugins')
 const { bot, mode, clockString } = require('../lib')
 const { BOT_INFO } = require('../config')
 const { hostname } = require('os')
@@ -13,7 +13,7 @@ bot(
  },
  async (message, match) => {
   if (match) {
-   for (const command of getPlugins().commands) {
+   for (const command of commands) {
     if (command.pattern instanceof RegExp && command.pattern.test(message.prefix + match)) {
      const commandName = command.pattern.toString().split(/\W+/)[1]
      message.sendReply(`\`\`\`Command: ${message.prefix}${commandName.trim()}
@@ -29,14 +29,14 @@ Description: ${command.desc}\`\`\``)
 ┃ ⎆  *HOST NAME*: ${hostname().split('-')[0]}
 ┃ ⎆  *DATE*: ${date}
 ┃ ⎆  *TIME*: ${time}
-┃ ⎆  *COMMANDS*: ${getPlugins().commands.length} 
+┃ ⎆  *COMMANDS*: ${commands.length} 
 ┃ ⎆  *UPTIME*: ${clockString(process.uptime())} 
 ╰━━━━━━━━━━━━━━━\n`
 
    const commandsList = []
    const categories = []
 
-   getPlugins().commands.forEach(command => {
+   commands.forEach(command => {
     let commandName
     if (command.pattern instanceof RegExp) {
      commandName = command.pattern.toString().split(/\W+/)[1]
