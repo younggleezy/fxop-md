@@ -12,7 +12,7 @@ bot(
   await message.sendReply('processing')
   const facebook = new Facebook(match)
   const hdVideo = await facebook.getHdVideo()
-  await message.sendMessage(message.jid, hdVideo, {}, 'video')
+  await message.send(hdVideo, {}, 'video')
  }
 )
 
