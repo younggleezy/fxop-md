@@ -26,8 +26,6 @@
 
 3. **Configuration**:
 
-   - Copy & Paste the lines below
-
    ```bash
    echo SESSION_ID = "your session here"
    ```
