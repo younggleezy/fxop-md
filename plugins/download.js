@@ -12,7 +12,7 @@ bot(
   await message.sendReply('processing')
   const facebook = new Facebook(match)
   const hdVideo = await facebook.getHdVideo()
-  await message.send(hdVideo, {}, 'video')
+ return await message.send(hdVideo, {}, 'video')
  }
 )
 
@@ -27,7 +27,7 @@ bot(
   await message.sendReply('_Downloading_')
   const insta = new Instagram()
   const result = await insta.download(match)
-  await message.send(result, {}, 'video')
+  return await message.send(result, {}, 'video')
  }
 )
 
@@ -42,7 +42,7 @@ bot(
   await message.sendReply('_Downloading_')
   const twitter = new Twitter()
   const file = await twitter.download(match)
-  await message.send(file, {}, 'video')
+  return await message.send(file, {}, 'video')
  }
 )
 
@@ -57,7 +57,7 @@ bot(
   await message.sendReply('_downloading_')
   const tiktok = new Tiktok()
   const file = tiktok.download(match)
-  await message.send(file, {}, 'video')
+  return await message.send(file, {}, 'video')
  }
 )
 
