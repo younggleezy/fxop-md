@@ -10,7 +10,6 @@
  "author": "FXastro",
  "dependencies": {
   "@adiwajshing/keyed-db": "^0.2.4",
-  "@neeraj-x0/ytsearch": "^1.0.0",
   "axios": "^1.7.4",
   "baileys": "github:FXastro/Baileys",
   "bitly": "^4.1.1",
