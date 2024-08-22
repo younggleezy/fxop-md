@@ -1,7 +1,7 @@
 const express = require('express')
 
 class RunServer {
- constructor(port = 3000) {
+ constructor(port = 8000) {
   this.app = express()
   this.port = port
 
