@@ -41,6 +41,6 @@
   "systeminformation": "^5.23.4"
  },
  "engines": {
-  "node": "20.16.0"
+  "node": "v20.17.0"
  }
 }

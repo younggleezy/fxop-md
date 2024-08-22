@@ -16,7 +16,7 @@ bot(
   if (message.reply_message.text) {
    buff = await textToImg(message.reply_message.text)
   } else {
-   buff = await m.quoted.download()
+   buff = await client.download(m.quoted)
   }
 
   message.sendMessage(message.jid, buff, { packname: config.PACKNAME, author: config.AUTHOR }, 'sticker')
@@ -76,7 +76,7 @@ bot(
   desc: 'converts video/voice to mp4',
   type: 'converter',
  },
- async (message, match, m) => {
+ async (message, m) => {
   if (!message.reply_message.video || !message.reply_message.sticker || !message.reply_message.audio) return await message.sendReply('_Reply to a sticker/audio/video_')
   let buff = await m.quoted.download()
   if (message.reply_message.sticker) {
