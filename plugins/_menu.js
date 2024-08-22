@@ -131,4 +131,4 @@ const runtime = function (seconds) {
  return dDisplay + hDisplay + mDisplay + sDisplay
 }
 
-exports.runtime = runtime
+module.exports = runtime

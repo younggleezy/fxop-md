@@ -3,9 +3,9 @@ const axios = require('axios')
 const fs = require('fs')
 const { PluginDB, installPlugin } = require('../lib/database').Plugins
 const { exec } = require('child_process')
-const { formatTime } = require('../lib/utils')
 const config = require('../config')
 const { PROCESSNAME } = require('../config')
+const runtime = require('./_menu')
 const simplegit = require('simple-git')
 const git = simplegit()
 var branch = config.BRANCH
@@ -34,7 +34,7 @@ bot(
   type: 'system',
  },
  async message => {
-  message.sendReply(`Uptime: ${formatTime(process.uptime())}`)
+  message.send(runtime(process.uptime()))
  }
 )
 

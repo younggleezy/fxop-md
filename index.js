@@ -4,7 +4,7 @@ const connect = require('./lib/client')
 const io = require('socket.io-client')
 const { getandRequirePlugins } = require('./lib/database/plugins')
 const { fetchFiles, createSession } = require('./lib/Misc')
-const { delay } = require('baileys')
+const { delay } = require('astrofx011')
 const RunServer = require('./server')
 async function startBot() {
  try {

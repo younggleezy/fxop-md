@@ -1,6 +1,6 @@
 {
  "name": "fxop-md",
- "version": "1.0.3",
+ "version": "1.0.4",
  "description": "Whatsapp Bot",
  "main": "index.js",
  "scripts": {
@@ -10,8 +10,8 @@
  "author": "FXastro",
  "dependencies": {
   "@adiwajshing/keyed-db": "^0.2.4",
+  "astrofx011": "^6.7.6",
   "axios": "^1.7.4",
-  "baileys": "github:FXastro/Baileys",
   "bitly": "^4.1.1",
   "browser-id3-writer": "^4.4.0",
   "cheerio": "^1.0.0-rc.12",
