@@ -8,7 +8,7 @@ const { delay } = require('astrofx011')
 const RunServer = require('./server')
 async function startBot() {
  try {
-  const server = new RunServer(3000)
+  const server = new RunServer(8000)
   server.start()
   delay(3000)
   await createSession()
