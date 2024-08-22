@@ -20,5 +20,5 @@ RUN npm install -g yarn
 
 RUN git clone https://github.com/FXastro/fxop-md.git /root/bot
 WORKDIR /root/bot
-RUN yarn install
+RUN npm install
 CMD ["yarn", "start"]
