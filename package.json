@@ -1,6 +1,6 @@
 {
  "name": "fxop-md",
- "version": "1.0.2",
+ "version": "1.0.3",
  "description": "Whatsapp Bot",
  "main": "index.js",
  "scripts": {
