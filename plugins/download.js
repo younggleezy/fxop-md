@@ -1,5 +1,5 @@
 const { bot, mode, isUrl, getBuffer, getJson, validateQuality } = require('../lib')
-const { Facebook, Instagram, Twitter } = require('../lib/Misc')
+const { Facebook, Instagram, Twitter, Tiktok } = require('../lib/Misc')
 const { ytsdl } = require('../lib/ytdl')
 bot(
  {
@@ -42,6 +42,21 @@ bot(
   await message.sendReply('_Downloading_')
   const twitter = new Twitter()
   const file = await twitter.download(match)
+  await message.send(file, {}, 'video')
+ }
+)
+
+bot(
+ {
+  pattern: 'tiktok',
+  info: 'Downloads Tiktok Media',
+  type: 'download',
+ },
+ async (message, match) => {
+  if (!match) return message.sendReply('_provide tiktok url_')
+  await message.sendReply('_downloading_')
+  const tiktok = new Tiktok()
+  const file = tiktok.download(match)
   await message.send(file, {}, 'video')
  }
 )
