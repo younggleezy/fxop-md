@@ -11,31 +11,30 @@ class RunServer {
  setupRoutes() {
   this.app.get('/', (req, res) => {
    res.send(`
-        <html>
-          <head>
-            <title>AstroFX Iframe</title>
-            <style>
-              body, html, iframe {
-                margin: 0;
-                padding: 0;
-                height: 100%;
-                width: 100%;
-                border: none;
-              }
-            </style>
-          </head>
-          <body>
-            <iframe src="https://astrofx.com" frameborder="0"></iframe>
-          </body>
-        </html>
+       <!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FXOP</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&display=swap" rel="stylesheet" />
+  <style>
+   *{margin: 0; padding: 0; box-sizing: border-box; font-family: Fira Code;} body{display: flex; justify-content: center; align-items: center; min-height: 100vh; strong{font-size: 5em;}
+  </style>
+ </head>
+ <body>
+  <strong>BOT CONNECTED</strong>
+ </body>
+</html>
+
       `)
   })
  }
 
  start() {
-  this.server = this.app.listen(this.port, () => {
-  //  console.log(`Server running on http://localhost:${this.port}`)
-  })
+  this.server = this.app.listen(this.port, () => {})
  }
 }
 
