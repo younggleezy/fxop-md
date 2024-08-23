@@ -16,7 +16,7 @@ bot(
   if (message.reply_message.text) {
    buff = await textToImg(message.reply_message.text)
   } else {
-   buff = await client.download(m.quoted)
+   buff = await message.client.download(m.quoted)
   }
 
   message.sendMessage(message.jid, buff, { packname: config.PACKNAME, author: config.AUTHOR }, 'sticker')
