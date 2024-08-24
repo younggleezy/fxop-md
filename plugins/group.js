@@ -316,7 +316,7 @@ bot(
 
 bot(
  {
-  pattern: 'mute',
+  pattern: 'gmute ?(.*)',
   fromMe: true,
   desc: 'nute group',
   type: 'group',
@@ -331,7 +331,7 @@ bot(
 
 bot(
  {
-  pattern: 'unmute',
+  pattern: 'gunmute ?(.*)',
   fromMe: true,
   desc: 'unmute group',
   type: 'group',
