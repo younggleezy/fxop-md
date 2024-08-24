@@ -2,7 +2,7 @@ const {
   command,
   qrcode,
   Bitly,
-  isPrivate,
+  mode,
   isUrl,
   readQr,
 } = require("../lib/");
@@ -13,7 +13,7 @@ const config = require("../config");
 command(
   {
     pattern: "vv",
-    fromMe: isPrivate,
+    fromMe: mode,
     desc: "Forwards The View once messsage",
     type: "tool",
   },
@@ -54,7 +54,7 @@ command(
 command(
   {
     pattern: "qr",
-    fromMe: isPrivate,
+    fromMe: mode,
     desc: "Read/Write Qr.",
     type: "Tool",
   },
@@ -86,7 +86,7 @@ command(
 command(
   {
     pattern: "bitly",
-    fromMe: isPrivate,
+    fromMe: mode,
     desc: "Converts Url to bitly",
     type: "tool",
   },
@@ -102,7 +102,7 @@ command(
 command(
   {
     pattern: "lyric",
-    fromMe: isPrivate,
+    fromMe: mode,
     desc: "Searches for lyrics based on the format: song;artist",
     type: "tools",
   },

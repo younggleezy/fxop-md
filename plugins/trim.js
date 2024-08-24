@@ -1,10 +1,10 @@
 const { fromBuffer } = require("file-type");
-const { command, isPrivate } = require("../lib/");
+const { command, mode } = require("../lib/");
 const { ffmpeg, parseTimeToSeconds } = require("../lib/functions");
 command(
   {
     pattern: "trim",
-    fromMe: isPrivate,
+    fromMe: mode,
     desc: "Trim the video or audio",
     type: "user",
   },

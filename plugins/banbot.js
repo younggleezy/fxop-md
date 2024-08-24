@@ -1,4 +1,4 @@
-const { command, isPrivate } = require("../lib/");
+const { command, mode } = require("../lib/");
 const { parsedJid } = require("../lib/functions");
 const { banUser, unbanUser, isBanned } = require("../lib/database/ban");
 command(

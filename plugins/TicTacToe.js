@@ -1,8 +1,8 @@
-const { command, isAdmin, parseJid, isPrivate } = require("../lib/");
+const { command, isAdmin, parseJid, mode } = require("../lib/");
 command(
   {
     pattern: "delttt",
-    fromMe: isPrivate,
+    fromMe: mode,
     desc: "delete TicTacToe running game.",
     type: "game",
     dontAddCommandList:true

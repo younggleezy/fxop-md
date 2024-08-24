@@ -1,10 +1,10 @@
-const { command, isPrivate, serialize } = require("../lib/");
+const { command, mode, serialize } = require("../lib/");
 const { loadMessage } = require("../lib/database/StoreDb");
 
 command(
   {
     pattern: "quoted",
-    fromMe: isPrivate,
+    fromMe: mode,
     desc: "quoted message",
   },
   async (message, match) => {

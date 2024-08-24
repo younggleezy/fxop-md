@@ -1,4 +1,4 @@
-const { command, isPrivate } = require("../lib/");
+const { command, mode } = require("../lib/");
 const { isAdmin, parsedJid } = require("../lib");
 
 command(

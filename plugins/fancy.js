@@ -1,10 +1,10 @@
-const { command, isPrivate } = require("../lib/");
+const { command, mode } = require("../lib/");
 const { listall } = require("../lib/fancy");
 
 command(
   {
     pattern: "fancy",
-    fromMe: isPrivate,
+    fromMe: mode,
     desc: "converts text to fancy text",
     type: "converter",
   },
