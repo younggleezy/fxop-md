@@ -1,9 +1,0 @@
-version: 2
-services:
- fxop-bot:
-  type: web
-  buildCommand: yarn install
-  startCommand: yarn start
-  envVars:
-   - key: NODE_ENV
-     value: production
