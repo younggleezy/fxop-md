@@ -33,7 +33,7 @@ command(
   },
   async (message, match) => {
     await message.sendMessage(message.jid, "shutting down...");
-    exec("pm2 stop x-asena", (error, stdout, stderr) => {
+    exec("pm2 stop fxop", (error, stdout, stderr) => {
       if (error) {
         return message.sendMessage(message.jid, `Error: ${error}`);
       }

@@ -41,7 +41,7 @@ command(
         {
           type: "url",
           params: {
-            display_text: "Neeraj-x0",
+            display_text: "Astro",
             url: "https://www.neerajx0.xyz/",
             merchant_url: "https://www.neerajx0.xyz/",
           },
@@ -74,7 +74,7 @@ command(
         },
       ],
       header: {
-        title: "X-Asena",
+        title: "fxop",
         subtitle: "WhatsApp Bot",
         hasMediaAttachment: false,
       },
