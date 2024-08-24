@@ -1,5 +1,5 @@
-const { command, isPrivate } = require("../../lib/");
-const { listall } = require("../../lib/fancy");
+const { command, isPrivate } = require("../lib/");
+const { listall } = require("../lib/fancy");
 
 command(
   {

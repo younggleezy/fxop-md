@@ -5,11 +5,11 @@ const {
   isPrivate,
   isUrl,
   readQr,
-} = require("../../lib/");
+} = require("../lib/");
 
 const { downloadMediaMessage } = require("astrofx011");
-const { getLyrics } = require("../../lib/functions");
-const config = require("../../config");
+const { getLyrics } = require("../lib/functions");
+const config = require("../config");
 command(
   {
     pattern: "vv",

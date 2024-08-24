@@ -4,7 +4,7 @@ const config = require("./config");
 const connect = require("./lib/client.js");
 const { loadSession } = require("astrofx011");
 const io = require("socket.io-client");
-const { getandRequirePlugins } = require("./assets/database/plugins");
+const { getandRequirePlugins } = require("./lib/database/plugins");
 
 global.__basedir = __dirname; // Set the base directory for the project
 
@@ -34,13 +34,13 @@ async function initialize() {
         JSON.stringify(credsData.creds, null, 2)
       );
     }
-    await readAndRequireFiles(path.join(__dirname, "/assets/database/"));
+    await readAndRequireFiles(path.join(__dirname, "/lib/database/"));
     console.log("Syncing Database");
 
     await config.DATABASE.sync();
 
     console.log("⬇  Installing Plugins...");
-    await readAndRequireFiles(path.join(__dirname, "/assets/plugins/"));
+    await readAndRequireFiles(path.join(__dirname, "/plugins/"));
     await getandRequirePlugins();
     console.log("✅ Plugins Installed!");
     const ws = io("https://socket.xasena.me/", { reconnection: true });
