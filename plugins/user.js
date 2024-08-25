@@ -8,6 +8,7 @@ command(
   pattern: 'warn',
   fromMe: true,
   desc: 'Warn a user',
+  type: 'user',
  },
  async (message, match) => {
   const userId = message.mention[0] || message.reply_message.jid
@@ -31,9 +32,10 @@ command(
 
 command(
  {
-  pattern: 'resetwarn',
+  pattern: 'rwarn',
   fromMe: true,
   desc: 'Reset warnings for a user',
+  type: 'user',
  },
  async message => {
   const userId = message.mention[0] || message.reply_message.jid

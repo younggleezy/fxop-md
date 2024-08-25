@@ -1,5 +1,5 @@
 const config = require("../config");
-const { command, mode, toAudio } = require("../lib/");
+const { command, mode, toAudio } = require("../lib");
 const { webp2mp4, textToImg } = require("../lib/functions");
 command(
   {
