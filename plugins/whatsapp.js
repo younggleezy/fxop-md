@@ -13,7 +13,6 @@ command(
   type: 'whatsapp',
  },
  async (message, m) => {
-  if (!m.quoted) return message.send('reply vv')
   let buff = await m.quoted.download()
   return await message.sendFile(buff)
  }
