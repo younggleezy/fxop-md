@@ -1,11 +1,11 @@
-var { commands } = require('../lib/plugins')
+var { commands, command } = require('../lib/plugins')
 const { bot, mode, formatBytes } = require('../lib')
 const { BOT_INFO, WORK_TYPE } = require('../config')
 const os = require('os')
 const version = require('../package.json').version
 const { tiny } = require('../lib/fancy')
 
-bot(
+command(
  {
   pattern: 'menu',
   fromMe: mode,
@@ -71,7 +71,7 @@ Description: ${command.desc}\`\`\``)
  }
 )
 
-bot(
+command(
  {
   pattern: 'list',
   fromMe: mode,
