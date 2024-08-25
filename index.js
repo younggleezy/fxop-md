@@ -2,11 +2,9 @@ const fs = require("fs").promises;
 const path = require("path");
 const config = require("./config");
 const connect = require("./lib/client.js");
-const { loadSession } = require("astrofx011");
-const io = require("socket.io-client");
 const { getandRequirePlugins } = require("./lib/database/plugins");
-
-global.__basedir = __dirname; // Set the base directory for the project
+const {existsSync, mkdirSync} = require('fs')
+global.__basedir = __dirname;
 
 const readAndRequireFiles = async (directory) => {
   try {
@@ -25,15 +23,6 @@ const readAndRequireFiles = async (directory) => {
 async function initialize() {
   console.log("fxop");
   try {
-    if (config.SESSION_ID && !fs.existsSync("session")) {
-      console.log("loading session from session id...");
-      fs.mkdirSync("./session");
-      const credsData = await loadSession(config.SESSION_ID);
-      fs.writeFileSync(
-        "./session/creds.json",
-        JSON.stringify(credsData.creds, null, 2)
-      );
-    }
     await readAndRequireFiles(path.join(__dirname, "/lib/database/"));
     console.log("Syncing Database");
 
@@ -43,13 +32,10 @@ async function initialize() {
     await readAndRequireFiles(path.join(__dirname, "/plugins/"));
     await getandRequirePlugins();
     console.log("✅ Plugins Installed!");
-    const ws = io("https://socket.xasena.me/", { reconnection: true });
-    ws.on("connect", () => console.log("Connected to server"));
-    ws.on("disconnect", () => console.log("Disconnected from server"));
     return await connect();
   } catch (error) {
     console.error("Initialization error:", error);
-    return process.exit(1); // Exit with error status
+    return process.exit(1);
   }
 }
 
