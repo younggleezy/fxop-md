@@ -1,5 +1,5 @@
 var { commands, command } = require('../lib/plugins')
-const { mode, formatBytes,  } = require('../lib')
+const { mode, formatBytes } = require('../lib')
 const { BOT_INFO, WORK_TYPE } = require('../config')
 const os = require('os')
 const version = require('../package.json').version
