@@ -1,20 +1,16 @@
-const { fromBuffer, mimeTypes } = require("file-type");
-const { command, mode } = require("../lib/");
+const {command, mode} = require('../lib')
 command(
-  {
-    pattern: "ping",
-    fromMe: mode,
-    desc: "To check ping",
-    type: "user",
-  },
-  async (message, match) => {
-    const start = new Date().getTime();
-    await message.sendMessage(message.jid, "```Ping!```");
-    const end = new Date().getTime();
-    return await message.sendMessage(
-      message.jid,
-      "*Pong!*\n ```" + (end - start) + "``` *ms*"
-    );
-  }
-);
-
+ {
+  pattern: 'ping ?(.*)',
+  fromMe: mode,
+  desc: 'Bot response in milliseconds.',
+  type: 'system',
+ },
+ async message => {
+  const start = new Date().getTime()
+  const msg = await message.reply('*ᴩɪɴɢ...*')
+  const end = new Date().getTime()
+  const responseTime = (end - start) / 1000
+  await msg.edit(`*ʀᴇsᴘᴏɴsᴇ ʀᴀᴛᴇ ${responseTime} secs*`)
+ }
+)
