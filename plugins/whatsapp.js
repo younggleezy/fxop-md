@@ -3,7 +3,7 @@ const { PausedChats } = require('../lib/database')
 const config = require('../config')
 const { DELETED_LOG_CHAT, DELETED_LOG } = require('../config')
 const { loadMessage, getName } = require('../lib/database/StoreDb')
-const { downloadMediaMessage } = require('astrofx011')
+const { downloadMediaMessage } = require('baileys')
 
 command(
  {
