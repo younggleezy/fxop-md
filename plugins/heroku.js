@@ -8,38 +8,21 @@ const { secondsToDHMS } = require("../lib/functions");
 const { delay } = require("astrofx011");
 
 command(
-  {
-    pattern: "restart",
-    fromMe: true,
-    type: "heroku",
-    desc: "Restart Dyno",
-    type: "heroku",
-  },
-  async (message) => {
-    await message.reply(`_Restarting_`);
-    if (Config.HEROKU) {
-      if (Config.HEROKU_APP_NAME === "") {
-        return await message.reply("Add `HEROKU_APP_NAME` env variable");
-      }
-      if (Config.HEROKU_API_KEY === "") {
-        return await message.reply("Add `HEROKU_API_KEY` env variable");
-      }
-      await heroku.delete(baseURI + "/dynos").catch(async (error) => {
-        await message.reply(`HEROKU : ${error.body.message}`);
-      });
-    } else {
-      require("child_process").exec(
-        "pm2 restart "+Config.PROCESSNAME,
-        (error, stdout, stderr) => {
-          if (error) {
-            return message.sendMessage(message.jid, `Error: ${error}`);
-          }
-          return;
-        }
-      );
-    }
-  }
-);
+ {
+  pattern: 'restart',
+  fromMe: true,
+  desc: 'Restart the bot',
+  type: 'system',
+ },
+ async messsage => {
+  await messsage.sendMessage(messsage.jid, 'restarting process...')
+  exec('pm2 restart fxop', error => {
+   if (error) {
+    return messsage.sendMessage(messsage.jid, `Error: ${error}`)
+   }
+  })
+ }
+)
 command(
   {
     pattern: "shutdown",
