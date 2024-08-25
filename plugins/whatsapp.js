@@ -12,7 +12,8 @@ command(
   desc: 'Forwards The View once messsage',
   type: 'whatsapp',
  },
- async (message, match, m) => {
+ async (message, m) => {
+  if (!m.quoted) return message.send('reply vv')
   let buff = await m.quoted.download()
   return await message.sendFile(buff)
  }
@@ -228,19 +229,18 @@ command(
 )
 
 command(
-  {
-   pattern: 'quoted',
-   fromMe: mode,
-   desc: 'quoted message',
-  },
-  async (message, match) => {
-   if (!message.reply_message) return await message.reply('*Reply to a message*')
-   let key = message.reply_message.key
-   let msg = await loadMessage(key.id)
-   if (!msg) return await message.reply('_Message not found maybe bot might not be running at that time_')
-   msg = await serialize(JSON.parse(JSON.stringify(msg.message)), message.client)
-   if (!msg.quoted) return await message.reply('No quoted message found')
-   await message.forward(message.jid, msg.quoted.message)
-  }
- )
- 
+ {
+  pattern: 'quoted',
+  fromMe: mode,
+  desc: 'quoted message',
+ },
+ async (message, match) => {
+  if (!message.reply_message) return await message.reply('*Reply to a message*')
+  let key = message.reply_message.key
+  let msg = await loadMessage(key.id)
+  if (!msg) return await message.reply('_Message not found maybe bot might not be running at that time_')
+  msg = await serialize(JSON.parse(JSON.stringify(msg.message)), message.client)
+  if (!msg.quoted) return await message.reply('No quoted message found')
+  await message.forward(message.jid, msg.quoted.message)
+ }
+)
