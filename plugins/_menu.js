@@ -1,5 +1,5 @@
 var { commands, command } = require('../lib/plugins')
-const { bot, mode, formatBytes } = require('../lib')
+const { mode, formatBytes,  } = require('../lib')
 const { BOT_INFO, WORK_TYPE } = require('../config')
 const os = require('os')
 const version = require('../package.json').version
@@ -11,7 +11,6 @@ command(
   fromMe: mode,
   desc: 'Display All Commands',
   dontAddCommandList: true,
-  type: 'user',
  },
  async (message, match) => {
   if (match) {
@@ -23,7 +22,6 @@ Description: ${command.desc}\`\`\``)
     }
    }
   } else {
-   const { prefix } = message
    let menuContent = `\`\`\`╭━━━〔 ${BOT_INFO.split(',')[1]} 〕━━━┈⊷
 │ Owner : ${BOT_INFO.split(',')[0]}
 │ User : ${message.pushName.replace(/[\r\n]+/gm, '')}
@@ -104,7 +102,7 @@ command(
    }
   })
 
-  return await message.sendReply(commandListContent)
+  return await message.send(commandListContent)
  }
 )
 
