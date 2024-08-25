@@ -1,0 +1,22 @@
+{
+   "name": "FXop-MD Dev Container",
+   "dockerFile": "Dockerfile",
+   "customizations": {
+     "vscode": {
+       "extensions": [
+         "dbaeumer.vscode-eslint",
+         "esbenp.prettier-vscode",
+         "GitHub.copilot",
+         "ms-azuretools.vscode-docker"
+       ],
+       "settings": {
+         "terminal.integrated.defaultProfile.linux": "bash",
+         "editor.formatOnSave": true,
+         "editor.defaultFormatter": "esbenp.prettier-vscode"
+       }
+     }
+   },
+   "forwardPorts": [3000],
+   "postCreateCommand": "npm install",
+   "remoteUser": "node"
+ }
