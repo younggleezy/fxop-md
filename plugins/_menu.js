@@ -24,7 +24,7 @@ command(
    const data = new Agent()
    const time = data.time()
    const date = data.date()
-   const day = data.day()
+   const day = await data.day()
    const runtime = await data.runtime()
    const os = await data.platform()
    const ram = data.ram()
@@ -39,7 +39,7 @@ command(
 │ Date : ${date}
 │ Version : ${version}
 │ Plugins : ${plugin}
-│ Ram : ${ram.freeMemory}
+│ Ram : ${ram.usedMemory}
 │ Uptime : ${runtime}
 │ Platform : ${os}
 ╰────────────────`
