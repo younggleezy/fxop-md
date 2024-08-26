@@ -12,7 +12,6 @@ command(
   type: 'user',
  },
  async (message, match) => {
-  const data = new Agent()
   if (match) {
    for (let i of plugins.commands) {
     if (i.pattern instanceof RegExp && i.pattern.test(message.prefix + match)) {
@@ -23,19 +22,20 @@ Description: ${i.desc}\`\`\``)
    }
   } else {
    let { prefix } = message
-   let [date] = new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }).split(',')
+   const data = new Agent()
    const time = data.getCurrentTime()
+   const date = data.getCurrentDate()
    const runtime = data.getRuntime()
    const os = data.getOperatingSystem()
    let menu = `╭━━━━━ᆫ ${BOT_NAME} ᄀ━━━
-┃ ⎆  *OWNER*:  ${OWNER_NAME}
-┃ ⎆  *PREFIX*: ${prefix}
-┃ ⎆  *HOST NAME*: ${os}
-┃ ⎆  *DATE*: ${date}
-┃ ⎆  *TIME*: ${time}
-┃ ⎆  *COMMANDS*: ${plugins.commands.length} 
-┃ ⎆  *UPTIME*: ${runtime} 
-╰━━━━━━━━━━━━━━━\n`
+   ┃ ⎆  *USER*:  ${message.pushName}
+   ┃ ⎆  *PREFIX*: ${prefix}
+   ┃ ⎆  *HOST NAME*: ${os}
+   ┃ ⎆  *DATE*: ${date}
+   ┃ ⎆  *TIME*: ${time}
+   ┃ ⎆  *COMMANDS*: ${plugins.commands.length} 
+   ┃ ⎆  *UPTIME*: ${runtime} 
+   ╰━━━━━━━━━━━━━━━\n`
    let cmnd = []
    let cmd
    let category = []
