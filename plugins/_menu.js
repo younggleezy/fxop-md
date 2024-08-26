@@ -47,7 +47,7 @@ command(
    let cmnd = []
    let cmd
    let category = []
-   plugins.commands.map(command => {
+   plugins.commands.map((command) => {
     if (command.pattern instanceof RegExp) {
      cmd = command.pattern.toString().split(/\W+/)[1]
     }
