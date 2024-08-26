@@ -7,6 +7,8 @@
 
 <a href='https://session-id-rz4x.onrender.com' target="_blank"><img alt='SESSION' src='https://img.shields.io/badge/GET SESSION-100000?style=for-the-badge&logo=scan&logoColor=white&labelColor=black&color=blue'/></a>
 
+<a href="https://whatsapp.com/channel/0029VambPbJ2f3ERs37HvM2J"><img alt="WhatsApp" src="https://img.shields.io/badge/-Whatsapp%20Channel-white?style=for-the-badge&logo=whatsapp&logoColor=black"/></a>
+
 ---
 
 #### Run Locally
