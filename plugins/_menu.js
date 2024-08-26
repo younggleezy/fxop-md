@@ -23,15 +23,18 @@ Description: ${i.desc}\`\`\``)
    }
   } else {
    let { prefix } = message
-   let [date, time] = new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }).split(',')
+   let [date] = new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }).split(',')
+   const time = data.getCurrentTime()
+   const runtime = data.getRuntime()
+   const os = data.getOperatingSystem()
    let menu = `╭━━━━━ᆫ ${BOT_NAME} ᄀ━━━
 ┃ ⎆  *OWNER*:  ${OWNER_NAME}
 ┃ ⎆  *PREFIX*: ${prefix}
-┃ ⎆  *HOST NAME*: ${data.getOperatingSystem()}
+┃ ⎆  *HOST NAME*: ${os}
 ┃ ⎆  *DATE*: ${date}
-┃ ⎆  *TIME*: ${data.getCurrentTime()}
+┃ ⎆  *TIME*: ${time}
 ┃ ⎆  *COMMANDS*: ${plugins.commands.length} 
-┃ ⎆  *UPTIME*: ${data.getRuntime()} 
+┃ ⎆  *UPTIME*: ${runtime} 
 ╰━━━━━━━━━━━━━━━\n`
    let cmnd = []
    let cmd
