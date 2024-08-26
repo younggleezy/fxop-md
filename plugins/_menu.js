@@ -27,7 +27,7 @@ command(
    const day = data.day()
    const runtime = await data.runtime()
    const os = await data.platform()
-   const ram = await data.ram()
+   const ram = data.ram()
    const plugin = commands.length
    const version = require('../package.json').version
    let menu = `
