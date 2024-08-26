@@ -25,10 +25,10 @@ command(
    const time = data.time()
    const date = data.date()
    const day = data.day()
-   const runtime = await data.runtime() // Await here
-   const os = await data.platform() // Await here
+   const runtime = await data.runtime()
+   const os = await data.platform()
    const plugins = commands.length
-
+   const version = require('../package.json').version
    let menu = `
 ╭────────────────
 │ Prefix : ${prefix}
@@ -36,7 +36,7 @@ command(
 │ Time : ${time}
 │ Day : ${day}
 │ Date : ${date}
-│ Version : ${VERSION}
+│ Version : ${version}
 │ Plugins : ${plugins}
 │ Ram : ${getRam()}
 │ Uptime : ${runtime}
