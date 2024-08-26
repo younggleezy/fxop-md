@@ -39,7 +39,7 @@ command(
 │ Date : ${date}
 │ Version : ${version}
 │ Plugins : ${plugin}
-│ Ram : ${ram}
+│ Ram : ${ram.freeMemory}
 │ Uptime : ${runtime}
 │ Platform : ${os}
 ╰────────────────`
