@@ -1,5 +1,5 @@
 const plugins = require('../lib/plugins')
-const { command, isPrivate } = require('../lib')
+const { command, isPrivate, commands } = require('../lib')
 const { BOT_NAME } = require('../config')
 const Agent = require('../lib/agent')
 command(
@@ -22,20 +22,26 @@ command(
   } else {
    let { prefix } = message
    const data = new Agent()
-   const time = data.getCurrentTime()
-   const date = data.getCurrentDate()
-   const runtime = await data.getRuntime() // Await here
-   const os = await data.getOperatingSystem() // Await here
+   const time = data.time()
+   const date = data.date()
+   const day = data.day()
+   const runtime = await data.runtime() // Await here
+   const os = await data.platform() // Await here
+   const plugins = commands.length
 
-   let menu = `╭━━━━━ᆫ ${BOT_NAME} ᄀ━━━
-    ┃ ⎆  *USER*:  ${message.pushName}
-    ┃ ⎆  *PREFIX*: ${prefix}
-    ┃ ⎆  *HOST NAME*: ${os}
-    ┃ ⎆  *DATE*: ${date}
-    ┃ ⎆  *TIME*: ${time}
-    ┃ ⎆  *COMMANDS*: ${plugins.commands.length} 
-    ┃ ⎆  *UPTIME*: ${runtime} 
-    ╰━━━━━━━━━━━━━━━\n`
+   let menu = `
+╭────────────────
+│ Prefix : ${prefix}
+│ User : ${message.pushName}
+│ Time : ${time}
+│ Day : ${day}
+│ Date : ${date}
+│ Version : ${VERSION}
+│ Plugins : ${plugins}
+│ Ram : ${getRam()}
+│ Uptime : ${runtime}
+│ Platform : ${os}
+╰────────────────`
 
    let cmnd = []
    let cmd
