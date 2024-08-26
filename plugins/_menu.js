@@ -2,7 +2,7 @@ const plugins = require('../lib/plugins')
 const { command, isPrivate, clockString, pm2Uptime } = require('../lib')
 const { OWNER_NAME, BOT_NAME } = require('../config')
 const { hostname } = require('os')
-
+const Agent = require('../lib/agent')
 command(
  {
   pattern: 'menu',
@@ -12,6 +12,7 @@ command(
   type: 'user',
  },
  async (message, match) => {
+  const data = new Agent()
   if (match) {
    for (let i of plugins.commands) {
     if (i.pattern instanceof RegExp && i.pattern.test(message.prefix + match)) {
@@ -26,11 +27,11 @@ Description: ${i.desc}\`\`\``)
    let menu = `╭━━━━━ᆫ ${BOT_NAME} ᄀ━━━
 ┃ ⎆  *OWNER*:  ${OWNER_NAME}
 ┃ ⎆  *PREFIX*: ${prefix}
-┃ ⎆  *HOST NAME*: ${hostname().split('-')[0]}
+┃ ⎆  *HOST NAME*: ${data.getOperatingSystem()}
 ┃ ⎆  *DATE*: ${date}
-┃ ⎆  *TIME*: ${time}
+┃ ⎆  *TIME*: ${data.getCurrentTime()}
 ┃ ⎆  *COMMANDS*: ${plugins.commands.length} 
-┃ ⎆  *UPTIME*: ${clockString(process.uptime())} 
+┃ ⎆  *UPTIME*: ${data.getRuntime()} 
 ╰━━━━━━━━━━━━━━━\n`
    let cmnd = []
    let cmd
