@@ -28,7 +28,7 @@ command(
    const runtime = await data.runtime()
    const os = await data.platform()
    const ram = await data.ram()
-   const plugins = commands.length
+   const plugin = commands.length
    const version = require('../package.json').version
    let menu = `
 ╭────────────────
@@ -38,7 +38,7 @@ command(
 │ Day : ${day}
 │ Date : ${date}
 │ Version : ${version}
-│ Plugins : ${plugins}
+│ Plugins : ${plugin}
 │ Ram : ${ram}
 │ Uptime : ${runtime}
 │ Platform : ${os}
@@ -47,7 +47,7 @@ command(
    let cmnd = []
    let cmd
    let category = []
-   plugins.commands.map((command) => {
+   plugins.commands.map(command => {
     if (command.pattern instanceof RegExp) {
      cmd = command.pattern.toString().split(/\W+/)[1]
     }
