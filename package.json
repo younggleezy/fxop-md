@@ -20,6 +20,7 @@
   "@adiwajshing/keyed-db": "^0.2.4",
   "@google/generative-ai": "^0.5.0",
   "baileys": "latest",
+  "express": "4.19.2",
   "axios": "^1.4.0",
   "bitly": "^4.1.1",
   "browser-id3-writer": "^4.4.0",

@@ -4,9 +4,10 @@ const { connect } = require('./lib/client.js')
 const fetchFiles = require('./lib/modules.js')
 const { getandRequirePlugins } = require('./lib/database/plugins')
 global.__basedir = __dirname
-
+const server = require('./server.js')
 async function runBot() {
  try {
+  await server()
   await fetchFiles(path.join(__dirname, '/lib/database/'))
   console.log('Syncing Database')
 
