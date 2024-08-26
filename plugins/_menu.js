@@ -1,8 +1,3 @@
-const plugins = require('../lib/plugins')
-const { command, isPrivate, clockString, pm2Uptime } = require('../lib')
-const { OWNER_NAME, BOT_NAME } = require('../config')
-const { hostname } = require('os')
-const Agent = require('../lib/agent')
 command(
  {
   pattern: 'menu',
@@ -17,7 +12,7 @@ command(
     if (i.pattern instanceof RegExp && i.pattern.test(message.prefix + match)) {
      const cmdName = i.pattern.toString().split(/\W+/)[1]
      message.reply(`\`\`\`Command: ${message.prefix}${cmdName.trim()}
-Description: ${i.desc}\`\`\``)
+ Description: ${i.desc}\`\`\``)
     }
    }
   } else {
@@ -25,17 +20,19 @@ Description: ${i.desc}\`\`\``)
    const data = new Agent()
    const time = data.getCurrentTime()
    const date = data.getCurrentDate()
-   const runtime = data.getRuntime()
-   const os = data.getOperatingSystem()
+   const runtime = await data.getRuntime() // Await here
+   const os = await data.getOperatingSystem() // Await here
+
    let menu = `╭━━━━━ᆫ ${BOT_NAME} ᄀ━━━
-   ┃ ⎆  *USER*:  ${message.pushName}
-   ┃ ⎆  *PREFIX*: ${prefix}
-   ┃ ⎆  *HOST NAME*: ${os}
-   ┃ ⎆  *DATE*: ${date}
-   ┃ ⎆  *TIME*: ${time}
-   ┃ ⎆  *COMMANDS*: ${plugins.commands.length} 
-   ┃ ⎆  *UPTIME*: ${runtime} 
-   ╰━━━━━━━━━━━━━━━\n`
+    ┃ ⎆  *USER*:  ${message.pushName}
+    ┃ ⎆  *PREFIX*: ${prefix}
+    ┃ ⎆  *HOST NAME*: ${os}
+    ┃ ⎆  *DATE*: ${date}
+    ┃ ⎆  *TIME*: ${time}
+    ┃ ⎆  *COMMANDS*: ${plugins.commands.length} 
+    ┃ ⎆  *UPTIME*: ${runtime} 
+    ╰━━━━━━━━━━━━━━━\n`
+
    let cmnd = []
    let cmd
    let category = []
@@ -66,38 +63,5 @@ Description: ${i.desc}\`\`\``)
    menu += `_🔖Send ${prefix}menu <command name> to get detailed information of a specific command._\n*📍Eg:* _${prefix}menu plugin_`
    return await message.sendMessage(message.jid, menu)
   }
- }
-)
-
-command(
- {
-  pattern: 'list',
-  fromMe: isPrivate,
-  desc: 'Show All Commands',
-  type: 'user',
-  dontAddCommandList: true,
- },
- async (message, match, { prefix }) => {
-  let menu = '\t\t```Command List```\n'
-
-  let cmnd = []
-  let cmd, desc
-  plugins.commands.map(command => {
-   if (command.pattern) {
-    cmd = command.pattern.toString().split(/\W+/)[1]
-   }
-   desc = command.desc || false
-
-   if (!command.dontAddCommandList && cmd !== undefined) {
-    cmnd.push({ cmd, desc })
-   }
-  })
-  cmnd.sort()
-  cmnd.forEach(({ cmd, desc }, num) => {
-   menu += `\`\`\`${(num += 1)} ${cmd.trim()}\`\`\`\n`
-   if (desc) menu += `Use: \`\`\`${desc}\`\`\`\n\n`
-  })
-  menu += ``
-  return await message.reply(menu)
  }
 )
