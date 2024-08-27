@@ -1,35 +1,35 @@
-const plugins = require('../lib/plugins')
-const { command, isPrivate, commands } = require('../lib')
-const { BOT_NAME } = require('../config')
-const Agent = require('../lib/agent')
+const plugins = require("../lib/plugins");
+const { command, isPrivate, commands } = require("../lib");
+const { BOT_NAME } = require("../config");
+const Agent = require("../lib/agent");
 command(
  {
-  pattern: 'menu',
+  pattern: "menu",
   fromMe: isPrivate,
-  desc: 'Show All Commands',
+  desc: "Show All Commands",
   dontAddCommandList: true,
-  type: 'user',
+  type: "user",
  },
  async (message, match) => {
   if (match) {
    for (let i of plugins.commands) {
     if (i.pattern instanceof RegExp && i.pattern.test(message.prefix + match)) {
-     const cmdName = i.pattern.toString().split(/\W+/)[1]
+     const cmdName = i.pattern.toString().split(/\W+/)[1];
      message.reply(`\`\`\`Command: ${message.prefix}${cmdName.trim()}
- Description: ${i.desc}\`\`\``)
+ Description: ${i.desc}\`\`\``);
     }
    }
   } else {
-   let { prefix } = message
-   const data = new Agent()
-   const time = data.time()
-   const date = data.date()
-   const day = await data.day()
-   const runtime = await data.runtime()
-   const os = await data.platform()
-   const ram = data.ram()
-   const plugin = commands.length
-   const version = require('../package.json').version
+   let { prefix } = message;
+   const data = new Agent();
+   const time = data.time();
+   const date = data.date();
+   const day = await data.day();
+   const runtime = await data.runtime();
+   const os = await data.platform();
+   const ram = data.ram();
+   const plugin = commands.length;
+   const version = require("../package.json").version;
    let menu = `
 ╭────────────────
 │ Prefix : ${prefix}
@@ -42,70 +42,70 @@ command(
 │ Ram : ${ram.usedMemory}
 │ Uptime : ${runtime}
 │ Platform : ${os}
-╰────────────────`
+╰────────────────`;
 
-   let cmnd = []
-   let cmd
-   let category = []
+   let cmnd = [];
+   let cmd;
+   let category = [];
    plugins.commands.map(command => {
     if (command.pattern instanceof RegExp) {
-     cmd = command.pattern.toString().split(/\W+/)[1]
+     cmd = command.pattern.toString().split(/\W+/)[1];
     }
 
     if (!command.dontAddCommandList && cmd !== undefined) {
-     let type = command.type ? command.type.toLowerCase() : 'misc'
+     let type = command.type ? command.type.toLowerCase() : "misc";
 
-     cmnd.push({ cmd, type })
+     cmnd.push({ cmd, type });
 
-     if (!category.includes(type)) category.push(type)
+     if (!category.includes(type)) category.push(type);
     }
-   })
-   cmnd.sort()
+   });
+   cmnd.sort();
    category.sort().forEach(cmmd => {
-    menu += `\n\t⦿---- *${cmmd.toUpperCase()}* ----⦿\n`
-    let comad = cmnd.filter(({ type }) => type == cmmd)
+    menu += `\n\t⦿---- *${cmmd.toUpperCase()}* ----⦿\n`;
+    let comad = cmnd.filter(({ type }) => type == cmmd);
     comad.forEach(({ cmd }) => {
-     menu += `\n⛥  _${cmd.trim()}_ `
-    })
-    menu += `\n`
-   })
+     menu += `\n⛥  _${cmd.trim()}_ `;
+    });
+    menu += `\n`;
+   });
 
-   menu += `\n`
-   menu += `_🔖Send ${prefix}menu <command name> to get detailed information of a specific command._\n*📍Eg:* _${prefix}menu plugin_`
-   return await message.sendMessage(message.jid, menu)
+   menu += `\n`;
+   menu += `_🔖Send ${prefix}menu <command name> to get detailed information of a specific command._\n*📍Eg:* _${prefix}menu plugin_`;
+   return await message.sendMessage(message.jid, menu);
   }
  }
-)
+);
 
 command(
  {
-  pattern: 'list',
+  pattern: "list",
   fromMe: isPrivate,
-  desc: 'Show All Commands',
-  type: 'user',
+  desc: "Show All Commands",
+  type: "user",
   dontAddCommandList: true,
  },
  async (message, match, { prefix }) => {
-  let menu = '\t\t```Command List```\n'
+  let menu = "\t\t```Command List```\n";
 
-  let cmnd = []
-  let cmd, desc
+  let cmnd = [];
+  let cmd, desc;
   plugins.commands.map(command => {
    if (command.pattern) {
-    cmd = command.pattern.toString().split(/\W+/)[1]
+    cmd = command.pattern.toString().split(/\W+/)[1];
    }
-   desc = command.desc || false
+   desc = command.desc || false;
 
    if (!command.dontAddCommandList && cmd !== undefined) {
-    cmnd.push({ cmd, desc })
+    cmnd.push({ cmd, desc });
    }
-  })
-  cmnd.sort()
+  });
+  cmnd.sort();
   cmnd.forEach(({ cmd, desc }, num) => {
-   menu += `\`\`\`${(num += 1)} ${cmd.trim()}\`\`\`\n`
-   if (desc) menu += `Use: \`\`\`${desc}\`\`\`\n\n`
-  })
-  menu += ``
-  return await message.reply(menu)
+   menu += `\`\`\`${(num += 1)} ${cmd.trim()}\`\`\`\n`;
+   if (desc) menu += `Use: \`\`\`${desc}\`\`\`\n\n`;
+  });
+  menu += ``;
+  return await message.reply(menu);
  }
-)
+);
