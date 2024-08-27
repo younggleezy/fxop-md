@@ -19,7 +19,6 @@ const server = app.listen(8000, () => {
 
 async function runBot() {
  try {
-  await server();
   await fetchFiles(path.join(__dirname, "/lib/database/"));
   console.log("Syncing Database");
 

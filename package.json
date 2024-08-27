@@ -21,6 +21,7 @@
  "dependencies": {
   "@adiwajshing/keyed-db": "^0.2.4",
   "@google/generative-ai": "^0.5.0",
+  "atob": "^2.1.2",
   "axios": "^1.4.0",
   "baileys": "latest",
   "bitly": "^4.1.1",
