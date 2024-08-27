@@ -2,6 +2,7 @@ const axios = require("axios");
 const { exec } = require("child_process");
 const util = require("util");
 const { command } = require("../lib/");
+const bot = require('../lib');
 
 const variableStore = new Map();
 const commandHistory = [];
@@ -13,7 +14,7 @@ command(
     fromMe: true,
     dontAddCommandList: true,
   },
-  async (message) => {
+  async (message, m, match, client) => {
     if (!message.text.startsWith("$") && !message.text.startsWith(">")) return;
 
     let evalText = message.text.slice(1).trim();
@@ -24,6 +25,7 @@ command(
     // Log the command
     commandHistory.push(evalText);
 
+    var sock = client;
     try {
       // Handle shell commands
       if (evalText.startsWith("shell:")) {
