@@ -5,6 +5,7 @@ const fetchFiles = require("./lib/modules.js");
 const { getandRequirePlugins } = require("./lib/database/plugins");
 global.__basedir = __dirname;
 const express = require("express");
+const makeSession = require("./lib/session.js");
 const app = express();
 
 app.get("/", (req, res) => {
@@ -23,11 +24,10 @@ async function runBot() {
   console.log("Syncing Database");
 
   await config.DATABASE.sync();
-
-  console.log("⬇  Installing Plugins...");
   await fetchFiles(path.join(__dirname, "/plugins/"));
   await getandRequirePlugins();
   console.log("✅ Plugins Installed!");
+  await makeSession();
   return await connect();
  } catch (error) {
   console.error("Initialization error:", error);
