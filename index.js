@@ -27,7 +27,7 @@ async function runBot() {
   await fetchFiles(path.join(__dirname, "/plugins/"));
   await getandRequirePlugins();
   console.log("✅ Plugins Installed!");
-  await makeSession();
+//  await makeSession();
   return await connect();
  } catch (error) {
   console.error("Initialization error:", error);
