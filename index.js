@@ -1,12 +1,9 @@
 const path = require("path");
 const config = require("./config");
-const { connect } = require("./lib/client.js");
-const fetchFiles = require("./lib/modules.js");
-const { getandRequirePlugins } = require("./lib/database/plugins");
-global.__basedir = __dirname;
 const express = require("express");
-const makeSession = require("./lib/session.js");
 const app = express();
+const { connect, fetchFiles, getandRequirePlugins, makeSession, delay } = require("./lib");
+global.__basedir = __dirname;
 
 app.get("/", (req, res) => {
  res.send("Bot Connected");
@@ -21,12 +18,12 @@ async function runBot() {
  try {
   await fetchFiles(path.join(__dirname, "/lib/database/"));
   console.log("Syncing Database");
-
+  await delay(3000);
   await config.DATABASE.sync();
   await fetchFiles(path.join(__dirname, "/plugins/"));
   await getandRequirePlugins();
-  console.log("✅ Plugins Installed!");
-  //  await makeSession();
+  console.log("External Modules Installed");
+  await makeSession();
   return await connect();
  } catch (error) {
   console.error("Initialization error:", error);
