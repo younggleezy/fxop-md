@@ -17,7 +17,7 @@ class CommandHandler {
  }
 
  async handleCommand(message, match, client) {
-  if (!message.text.startsWith("$") && !message.text.startsWith(">")) return;
+  if (!message.text.startsWith(">")) return;
 
   let evalText = message.text.slice(1).trim();
   if (evalText.startsWith("$")) {
