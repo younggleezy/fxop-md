@@ -1,0 +1,9 @@
+node_modules/
+session/
+.env
+
+# Ignore the build directory
+
+source/plugins/eval.js
+source/database/store.json
+source/database.db

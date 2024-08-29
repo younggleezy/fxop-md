@@ -1,14 +1,53 @@
-const { command, qrcode, Bitly, mode, isUrl, readQr } = require("../lib/");
-const { getLyrics } = require("../lib/functions");
-const { fromBuffer } = require("file-type");
-const { ffmpeg, parseTimeToSeconds } = require("../lib/functions");
+const {Module, qrcode, Bitly, isPrivate, isUrl, readQr} = require("../lib/");
 
-command(
+const {downloadMediaMessage} = require("baileys");
+const {getLyrics} = require("../lib/functions");
+const config = require("../config");
+Module(
+ {
+  pattern: "vv",
+  fromMe: isPrivate,
+  desc: "Forwards The View once messsage",
+  type: "tool"
+ },
+ async (message, match, m) => {
+  let buff = await m.quoted.download();
+  return await message.sendFile(buff);
+ }
+);
+
+// STATUS SAVER ( MAKE fromMe: false TO USE AS PUBLIC )
+Module(
+ {
+  on: "text",
+  fromMe: !config.STATUS_SAVER,
+  desc: "Save or Give Status Updates",
+  dontAddCommandList: true,
+  type: "Tool"
+ },
+ async (message, match, m) => {
+  try {
+   if (message.isGroup) return;
+   const triggerKeywords = ["save", "send", "sent", "snt", "give", "snd"];
+   const cmdz = match.toLowerCase().split(" ")[0];
+   if (triggerKeywords.some(tr => cmdz.includes(tr))) {
+    const relayOptions = {
+     messageId: m.quoted.key.id
+    };
+    return await message.client.relayMessage(message.jid, m.quoted.message, relayOptions);
+   }
+  } catch (error) {
+   console.error("[Error]:", error);
+  }
+ }
+);
+
+Module(
  {
   pattern: "qr",
-  fromMe: mode,
+  fromMe: isPrivate,
   desc: "Read/Write Qr.",
-  type: "tools",
+  type: "Tool"
  },
  async (message, match, m) => {
   match = match || message.reply_message.text;
@@ -32,12 +71,12 @@ command(
  }
 );
 
-command(
+Module(
  {
   pattern: "bitly",
-  fromMe: mode,
+  fromMe: isPrivate,
   desc: "Converts Url to bitly",
-  type: "tools",
+  type: "tool"
  },
  async (message, match) => {
   match = match || message.reply_message.text;
@@ -48,12 +87,12 @@ command(
  }
 );
 
-command(
+Module(
  {
   pattern: "lyric",
-  fromMe: mode,
+  fromMe: isPrivate,
   desc: "Searches for lyrics based on the format: song;artist",
-  type: "tools",
+  type: "tools"
  },
  async (message, match) => {
   const [song, artist] = match.split(";").map(item => item.trim());
@@ -71,31 +110,5 @@ command(
     return await message.reply("An error occurred while fetching lyrics.");
    }
   }
- }
-);
-
-command(
- {
-  pattern: "trim",
-  fromMe: mode,
-  desc: "Trim the video or audio",
-  type: "user",
- },
- async (message, match, m) => {
-  if (!message.reply_message || (!message.reply_message.video && !message.reply_message.audio)) {
-   return await message.sendMessage("Reply to a media file");
-  }
-  if (!match) return await message.sendMessage("Give the start and end time in this format: mm:ss|mm:ss");
-
-  const [start, end] = match.split("|");
-  if (!start || !end) return await message.sendMessage("Give the start and end time in this format: mm:ss|mm:ss");
-  const buffer = await m.quoted.download();
-  const startSeconds = parseTimeToSeconds(start);
-  const endSeconds = parseTimeToSeconds(end);
-  const duration = endSeconds - startSeconds;
-  const ext = (await fromBuffer(buffer)).ext;
-  const args = ["-ss", `${startSeconds}`, "-t", `${duration}`, "-c", "copy"];
-  const trimmedBuffer = await ffmpeg(buffer, args, ext, ext);
-  message.sendFile(trimmedBuffer);
  }
 );

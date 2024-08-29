@@ -1,13 +1,13 @@
-const { getFilter, setFilter, deleteFilter } = require("../lib/database/filters");
-const { command } = require("../lib");
+const {getFilter, setFilter, deleteFilter} = require("../lib/database/filters");
+const {Module} = require("../lib");
 
-command(
+Module(
  {
   pattern: "filter",
   fromMe: true,
   desc: "Adds a filter. When someone triggers the filter, it sends the corresponding response. To view your filter list, use `.filter`.",
   usage: ".filter keyword:message",
-  type: "group",
+  type: "group"
  },
  async (message, match) => {
   let text, msg;
@@ -33,13 +33,13 @@ command(
  }
 );
 
-command(
+Module(
  {
   pattern: "stop",
   fromMe: true,
   desc: "Stops a previously added filter.",
   usage: '.stop "hello"',
-  type: "group",
+  type: "group"
  },
  async (message, match) => {
   if (!match) return await message.reply("\n*Example:* ```.stop hello```");
@@ -53,15 +53,22 @@ command(
  }
 );
 
-command({ on: "text", fromMe: false, dontAddCommandList: true }, async (message, match) => {
- var filtreler = await getFilter(message.jid);
- if (!filtreler) return;
- filtreler.map(async filter => {
-  pattern = new RegExp(filter.dataValues.regex ? filter.dataValues.pattern : "\\b(" + filter.dataValues.pattern + ")\\b", "gm");
-  if (pattern.test(match)) {
-   return await message.reply(filter.dataValues.text, {
-    quoted: message,
-   });
-  }
- });
-});
+Module(
+ {
+  on: "text",
+  fromMe: false,
+  dontAddCommandList: true
+ },
+ async (message, match) => {
+  var filtreler = await getFilter(message.jid);
+  if (!filtreler) return;
+  filtreler.map(async filter => {
+   pattern = new RegExp(filter.dataValues.regex ? filter.dataValues.pattern : "\\b(" + filter.dataValues.pattern + ")\\b", "gm");
+   if (pattern.test(match)) {
+    return await message.reply(filter.dataValues.text, {
+     quoted: message
+    });
+   }
+  });
+ }
+);

@@ -1,12 +1,12 @@
-const { command } = require("../lib");
+const {Module, isPrivate} = require("../lib");
 
-command(
+Module(
  {
   pattern: "button",
   fromMe: true,
   desc: "send a button message",
   usage: "#button",
-  type: "message",
+  type: "message"
  },
  async (message, match, m) => {
   let data = {
@@ -24,66 +24,66 @@ command(
           header: "title",
           title: "Button 1",
           description: "Description 1",
-          id: "#menu",
-         },
-        ],
-       },
-      ],
-     },
+          id: "#menu"
+         }
+        ]
+       }
+      ]
+     }
     },
     {
      type: "reply",
      params: {
       display_text: "MENU",
-      id: "#menu",
-     },
+      id: "#menu"
+     }
     },
     {
      type: "url",
      params: {
       display_text: "Astro",
       url: "https://www.neerajx0.xyz/",
-      merchant_url: "https://www.neerajx0.xyz/",
-     },
+      merchant_url: "https://www.neerajx0.xyz/"
+     }
     },
     {
      type: "address",
      params: {
       display_text: "Address",
-      id: "message",
-     },
+      id: "message"
+     }
     },
     {
      type: "location",
-     params: {},
+     params: {}
     },
     {
      type: "copy",
      params: {
       display_text: "copy",
       id: "123456789",
-      copy_code: "message",
-     },
+      copy_code: "message"
+     }
     },
     {
      type: "call",
      params: {
       display_text: "Call",
-      phone_number: "123456789",
-     },
-    },
+      phone_number: "123456789"
+     }
+    }
    ],
    header: {
     title: "fxop",
     subtitle: "WhatsApp Bot",
-    hasMediaAttachment: false,
+    hasMediaAttachment: false
    },
    footer: {
-    text: "Interactive Native Flow Message",
+    text: "Interactive Native Flow Message"
    },
    body: {
-    text: "Interactive Message",
-   },
+    text: "Interactive Message"
+   }
   };
   return await message.sendMessage(message.jid, data, {}, "interactive");
  }

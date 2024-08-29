@@ -1,12 +1,12 @@
-const { command, mode } = require("../lib/");
-const { listall } = require("../lib/fancy");
+const {Module, isPrivate} = require("../lib/");
+const {listall} = require("../lib/fancy");
 
-command(
+Module(
  {
   pattern: "fancy",
-  fromMe: mode,
+  fromMe: isPrivate,
   desc: "converts text to fancy text",
-  type: "converter",
+  type: "converter"
  },
  async (message, match) => {
   let text = match;

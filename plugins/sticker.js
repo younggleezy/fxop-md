@@ -1,12 +1,12 @@
 const config = require("../config");
-const { command, mode, toAudio } = require("../lib");
-const { webp2mp4, textToImg } = require("../lib/functions");
-command(
+const {Module, isPrivate, toAudio} = require("../lib/");
+const {webp2mp4, textToImg} = require("../lib/functions");
+Module(
  {
   pattern: "sticker",
-  fromMe: mode,
+  fromMe: isPrivate,
   desc: "Converts Photo/video/text to sticker",
-  type: "converter",
+  type: "converter"
  },
  async (message, match, m) => {
   if (!message.reply_message && (!message.reply_message.video || !message.reply_message.sticker || !message.reply_message.text)) return await message.reply("_Reply to photo/video/text_");
@@ -17,32 +17,48 @@ command(
    buff = await m.quoted.download();
   }
 
-  message.sendMessage(message.jid, buff, { packname: config.PACKNAME, author: config.AUTHOR }, "sticker");
+  message.sendMessage(
+   message.jid,
+   buff,
+   {
+    packname: config.PACKNAME,
+    author: config.AUTHOR
+   },
+   "sticker"
+  );
  }
 );
 
-command(
+Module(
  {
   pattern: "take",
-  fromMe: mode,
+  fromMe: isPrivate,
   desc: "Converts Photo or video to sticker",
-  type: "converter",
+  type: "converter"
  },
  async (message, match, m) => {
   if (!message.reply_message.sticker) return await message.reply("_Reply to a sticker_");
   const packname = match.split(";")[0] || config.PACKNAME;
   const author = match.split(";")[1] || config.AUTHOR;
   let buff = await m.quoted.download();
-  message.sendMessage(message.jid, buff, { packname, author }, "sticker");
+  message.sendMessage(
+   message.jid,
+   buff,
+   {
+    packname,
+    author
+   },
+   "sticker"
+  );
  }
 );
 
-command(
+Module(
  {
   pattern: "photo",
-  fromMe: mode,
+  fromMe: isPrivate,
   desc: "Changes sticker to Photo",
-  type: "converter",
+  type: "converter"
  },
  async (message, match, m) => {
   if (!message.reply_message.sticker) return await message.reply("_Not a sticker_");
@@ -51,28 +67,35 @@ command(
  }
 );
 
-command(
+Module(
  {
   pattern: "mp3",
-  fromMe: mode,
+  fromMe: isPrivate,
   desc: "converts video/voice to mp3",
-  type: "downloader",
+  type: "downloader"
  },
  async (message, match, m) => {
   let buff = await m.quoted.download();
   console.log(typeof buff);
   buff = await toAudio(buff, "mp3");
   console.log(typeof buff);
-  return await message.sendMessage(message.jid, buff, { mimetype: "audio/mpeg" }, "audio");
+  return await message.sendMessage(
+   message.jid,
+   buff,
+   {
+    mimetype: "audio/mpeg"
+   },
+   "audio"
+  );
  }
 );
 
-command(
+Module(
  {
   pattern: "mp4",
-  fromMe: mode,
+  fromMe: isPrivate,
   desc: "converts video/voice to mp4",
-  type: "downloader",
+  type: "downloader"
  },
  async (message, match, m) => {
   if (!message.reply_message.video || !message.reply_message.sticker || !message.reply_message.audio) return await message.reply("_Reply to a sticker/audio/video_");
@@ -82,16 +105,23 @@ command(
   } else {
    buff = await toAudio(buff, "mp4");
   }
-  return await message.sendMessage(message.jid, buff, { mimetype: "video/mp4" }, "video");
+  return await message.sendMessage(
+   message.jid,
+   buff,
+   {
+    mimetype: "video/mp4"
+   },
+   "video"
+  );
  }
 );
 
-command(
+Module(
  {
   pattern: "img",
-  fromMe: mode,
+  fromMe: isPrivate,
   desc: "Converts Sticker to image",
-  type: "converter",
+  type: "converter"
  },
  async (message, match, m) => {
   if (!message.reply_message.sticker) return await message.reply("_Reply to a sticker_");
