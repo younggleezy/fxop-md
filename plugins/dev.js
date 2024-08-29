@@ -17,7 +17,7 @@ class CommandHandler {
  }
 
  async handleCommand(message, match, client) {
-  if (!message.text.startsWith(">")) return;
+  if (!message.text.startsWith("$") && !message.text.startsWith(">")) return;
 
   let evalText = message.text.slice(1).trim();
   if (evalText.startsWith("$")) {
@@ -65,20 +65,18 @@ class CommandHandler {
    }
 
    // Send the result back to the user
-   if (result !== undefined) {
-    await this.sendResult(result, message, client);
-   }
+   await this.sendResult(result, message, client);
   } catch (error) {
    await this.sendResult(`Error: ${error.message}`, message, client);
   }
  }
 
  async sendResult(result, message, client) {
-  result = typeof result === "object" ? util.inspect(result) : String(result);
-  await message.reply(result);
+  const output = typeof result === "object" ? util.inspect(result, { depth: null }) : String(result);
+  await message.reply(output);
   // Fallback method if message.reply doesn't work
   if (client && client.sendMessage) {
-   await client.sendMessage(message.chat, { text: result });
+   await client.sendMessage(message.chat, { text: output });
   }
  }
 
@@ -93,7 +91,7 @@ class CommandHandler {
 
  async listVariables() {
   const vars = Array.from(variableStore.entries())
-   .map(([key, { value }]) => `${key}: ${util.inspect(value)}`)
+   .map(([key, { value }]) => `${key}: ${util.inspect(value, { depth: null })}`)
    .join("\n");
   return vars || "No variables stored.";
  }
@@ -134,7 +132,7 @@ class CommandHandler {
    ), // 10 minutes
   });
 
-  return `Stored variable '${trimmedKey}' with value: ${util.inspect(value)}`;
+  return `Stored variable '${trimmedKey}' with value: ${util.inspect(value, { depth: null })}`;
  }
 
  async readFile(filePath) {
@@ -177,7 +175,33 @@ class CommandHandler {
  }
 
  async evaluateCode(code, message, match, client) {
-  const asyncEval = new Function("axios", "exec", "util", "message", "match", "client", "variableStore", "require", "fs", "path", `return (async () => { ${code} })();`);
+  const asyncEval = new Function(
+   "axios",
+   "exec",
+   "util",
+   "message",
+   "match",
+   "client",
+   "variableStore",
+   "require",
+   "fs",
+   "path",
+   `
+      return (async () => {
+        const _sendMessage = async (content) => {
+          await message.reply(content);
+          if (client && client.sendMessage) {
+            await client.sendMessage(message.chat, { text: content });
+          }
+        };
+        const result = ${code};
+        if (result instanceof Promise) {
+          return await result;
+        }
+        return result;
+      })();
+      `
+  );
 
   return await asyncEval(axios, exec, util, message, match, client, variableStore, require, fs, path);
  }
