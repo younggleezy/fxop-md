@@ -14,6 +14,7 @@ module.exports = {
   RMBG_KEY: process.env.RMBG_KEY || false,
   BRANCH: "main",
   WARN_COUNT: 3,
+  COOLDOWNS: process.env.COOLDOWNS || 5000,
   PACKNAME: process.env.PACKNAME || "fxop",
   WELCOME_MSG: process.env.WELCOME_MSG || "Hi @user Welcome to @gname",
   GOODBYE_MSG: process.env.GOODBYE_MSG || "Hi @user It was Nice Seeing you",
@@ -33,6 +34,7 @@ module.exports = {
   DELETED_LOG_CHAT: process.env.DELETED_LOG_CHAT || false,
   REMOVEBG: process.env.REMOVEBG || false,
   DATABASE_URL: DATABASE_URL,
+  STATUS_MESSAGES: process.env.STATUS_MESSAGES || "",
   STATUS_SAVER: toBool(process.env.STATUS_SAVER) || true,
   DATABASE:
     DATABASE_URL === "./database.db"
