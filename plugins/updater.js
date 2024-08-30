@@ -1,10 +1,60 @@
 const { Module, mode } = require("../lib");
-const simpleGit = require("simple-git");
 const { exec } = require("child_process");
-const { promisify } = require("util");
-
+const simpleGit = require("simple-git");
 const git = simpleGit();
-const execPromise = promisify(exec);
+
+async function getUpdate() {
+ try {
+  await git.fetch();
+  const branchSummary = await git.branch();
+  const currentBranch = branchSummary.current;
+  const status = await git.status();
+  if (status.ahead > 0 || status.behind > 0) {
+   return "already up to date";
+  }
+
+  const log = await git.log(["-1"]);
+  const latestCommit = log.latest;
+
+  return {
+   commitHash: latestCommit.hash,
+   author: latestCommit.author_name,
+   date: latestCommit.date,
+   message: latestCommit.message,
+  };
+ } catch (error) {
+  console.error("Error fetching the latest commit:", error);
+  return null;
+ }
+}
+
+async function updateNow() {
+ try {
+  console.log("Stashing local changes...");
+  await git.stash();
+  console.log("Pulling latest changes...");
+  const result = await git.pull();
+
+  console.log("Pull result:", result);
+ } catch (error) {
+  console.error("Error during stash and pull:", error);
+ }
+}
+const restartCommand = "pm2 restart fxop";
+
+const restart = () => {
+ exec(restartCommand, (error, stdout, stderr) => {
+  if (error) {
+   console.error(`Error restarting process: ${error.message}`);
+   return;
+  }
+  if (stderr) {
+   console.error(`stderr: ${stderr}`);
+   return;
+  }
+  console.log(`stdout: ${stdout}`);
+ });
+};
 
 Module(
  {
@@ -14,49 +64,15 @@ Module(
   type: "updater",
  },
  async (message, match) => {
-  if (match === "now") {
-   try {
-    // Stash any local changes and pull the latest changes
-    await execPromise("git stash && git pull");
-    await message.sendMessage(message.jid, "> Successfully Updated Bot\n\nRestarting Now...");
-    await exec('pm2 restart')
-
-    // Get the current branch name
-    const status = await git.status();
-    const currentBranch = status.current;
-
-    // Fetch from the remote repository
-    await git.fetch();
-
-    // Compare the local branch with the remote branch
-    const remoteBranch = `origin/${currentBranch}`;
-    const diffSummary = await git.diffSummary([currentBranch, remoteBranch]);
-
-    if (diffSummary.files.length === 0) {
-     await message.sendMessage(message.jid, "Already up to date.");
-     return;
-    }
-
-    // Get the latest commit from the remote branch
-    const log = await git.log([remoteBranch]);
-    const latestCommit = log.latest;
-
-    // Send the contributor's name
-    await message.sendMessage(message.jid, `Committer: ${latestCommit.author_name}`);
-
-    // Send changes in the specified format
-    const changeMessages = diffSummary.files
-     .map((file) => {
-      const status = file.changes > 0 ? "updated" : "deleted";
-      const sign = file.changes > 0 ? "+" : "-";
-      return `Astro: ${status} ${file.file} ${sign}${Math.abs(file.changes)}`;
-     })
-     .join("\n");
-
-    await message.sendMessage(message.jid, changeMessages);
-   } catch (error) {
-    await message.sendMessage(message.jid, `Error executing git commands or fetching changes: ${error.message}`);
-   }
+  const isUpdate = await getUpdate();
+  await message.sendMessage(message.jid, isUpdate);
+  if (match == "now") {
+   await updateNow();
+   const updatedMessage = `\`\`\`Bot Has Been Updated\`\`\``;
+   await message.sendMessage(message.jid, updatedMessage);
+   await restart();
+  } else {
+   await message.sendMessage(message.jid, `Something isn't right`);
   }
  }
 );
