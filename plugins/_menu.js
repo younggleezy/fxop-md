@@ -30,13 +30,12 @@ Module(
    const { prefix } = message;
    const [currentDate, currentTime] = new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" }).split(",");
    let menuMessage = `\`\`\`╭────《 ${BOT_NAME} 》─────⊷
-│ │ User: ${message.pushName}
-│ │ Prefix: ${prefix}
-│ │ Date: ${currentDate}
-│ │ Time: ${currentTime}
-│ │ Plugins: ${plugins.commands.length} 
-│ │ Runtime: ${runtime(process.uptime())} 
-│ ╰──────────────
+│ User: ${message.pushName}
+│ Prefix: ${prefix}
+│ Date: ${currentDate}
+│ Time: ${currentTime}
+│ Plugins: ${plugins.commands.length} 
+│ Runtime: ${runtime(process.uptime())} 
 ╰───────────────⊷\n\`\`\``;
 
    const commandList = [];
