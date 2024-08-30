@@ -65,13 +65,13 @@ Module(
    commandList.sort((a, b) => a.commandName.localeCompare(b.commandName));
 
    categoryList.forEach((category) => {
-    menuMessage += `\n╭────❏${tiny(category)} ❏\n`;
+    menuMessage += `\n╭──❏ ${tiny(category)} ❏\n`;
     const filteredCommands = commandList.filter(({ commandType }) => commandType === category);
     if (filteredCommands.length === 0) {
      menuMessage += `\n_No commands available for this category._\n`;
     } else {
      filteredCommands.forEach(({ commandName }) => {
-      menuMessage += `│ ${tiny(commandName.trim())}\n `;
+      menuMessage += `│ ${tiny(commandName.trim())}\n`;
      });
     }
     menuMessage += `╰━━━━━━━━━━━━━──⊷\n`
