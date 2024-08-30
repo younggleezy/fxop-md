@@ -41,16 +41,12 @@
 
 ### Technology Used
 
-| Name      | Occupation                                                                           |
-| --------- | ------------------------------------------------------------------------------------ |
-| Node.js   | For server-side development and scripting.                                           |
-| CLI Tools | To display data in tabular format using tools like `console.table()` or `cli-table`. |
-| Git       | Version control system for managing changes to the project.                          |
-| VS Code   | Integrated Development Environment (IDE) for writing and debugging code.             |
-
-Here's an expanded version that you could use to emphasize the privacy and exclusivity of your project:
-
----
+| Name      | Occupation                                                                                           |
+| --------- | ---------------------------------------------------------------------------------------------------- |
+| Node.js   | For server-side development and scripting.                                                           |
+| CLI Tools | Utilized for debugging and managing various tasks within the development environment.                |
+| Git       | Employed as a version control system to manage and track changes throughout the project's lifecycle. |
+| VS Code   | Integrated Development Environment (IDE) for writing and debugging code.                             |
 
 ## Warning
 
