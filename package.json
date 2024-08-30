@@ -21,7 +21,7 @@
  "dependencies": {
   "@adiwajshing/keyed-db": "^0.2.4",
   "axios": "^1.4.0",
-  "baileys": "github:X-Electra/baileys",
+  "baileys": "github:FXastro/baileys",
   "bitly": "^4.1.1",
   "browser-id3-writer": "^4.4.0",
   "cheerio": "^1.0.0-rc.12",
