@@ -6,9 +6,9 @@
 
 <a href='https://session-id-rz4x.onrender.com' target="_blank"><img alt='SESSION' src='https://img.shields.io/badge/Get Sssion ID-100000?style=for-the-badge&logo=scan&logoColor=white&labelColor=black&color=blue'/></a>
 
-<a href="https://whatsapp.com/channel/0029VambPbJ2f3ERs37HvM2J"><img alt="WhatsApp" src="https://img.shields.io/badge/-Whatsapp%20Channel-white?style=for-the-badge&logo=whatsapp&logoColor=black"/></a>
+<a href="https://whatsapp.com/channel/0029VambPbJ2f3ERs37HvM2J"><img alt="WhatsApp" src="https://img.shields.io/badge/-Whatsapp%20Channel-white?style=for-the-badge&logo=whatsapp&logoColor=gray"/></a>
 
-<a href="https://github.com/FXastro/fxop-md/wiki"><img alt="Wiki" src="https://img.shields.io/badge/-Read Wiki-white?style=for-the-badge&logo=github&logoColor=black"/></a>
+<a href="https://github.com/FXastro/fxop-md/wiki"><img alt="Wiki" src="https://img.shields.io/badge/-Read Wiki-white?style=for-the-badge&logo=github&logoColor=gray"/></a>
 
 ---
 
