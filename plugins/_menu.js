@@ -2,7 +2,7 @@ const plugins = require("../lib/plugins");
 const { tiny } = require("../lib/fancy");
 const { Module, mode, runtime, formatBytes } = require("../lib");
 const { BOT_NAME, HANDLERS } = require("../config");
-
+const os = require('os')
 Module(
  {
   pattern: "menu",
