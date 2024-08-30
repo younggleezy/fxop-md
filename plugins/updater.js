@@ -84,11 +84,7 @@ Module(
   if (typeof updateInfo === "string") {
    updateMessage = updateInfo;
   } else if (updateInfo && typeof updateInfo === "object") {
-   updateMessage = `> New update available:
-  Author: ${updateInfo.author}
-  Date: ${updateInfo.date}
-  Message: ${updateInfo.message}
-  Changed Files: ${updateInfo.changedFiles}`;
+   updateMessage = `> *NEW UPDATE*\n\`\`\`${updateInfo.author}\`\`\`\n\`\`\`Details: ${updateInfo.message}\`\`\``;
   } else {
    updateMessage = "Unable to check for updates.";
   }
