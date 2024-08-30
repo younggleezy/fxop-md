@@ -2,7 +2,7 @@ const plugins = require("../lib/plugins");
 const { tiny } = require("../lib/fancy");
 const { Module, mode, runtime, formatBytes } = require("../lib");
 const { BOT_NAME, HANDLERS } = require("../config");
-const os = require('os')
+const os = require("os");
 Module(
  {
   pattern: "menu",
@@ -37,7 +37,7 @@ Module(
 │ Plugins: ${plugins.commands.length} 
 │ Runtime: ${runtime(process.uptime())} 
 │ Ram: ${formatBytes(os.totalmem() - os.freemem())} / ${formatBytes(os.totalmem())}
-│ Version: ${version = require('../package.json').version}
+│ Version: ${(version = require("../package.json").version)}
 ╰───────────────⊷\n\`\`\``;
 
    const commandList = [];
@@ -75,7 +75,7 @@ Module(
       menuMessage += `│ ${tiny(commandName.trim())}\n`;
      });
     }
-    menuMessage += `╰━━━━━━━━━━━━━──⊷\n`
+    menuMessage += `╰━━━━━━━━━━━━━──⊷\n`;
    });
    menuMessage += `\n`;
    return await message.sendMessage(menuMessage);

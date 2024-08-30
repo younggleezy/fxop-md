@@ -77,32 +77,29 @@ Module(
   type: "updater",
  },
  async (message, match) => {
+  let updateMessage; // Declare the variable here
+
+  const updateInfo = await getUpdate();
+
+  if (typeof updateInfo === "string") {
+   updateMessage = updateInfo;
+  } else if (updateInfo && typeof updateInfo === "object") {
+   updateMessage = `> New update available:
+  Author: ${updateInfo.author}
+  Date: ${updateInfo.date}
+  Message: ${updateInfo.message}
+  Changed Files: ${updateInfo.changedFiles}`;
+  } else {
+   updateMessage = "Unable to check for updates.";
+  }
+
+  await message.sendMessage(updateMessage);
   if (match === "now") {
    const updateResult = await updateNow();
    await message.sendMessage(updateResult);
    if (updateResult.includes("successful")) {
     restart();
    }
-  } else {
-   const updateInfo = await getUpdate();
-   let updateMessage;
-
-   if (typeof updateInfo === "string") {
-    updateMessage = updateInfo;
-   } else if (updateInfo && typeof updateInfo === "object") {
-    updateMessage = `New update available:
-Commit: ${updateInfo.commitHash}
-Author: ${updateInfo.author}
-Date: ${updateInfo.date}
-Message: ${updateInfo.message}
-Changed Files: ${updateInfo.changedFiles}
-Insertions: ${updateInfo.insertions}
-Deletions: ${updateInfo.deletions}`;
-   } else {
-    updateMessage = "Unable to check for updates.";
-   }
-
-   await message.sendMessage(updateMessage);
   }
  }
 );
