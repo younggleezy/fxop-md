@@ -6,14 +6,14 @@ const git = simpleGit();
 async function getUpdate() {
  try {
   await git.fetch();
-  const branchSummary = await git.branch();
-  const currentBranch = branchSummary.current;
   const status = await git.status();
-  if (status.ahead > 0 || status.behind > 0) {
-   return "already up to date";
+
+  if (status.behind === 0) {
+   return "You are already on the latest version.";
   }
 
-  const log = await git.log(["-1"]);
+  const diff = await git.diffSummary(["HEAD..@{u}"]);
+  const log = await git.log(["HEAD..@{u}"]);
   const latestCommit = log.latest;
 
   return {
@@ -21,25 +21,38 @@ async function getUpdate() {
    author: latestCommit.author_name,
    date: latestCommit.date,
    message: latestCommit.message,
+   changedFiles: diff.files.length,
+   insertions: diff.insertions,
+   deletions: diff.deletions,
   };
  } catch (error) {
-  console.error("Error fetching the latest commit:", error);
+  console.error("Error checking for updates:", error);
   return null;
  }
 }
 
 async function updateNow() {
  try {
+  const status = await git.status();
+
+  if (status.behind === 0) {
+   return "Already updated to the latest version.";
+  }
+
   console.log("Stashing local changes...");
   await git.stash();
-  console.log("Pulling latest changes...");
-  const result = await git.pull();
 
-  console.log("Pull result:", result);
+  console.log("Pulling latest changes...");
+  const pullResult = await git.pull();
+
+  console.log("Pull result:", pullResult);
+  return "Update successful. Restarting...";
  } catch (error) {
-  console.error("Error during stash and pull:", error);
+  console.error("Error during update:", error);
+  return "Error occurred during update.";
  }
 }
+
 const restartCommand = "pm2 restart fxop";
 
 const restart = () => {
@@ -64,30 +77,32 @@ Module(
   type: "updater",
  },
  async (message, match) => {
-  const isUpdate = await getUpdate();
-  let updateMessage;
-
-  if (typeof isUpdate === "string") {
-   updateMessage = isUpdate;
-  } else if (isUpdate && typeof isUpdate === "object") {
-   updateMessage = `New update available:
- Commit: ${isUpdate.commitHash}
- Author: ${isUpdate.author}
- Date: ${isUpdate.date}
- Message: ${isUpdate.message}`;
+  if (match === "now") {
+   const updateResult = await updateNow();
+   await message.sendMessage(updateResult);
+   if (updateResult.includes("successful")) {
+    restart();
+   }
   } else {
-   updateMessage = "Unable to check for updates.";
-  }
+   const updateInfo = await getUpdate();
+   let updateMessage;
 
-  await message.sendMessage(updateMessage);
+   if (typeof updateInfo === "string") {
+    updateMessage = updateInfo;
+   } else if (updateInfo && typeof updateInfo === "object") {
+    updateMessage = `New update available:
+Commit: ${updateInfo.commitHash}
+Author: ${updateInfo.author}
+Date: ${updateInfo.date}
+Message: ${updateInfo.message}
+Changed Files: ${updateInfo.changedFiles}
+Insertions: ${updateInfo.insertions}
+Deletions: ${updateInfo.deletions}`;
+   } else {
+    updateMessage = "Unable to check for updates.";
+   }
 
-  if (match == "now") {
-   await updateNow();
-   const updatedMessage = "```Bot Has Been Updated```";
-   await message.sendMessage(updatedMessage);
-   restart();
-  } else if (match && match !== "now") {
-   await message.sendMessage("Invalid update option. Use 'update now' to update the bot.");
+   await message.sendMessage(updateMessage);
   }
  }
 );
