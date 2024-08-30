@@ -65,14 +65,29 @@ Module(
  },
  async (message, match) => {
   const isUpdate = await getUpdate();
-  await message.sendMessage(message.jid, isUpdate);
+  let updateMessage;
+
+  if (typeof isUpdate === "string") {
+   updateMessage = isUpdate;
+  } else if (isUpdate && typeof isUpdate === "object") {
+   updateMessage = `New update available:
+ Commit: ${isUpdate.commitHash}
+ Author: ${isUpdate.author}
+ Date: ${isUpdate.date}
+ Message: ${isUpdate.message}`;
+  } else {
+   updateMessage = "Unable to check for updates.";
+  }
+
+  await message.sendMessage(message.jid, { text: updateMessage });
+
   if (match == "now") {
    await updateNow();
-   const updatedMessage = `\`\`\`Bot Has Been Updated\`\`\``;
-   await message.sendMessage(message.jid, updatedMessage);
+   const updatedMessage = "```Bot Has Been Updated```";
+   await message.sendMessage(message.jid, { text: updatedMessage });
    await restart();
-  } else {
-   await message.sendMessage(message.jid, `Something isn't right`);
+  } else if (match && match !== "now") {
+   await message.sendMessage(message.jid, { text: "Invalid update option. Use 'update now' to update the bot." });
   }
  }
 );
