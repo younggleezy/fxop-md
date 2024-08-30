@@ -82,20 +82,27 @@ Module(
   const updateInfo = await getUpdate();
 
   if (typeof updateInfo === "string") {
-   updateMessage = updateInfo;
+   // No updates available
+   updateMessage = "You are on the latest version.";
   } else if (updateInfo && typeof updateInfo === "object") {
-   updateMessage = `> *NEW UPDATE*\n\`\`\`${updateInfo.author}\`\`\`\n\`\`\`Details: ${updateInfo.message}\`\`\``;
+   // Update is available
+   updateMessage = `> *NEW UPDATE*\n\`\`\`${updateInfo.author}\`\`\`\n\n\`\`\`Details: ${updateInfo.message}\`\`\``;
+
+   await message.sendMessage(updateMessage);
+
+   if (match === "now") {
+    await updateNow();
+    const updatedMessage = "```Bot Has Been Updated```";
+    await message.sendMessage(updatedMessage);
+    restart();
+    return; // Exit after restart
+   } else if (match && match !== "now") {
+    await message.sendMessage("Invalid update option. Use 'update now' to update the bot.");
+   }
   } else {
    updateMessage = "Unable to check for updates.";
   }
 
   await message.sendMessage(updateMessage);
-  if (match === "now") {
-   const updateResult = await updateNow();
-   await message.sendMessage(updateResult);
-   if (updateResult.includes("successful")) {
-    restart();
-   }
-  }
  }
 );
