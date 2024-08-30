@@ -1,7 +1,7 @@
 const plugins = require("../lib/plugins");
 const { tiny } = require("../lib/fancy");
 const { Module, mode, runtime } = require("../lib");
-const { BOT_NAME } = require("../config");
+const { BOT_NAME, HANDLERS } = require("../config");
 
 Module(
  {
@@ -31,11 +31,13 @@ Module(
    const [currentDate, currentTime] = new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" }).split(",");
    let menuMessage = `\`\`\`╭────《 ${BOT_NAME} 》─────⊷
 │ User: ${message.pushName}
-│ Prefix: ${prefix}
+│ Prefix: ${HANDLERS}
 │ Date: ${currentDate}
 │ Time: ${currentTime}
 │ Plugins: ${plugins.commands.length} 
 │ Runtime: ${runtime(process.uptime())} 
+│ Ram: ${formatBytes(os.totalmem() - os.freemem())} / ${formatBytes(os.totalmem())}
+│ Version: ${version = require('../package.json').version}
 ╰───────────────⊷\n\`\`\``;
 
    const commandList = [];
