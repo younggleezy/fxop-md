@@ -4,7 +4,7 @@ const config = require("./config");
 const connect = require("./lib/client");
 const { getandRequirePlugins } = require("./lib/database/plugins");
 const { exec } = require("child_process");
-const { patch, MakeSession } = require("./lib");
+const { patch, writeSession } = require("./lib");
 global.__basedir = __dirname;
 const process = require("./package.json").scripts.stop;
 const parseDir = async (directory) => {
@@ -20,7 +20,7 @@ const parseDir = async (directory) => {
 async function initialize() {
  try {
   await patch();
-  await MakeSession();
+  await writeSession();
   await parseDir(path.join(__dirname, "/lib/database/"));
   console.log("Syncing Database");
 
