@@ -3,53 +3,29 @@ const { exec } = require("child_process");
 const simpleGit = require("simple-git");
 const git = simpleGit();
 
-async function getUpdate() {
+async function checkForUpdates() {
  try {
   await git.fetch();
   const status = await git.status();
-
-  if (status.behind === 0) {
-   return "You are already on the latest version.";
-  }
-
-  const diff = await git.diffSummary(["HEAD..@{u}"]);
-  const log = await git.log(["HEAD..@{u}"]);
-  const latestCommit = log.latest;
-
-  return {
-   commitHash: latestCommit.hash,
-   author: latestCommit.author_name,
-   date: latestCommit.date,
-   message: latestCommit.message,
-   changedFiles: diff.files.length,
-   insertions: diff.insertions,
-   deletions: diff.deletions,
-  };
+  return status.behind > 0;
  } catch (error) {
   console.error("Error checking for updates:", error);
-  return null;
+  return false;
  }
 }
 
 async function updateNow() {
  try {
-  const status = await git.status();
-
-  if (status.behind === 0) {
-   return "Already updated to the latest version.";
-  }
-
   console.log("Stashing local changes...");
   await git.stash();
 
   console.log("Pulling latest changes...");
-  const pullResult = await git.pull();
+  await git.pull();
 
-  console.log("Pull result:", pullResult);
-  return "Update successful. Restarting...";
+  return true;
  } catch (error) {
   console.error("Error during update:", error);
-  return "Error occurred during update.";
+  return false;
  }
 }
 
@@ -76,33 +52,24 @@ Module(
   info: "Check for updates",
   type: "updater",
  },
- async (message, match) => {
-  let updateMessage; // Declare the variable here
+ async (message) => {
+  const hasUpdates = await checkForUpdates();
 
-  const updateInfo = await getUpdate();
-
-  if (typeof updateInfo === "string") {
-   // No updates available
-   updateMessage = "You are on the latest version.";
-  } else if (updateInfo && typeof updateInfo === "object") {
-   // Update is available
-   updateMessage = `> *NEW UPDATE*\n\`\`\`${updateInfo.author}\`\`\`\n\n\`\`\`Details: ${updateInfo.message}\`\`\``;
-
-   await message.sendMessage(updateMessage);
-
-   if (match === "now") {
-    await updateNow();
-    const updatedMessage = "```Bot Has Been Updated```";
-    await message.sendMessage(updatedMessage);
-    restart();
-    return; // Exit after restart
-   } else if (match && match !== "now") {
-    await message.sendMessage("Invalid update option. Use 'update now' to update the bot.");
-   }
-  } else {
-   updateMessage = "Unable to check for updates.";
+  if (!hasUpdates) {
+   await message.sendMessage("You are on the latest version.");
+   return;
   }
 
-  await message.sendMessage(updateMessage);
+  await message.sendMessage("Updating...");
+  const updateSuccess = await updateNow();
+
+  if (updateSuccess) {
+   await message.sendMessage("Bot updated. Now restarting in 3 seconds...");
+   setTimeout(() => {
+    restart();
+   }, 3000);
+  } else {
+   await message.sendMessage("Update failed. Please try again later.");
+  }
  }
 );
