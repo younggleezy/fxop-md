@@ -1,9 +1,9 @@
 const plugins = require("../lib/plugins");
-const {Module, isPrivate, clockString, pm2Uptime} = require("../lib");
+const {command, isPrivate, clockString, pm2Uptime} = require("../lib");
 const {OWNER_NAME, BOT_NAME} = require("../config");
 const {hostname} = require("os");
 
-Module(
+command(
  {
   pattern: "menu",
   fromMe: isPrivate,
@@ -22,11 +22,7 @@ Description: ${i.desc}\`\`\``);
    }
   } else {
    let {prefix} = message;
-   let [date, time] = new Date()
-    .toLocaleString("en-IN", {
-     timeZone: "Asia/Kolkata"
-    })
-    .split(",");
+   let [date, time] = new Date().toLocaleString("en-IN", {timeZone: "Asia/Kolkata"}).split(",");
    let menu = `╭━━━━━ᆫ ${BOT_NAME} ᄀ━━━
 ┃ ⎆  *OWNER*:  ${OWNER_NAME}
 ┃ ⎆  *PREFIX*: ${prefix}
@@ -47,10 +43,7 @@ Description: ${i.desc}\`\`\``);
     if (!command.dontAddCommandList && cmd !== undefined) {
      let type = command.type ? command.type.toLowerCase() : "misc";
 
-     cmnd.push({
-      cmd,
-      type
-     });
+     cmnd.push({cmd, type});
 
      if (!category.includes(type)) category.push(type);
     }
@@ -72,7 +65,7 @@ Description: ${i.desc}\`\`\``);
  }
 );
 
-Module(
+command(
  {
   pattern: "list",
   fromMe: isPrivate,
@@ -92,10 +85,7 @@ Module(
    desc = command.desc || false;
 
    if (!command.dontAddCommandList && cmd !== undefined) {
-    cmnd.push({
-     cmd,
-     desc
-    });
+    cmnd.push({cmd, desc});
    }
   });
   cmnd.sort();

@@ -1,5 +1,5 @@
-const {Module, isAdmin, parseJid, isPrivate} = require("../lib/");
-Module(
+const {command, isAdmin, parseJid, isPrivate} = require("../lib");
+command(
  {
   pattern: "delttt",
   fromMe: isPrivate,
@@ -21,7 +21,7 @@ Module(
  }
 );
 
-Module(
+command(
  {
   pattern: "ttt",
   fromMe: false,
@@ -63,10 +63,7 @@ Current turn: @${room.game.currentTurn.split("@")[0]}
 `;
     let mentions = parseJid(str);
     for (let i of mentions) {
-     return await message.client.sendMessage(i, {
-      text: str,
-      mentions
-     });
+     return await message.client.sendMessage(i, {text: str, mentions});
     }
    } else {
     room = {
@@ -84,7 +81,7 @@ Current turn: @${room.game.currentTurn.split("@")[0]}
  }
 );
 
-Module(
+command(
  {
   on: "text",
   fromMe: false,
@@ -151,10 +148,7 @@ ${isWin ? `@${winner.split("@")[0]} Won !` : isTie ? `Tie` : `Current Turn ${["â
    if ((room.game._currentTurn ^ isSurrender ? room.x : room.o) !== m.chat) room[room.game._currentTurn ^ isSurrender ? "x" : "o"] = m.chat;
    let mentions = parseJid(str);
    for (let i of mentions) {
-    return await message.client.sendMessage(i, {
-     text: str,
-     mentions
-    });
+    return await message.client.sendMessage(i, {text: str, mentions});
    }
 
    if (isTie || isWin) {

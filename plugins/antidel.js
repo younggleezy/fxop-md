@@ -1,7 +1,7 @@
 const {DELETED_LOG_CHAT, DELETED_LOG} = require("../config");
-const {Module, serialize} = require("../lib");
+const {command, isPrivate, serialize} = require("../lib");
 const {loadMessage, getName} = require("../lib/database/StoreDb");
-Module(
+command(
  {
   on: "delete",
   fromMe: false,
@@ -24,8 +24,6 @@ Module(
    let getname = await getName(msg.sender);
    name = `_Group : ${gname}_\n_Name : ${getname}_`;
   }
-  return await message.sendMessage(DELETED_LOG_CHAT, `_Message Deleted_\n_From : ${msg.from}_\n${name}\n_SenderJid : ${msg.sender}_`, {
-   quoted: deleted
-  });
+  return await message.sendMessage(DELETED_LOG_CHAT, `_Message Deleted_\n_From : ${msg.from}_\n${name}\n_SenderJid : ${msg.sender}_`, {quoted: deleted});
  }
 );

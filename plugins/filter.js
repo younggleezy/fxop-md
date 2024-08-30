@@ -1,7 +1,7 @@
 const {getFilter, setFilter, deleteFilter} = require("../lib/database/filters");
-const {Module} = require("../lib");
+const {command} = require("../lib");
 
-Module(
+command(
  {
   pattern: "filter",
   fromMe: true,
@@ -33,7 +33,7 @@ Module(
  }
 );
 
-Module(
+command(
  {
   pattern: "stop",
   fromMe: true,
@@ -53,22 +53,15 @@ Module(
  }
 );
 
-Module(
- {
-  on: "text",
-  fromMe: false,
-  dontAddCommandList: true
- },
- async (message, match) => {
-  var filtreler = await getFilter(message.jid);
-  if (!filtreler) return;
-  filtreler.map(async filter => {
-   pattern = new RegExp(filter.dataValues.regex ? filter.dataValues.pattern : "\\b(" + filter.dataValues.pattern + ")\\b", "gm");
-   if (pattern.test(match)) {
-    return await message.reply(filter.dataValues.text, {
-     quoted: message
-    });
-   }
-  });
- }
-);
+command({on: "text", fromMe: false, dontAddCommandList: true}, async (message, match) => {
+ var filtreler = await getFilter(message.jid);
+ if (!filtreler) return;
+ filtreler.map(async filter => {
+  pattern = new RegExp(filter.dataValues.regex ? filter.dataValues.pattern : "\\b(" + filter.dataValues.pattern + ")\\b", "gm");
+  if (pattern.test(match)) {
+   return await message.reply(filter.dataValues.text, {
+    quoted: message
+   });
+  }
+ });
+});

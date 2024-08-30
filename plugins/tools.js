@@ -1,9 +1,9 @@
-const {Module, qrcode, Bitly, isPrivate, isUrl, readQr} = require("../lib/");
+const {command, qrcode, Bitly, isPrivate, isUrl, readQr} = require("../lib/");
 
 const {downloadMediaMessage} = require("baileys");
 const {getLyrics} = require("../lib/functions");
 const config = require("../config");
-Module(
+command(
  {
   pattern: "vv",
   fromMe: isPrivate,
@@ -17,7 +17,7 @@ Module(
 );
 
 // STATUS SAVER ( MAKE fromMe: false TO USE AS PUBLIC )
-Module(
+command(
  {
   on: "text",
   fromMe: !config.STATUS_SAVER,
@@ -31,9 +31,7 @@ Module(
    const triggerKeywords = ["save", "send", "sent", "snt", "give", "snd"];
    const cmdz = match.toLowerCase().split(" ")[0];
    if (triggerKeywords.some(tr => cmdz.includes(tr))) {
-    const relayOptions = {
-     messageId: m.quoted.key.id
-    };
+    const relayOptions = {messageId: m.quoted.key.id};
     return await message.client.relayMessage(message.jid, m.quoted.message, relayOptions);
    }
   } catch (error) {
@@ -42,7 +40,7 @@ Module(
  }
 );
 
-Module(
+command(
  {
   pattern: "qr",
   fromMe: isPrivate,
@@ -71,7 +69,7 @@ Module(
  }
 );
 
-Module(
+command(
  {
   pattern: "bitly",
   fromMe: isPrivate,
@@ -87,7 +85,7 @@ Module(
  }
 );
 
-Module(
+command(
  {
   pattern: "lyric",
   fromMe: isPrivate,

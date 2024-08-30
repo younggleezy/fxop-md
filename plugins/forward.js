@@ -1,6 +1,6 @@
-const {Module, parsedJid, isPrivate} = require("../lib/");
+const {command, parsedJid, isPrivate} = require("../lib/");
 
-Module(
+command(
  {
   pattern: "fd",
   fromMe: isPrivate,

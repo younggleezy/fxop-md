@@ -1,6 +1,6 @@
-const {Module, isPrivate} = require("../lib");
+const {command, isPrivate} = require("../lib");
 
-Module(
+command(
  {
   pattern: "button",
   fromMe: true,
@@ -41,7 +41,7 @@ Module(
     {
      type: "url",
      params: {
-      display_text: "Astro",
+      display_text: "Neeraj-x0",
       url: "https://www.neerajx0.xyz/",
       merchant_url: "https://www.neerajx0.xyz/"
      }
@@ -74,7 +74,7 @@ Module(
     }
    ],
    header: {
-    title: "fxop",
+    title: "FX-BOT",
     subtitle: "WhatsApp Bot",
     hasMediaAttachment: false
    },

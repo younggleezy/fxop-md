@@ -1,10 +1,22 @@
 {
- "name": "fxop",
- "version": "2.0.1",
+ "name": "fxop-md",
+ "version": "2.0.0",
  "description": "Whatsapp Bot",
  "main": "index.js",
  "directories": {
   "lib": "lib"
+ },
+ "scripts": {
+  "start": "pm2 start index.js --deep-monitoring --attach --name fxop",
+  "stop": "pm2 stop fxop",
+  "format": "prettier --write ."
+ },
+ "author": "FXastro",
+ "devDependencies": {
+  "prettier": "^3.3.3",
+  "@eslint/js": "^9.4.0",
+  "eslint": "^9.4.0",
+  "globals": "^15.4.0"
  },
  "dependencies": {
   "@adiwajshing/keyed-db": "^0.2.4",
@@ -35,17 +47,5 @@
   "socket.io-client": "^4.7.5",
   "sqlite3": "^5.1.7",
   "stream-buffers": "^3.0.2"
- },
- "scripts": {
-  "start": "pm2 start index.js --deep-monitoring --attach --name fxop",
-  "stop": "pm2 stop fxop",
-  "format": "prettier --write ."
- },
- "author": "FXastro",
- "devDependencies": {
-  "@eslint/js": "^9.4.0",
-  "eslint": "^9.4.0",
-  "globals": "^15.4.0",
-  "prettier": "^3.3.3"
  }
 }

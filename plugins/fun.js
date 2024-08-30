@@ -1,9 +1,9 @@
-const {Module, isPrivate, XKCDComic, getJson} = require("../lib");
+const {command, isPrivate, XKCDComic, getJson} = require("../lib");
 const axios = require("axios");
 
 let triviaGames = {};
 
-Module(
+command(
  {
   pattern: "trivia",
   fromMe: isPrivate,
@@ -30,7 +30,7 @@ Module(
  }
 );
 
-Module(
+command(
  {
   on: "text",
   fromMe: isPrivate,
@@ -112,7 +112,7 @@ async function endTriviaGame(message, userId) {
 /**
  *
  */
-Module(
+command(
  {
   pattern: "xkcd",
   fromMe: isPrivate,
@@ -122,14 +122,7 @@ Module(
  async (message, match, m) => {
   try {
    const result = await XKCDComic();
-   message.sendMessage(
-    message.jid,
-    result.imageUrl,
-    {
-     quoted: message.data
-    },
-    "image"
-   );
+   message.sendMessage(message.jid, result.imageUrl, {quoted: message.data}, "image");
   } catch (error) {
    console.error("Error:", error.message);
    message.reply("Error fetching XKCD comic.");
@@ -142,7 +135,7 @@ Module(
  *
  */
 
-Module(
+command(
  {
   pattern: "joke",
   fromMe: isPrivate,

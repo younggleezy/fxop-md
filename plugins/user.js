@@ -1,11 +1,11 @@
-const {Module, isAdmin, parsedJid} = require("../lib");
+const {command, isAdmin, parsedJid} = require("../lib");
 const {exec} = require("child_process");
 const {PausedChats, WarnDB} = require("../lib/database");
 const {WARN_COUNT} = require("../config");
 const {secondsToDHMS} = require("../lib/functions");
 const {saveWarn, resetWarn} = WarnDB;
 
-Module(
+command(
  {
   pattern: "pause",
   fromMe: true,
@@ -24,7 +24,7 @@ Module(
  }
 );
 
-Module(
+command(
  {
   pattern: "shutdown",
   fromMe: true,
@@ -33,7 +33,7 @@ Module(
  },
  async (message, match) => {
   await message.sendMessage(message.jid, "shutting down...");
-  exec("pm2 stop fxop", (error, stdout, stderr) => {
+  exec("pm2 stop x-asena", (error, stdout, stderr) => {
    if (error) {
     return message.sendMessage(message.jid, `Error: ${error}`);
    }
@@ -42,7 +42,7 @@ Module(
  }
 );
 
-Module(
+command(
  {
   pattern: "resume",
   fromMe: true,
@@ -54,9 +54,7 @@ Module(
 
   try {
    const pausedChat = await PausedChats.PausedChats.findOne({
-    where: {
-     chatId
-    }
+    where: {chatId}
    });
 
    if (pausedChat) {
@@ -72,7 +70,7 @@ Module(
  }
 );
 
-Module(
+command(
  {
   pattern: "setpp",
   fromMe: true,
@@ -87,7 +85,7 @@ Module(
  }
 );
 
-Module(
+command(
  {
   pattern: "setname",
   fromMe: true,
@@ -101,7 +99,7 @@ Module(
  }
 );
 
-Module(
+command(
  {
   pattern: "block",
   fromMe: true,
@@ -123,7 +121,7 @@ Module(
  }
 );
 
-Module(
+command(
  {
   pattern: "unblock",
   fromMe: true,
@@ -145,7 +143,7 @@ Module(
  }
 );
 
-Module(
+command(
  {
   pattern: "jid",
   fromMe: true,
@@ -157,7 +155,7 @@ Module(
  }
 );
 
-Module(
+command(
  {
   pattern: "dlt",
   fromMe: true,
@@ -166,14 +164,12 @@ Module(
  },
  async (message, match, m, client) => {
   if (message.isGroup) {
-   client.sendMessage(message.jid, {
-    delete: message.reply_message.key
-   });
+   client.sendMessage(message.jid, {delete: message.reply_message.key});
   }
  }
 );
 
-Module(
+command(
  {
   pattern: "warn",
   fromMe: true,
@@ -189,9 +185,7 @@ Module(
   const warnInfo = await saveWarn(userId, reason);
   let userWarnCount = warnInfo ? warnInfo.warnCount : 0;
   userWarnCount++;
-  await message.reply(`_User @${userId.split("@")[0]} warned._ \n_Warn Count: ${userWarnCount}._ \n_Reason: ${reason}_`, {
-   mentions: [userId]
-  });
+  await message.reply(`_User @${userId.split("@")[0]} warned._ \n_Warn Count: ${userWarnCount}._ \n_Reason: ${reason}_`, {mentions: [userId]});
   if (userWarnCount > WARN_COUNT) {
    const jid = parsedJid(userId);
    await message.sendMessage(message.jid, "Warn limit exceeded kicking user");
@@ -201,7 +195,7 @@ Module(
  }
 );
 
-Module(
+command(
  {
   pattern: "resetwarn",
   fromMe: true,
@@ -217,7 +211,7 @@ Module(
  }
 );
 
-Module(
+command(
  {
   pattern: "uptime",
   fromMe: true,

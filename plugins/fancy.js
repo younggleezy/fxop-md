@@ -1,7 +1,7 @@
-const {Module, isPrivate} = require("../lib/");
+const {command, isPrivate} = require("../lib/");
 const {listall} = require("../lib/fancy");
 
-Module(
+command(
  {
   pattern: "fancy",
   fromMe: isPrivate,

@@ -1,7 +1,7 @@
 const config = require("../config");
-const {Module, isPrivate, toAudio} = require("../lib/");
+const {command, isPrivate, toAudio} = require("../lib/");
 const {webp2mp4, textToImg} = require("../lib/functions");
-Module(
+command(
  {
   pattern: "sticker",
   fromMe: isPrivate,
@@ -17,19 +17,11 @@ Module(
    buff = await m.quoted.download();
   }
 
-  message.sendMessage(
-   message.jid,
-   buff,
-   {
-    packname: config.PACKNAME,
-    author: config.AUTHOR
-   },
-   "sticker"
-  );
+  message.sendMessage(message.jid, buff, {packname: config.PACKNAME, author: config.AUTHOR}, "sticker");
  }
 );
 
-Module(
+command(
  {
   pattern: "take",
   fromMe: isPrivate,
@@ -41,19 +33,11 @@ Module(
   const packname = match.split(";")[0] || config.PACKNAME;
   const author = match.split(";")[1] || config.AUTHOR;
   let buff = await m.quoted.download();
-  message.sendMessage(
-   message.jid,
-   buff,
-   {
-    packname,
-    author
-   },
-   "sticker"
-  );
+  message.sendMessage(message.jid, buff, {packname, author}, "sticker");
  }
 );
 
-Module(
+command(
  {
   pattern: "photo",
   fromMe: isPrivate,
@@ -67,7 +51,7 @@ Module(
  }
 );
 
-Module(
+command(
  {
   pattern: "mp3",
   fromMe: isPrivate,
@@ -79,18 +63,11 @@ Module(
   console.log(typeof buff);
   buff = await toAudio(buff, "mp3");
   console.log(typeof buff);
-  return await message.sendMessage(
-   message.jid,
-   buff,
-   {
-    mimetype: "audio/mpeg"
-   },
-   "audio"
-  );
+  return await message.sendMessage(message.jid, buff, {mimetype: "audio/mpeg"}, "audio");
  }
 );
 
-Module(
+command(
  {
   pattern: "mp4",
   fromMe: isPrivate,
@@ -105,18 +82,11 @@ Module(
   } else {
    buff = await toAudio(buff, "mp4");
   }
-  return await message.sendMessage(
-   message.jid,
-   buff,
-   {
-    mimetype: "video/mp4"
-   },
-   "video"
-  );
+  return await message.sendMessage(message.jid, buff, {mimetype: "video/mp4"}, "video");
  }
 );
 
-Module(
+command(
  {
   pattern: "img",
   fromMe: isPrivate,
