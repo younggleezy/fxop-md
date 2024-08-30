@@ -41,7 +41,7 @@
 
 ### Technology Used
 
-| Name      | Occupation                                                                                           |
+| FrameWork | Usage                                                                                                |
 | --------- | ---------------------------------------------------------------------------------------------------- |
 | Node.js   | For server-side development and scripting.                                                           |
 | CLI Tools | Utilized for debugging and managing various tasks within the development environment.                |
