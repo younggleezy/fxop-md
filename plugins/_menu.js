@@ -71,7 +71,7 @@ Module(
      menuMessage += `\n_No commands available for this category._\n`;
     } else {
      filteredCommands.forEach(({ commandName }) => {
-      menuMessage += `│ ${tiny(commandName.trim())} `;
+      menuMessage += `│ ${tiny(commandName.trim())}\n `;
      });
     }
     menuMessage += `╰━━━━━━━━━━━━━──⊷\n`
