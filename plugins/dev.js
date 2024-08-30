@@ -92,8 +92,7 @@ class CommandHandler {
   async listVariables() {
     const vars = Array.from(variableStore.entries())
       .map(([key, { value }]) => `${key}: ${util.inspect(value, { depth: null })}`)
-      .join('
-');
+      .join('');
     return vars || 'No variables stored.';
   }
 
