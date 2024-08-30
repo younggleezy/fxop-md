@@ -52,19 +52,19 @@ Module(
 
   if (match) {
    let buff = await qrcode(match);
-   return await message.sendMessage(message.jid, buff, {}, "image");
+   return await message.sendMessage( buff, {}, "image");
   } else if (message.reply_message.image) {
    const buffer = await m.quoted.download();
    readQr(buffer)
     .then(async (data) => {
-     return await message.sendMessage(message.jid, data);
+     return await message.sendMessage( data);
     })
     .catch(async (error) => {
      console.error("Error:", error.message);
-     return await message.sendMessage(message.jid, error.message);
+     return await message.sendMessage( error.message);
     });
   } else {
-   return await message.sendMessage(message.jid, "*Example : qr test*\n*Reply to a qr image.*");
+   return await message.sendMessage( "*Example : qr test*\n*Reply to a qr image.*");
   }
  }
 );

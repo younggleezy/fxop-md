@@ -79,15 +79,15 @@ Module(
    updateMessage = "Unable to check for updates.";
   }
 
-  await message.sendMessage(message.jid, { text: updateMessage });
+  await message.sendMessage( { text: updateMessage });
 
   if (match == "now") {
    await updateNow();
    const updatedMessage = "```Bot Has Been Updated```";
-   await message.sendMessage(message.jid, { text: updatedMessage });
-   await restart();
+   await message.sendMessage( { text: updatedMessage });
+   restart();
   } else if (match && match !== "now") {
-   await message.sendMessage(message.jid, { text: "Invalid update option. Use 'update now' to update the bot." });
+   await message.sendMessage( { text: "Invalid update option. Use 'update now' to update the bot." });
   }
  }
 );

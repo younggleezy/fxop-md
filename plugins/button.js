@@ -85,6 +85,6 @@ Module(
     text: "Interactive Message",
    },
   };
-  return await message.sendMessage(message.jid, data, {}, "interactive");
+  return await message.sendMessage( data, {}, "interactive");
  }
 );
