@@ -6,7 +6,7 @@ const { getandRequirePlugins } = require("./lib/database/plugins");
 const { exec } = require("child_process");
 global.__basedir = __dirname;
 const process = require("./package.json").scripts.stop;
-const readAndRequireFiles = async (directory) => {
+const parseDir = async (directory) => {
  try {
   const files = await fs.readdir(directory);
   return Promise.all(files.filter((file) => path.extname(file).toLowerCase() === ".js").map((file) => require(path.join(directory, file))));
@@ -18,12 +18,12 @@ const readAndRequireFiles = async (directory) => {
 
 async function initialize() {
  try {
-  await readAndRequireFiles(path.join(__dirname, "/lib/database/"));
+  await parseDir(path.join(__dirname, "/lib/database/"));
   console.log("Syncing Database");
 
   await config.DATABASE.sync();
 
-  await readAndRequireFiles(path.join(__dirname, "/plugins/"));
+  await parseDir(path.join(__dirname, "/plugins/"));
   await getandRequirePlugins();
   console.log("External Modules Installed");
 
