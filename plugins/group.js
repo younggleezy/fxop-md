@@ -167,7 +167,7 @@ Module(
   for (let mem of participants) {
    teks += ` @${mem.id.split("@")[0]}\n`;
   }
-  message.sendMessage( teks.trim(), {
+  message.sendMessage(teks.trim(), {
    mentions: participants.map((a) => a.id),
   });
  }
@@ -186,7 +186,7 @@ Module(
   if (!match) return message.reply("_Enter or reply to a text to tag_");
   if (!message.isGroup) return;
   const { participants } = await message.client.groupMetadata(message.jid);
-  message.sendMessage( match, {
+  message.sendMessage(match, {
    mentions: participants.map((a) => a.id),
   });
  }

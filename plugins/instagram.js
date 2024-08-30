@@ -21,11 +21,11 @@ Module(
     for (const url of data.media) {
      if (url) {
       if (match.includes("/p/")) {
-       await message.client.sendMessage( { image: { url } });
+       await message.client.sendMessage({ image: { url } });
       } else if (match.includes("/reel/") || match.includes("/tv/")) {
-       await message.client.sendMessage( { video: { url } });
+       await message.client.sendMessage({ video: { url } });
       } else {
-       await message.client.sendMessage( { video: { url } });
+       await message.client.sendMessage({ video: { url } });
       }
      }
     }

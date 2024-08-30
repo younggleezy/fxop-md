@@ -9,8 +9,8 @@ Module(
  },
  async (message, match) => {
   const start = new Date().getTime();
-  await message.sendMessage( "```Ping!```");
+  await message.sendMessage("```Ping!```");
   const end = new Date().getTime();
-  return await message.sendMessage( "*Pong!*\n ```" + (end - start) + "``` *ms*");
+  return await message.sendMessage("*Pong!*\n ```" + (end - start) + "``` *ms*");
  }
 );

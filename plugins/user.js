@@ -32,10 +32,10 @@ Module(
   type: "user",
  },
  async (message, match) => {
-  await message.sendMessage( "shutting down...");
+  await message.sendMessage("shutting down...");
   exec("pm2 stop x-asena", (error, stdout, stderr) => {
    if (error) {
-    return message.sendMessage( `Error: ${error}`);
+    return message.sendMessage(`Error: ${error}`);
    }
    return;
   });
@@ -133,7 +133,7 @@ Module(
    let jid = message.mention[0] || message.reply_message.jid;
    if (!jid) return await message.reply("_Reply to a person or mention_");
    await message.block(jid);
-   return await message.sendMessage( `_@${jid.split("@")[0]} unblocked_`, {
+   return await message.sendMessage(`_@${jid.split("@")[0]} unblocked_`, {
     mentions: [jid],
    });
   } else {
@@ -151,7 +151,7 @@ Module(
   type: "user",
  },
  async (message, match) => {
-  return await message.sendMessage( message.mention[0] || message.reply_message.jid || message.jid);
+  return await message.sendMessage(message.mention[0] || message.reply_message.jid || message.jid);
  }
 );
 
@@ -164,7 +164,7 @@ Module(
  },
  async (message, match, m, client) => {
   if (message.isGroup) {
-   client.sendMessage( { delete: message.reply_message.key });
+   client.sendMessage({ delete: message.reply_message.key });
   }
  }
 );
@@ -188,7 +188,7 @@ Module(
   await message.reply(`_User @${userId.split("@")[0]} warned._ \n_Warn Count: ${userWarnCount}._ \n_Reason: ${reason}_`, { mentions: [userId] });
   if (userWarnCount > WARN_COUNT) {
    const jid = parsedJid(userId);
-   await message.sendMessage( "Warn limit exceeded kicking user");
+   await message.sendMessage("Warn limit exceeded kicking user");
    return await message.client.groupParticipantsUpdate(message.jid, jid, "remove");
   }
   return;

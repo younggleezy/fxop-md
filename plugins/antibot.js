@@ -28,10 +28,10 @@ Module(
   const chatid = message.jid;
   const isban = await isBanned(chatid);
   if (isban) {
-   return await message.sendMessage( "Bot is already banned");
+   return await message.sendMessage("Bot is already banned");
   }
   await banUser(chatid);
-  return await message.sendMessage( "Bot banned");
+  return await message.sendMessage("Bot banned");
  }
 );
 
@@ -46,9 +46,9 @@ Module(
   const chatid = message.jid;
   const isban = await isBanned(chatid);
   if (!isban) {
-   return await message.sendMessage( "Bot is not banned");
+   return await message.sendMessage("Bot is not banned");
   }
   await unbanUser(chatid);
-  return await message.sendMessage( "Bot unbanned");
+  return await message.sendMessage("Bot unbanned");
  }
 );
