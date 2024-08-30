@@ -7,35 +7,31 @@ const { exec } = require("child_process");
 global.__basedir = __dirname;
 const process = require("./package.json").scripts.stop;
 const readAndRequireFiles = async (directory) => {
-  try {
-    const files = await fs.readdir(directory);
-    return Promise.all(
-      files
-        .filter((file) => path.extname(file).toLowerCase() === ".js")
-        .map((file) => require(path.join(directory, file))),
-    );
-  } catch (error) {
-    console.error("Error reading and requiring files:", error);
-    throw error;
-  }
+ try {
+  const files = await fs.readdir(directory);
+  return Promise.all(files.filter((file) => path.extname(file).toLowerCase() === ".js").map((file) => require(path.join(directory, file))));
+ } catch (error) {
+  console.error("Error reading and requiring files:", error);
+  throw error;
+ }
 };
 
 async function initialize() {
-  try {
-    await readAndRequireFiles(path.join(__dirname, "/lib/database/"));
-    console.log("Syncing Database");
+ try {
+  await readAndRequireFiles(path.join(__dirname, "/lib/database/"));
+  console.log("Syncing Database");
 
-    await config.DATABASE.sync();
+  await config.DATABASE.sync();
 
-    await readAndRequireFiles(path.join(__dirname, "/plugins/"));
-    await getandRequirePlugins();
-    console.log("External Modules Installed");
+  await readAndRequireFiles(path.join(__dirname, "/plugins/"));
+  await getandRequirePlugins();
+  console.log("External Modules Installed");
 
-    return await connect();
-  } catch (error) {
-    console.error("Initialization error:", error);
-    return exec(process);
-  }
+  return await connect();
+ } catch (error) {
+  console.error("Initialization error:", error);
+  return exec(process);
+ }
 }
 
 initialize();
