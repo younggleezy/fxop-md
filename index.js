@@ -2,37 +2,41 @@ const fs = require("fs").promises;
 const path = require("path");
 const config = require("./config");
 const connect = require("./lib/client");
-const {getandRequirePlugins} = require("./lib/database/plugins");
+const { getandRequirePlugins } = require("./lib/database/plugins");
 
 global.__basedir = __dirname; // Set the base directory for the project
 
-const readAndRequireFiles = async directory => {
- try {
-  const files = await fs.readdir(directory);
-  return Promise.all(files.filter(file => path.extname(file).toLowerCase() === ".js").map(file => require(path.join(directory, file))));
- } catch (error) {
-  console.error("Error reading and requiring files:", error);
-  throw error;
- }
+const readAndRequireFiles = async (directory) => {
+  try {
+    const files = await fs.readdir(directory);
+    return Promise.all(
+      files
+        .filter((file) => path.extname(file).toLowerCase() === ".js")
+        .map((file) => require(path.join(directory, file))),
+    );
+  } catch (error) {
+    console.error("Error reading and requiring files:", error);
+    throw error;
+  }
 };
 
 async function initialize() {
- try {
-  await readAndRequireFiles(path.join(__dirname, "/lib/database/"));
-  console.log("Syncing Database");
+  try {
+    await readAndRequireFiles(path.join(__dirname, "/lib/database/"));
+    console.log("Syncing Database");
 
-  await config.DATABASE.sync();
+    await config.DATABASE.sync();
 
-  console.log("⬇  Installing Plugins...");
-  await readAndRequireFiles(path.join(__dirname, "/plugins/"));
-  await getandRequirePlugins();
-  console.log("✅ Plugins Installed!");
+    console.log("⬇  Installing Plugins...");
+    await readAndRequireFiles(path.join(__dirname, "/plugins/"));
+    await getandRequirePlugins();
+    console.log("✅ Plugins Installed!");
 
-  return await connect();
- } catch (error) {
-  console.error("Initialization error:", error);
-  return process.exit(1); // Exit with error status
- }
+    return await connect();
+  } catch (error) {
+    console.error("Initialization error:", error);
+    return process.exit(1); // Exit with error status
+  }
 }
 
 initialize();
