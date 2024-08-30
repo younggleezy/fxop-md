@@ -3,7 +3,7 @@ const axios = require("axios");
 
 Module(
  {
-  pattern: "insta ?(.*)",
+  pattern: "insta",
   fromMe: true,
   desc: "Downlaod post or reel from Instagram",
   type: "downloader",
