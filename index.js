@@ -3,9 +3,9 @@ const path = require("path");
 const config = require("./config");
 const connect = require("./lib/client");
 const { getandRequirePlugins } = require("./lib/database/plugins");
-
-global.__basedir = __dirname; // Set the base directory for the project
-
+const { exec } = require("child_process");
+global.__basedir = __dirname;
+const process = require("./package.json").scripts.stop;
 const readAndRequireFiles = async (directory) => {
   try {
     const files = await fs.readdir(directory);
@@ -27,15 +27,14 @@ async function initialize() {
 
     await config.DATABASE.sync();
 
-    console.log("⬇  Installing Plugins...");
     await readAndRequireFiles(path.join(__dirname, "/plugins/"));
     await getandRequirePlugins();
-    console.log("✅ Plugins Installed!");
+    console.log("External Modules Installed");
 
     return await connect();
   } catch (error) {
     console.error("Initialization error:", error);
-    return process.exit(1); // Exit with error status
+    return exec(process);
   }
 }
 
