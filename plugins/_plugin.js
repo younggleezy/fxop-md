@@ -1,9 +1,9 @@
-const { command } = require("../lib");
+const { Module } = require("../lib");
 const axios = require("axios");
 const fs = require("fs");
 const { PluginDB, installPlugin } = require("../lib/database").Plugins;
 
-command(
+Module(
   {
     pattern: "install",
     fromMe: true,
@@ -62,7 +62,7 @@ command(
   },
 );
 
-command(
+Module(
   { pattern: "plugin", fromMe: true, desc: "plugin list", type: "user" },
   async (message, match) => {
     var mesaj = "";
@@ -86,7 +86,7 @@ command(
   },
 );
 
-command(
+Module(
   {
     pattern: "remove",
     fromMe: true,

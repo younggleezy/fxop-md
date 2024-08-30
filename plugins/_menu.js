@@ -1,12 +1,12 @@
 const plugins = require("../lib/plugins");
-const { command, isPrivate, clockString, pm2Uptime } = require("../lib");
+const { Module, mode, clockString, pm2Uptime } = require("../lib");
 const { OWNER_NAME, BOT_NAME } = require("../config");
 const { hostname } = require("os");
 
-command(
+Module(
   {
     pattern: "menu",
-    fromMe: isPrivate,
+    fromMe: mode,
     desc: "Show All Commands",
     dontAddCommandList: true,
     type: "user",
@@ -70,10 +70,10 @@ Description: ${i.desc}\`\`\``);
   },
 );
 
-command(
+Module(
   {
     pattern: "list",
-    fromMe: isPrivate,
+    fromMe: mode,
     desc: "Show All Commands",
     type: "user",
     dontAddCommandList: true,

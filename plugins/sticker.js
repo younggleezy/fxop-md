@@ -1,10 +1,10 @@
 const config = require("../config");
-const { command, isPrivate, toAudio } = require("../lib/");
+const { Module, mode, toAudio } = require("../lib/");
 const { webp2mp4, textToImg } = require("../lib/functions");
-command(
+Module(
   {
     pattern: "sticker",
-    fromMe: isPrivate,
+    fromMe: mode,
     desc: "Converts Photo/video/text to sticker",
     type: "converter",
   },
@@ -32,10 +32,10 @@ command(
   },
 );
 
-command(
+Module(
   {
     pattern: "take",
-    fromMe: isPrivate,
+    fromMe: mode,
     desc: "Converts Photo or video to sticker",
     type: "converter",
   },
@@ -49,10 +49,10 @@ command(
   },
 );
 
-command(
+Module(
   {
     pattern: "photo",
-    fromMe: isPrivate,
+    fromMe: mode,
     desc: "Changes sticker to Photo",
     type: "converter",
   },
@@ -64,10 +64,10 @@ command(
   },
 );
 
-command(
+Module(
   {
     pattern: "mp3",
-    fromMe: isPrivate,
+    fromMe: mode,
     desc: "converts video/voice to mp3",
     type: "downloader",
   },
@@ -85,10 +85,10 @@ command(
   },
 );
 
-command(
+Module(
   {
     pattern: "mp4",
-    fromMe: isPrivate,
+    fromMe: mode,
     desc: "converts video/voice to mp4",
     type: "downloader",
   },
@@ -114,10 +114,10 @@ command(
   },
 );
 
-command(
+Module(
   {
     pattern: "img",
-    fromMe: isPrivate,
+    fromMe: mode,
     desc: "Converts Sticker to image",
     type: "converter",
   },

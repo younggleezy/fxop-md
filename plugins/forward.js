@@ -1,9 +1,9 @@
-const { command, parsedJid, isPrivate } = require("../lib/");
+const { Module, parsedJid, mode } = require("../lib/");
 
-command(
+Module(
   {
     pattern: "fd",
-    fromMe: isPrivate,
+    fromMe: mode,
     desc: "Forwards the replied Message",
     type: "Util",
   },

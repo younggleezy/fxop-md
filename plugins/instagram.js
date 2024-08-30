@@ -1,7 +1,7 @@
-const { command, IronMan } = require("../lib");
+const { Module, IronMan } = require("../lib");
 const axios = require("axios");
 
-command(
+Module(
   {
     pattern: "insta ?(.*)",
     fromMe: true,

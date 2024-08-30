@@ -1,8 +1,8 @@
-const { command, isAdmin, parseJid, isPrivate } = require("../lib");
-command(
+const { Module, isAdmin, parseJid, mode } = require("../lib");
+Module(
   {
     pattern: "delttt",
-    fromMe: isPrivate,
+    fromMe: mode,
     desc: "delete TicTacToe running game.",
     type: "game",
     dontAddCommandList: true,
@@ -26,7 +26,7 @@ command(
   },
 );
 
-command(
+Module(
   {
     pattern: "ttt",
     fromMe: false,
@@ -96,7 +96,7 @@ Current turn: @${room.game.currentTurn.split("@")[0]}
   },
 );
 
-command(
+Module(
   {
     on: "text",
     fromMe: false,

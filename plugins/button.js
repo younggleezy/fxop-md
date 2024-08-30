@@ -1,6 +1,6 @@
-const { command, isPrivate } = require("../lib");
+const { Module, mode } = require("../lib");
 
-command(
+Module(
   {
     pattern: "button",
     fromMe: true,

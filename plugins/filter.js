@@ -3,9 +3,9 @@ const {
   setFilter,
   deleteFilter,
 } = require("../lib/database/filters");
-const { command } = require("../lib");
+const { Module } = require("../lib");
 
-command(
+Module(
   {
     pattern: "filter",
     fromMe: true,
@@ -41,7 +41,7 @@ command(
   },
 );
 
-command(
+Module(
   {
     pattern: "stop",
     fromMe: true,
@@ -61,7 +61,7 @@ command(
   },
 );
 
-command(
+Module(
   { on: "text", fromMe: false, dontAddCommandList: true },
   async (message, match) => {
     var filtreler = await getFilter(message.jid);

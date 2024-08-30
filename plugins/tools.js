@@ -1,12 +1,12 @@
-const { command, qrcode, Bitly, isPrivate, isUrl, readQr } = require("../lib/");
+const { Module, qrcode, Bitly, mode, isUrl, readQr } = require("../lib/");
 
 const { downloadMediaMessage } = require("baileys");
 const { getLyrics } = require("../lib/functions");
 const config = require("../config");
-command(
+Module(
   {
     pattern: "vv",
-    fromMe: isPrivate,
+    fromMe: mode,
     desc: "Forwards The View once messsage",
     type: "tool",
   },
@@ -17,7 +17,7 @@ command(
 );
 
 // STATUS SAVER ( MAKE fromMe: false TO USE AS PUBLIC )
-command(
+Module(
   {
     on: "text",
     fromMe: !config.STATUS_SAVER,
@@ -44,10 +44,10 @@ command(
   },
 );
 
-command(
+Module(
   {
     pattern: "qr",
-    fromMe: isPrivate,
+    fromMe: mode,
     desc: "Read/Write Qr.",
     type: "Tool",
   },
@@ -76,10 +76,10 @@ command(
   },
 );
 
-command(
+Module(
   {
     pattern: "bitly",
-    fromMe: isPrivate,
+    fromMe: mode,
     desc: "Converts Url to bitly",
     type: "tool",
   },
@@ -92,10 +92,10 @@ command(
   },
 );
 
-command(
+Module(
   {
     pattern: "lyric",
-    fromMe: isPrivate,
+    fromMe: mode,
     desc: "Searches for lyrics based on the format: song;artist",
     type: "tools",
   },
