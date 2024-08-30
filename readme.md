@@ -56,4 +56,4 @@ If you come across any unauthorized or cheap copy of this project, please report
 
 All rights are reserved, and we take any violation seriously, including pursuing legal action to protect our work.
 
-Thank you for your understanding and cooperation!
+Thank you for choosing fx-md
