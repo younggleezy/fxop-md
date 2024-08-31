@@ -8,10 +8,26 @@ Module(
   type: "ai",
  },
  async (message, match) => {
-  if (!match) return message.sendReply("hmm, give me something");
+  if (!match) return message.sendReply("*_hmm, give me something_*");
   const msg = await message.reply("_thinking_");
   const request = new Scraper();
   const result = await request.gpt4(match);
-  return await msg.edit(`*GPT4: ${result}`);
+  return await msg.edit(`*GPT4:* ${result}`);
+ }
+);
+
+Module(
+ {
+  pattern: "blackbox",
+  fromMe: mode,
+  desc: "Chat with BlackBox Ai",
+  type: "ai",
+ },
+ async (message, match) => {
+  if (!match) return await message.sendReply("*_look i can't deal with empty queries_*");
+  const msg = await message.reply("_thinking_");
+  const request = new Scraper();
+  const result = await request.blackbox(match);
+  return await msg.edit(`*BlackBox:* ${result}`);
  }
 );
