@@ -46,3 +46,19 @@ Module(
   return message.sendFile(buff);
  }
 );
+
+Module(
+ {
+  pattern: "pinterest",
+  fromMe: mode,
+  desc: "Downloads Pinterest Images",
+  type: "downloader",
+ },
+ async (message, match) => {
+  if (!match) return await message.sendReply("_provide me words_");
+  await message.sendReply("_processing_");
+  const pint = new Scraper();
+  const buff = await pint.pinterest(match);
+  return message.sendFile(buff);
+ }
+);
