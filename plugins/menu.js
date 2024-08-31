@@ -46,11 +46,7 @@ Module(
    plugins.commands.forEach((command) => {
     if (command.pattern) {
      // Extract command name from the pattern
-     const commandName = command.pattern
-      .toString()
-      .replace(/^\^.*?\s?/, "") // Remove leading part of the regex
-      .replace(/(?=\b|$)\)$/g, "") // Remove trailing part of the regex
-      .trim();
+     const commandName = command.pattern.toString().split(/\W+/)[1];
 
      if (commandName) {
       const commandType = command.type ? command.type.toLowerCase() : "misc";
