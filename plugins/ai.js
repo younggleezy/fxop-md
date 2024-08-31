@@ -12,7 +12,7 @@ Module(
   const msg = await message.reply("_thinking_");
   const request = new Scraper();
   const result = await request.gpt4(match);
-  return await msg.edit(`*GPT4:* ${result}`);
+  return await msg.edit(`*GPT4:*\n ${result}`);
  }
 );
 
@@ -28,6 +28,7 @@ Module(
   const msg = await message.reply("_thinking_");
   const request = new Scraper();
   const result = await request.blackbox(match);
-  return await msg.edit(`*BlackBox:* ${result}`);
+  return await msg.edit(`*BlackBox:*\n ${result}`);
  }
 );
+
