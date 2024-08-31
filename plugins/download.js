@@ -1,6 +1,5 @@
-const { Module, IronMan } = require("../lib");
+const { Module, IronMan, Scraper } = require("../lib");
 const axios = require("axios");
-
 Module(
  {
   pattern: "insta",
@@ -35,5 +34,21 @@ Module(
   } catch (error) {
    await message.reply("No media found./nCheck if your url is valid");
   }
+ }
+);
+
+Module(
+ {
+  pattern: "facebook",
+  fromMe: Mode,
+  desc: "Download Facebook Videos & Images ",
+  type: "downloader",
+ },
+ async (message, match) => {
+  if (!match) return await message.sendReply("_provide facebook url_");
+  await message.sendReply("_downloading_");
+  const fb = new Scraper();
+  const buff = await fb.facebook(match);
+  return await message.sendFile(buff);
  }
 );
