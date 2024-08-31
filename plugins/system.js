@@ -14,13 +14,8 @@ Module(
   const start = new Date().getTime();
   const msg = await message.reply("*ᴩɪɴɢ...*");
   const end = new Date().getTime();
-  const responseTime = ((end - start) / 1000).toFixed(3); // Round to 3 decimal places
-  try {
-   await msg.edit(`*ʀᴇsᴘᴏɴsᴇ ʀᴀᴛᴇ: ${responseTime} secs*`);
-  } catch (error) {
-   console.error("Error editing ping message:", error);
-   await message.reply(`*ʀᴇsᴘᴏɴsᴇ ʀᴀᴛᴇ: ${responseTime} secs* (Edit failed)`);
-  }
+  const responseTime = ((end - start) / 1000).toFixed(3);
+  await msg.edit(`*ʀᴇsᴘᴏɴsᴇ ʀᴀᴛᴇ: ${responseTime} secs*`);
  }
 );
 
