@@ -1,4 +1,3 @@
-const { fromBuffer, mimeTypes } = require("file-type");
 const { Module, mode } = require("../lib/");
 Module(
  {
@@ -9,8 +8,9 @@ Module(
  },
  async (message, match) => {
   const start = new Date().getTime();
-  await message.sendMessage("```Ping!```");
+  const sentMessage = await message.sendMessage("```Ping!```");
   const end = new Date().getTime();
-  return await message.sendMessage("*Pong!*\n ```" + (end - start) + "``` *ms*");
+  const pingTime = end - start;
+  await message.edit(`*Pong!*\n ${pingTime} *ms*`, sentMessage.key);
  }
 );

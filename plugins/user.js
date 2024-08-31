@@ -157,20 +157,6 @@ Module(
 
 Module(
  {
-  pattern: "dlt",
-  fromMe: true,
-  desc: "deletes a message",
-  type: "user",
- },
- async (message, match, m, client) => {
-  if (message.isGroup) {
-   client.sendMessage({ delete: message.reply_message.key });
-  }
- }
-);
-
-Module(
- {
   pattern: "warn",
   fromMe: true,
   desc: "Warn a user",

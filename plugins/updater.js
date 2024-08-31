@@ -74,24 +74,26 @@ Module(
  }
 );
 
-
-Module({
+Module(
+ {
   pattern: "upgrade",
   fromMe: mode,
   desc: "Upgrade project dependencies",
   type: "updater",
-}, async (message, match) => {
+ },
+ async (message, match) => {
   await message.reply("Upgrading dependencies... Please wait.");
 
-  exec("npm install && npm upgrade", (error, stdout, stderr) => { 
-    if (error) {
-      message.reply(`Upgrade failed: ${error.message}`);
-      return;
-    }
-    if (stderr) {
-      message.reply(`Upgrade process encountered some issues: ${stderr}`);
-      return;
-    }
-    message.reply(`Successfully upgraded dependencies:\n\n${stdout}`);
+  exec("npm install && npm upgrade", (error, stdout, stderr) => {
+   if (error) {
+    message.reply(`Upgrade failed: ${error.message}`);
+    return;
+   }
+   if (stderr) {
+    message.reply(`Upgrade process encountered some issues: ${stderr}`);
+    return;
+   }
+   message.reply(`Successfully upgraded dependencies:\n\n${stdout}`);
   });
-});
+ }
+);
