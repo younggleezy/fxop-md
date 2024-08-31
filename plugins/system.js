@@ -19,7 +19,6 @@ Module(
  }
 );
 
-
 Module(
  {
   pattern: "restart",

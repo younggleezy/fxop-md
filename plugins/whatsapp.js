@@ -1,6 +1,6 @@
 const { Module } = require("../lib");
-const parsedJid = function(text) {
-  return text.match(/[0-9]+(-[0-9]+|)@(g.us|s.whatsapp.net)/g);
+const parsedJid = function (text) {
+ return text.match(/[0-9]+(-[0-9]+|)@(g.us|s.whatsapp.net)/g);
 };
 
 Module(
