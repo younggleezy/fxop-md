@@ -7,15 +7,21 @@ Module(
  {
   pattern: "ping",
   fromMe: mode,
-  desc: "Bot response in milliseconds.",
+  desc: "To check ping",
   type: "system",
  },
- async (message) => {
+ async (message, match) => {
   const start = new Date().getTime();
-  const msg = await message.reply("*ᴩɪɴɢ...*");
+  const sentMessage = await message.sendMessage("```Ping!```");
   const end = new Date().getTime();
-  const responseTime = (end - start) / 1000;
-  await msg.edit(`*ʀᴇsᴘᴏɴsᴇ ʀᴀᴛᴇ ${responseTime} secs*`);
+  const pingTime = end - start;
+  await new Promise((resolve) => setTimeout(resolve, 100));
+  try {
+   await message.edit(`*Pong!*\n ${pingTime} *ms*`, sentMessage.key);
+  } catch (error) {
+   console.error("Error editing ping message:", error);
+   await message.sendMessage(`*Pong!*\n ${pingTime} *ms*\n(Edit failed)`);
+  }
  }
 );
 
