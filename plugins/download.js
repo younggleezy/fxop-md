@@ -1,4 +1,4 @@
-const { Module, IronMan, Scraper } = require("../lib");
+const { Module, IronMan, Scraper, mode } = require("../lib");
 const axios = require("axios");
 Module(
  {
@@ -40,7 +40,7 @@ Module(
 Module(
  {
   pattern: "facebook",
-  fromMe: Mode,
+  fromMe: mode,
   desc: "Download Facebook Videos & Images ",
   type: "downloader",
  },
