@@ -30,3 +30,19 @@ Module(
   return await message.sendFile(buff);
  }
 );
+
+Module(
+ {
+  pattern: "twitter",
+  fromMe: mode,
+  desc: "Download Twitter Videos & Images",
+  type: "downloader",
+ },
+ async (message, match) => {
+  if (!match) return await message.sendReply("_provide twitter url_");
+  await message.sendReply("_downloading_");
+  const x = new Scraper();
+  const buff = await x.twitter(match);
+  return message.sendFile(buff);
+ }
+);
