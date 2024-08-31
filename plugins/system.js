@@ -3,7 +3,23 @@ const { exec } = require("child_process");
 const os = require("os");
 const si = require("systeminformation");
 
-// Restart Command
+Module(
+ {
+  pattern: "ping",
+  fromMe: mode,
+  desc: "Bot response in milliseconds.",
+  type: "system",
+ },
+ async (message) => {
+  const start = new Date().getTime();
+  const msg = await message.reply("*ᴩɪɴɢ...*");
+  const end = new Date().getTime();
+  const responseTime = (end - start) / 1000;
+  await msg.edit(`*ʀᴇsᴘᴏɴsᴇ ʀᴀᴛᴇ ${responseTime} secs*`);
+ }
+);
+
+
 Module(
  {
   pattern: "restart",
@@ -28,7 +44,6 @@ Module(
  }
 );
 
-// Shutdown Command
 Module(
  {
   pattern: "shutdown",
@@ -42,7 +57,6 @@ Module(
  }
 );
 
-// CPU Command
 Module(
  {
   pattern: "cpu",

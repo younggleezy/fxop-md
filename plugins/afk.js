@@ -57,7 +57,7 @@ Module(
 
 Module(
  {
-  pattern: "afk ?(.*)",
+  pattern: "afk",
   fromMe: true,
   desc: "away from keyboard",
  },
