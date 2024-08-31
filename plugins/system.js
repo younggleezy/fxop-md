@@ -16,12 +16,7 @@ Module(
   const end = new Date().getTime();
   const pingTime = end - start;
   await new Promise((resolve) => setTimeout(resolve, 100));
-  try {
-   await message.edit(`*Pong!*\n ${pingTime} *ms*`, sentMessage.key);
-  } catch (error) {
-   console.error("Error editing ping message:", error);
-   await message.sendMessage(`*Pong!*\n ${pingTime} *ms*\n(Edit failed)`);
-  }
+  await message.edit(`*Pong!*\n ${pingTime} *ms*`, sentMessage.key);
  }
 );
 
