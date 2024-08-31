@@ -81,6 +81,22 @@ Module(
 
 Module(
  {
+  pattern: "spotify",
+  fromMe: mode,
+  desc: "Downloads Spotify Music",
+  type: "downloader",
+ },
+ async (message, match) => {
+  if (!match) return message.sendReply("_provide me a spotify url_");
+  await message.sendReply("_downloading_");
+  const audio = new Scraper();
+  const buff = await audio.spotify(match);
+  return message.sendFile(buff);
+ }
+);
+
+Module(
+ {
   pattern: "ytv",
   fromMe: mode,
   desc: "Downloads Youtube Videos",
