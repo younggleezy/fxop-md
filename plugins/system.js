@@ -7,16 +7,15 @@ Module(
  {
   pattern: "ping",
   fromMe: mode,
-  desc: "To check ping",
+  desc: "Bot response in milliseconds.",
   type: "system",
  },
- async (message, match) => {
+ async (message) => {
   const start = new Date().getTime();
-  const sentMessage = await message.sendMessage("```Ping!```");
+  const msg = await message.reply("*ᴩɪɴɢ...*");
   const end = new Date().getTime();
-  const pingTime = end - start;
-  await new Promise((resolve) => setTimeout(resolve, 200));
-  await message.edit(`*Pong!*\n ${pingTime} *ms*`, sentMessage.key);
+  const responseTime = (end - start) / 1000;
+  await msg.edit(`*ʀᴇsᴘᴏɴsᴇ ʀᴀᴛᴇ ${responseTime} secs*`);
  }
 );
 
