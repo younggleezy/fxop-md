@@ -62,3 +62,19 @@ Module(
   return message.sendFile(buff);
  }
 );
+
+Module(
+ {
+  pattern: "tiktok",
+  fromMe: mode,
+  desc: "Downloads Tiktok Videos & Images",
+  type: "downloader",
+ },
+ async (message, match) => {
+  if (!match) return await message.sendReply("_provide tiktok url_");
+  await message.sendReply("_downloading_");
+  const tik = new Scraper();
+  const buff = await tik.tiktok(match);
+  return message.sendFile(buff);
+ }
+);
