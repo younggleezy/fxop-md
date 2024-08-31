@@ -11,7 +11,7 @@ Module(
  async (message, match) => {
   await message.send("This is a normal logic");
 
-  if (match.includes("now")) {
+  if (match == 'now') {
    await message.send("other logic success");
   }
  }
