@@ -78,3 +78,35 @@ Module(
   return message.sendFile(buff);
  }
 );
+
+Module(
+ {
+  pattern: "ytv",
+  fromMe: mode,
+  desc: "Downloads Youtube Videos",
+  type: "downlaoder",
+ },
+ async (message, match) => {
+  if (!match) return await message.sendReply("_provide youtube video url_");
+  await message.sendReply("_downloading_");
+  const yts = new Scraper();
+  const buff = await yts.youtube(match);
+  return message.sendFile(buff);
+ }
+);
+
+Module(
+ {
+  pattern: "yta",
+  fromMe: mode,
+  desc: "Downloads Youtube Music",
+  type: "downloader",
+ },
+ async (message, match) => {
+  if (!match) return message.sendReply("_provide youtube music url_");
+  await message.sendReply("_downloading_");
+  const ytsa = new Scraper();
+  const buff = await ytsa.youtubeMp3(match);
+  return message.sendFile(buff);
+ }
+);

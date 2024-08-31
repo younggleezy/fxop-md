@@ -31,4 +31,3 @@ Module(
   return await msg.edit(`*BlackBox:*\n ${result}`);
  }
 );
-
