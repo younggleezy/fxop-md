@@ -15,7 +15,7 @@ Module(
   const sentMessage = await message.sendMessage("```Ping!```");
   const end = new Date().getTime();
   const pingTime = end - start;
-  await new Promise((resolve) => setTimeout(resolve, 100));
+  await new Promise((resolve) => setTimeout(resolve, 200));
   await message.edit(`*Pong!*\n ${pingTime} *ms*`, sentMessage.key);
  }
 );
