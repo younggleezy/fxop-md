@@ -1,0 +1,17 @@
+{
+  "name": "fxop",
+  "success_url": "/",
+  "stack": "container",
+  "env": {
+   "SESSION_ID": {
+    "description": "Session ID to Run Bot",
+    "value": "Session~"
+   }
+  },
+  "formation": {
+   "worker": {
+    "quantity": 1,
+    "size": "basic"
+   }
+  }
+ }

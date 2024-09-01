@@ -29,10 +29,12 @@
 
 ## Warning
 
-This project is **NOT open source** and is **NOT for sale**. Any unauthorized distribution, copying, or use of this project’s code, assets, or any related content is strictly prohibited.
+This project is **NOT open source** and is **NOT for sale**. Any unauthorized distribution, copying, or use of this project’s code, assets, or any related content is strictly prohibited I keep my oath I do not have access and I will not steal your personal infomation.
 
 If you come across any unauthorized or cheap copy of this project, please report it immediately to **xstrofx010@gmail.com**.
 
 All rights are reserved, and we take any violation seriously, including pursuing legal action to protect our work.
+
+Use this bot at your own risk, WhatsApp will ban you if you use it for spamming.
 
 Thank you for choosing fx-md
