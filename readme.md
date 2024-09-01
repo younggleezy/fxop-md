@@ -20,9 +20,6 @@
     </a>
 </p>
 
-
-### Technology Used
-
 | FrameWork | Usage                                                                                                |
 | --------- | ---------------------------------------------------------------------------------------------------- |
 | Node.js   | For server-side development and scripting.                                                           |
