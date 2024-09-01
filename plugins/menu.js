@@ -46,13 +46,7 @@ Module(
 
    plugins.commands.forEach((command) => {
     if (command.pattern) {
-     // Extract command name from the pattern as a string
-     const commandName = command.pattern
-      .toString() // Convert the RegExp object to a string
-      .replace(/^\^.*?\s?/, "") // Remove leading part of the regex
-      .replace(/(?=\b|$)\)$/g, "") // Remove trailing part of the regex
-      .trim();
-
+     const commandName = command.pattern;
      if (commandName) {
       const commandType = command.type ? command.type.toLowerCase() : "misc";
       commandList.push({ commandName, commandType });
@@ -61,37 +55,21 @@ Module(
      }
     }
    });
-
-   // Sorting categories and commands by commandName
    categoryList.sort();
    commandList.sort((a, b) => a.commandName.localeCompare(b.commandName));
 
-   // Adjusted commandName extraction to remove regex characters
-   const cleanCommandName = (pattern) => {
-    return pattern
-     .toString() // Convert RegExp to string
-     .replace(/^\/\^?.*?\s?/, "") // Remove prefix like `/^` and any characters until the first space or pattern
-     .replace(/(?=\b|$).*\$\/[a-z]*$/i, "") // Remove suffix like `(?=\b|$))(.*)/is`
-     .trim(); // Trim any whitespace
-   };
-
-   // Sort and display the command list
    categoryList.forEach((category) => {
     menuMessage += `\n╭──〘 ${tiny(category)} 〙━━──⊷\n│╭──────────────\n`;
     const filteredCommands = commandList.filter(({ commandType }) => commandType === category);
-
     if (filteredCommands.length === 0) {
      menuMessage += `\n_No commands available for this category._\n`;
     } else {
      filteredCommands.forEach(({ commandName }) => {
-      const cleanedName = cleanCommandName(commandName); // Apply cleanup function
-      menuMessage += `││ ${tiny(cleanedName)}\n`; // Use cleaned name
+      menuMessage += `││ ${tiny(commandName.trim())}\n`;
      });
     }
-
     menuMessage += `│╰───────────\n╰━━━━━━━━━━━━━──⊷\n`;
    });
-
    menuMessage += `\n`;
    return await message.sendMessage(menuMessage);
   }
