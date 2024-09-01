@@ -1,7 +1,7 @@
 const fs = require("fs").promises;
 const path = require("path");
 const config = require("./config");
-const connect = require("./lib/client");
+const { connect } = require("./lib");
 const { getandRequirePlugins } = require("./lib/database/plugins");
 global.__basedir = __dirname;
 
