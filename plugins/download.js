@@ -100,7 +100,7 @@ Module(
   pattern: "ytv",
   fromMe: mode,
   desc: "Downloads Youtube Videos",
-  type: "downlaoder",
+  type: "downloader",
  },
  async (message, match) => {
   if (!match) return await message.sendReply("_provide youtube video url_");
