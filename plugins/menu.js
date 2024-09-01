@@ -46,7 +46,7 @@ Module(
 
    plugins.commands.forEach((command) => {
     if (command.pattern) {
-     const commandName = command.pattern
+     const commandName = command.pattern;
 
      if (commandName) {
       const commandType = command.type ? command.type.toLowerCase() : "misc";

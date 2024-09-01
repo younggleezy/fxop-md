@@ -151,7 +151,8 @@ Module(
   type: "user",
  },
  async (message, match) => {
-  return await message.sendMessage(message.mention[0] || message.reply_message.jid || message.jid);
+  const jid = message.mention[0] || (message.reply_message && message.reply_message.jid) || message.jid;
+  return await message.sendMessage(jid);
  }
 );
 
