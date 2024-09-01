@@ -1,7 +1,7 @@
 const fs = require("fs").promises;
 const path = require("path");
 const config = require("./config");
-const { connect } = require("./lib");
+const { connect, writeSession, patch } = require("./lib");
 const { getandRequirePlugins } = require("./lib/database/plugins");
 global.__basedir = __dirname;
 
@@ -17,6 +17,8 @@ const parseDir = async directory => {
 
 async function initialize() {
  try {
+  patch();
+  writeSession();
   await parseDir(path.join(__dirname, "/lib/database/"));
   console.log("Syncing Database");
   await config.DATABASE.sync();
