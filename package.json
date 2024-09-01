@@ -6,6 +6,11 @@
  "directories": {
   "lib": "lib"
  },
+ "author": "FXastro",
+ "scripts": {
+  "start": "pm2 start lib/client.js --deep-monitoring --attach --name fx-md",
+  "stop": "pm2 stop fx-md"
+ },
  "devDependencies": {
   "@eslint/js": "^9.4.0",
   "eslint": "^9.4.0",
