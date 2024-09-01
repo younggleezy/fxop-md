@@ -1,14 +1,25 @@
-## FXOP-MD
+<p align="center">
+    <img src="https://github.com/user-attachments/assets/1952f21e-2152-4097-b8c2-9d06bed8aa8c" alt="logo" width="350"/>
+</p>
 
-### A Simple WhatsApp Bot
+<h3 align="center">A Simple WhatsApp Bot</h3>
 
-**FXOP-MD** is a WhatsApp bot made to automate tasks on WhatsApp.
+<p align="center">
+    <strong>FXOP-MD</strong> is a WhatsApp bot made to automate tasks on WhatsApp.
+</p>
 
-<a href='https://rocky-fjord-18084-7fa90f18d8d2.herokuapp.com/code' target="_blank"><img alt='SESSION' src='https://img.shields.io/badge/Get Sssion ID-100000?style=for-the-badge&logo=scan&logoColor=white&labelColor=black&color=blue'/></a>
+<p align="center">
+    <a href='https://rocky-fjord-18084-7fa90f18d8d2.herokuapp.com/code' target="_blank">
+        <img alt='SESSION' src='https://img.shields.io/badge/Get%20Sssion%20ID-100000?style=for-the-badge&logo=scan&logoColor=white&labelColor=black&color=blue'/>
+    </a>
+</p>
 
-<a href="https://whatsapp.com/channel/0029VambPbJ2f3ERs37HvM2J"><img alt="WhatsApp" src="https://img.shields.io/badge/-Whatsapp%20Channel-white?style=for-the-badge&logo=whatsapp&logoColor=blue"/></a>
+<p align="center">
+    <a href="https://whatsapp.com/channel/0029VambPbJ2f3ERs37HvM2J">
+        <img alt="WhatsApp" src="https://img.shields.io/badge/-Whatsapp%20Channel-white?style=for-the-badge&logo=whatsapp&logoColor=blue"/>
+    </a>
+</p>
 
----
 
 ### Technology Used
 
