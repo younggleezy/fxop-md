@@ -46,7 +46,12 @@ Module(
 
    plugins.commands.forEach((command) => {
     if (command.pattern) {
-     const commandName = command.pattern;
+     // Extract command name from the pattern as a string
+     const commandName = command.pattern
+      .toString() // Convert the RegExp object to a string
+      .replace(/^\^.*?\s?/, "") // Remove leading part of the regex
+      .replace(/(?=\b|$)\)$/g, "") // Remove trailing part of the regex
+      .trim();
 
      if (commandName) {
       const commandType = command.type ? command.type.toLowerCase() : "misc";
@@ -57,7 +62,7 @@ Module(
     }
    });
 
-   // Sorting categories and commands
+   // Sorting categories and commands by commandName
    categoryList.sort();
    commandList.sort((a, b) => a.commandName.localeCompare(b.commandName));
 
