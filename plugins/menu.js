@@ -56,7 +56,7 @@ Module(
     }
    });
    categoryList.sort();
-   commandList.sort((a, b) => a.commandName.localeCompare(b.commandName));
+   commandList.sort((a, b) => a.commandName(b.commandName));
 
    categoryList.forEach((category) => {
     menuMessage += `\n╭──〘 ${tiny(category)} 〙━━──⊷\n│╭──────────────\n`;
