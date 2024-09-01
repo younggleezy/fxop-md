@@ -1,4 +1,4 @@
-const { command, mode, parsedJid, isAdmin, parsedJid } = require("../lib/");
+const { command, mode, parsedJid, isAdmin } = require("../lib/");
 const { setMessage, getMessage, delMessage, getStatus, toggleStatus } = require("../lib/database").Greetings;
 const { banUser, unbanUser, isBanned } = require("../lib/database/ban");
 command(
