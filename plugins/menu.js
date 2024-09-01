@@ -71,7 +71,7 @@ Module(
       menuMessage += `││ ${tiny(commandName.trim())}\n`;
      });
     }
-    menuMessage += `╰───────────\n╰━━━━━━━━━━━━━──⊷\n`;
+    menuMessage += `│╰───────────\n╰━━━━━━━━━━━━━──⊷\n`;
    });
    menuMessage += `\n`;
    return await message.sendMessage(menuMessage);
