@@ -27,18 +27,19 @@ Module(
     }
    }
   } else {
-   const { prefix } = message;
-   const [currentDate, currentTime] = new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" }).split(",");
-   let menuMessage = `\`\`\`╭────《 ${BOT_NAME} 》─────⊷
-│ User: ${message.pushName}
-│ Prefix: ${HANDLERS}
-│ Date: ${currentDate}
-│ Time: ${currentTime}
-│ Plugins: ${plugins.commands.length} 
-│ Runtime: ${runtime(process.uptime())} 
-│ Ram: ${formatBytes(os.totalmem() - os.freemem())} / ${formatBytes(os.totalmem())}
-│ Version: ${(version = require("../package.json").version)}
-╰───────────────⊷\n\`\`\``;
+   const [currentDate, currentTime] = new Date().toLocaleString("en-IN", { timeZone: "Africa/Lagos" }).split(",");
+   let menuMessage = `\`\`\`╭━━━〔 ${BOT_NAME} 〕━━━┈⊷
+│✷╭──────────────
+│✷│User: ${message.pushName}
+│✷│Prefix: ${HANDLERS}
+│✷│Date: ${currentDate}
+│✷│Time: ${currentTime}
+│✷│Plugins: ${plugins.commands.length} 
+│✷│Runtime: ${runtime(process.uptime())} 
+│✷│Ram: ${formatBytes(os.totalmem() - os.freemem())} / ${formatBytes(os.totalmem())}
+│✷│Version: ${(version = require("../package.json").version)}
+│✷╰──────────────
+╰━━━━━━━━━━━━━━━┈⊷\n\`\`\``;
 
    const commandList = [];
    const categoryList = [];
