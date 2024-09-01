@@ -10,33 +10,6 @@
 
 ---
 
-### CLI SETUP
-
-1. **Clone the Repository**:
-
-   ```bash
-   git clone https://github.com/FXastro/fxop-md.git
-   cd fxop-md
-   ```
-
-2. **Install Dependencies**:
-
-   ```bash
-   npm install
-   ```
-
-3. **Configuration**:
-
-   ```bash
-   echo 'SESSION_ID="your session id here"' > .env
-   ```
-
-4. **Start the Bot**:
-
-   ```bash
-   npm start
-   ```
-
 ### Technology Used
 
 | FrameWork | Usage                                                                                                |
