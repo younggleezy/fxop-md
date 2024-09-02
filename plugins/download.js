@@ -89,3 +89,18 @@ command(
   return await message.sendFile(buff);
  }
 );
+
+command(
+ {
+  pattern: "youtube",
+  fromeMe: true,
+  desc: "Downloads Youtube Videos",
+  type: "download",
+ },
+ async (message, match) => {
+  if (!match) return message.reply("_provide youtube url_");
+  await message.reply("_Downloading_");
+  const buff = await ScrapeDl.youtube(match);
+  return await message.sendFile(buff);
+ }
+);

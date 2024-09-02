@@ -33,6 +33,7 @@
   "jsqr": "^1.4.0",
   "node-fetch": "^2.7.0",
   "node-webpmux": "^3.1.7",
+  "mp3-duration": "latest",
   "pastebin-js": "^1.0.6",
   "pg": "^8.12.0",
   "pino": "^8.14.1",
