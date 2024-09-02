@@ -15,20 +15,20 @@ command(
  }
 );
 
-command(
- {
-  pattern: "instagram",
-  fromMe: mode,
-  desc: "Downloads Instagram Media",
-  type: "download",
- },
- async (message, match) => {
-  if (!match) return message.reply("_provide vaild instagram link_");
-  await message.reply("_Downloading_");
-  const buff = await ScrapeDl.instagram(match);
-  return message.sendFile(buff);
- }
-);
+// command(
+//  {
+//   pattern: "instagram",
+//   fromMe: mode,
+//   desc: "Downloads Instagram Media",
+//   type: "download",
+//  },
+//  async (message, match) => {
+//   if (!match) return message.reply("_provide vaild instagram link_");
+//   await message.reply("_Downloading_");
+//   const buff = await ScrapeDl.instagram(match);
+//   return message.sendFile(buff);
+//  }
+// );
 
 command(
  {
@@ -37,5 +37,10 @@ command(
   desc: "Downloads Twitter Media",
   type: "download",
  },
- async (message, match) => {}
+ async (message, match) => {
+  if (!match) return message.reply("_provide vaild twitter url_");
+  await message.reply("_Downloading_");
+  const buff = await ScrapeDl.twitter(match);
+  return await message.sendFile(buff);
+ }
 );
