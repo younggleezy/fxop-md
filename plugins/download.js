@@ -1,4 +1,5 @@
-const { command, mode, ScrapeDl } = require("../lib");
+const { command, mode } = require("../lib");
+const { ScrapeDl } = require("../lib/scraper");
 command(
  {
   pattern: "facebook",
