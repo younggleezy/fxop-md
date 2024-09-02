@@ -17,8 +17,8 @@ const parseDir = async directory => {
 
 async function initialize() {
  try {
-  patch();
-  writeSession();
+  await patch();
+  await writeSession();
   await parseDir(path.join(__dirname, "/lib/database/"));
   console.log("Syncing Database");
   await config.DATABASE.sync();
