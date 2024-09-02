@@ -1,7 +1,7 @@
 const plugins = require("../lib/plugins");
 const { command, mode, clockString, tiny, formatBytes } = require("../lib");
 const { BOT_INFO } = require("../config");
-const { hostname } = require("os");
+const os = require("os");
 
 command(
  {
