@@ -22,12 +22,12 @@
 <h2 align="center">Deployments Platforms</h2>
 
 <p align="center">
-   <a href="https://whatsapp.com/channel/0029VambPbJ2f3ERs37HvM2J">
+   <a href="https://www.heroku.com/deploy?template=https://github.com/FXastro/fxop-md">
         <img alt="Heroku" src="https://img.shields.io/badge/-Heroku-430098?style=for-the-badge&logo=heroku&logoColor=white"/>
     </a>
-    <a href="https://whatsapp.com/channel/0029VambPbJ2f3ERs37HvM2J">
-        <img alt="Koyeb" src="https://img.shields.io/badge/-Koyeb-1DA1F2?style=for-the-badge&logo=koyeb&logoColor=white"/>
-    </a>
+    <a href="https://app.koyeb.com/services/deploy?type=docker&image=docker.io/fxastro/fxop-md&name=fxop-md-demo&env[SESSION_ID]=Session~&env[BOT_INFO]=ᴀsᴛʀᴏ;ғxᴏᴘ-ᴍᴅ&env[SUDO]=2348039607375&env[ANTILINK]=true&env[PORT]=8000&service_type=worker">
+    <img alt="Koyeb" src="https://img.shields.io/badge/-Koyeb-1DA1F2?style=for-the-badge&logo=koyeb&logoColor=white"/>
+</a>
     <a href="https://whatsapp.com/channel/0029VambPbJ2f3ERs37HvM2J">
         <img alt="Render" src="https://img.shields.io/badge/-Render-46E3B7?style=for-the-badge&logo=render&logoColor=black"/>
     </a>
