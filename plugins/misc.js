@@ -9,7 +9,7 @@ command(
   pattern: "install",
   fromMe: true,
   desc: "Installs External plugins",
-  type: "user",
+  type: "misc",
  },
  async (message, match) => {
   if (!match) return await message.sendMessage(message.jid, "_Send a plugin url_");
@@ -56,7 +56,7 @@ command(
  }
 );
 
-command({ pattern: "plugin", fromMe: true, desc: "plugin list", type: "user" }, async (message, match) => {
+command({ pattern: "plugin", fromMe: true, desc: "plugin list", type: "misc" }, async (message, match) => {
  var mesaj = "";
  var plugins = await PluginDB.findAll();
  if (plugins.length < 1) {
@@ -74,7 +74,7 @@ command(
   pattern: "remove",
   fromMe: true,
   desc: "Remove external plugins",
-  type: "user",
+  type: "misc",
  },
  async (message, match) => {
   if (!match) return await message.sendMessage(message.jid, "_Need a plugin name_");
@@ -152,7 +152,7 @@ command(
   pattern: "ping",
   fromMe: mode,
   desc: "To check ping",
-  type: "user",
+  type: "misc",
  },
  async (message, match) => {
   const start = new Date().getTime();

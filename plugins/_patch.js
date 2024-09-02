@@ -8,7 +8,6 @@ command(
   pattern: "menu",
   fromMe: mode,
   desc: "Show All Commands",
-  dontAddCommandList: true,
   type: "user",
  },
  async (message, match) => {
@@ -71,7 +70,6 @@ command(
   pattern: "list",
   fromMe: mode,
   desc: "Show All Commands",
-  type: "user",
   dontAddCommandList: true,
  },
  async (message, match, { prefix }) => {

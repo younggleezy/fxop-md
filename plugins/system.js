@@ -1,4 +1,4 @@
-const {  command, mode } = require("../lib");
+const { command, mode } = require("../lib");
 const { exec } = require("child_process");
 const simpleGit = require("simple-git");
 const git = simpleGit();
@@ -50,13 +50,13 @@ command(
   pattern: "update",
   fromMe: mode,
   info: "Check for updates",
-  type: "updater",
+  type: "system",
  },
  async message => {
   const hasUpdates = await checkForUpdates();
 
   if (!hasUpdates) {
-   await message.sendMessage("You are on the latest version.");
+   await message.sendMessage(message.jid, "You are on the latest version.");
    return;
   }
 
@@ -64,7 +64,7 @@ command(
   const updateSuccess = await updateNow();
 
   if (updateSuccess) {
-   await message.sendMessage("Bot updated. Now restarting in 3 seconds...");
+   await message.sendMessage(message.jid, "Bot updated. Now restarting in 3 seconds...");
    setTimeout(() => {
     restart();
    }, 3000);
@@ -79,7 +79,7 @@ command(
   pattern: "upgrade",
   fromMe: mode,
   desc: "Upgrade project dependencies",
-  type: "updater",
+  type: "system",
  },
  async (message, match) => {
   await message.reply("Upgrading dependencies... Please wait.");

@@ -9,7 +9,7 @@ command(
   pattern: "pause",
   fromMe: true,
   desc: "Pause the chat",
-  dontAddCommandList: true,
+  type: "user",
  },
  async message => {
   const chatId = message.key.remoteJid;
@@ -28,7 +28,7 @@ command(
   pattern: "resume",
   fromMe: true,
   desc: "Resume the paused chat",
-  dontAddCommandList: true,
+  type: "user",
  },
  async message => {
   const chatId = message.key.remoteJid;
@@ -56,6 +56,7 @@ command(
   pattern: "warn",
   fromMe: true,
   desc: "Warn a user",
+  type: "user",
  },
  async (message, match) => {
   const userId = message.mention[0] || message.reply_message.jid;
@@ -79,9 +80,10 @@ command(
 
 command(
  {
-  pattern: "resetwarn",
+  pattern: "rwarn",
   fromMe: true,
   desc: "Reset warnings for a user",
+  type: "user",
  },
  async message => {
   const userId = message.mention[0] || message.reply_message.jid;
@@ -111,7 +113,7 @@ command(
   fromMe: true,
   desc: "Adds a filter. When someone triggers the filter, it sends the corresponding response. To view your filter list, use `.filter`.",
   usage: ".filter keyword:message",
-  type: "group",
+  type: "user",
  },
  async (message, match) => {
   let text, msg;
@@ -143,7 +145,7 @@ command(
   fromMe: true,
   desc: "Stops a previously added filter.",
   usage: '.stop "hello"',
-  type: "group",
+  type: "user",
  },
  async (message, match) => {
   if (!match) return await message.reply("\n*Example:* ```.stop hello```");

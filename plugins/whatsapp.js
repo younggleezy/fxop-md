@@ -7,7 +7,7 @@ command(
   pattern: "vv",
   fromMe: mode,
   desc: "Forwards The View once messsage",
-  type: "tool",
+  type: "whatsapp",
  },
  async (message, match, m) => {
   let buff = await m.quoted.download();
@@ -21,7 +21,7 @@ command(
   fromMe: !STATUS_SAVER,
   desc: "Save or Give Status Updates",
   dontAddCommandList: true,
-  type: "Tool",
+  type: "whatsapp",
  },
  async (message, match, m) => {
   try {
@@ -42,7 +42,7 @@ command(
   pattern: "setpp",
   fromMe: true,
   desc: "Set profile picture",
-  type: "user",
+  type: "whatsapp",
  },
  async (message, match, m) => {
   if (!message.reply_message.image) return await message.reply("_Reply to a photo_");
@@ -57,7 +57,7 @@ command(
   pattern: "setname",
   fromMe: true,
   desc: "Set User name",
-  type: "user",
+  type: "whatsapp",
  },
  async (message, match) => {
   if (!match) return await message.reply("_Enter name_");
@@ -71,7 +71,7 @@ command(
   pattern: "block",
   fromMe: true,
   desc: "Block a person",
-  type: "user",
+  type: "whatsapp",
  },
  async (message, match) => {
   if (message.isGroup) {
@@ -93,7 +93,7 @@ command(
   pattern: "unblock",
   fromMe: true,
   desc: "Unblock a person",
-  type: "user",
+  type: "whatsapp",
  },
  async (message, match) => {
   if (message.isGroup) {
@@ -115,7 +115,7 @@ command(
   pattern: "jid",
   fromMe: true,
   desc: "Give jid of chat/user",
-  type: "user",
+  type: "whatsapp",
  },
  async (message, match) => {
   return await message.sendMessage(message.jid, message.mention[0] || message.reply_message.jid || message.jid);
@@ -127,7 +127,7 @@ command(
   pattern: "dlt",
   fromMe: true,
   desc: "deletes a message",
-  type: "user",
+  type: "whatsapp",
  },
  async (message, match, m, client) => {
   if (message.isGroup) {
