@@ -57,7 +57,7 @@ Description: ${i.desc}\`\`\``);
     comad.forEach(({ cmd }) => {
      menu += `││ ${tiny(cmd.trim())}\n`;
     });
-    menu += `\n│╰───────────\n╰━━━━━━━━━━━━━──⊷\n`;
+    menu += `│╰───────────\n╰━━━━━━━━━━━━━──⊷\n`;
    });
 
    menu += `\n`;
