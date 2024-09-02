@@ -23,17 +23,17 @@ Description: ${i.desc}\`\`\``);
   } else {
    let { prefix } = message;
    let [date, time] = new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" }).split(",");
-   let menu = `╭━━━ ${BOT_INFO.split(";")[1]} ━━━┈⊷
-││USER:  ${message.pushName}
-││PREFIX: ${prefix}
-││DATE: ${date}
-││TIME: ${time}
-││PLUGINS: ${plugins.commands.length} 
-││UPTIME: ${clockString(process.uptime())} 
-││RAM: ${formatBytes(os.totalmem() - os.freemem())} / ${formatBytes(os.totalmem())}
-││VERSION: ${(version = require("../package.json").version)}
+   let menu = `\`\`\`╭━━━ ${BOT_INFO.split(";")[1]} ━━━┈⊷
+││ User:  ${message.pushName}
+││ Prefix: ${prefix}
+││ Date: ${date}
+││ Time: ${time}
+││ Plugins: ${plugins.commands.length} 
+││ Uptime: ${clockString(process.uptime())} 
+││ Ram: ${formatBytes(os.totalmem() - os.freemem())} / ${formatBytes(os.totalmem())}
+││ Version: ${(version = require("../package.json").version)}
 │╰──────────────
-╰━━━━━━━━━━━━━━━┈⊷\n`;
+╰━━━━━━━━━━━━━━━┈⊷\`\`\`\n`;
    let cmnd = [];
    let cmd;
    let category = [];
@@ -55,9 +55,9 @@ Description: ${i.desc}\`\`\``);
     menu += `\n╭── *${tiny(cmmd)}* ━━──⊷\n│╭──────────────\n`;
     let comad = cmnd.filter(({ type }) => type == cmmd);
     comad.forEach(({ cmd }) => {
-     menu += `││ ${tiny(cmd.trim())}`;
+     menu += `││ ${tiny(cmd.trim())}\n`;
     });
-    menu += `│╰───────────\n╰━━━━━━━━━━━━━──⊷\n`;
+    menu += `\n│╰───────────\n╰━━━━━━━━━━━━━──⊷\n`;
    });
 
    menu += `\n`;
