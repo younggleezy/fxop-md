@@ -14,3 +14,19 @@ command(
   return message.sendFile(buff);
  }
 );
+
+command(
+ {
+  pattern: "instagram",
+  fromMe: mode,
+  desc: "Downloads Instagram Media",
+  type: "download",
+ },
+ async (message, match) => {
+  if (!match) return message.reply("_provide vaild facebook link_");
+  await message.reply("_Downloading_");
+  const media = new ScrapeDl();
+  const buff = await media.instagram(match);
+  return message.sendFile(buff);
+ }
+);
