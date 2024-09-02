@@ -1,4 +1,5 @@
-const { command, mode, ScrapeDl } = require("../lib");
+const { command, mode } = require("../lib");
+const ScrapeDl = require("../lib/scraper");
 command(
  {
   pattern: "facebook",
@@ -9,8 +10,7 @@ command(
  async (message, match) => {
   if (!match) return message.reply("_provide vaild facebook link_");
   await message.reply("_Downloading_");
-  const media = ScrapeDl();
-  const buff = await media.facebook(match);
+  const buff = await ScrapeDl.facebook(match);
   return message.sendFile(buff);
  }
 );
@@ -25,8 +25,7 @@ command(
  async (message, match) => {
   if (!match) return message.reply("_provide vaild instagram link_");
   await message.reply("_Downloading_");
-  const media = ScrapeDl();
-  const buff = await media.instagram(match);
+  const buff = await ScrapeDl.instagram(match);
   return message.sendFile(buff);
  }
 );
