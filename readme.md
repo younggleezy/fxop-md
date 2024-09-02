@@ -17,16 +17,30 @@
     </a>
 </p>
 
-<p align="center">
-   
-</p>
+---
 
-| FrameWork | Usage                                                                                                |
-| --------- | ---------------------------------------------------------------------------------------------------- |
-| Node.js   | For server-side development and scripting.                                                           |
-| CLI Tools | Utilized for debugging and managing various tasks within the development environment.                |
-| Git       | Employed as a version control system to manage and track changes throughout the project's lifecycle. |
-| VS Code   | Integrated Development Environment (IDE) for writing and debugging code.                             |
+<h2 align="center">Deployments Platforms</h2>
+
+<p align="center">
+   <a href="https://whatsapp.com/channel/0029VambPbJ2f3ERs37HvM2J">
+        <img alt="Heroku" src="https://img.shields.io/badge/-Heroku-430098?style=for-the-badge&logo=heroku&logoColor=white"/>
+    </a>
+    <a href="https://whatsapp.com/channel/0029VambPbJ2f3ERs37HvM2J">
+        <img alt="Koyeb" src="https://img.shields.io/badge/-Koyeb-1DA1F2?style=for-the-badge&logo=koyeb&logoColor=white"/>
+    </a>
+    <a href="https://whatsapp.com/channel/0029VambPbJ2f3ERs37HvM2J">
+        <img alt="Render" src="https://img.shields.io/badge/-Render-46E3B7?style=for-the-badge&logo=render&logoColor=black"/>
+    </a>
+    <a href="https://whatsapp.com/channel/0029VambPbJ2f3ERs37HvM2J">
+        <img alt="Railway" src="https://img.shields.io/badge/-Railway-0B0D0E?style=for-the-badge&logo=railway&logoColor=white"/>
+    </a>
+    <a href="https://whatsapp.com/channel/0029VambPbJ2f3ERs37HvM2J">
+        <img alt="Termux" src="https://img.shields.io/badge/-Termux-2CA5E0?style=for-the-badge&logo=termux&logoColor=white"/>
+    </a>
+    <a href="https://whatsapp.com/channel/0029VambPbJ2f3ERs37HvM2J">
+        <img alt="Panel" src="https://img.shields.io/badge/-Panel-FF7139?style=for-the-badge&logo=pterodactyl&logoColor=white"/>
+    </a>
+</p>
 
 ## Warning
 
