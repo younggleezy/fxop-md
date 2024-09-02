@@ -74,3 +74,18 @@ command(
   return await message.sendFile(buff);
  }
 );
+
+command(
+ {
+  pattern: "spotify",
+  fromMe: true,
+  desc: "Downloads Spotify Music",
+  type: "download",
+ },
+ async (message, match) => {
+  if (!match) return message.reply("_provide me spotify url_");
+  await message.reply("_Downloading_");
+  const buff = await ScrapeDl.spotify(match);
+  return await message.sendFile(buff);
+ }
+);
