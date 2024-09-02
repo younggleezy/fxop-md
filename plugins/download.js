@@ -44,3 +44,18 @@ command(
   return await message.sendFile(buff);
  }
 );
+
+command(
+ {
+  pattern: "tiktok",
+  fromMe: true,
+  desc: "Downloads Tiktok Media",
+  type: "download",
+ },
+ async (message, match) => {
+  if (!match) return await message.reply("_provide tiktok url_");
+  await message.reply("_Downloading_");
+  const buff = await ScrapeDl.tiktok(match);
+  return await message.sendFile(buff);
+ }
+);
