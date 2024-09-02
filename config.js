@@ -1,38 +1,34 @@
 const { Sequelize } = require("sequelize");
-const fs = require("fs");
 require("dotenv").config();
 const toBool = x => x === "true";
 const DATABASE_URL = process.env.DATABASE_URL || "./database.db";
 module.exports = {
- ANTILINK: toBool(process.env.ANTI_LINK) || false,
+ SESSION_ID: process.env.SESSION_ID || "",
+ BOT_INFO: process.env.BOT_INFO || "ᴀsᴛʀᴏ;ғxᴏᴘ-ᴍᴅ",
+ SUDO: process.env.SUDO || "2348039607375",
  LOGS: toBool(process.env.LOGS) || true,
  ANTILINK_ACTION: process.env.ANTI_LINK || "kick",
- SESSION_ID: process.env.SESSION_ID || null,
  LANG: process.env.LANG || "EN",
- AUTH_TOKEN: "",
- HANDLERS: process.env.HANDLER === "false" || process.env.HANDLER === "null" ? "^" : "[#]",
- RMBG_KEY: process.env.RMBG_KEY || false,
- BRANCH: "main",
+ HANDLERS: process.env.HANDLER === "false" || process.env.HANDLER === "null" ? "^" : "[.]",
+ BRANCH: "master",
  WARN_COUNT: 3,
+ AUTHOR: process.env.AUTHOR || "ғxᴏᴘ-ᴍᴅ",
  PACKNAME: process.env.PACKNAME || "ғxᴏᴘ-ᴍᴅ",
  WELCOME_MSG: process.env.WELCOME_MSG || "Hi @user Welcome to @gname",
  GOODBYE_MSG: process.env.GOODBYE_MSG || "Hi @user It was Nice Seeing you",
- AUTHOR: process.env.AUTHOR || "ғxᴏᴘ-ᴍᴅ",
- SUDO: process.env.SUDO || "2348039607375",
- HEROKU_APP_NAME: process.env.HEROKU_APP_NAME || "",
- HEROKU_API_KEY: process.env.HEROKU_API_KEY || "",
- OWNER_NAME: process.env.OWNER_NAME || "ᴀsᴛʀᴏ",
+ ANTILINK: toBool(process.env.ANTI_LINK) || false,
  HEROKU: toBool(process.env.HEROKU) || false,
- BOT_NAME: process.env.BOT_NAME || "ғxᴏᴘ-ᴍᴅ",
  AUTO_READ: toBool(process.env.AUTO_READ) || false,
+ RMBG_KEY: process.env.RMBG_KEY || false,
  AUTO_STATUS_READ: toBool(process.env.AUTO_STATUS_READ) || false,
- PROCESSNAME: process.env.PROCESSNAME || "ғxᴏᴘ-ᴍᴅ",
  WORK_TYPE: process.env.WORK_TYPE || "private",
  DELETED_LOG: toBool(process.env.DELETED_LOG) || false,
  DELETED_LOG_CHAT: process.env.DELETED_LOG_CHAT || false,
- REMOVEBG: process.env.REMOVEBG || '',
+ REMOVEBG: process.env.REMOVEBG || "",
  DATABASE_URL: DATABASE_URL,
  STATUS_SAVER: toBool(process.env.STATUS_SAVER) || true,
+ HEROKU_APP_NAME: process.env.HEROKU_APP_NAME,
+ HEROKU_API_KEY: process.env.HEROKU_API_KEY,
  DATABASE:
   DATABASE_URL === "./database.db"
    ? new Sequelize({
