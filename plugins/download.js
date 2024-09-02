@@ -59,3 +59,18 @@ command(
   return await message.sendFile(buff);
  }
 );
+
+command(
+ {
+  pattern: "pinterest",
+  fromMe: true,
+  desc: "Downloads Pinterest Images",
+  type: "download",
+ },
+ async (message, match) => {
+  if (!match) return message.reply("_provide me a searching option_");
+  await message.reply("_Searching_");
+  const buff = await ScrapeDl.pinterest(match);
+  return await message.sendFile(buff);
+ }
+);
