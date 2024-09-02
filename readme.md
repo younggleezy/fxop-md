@@ -29,13 +29,13 @@
     <img alt="Koyeb" src="https://img.shields.io/badge/-Koyeb-1DA1F2?style=for-the-badge&logo=koyeb&logoColor=white"/>
 </a>
     <a href="https://whatsapp.com/channel/0029VambPbJ2f3ERs37HvM2J">
-        <img alt="Render" src="https://img.shields.io/badge/-Render-46E3B7?style=for-the-badge&logo=render&logoColor=black"/>
+        <img alt="Render" src="https://img.shields.io/badge/-Render-003d2b?style=for-the-badge&logo=render&logoColor=white"/>
     </a>
     <a href="https://whatsapp.com/channel/0029VambPbJ2f3ERs37HvM2J">
         <img alt="Railway" src="https://img.shields.io/badge/-Railway-0B0D0E?style=for-the-badge&logo=railway&logoColor=white"/>
     </a>
     <a href="https://whatsapp.com/channel/0029VambPbJ2f3ERs37HvM2J">
-        <img alt="Termux" src="https://img.shields.io/badge/-Termux-2CA5E0?style=for-the-badge&logo=termux&logoColor=white"/>
+        <img alt="Termux" src="https://img.shields.io/badge/-Termux-2CA5E0?style=for-the-badge&logo=shell&logoColor=white"/>
     </a>
     <a href="https://whatsapp.com/channel/0029VambPbJ2f3ERs37HvM2J">
         <img alt="Panel" src="https://img.shields.io/badge/-Panel-FF7139?style=for-the-badge&logo=pterodactyl&logoColor=white"/>
