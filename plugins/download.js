@@ -1,5 +1,4 @@
-const { command, mode } = require("../lib");
-const { ScrapeDl } = require("../lib/scraper");
+const { command, mode, ScrapeDl } = require("../lib");
 command(
  {
   pattern: "facebook",
@@ -11,7 +10,7 @@ command(
   if (!match) return message.reply("_provide vaild facebook link_");
   await message.reply("_Downloading_");
   const media = new ScrapeDl();
-  const buff = new media.facebook(match);
+  const buff = await media.facebook(match);
   return message.sendFile(buff);
  }
 );
