@@ -73,7 +73,12 @@ Description: ${i.desc}\`\`\``);
    });
 
    menu += `\n`;
-   return await message.sendMessage(message.jid, menu);
+   const menuMedia = BOT_INFO.split(";")[2];
+   if (!menuMedia) {
+    return message.send(menu);
+   } else {
+    return message.send(menuMedia, { caption: menu });
+   }
   }
  }
 );
