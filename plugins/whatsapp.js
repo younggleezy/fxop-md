@@ -54,6 +54,19 @@ command(
 
 command(
  {
+  pattern: "rpp",
+  fromMe: true,
+  desc: "Removes Profile picture",
+  type: "whatsapp",
+ },
+ async (m, match) => {
+  await m.removeProfilePicture(message.user);
+  return await message.reply("_Profile Picture Removed_");
+ }
+);
+
+command(
+ {
   pattern: "setname",
   fromMe: true,
   desc: "Set User name",
@@ -162,7 +175,7 @@ command(
  }
 );
 
-const numToJid = num => num + '@s.whatsapp.net';
+const numToJid = num => num + "@s.whatsapp.net";
 
 command(
  {
