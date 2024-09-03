@@ -12,7 +12,7 @@ command(
   if (!match) return await message.sendReply("_Hello What Code Do You Help For?_");
   await message.reply("_Analyzing Request_");
   const processedMsg = await aiResponse.coderAi(match);
-  return await message.send(processedMsg);
+  return await message.send(processedMsg, { contextInfo: { forwardingScore: 1, isForwarded: true, forwardedNewsletterMessageInfo: { newsletterJid: '120363327841612745@newsletter', newsletterName: 'ᴄᴏᴅᴇᴀɪ' }}} );
  }
 );
 
