@@ -1,5 +1,6 @@
 const fs = require("fs").promises;
 const path = require("path");
+const express = require("express");
 const config = require("./config");
 const { connect, writeSession, patch } = require("./lib");
 const { getandRequirePlugins } = require("./lib/database/plugins");
@@ -17,7 +18,7 @@ const parseDir = async directory => {
 
 async function initialize() {
  try {
- // await patch();
+  // await patch();
   await writeSession();
   await parseDir(path.join(__dirname, "/lib/database/"));
   console.log("Syncing Database");
@@ -32,4 +33,22 @@ async function initialize() {
  }
 }
 
-initialize();
+async function startServer() {
+ const app = express();
+ const port = process.env.PORT || 3000;
+
+ app.get("/", (req, res) => {
+  res.send("Bot Running");
+ });
+
+ app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
+ });
+}
+
+async function main() {
+ await initialize();
+ await startServer();
+}
+
+main();
