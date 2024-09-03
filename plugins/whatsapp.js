@@ -9,7 +9,7 @@ command(
   desc: "Forwards The View once messsage",
   type: "whatsapp",
  },
- async (message, match, m) => {
+ async (message, m) => {
   let buff = await m.quoted.download();
   return await message.sendFile(buff);
  }
