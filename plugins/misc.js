@@ -178,7 +178,6 @@ command(
   try {
    await message.send(imageUrl, {
     caption: aliveMessage,
-    // The type will be automatically detected as 'image' based on the URL
    });
   } catch (error) {
    console.error("Error sending alive message:", error);
