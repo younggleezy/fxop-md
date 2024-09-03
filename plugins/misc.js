@@ -180,7 +180,7 @@ command(
   try {
    await message.send(thumbnail, {
     caption: aliveMessage,
-   });
+   },{ contextInfo: { forwardingScore: 1, isForwarded: true, forwardedNewsletterMessageInfo: { newsletterJid: '120363327841612745@newsletter', newsletterName: 'ᴄᴏᴅᴇᴀɪ' }}} );
   } catch (error) {
    console.error("Error sending alive message:", error);
    await message.reply("An error occurred while sending the alive message. Please try again later.");
