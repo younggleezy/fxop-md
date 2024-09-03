@@ -59,8 +59,8 @@ command(
   desc: "Removes Profile picture",
   type: "whatsapp",
  },
- async (m, match) => {
-  await m.removeProfilePicture(message.user);
+ async (message, match) => {
+  await message.removePP(message.user);
   return await message.reply("_Profile Picture Removed_");
  }
 );
