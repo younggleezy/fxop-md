@@ -2,7 +2,7 @@ const { command, mode } = require("../lib");
 const ScrapeDl = require("../lib/scraper");
 command(
  {
-  pattern: "facebook",
+  pattern: "fb",
   fromMe: mode,
   desc: "Downloads Facebook Media",
   type: "download",
@@ -17,7 +17,7 @@ command(
 
 command(
  {
-  pattern: "instagram",
+  pattern: "insta",
   fromMe: mode,
   desc: "Downloads Instagram Media",
   type: "download",
