@@ -175,7 +175,7 @@ command(
   if (!m.quoted) return message.reply("Reply to something");
   let jids = parsedJid(match);
   for (let i of jids) {
-   await message.send(i, message.reply_message.message);
+   await message.forward(i, message.reply_message.message);
   }
  }
 );
