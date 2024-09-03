@@ -15,3 +15,18 @@ command(
   return await message.send(processedMsg);
  }
 );
+
+command(
+ {
+  pattern: "gpt4",
+  fromMe: true,
+  desc: "Chat With Gpt4 AI Model",
+  type: "ai",
+ },
+ async (message, match) => {
+  if (!match) return await message.sendReply("_Hello How Can I Assist You Today?_");
+  await message.reply("_Hold On!_");
+  const processedMsg = await aiResponse.gpt4(match);
+  return await message.send(processedMsg);
+ }
+);
