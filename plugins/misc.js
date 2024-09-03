@@ -2,7 +2,7 @@ const fs = require("fs");
 const axios = require("axios");
 const config = require("../config");
 const { command, qrcode, mode, readQr, removeBg } = require("../lib/");
-const { buffThumb } = require("../media");
+const { buffpath } = require("../media");
 const { PluginDB, installPlugin } = require("../lib/database").Plugins;
 
 command(
@@ -176,7 +176,7 @@ command(
     ғxᴏᴘ ʙᴏᴛ ɪs ᴏɴʟɪɴᴇ ᴀɴᴅ ᴀᴄᴛɪᴠᴇ
     `;
     const thumbnailPath = '../media/images/thumb.jpg'
-    const thumbnail = await buffThumb(thumbnailPath)
+    const thumbnail = await buffpath(thumbnailPath)
   try {
    await message.send(thumbnail, {
     caption: aliveMessage,
