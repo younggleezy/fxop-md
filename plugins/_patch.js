@@ -79,10 +79,10 @@ Description: ${i.desc}\`\`\``);
 
    menu += `\n`;
    const menuMedia = BOT_INFO.split(";")[2];
-   const buff = await getBuffer(menuMedia);
    if (!menuMedia) {
     return message.send(menu);
    } else {
+const buff = await getBuffer(menuMedia); 
     return message.send(buff, { caption: menu });
    }
   }
