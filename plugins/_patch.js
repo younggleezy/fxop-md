@@ -80,10 +80,10 @@ Description: ${i.desc}\`\`\``);
    menu += `\n`;
    const menuMedia = BOT_INFO.split(";")[2];
    if (!menuMedia) {
-    return message.send(menu);
+    return message.send(menu, { contextInfo: { forwardingScore: 1, isForwarded: true, forwardedNewsletterMessageInfo: { newsletterJid: "120363327841612745@newsletter", newsletterName: "ᴘᴀᴛᴄʜ 𝟸.𝟻.𝟶" } } });
    } else {
-const buff = await getBuffer(menuMedia); 
-    return message.send(buff, { caption: menu });
+    const buff = await getBuffer(menuMedia);
+    return message.send(buff, { caption: menu, contextInfo: { forwardingScore: 1, isForwarded: true, forwardedNewsletterMessageInfo: { newsletterJid: "120363327841612745@newsletter", newsletterName: "ᴘᴀᴛᴄʜ 𝟸.𝟻.𝟶" } } });
    }
   }
  }
