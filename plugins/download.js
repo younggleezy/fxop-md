@@ -92,7 +92,7 @@ command(
 
 command(
  {
-  pattern: "youtube",
+  pattern: "ytv",
   fromeMe: true,
   desc: "Downloads Youtube Videos",
   type: "download",
@@ -101,6 +101,21 @@ command(
   if (!match) return message.reply("_provide youtube url_");
   await message.reply("_Downloading_");
   const buff = await ScrapeDl.youtube(match);
+  return await message.sendFile(buff);
+ }
+);
+
+command(
+ {
+  pattern: "yta",
+  fromMe: true,
+  desc: "Download Youtube Music Audio",
+  type: "download",
+ },
+ async (message, match) => {
+  if (!match) return await message.reply("_provide youtube music_");
+  await message.reply("_Downloading_");
+  const buff = await ScrapeDl.ytmp3(match);
   return await message.sendFile(buff);
  }
 );
