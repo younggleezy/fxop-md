@@ -56,20 +56,20 @@ command(
   const hasUpdates = await checkForUpdates();
 
   if (!hasUpdates) {
-   await message.sendMessage(message.jid, "You are on the latest version.");
+   await message.send("You are on the latest version.");
    return;
   }
 
-  await message.sendMessage("Updating...");
+  await message.send("Updating...");
   const updateSuccess = await updateNow();
 
   if (updateSuccess) {
-   await message.sendMessage(message.jid, "Bot updated. Now restarting in 3 seconds...");
+   await message.send("Bot updated. Now restarting in 3 seconds...");
    setTimeout(() => {
     restart();
    }, 3000);
   } else {
-   await message.sendMessage("Update failed. Please try again later.");
+   await message.send("Update failed. Please try again later.");
   }
  }
 );
