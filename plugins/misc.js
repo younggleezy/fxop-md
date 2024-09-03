@@ -1,7 +1,7 @@
 const fs = require("fs");
 const axios = require("axios");
 const config = require("../config");
-const { command, qrcode, mode, readQr, removeBg } = require("../lib/");
+const { command, qrcode, mode, readQr, removeBg, sleep } = require("../lib/");
 const { buffpath } = require("../media");
 const { PluginDB, installPlugin } = require("../lib/database").Plugins;
 
@@ -157,7 +157,7 @@ command(
  },
  async message => {
   const start = new Date().getTime();
-  const sentMessage = await message.reply("```Ping!```");
+  await sleep(1000);
   const end = new Date().getTime();
   const responseTime = end - start;
   await new Promise(resolve => setTimeout(resolve, 100));
@@ -175,11 +175,13 @@ command(
   const aliveMessage = `
     ғxᴏᴘ ʙᴏᴛ ɪs ᴏɴʟɪɴᴇ ᴀɴᴅ ᴀᴄᴛɪᴠᴇ
     `;
-    const thumbnailPath = '../media/images/thumb.jpg'
-    const thumbnail = await buffpath(thumbnailPath)
+  const thumbnailPath = "../media/images/thumb.jpg";
+  const thumbnail = await buffpath(thumbnailPath);
   try {
    await message.send(thumbnail, {
-    caption: aliveMessage, contextInfo: { forwardingScore: 1, isForwarded: true, forwardedNewsletterMessageInfo: { newsletterJid: '120363327841612745@newsletter', newsletterName: 'ᴄᴏᴅᴇᴀɪ' }}} );
+    caption: aliveMessage,
+    contextInfo: { forwardingScore: 1, isForwarded: true, forwardedNewsletterMessageInfo: { newsletterJid: "120363327841612745@newsletter", newsletterName: "ᴀʟɪᴠᴇ ᴍsɢ" } },
+   });
   } catch (error) {
    console.error("Error sending alive message:", error);
    await message.reply("An error occurred while sending the alive message. Please try again later.");

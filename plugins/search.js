@@ -12,6 +12,6 @@ command(
   if (!match) return await m.sendReply("_Hmm Provide Me A Song Name_");
   await m.reply("_Searching Lyrics!_");
   const lyricsMsg = await ScrapeSrc.lyrics(match);
-  return await m.send(lyricsMsg);
+  return await m.send(lyricsMsg, { contextInfo: { forwardingScore: 1, isForwarded: true, forwardedNewsletterMessageInfo: { newsletterJid: "120363327841612745@newsletter", newsletterName: "sᴏɴɢ ʟʏʀɪᴄs" } } });
  }
 );
