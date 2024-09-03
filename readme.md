@@ -9,7 +9,7 @@
 </p>
 
 <p align="center">
-    <a href='https://rocky-fjord-18084-7fa90f18d8d2.herokuapp.com/code' target="_blank">
+    <a href='https://fx-session.onrender.com' target="_blank">
         <img alt='SESSION' src='https://img.shields.io/badge/Get%20Session%20ID-100000?style=for-the-badge&logo=scan&logoColor=white&labelColor=black&color=blue'/>
     </a>
      <a href="https://whatsapp.com/channel/0029VambPbJ2f3ERs37HvM2J">
