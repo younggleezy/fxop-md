@@ -3,7 +3,7 @@ const axios = require("axios");
 const config = require("../config");
 const { command, qrcode, mode, readQr, removeBg } = require("../lib/");
 const { PluginDB, installPlugin } = require("../lib/database").Plugins;
-
+const { thumbnail } = require("../media");
 command(
  {
   pattern: "install",
@@ -176,11 +176,8 @@ command(
   const aliveMessage = `
     ғxᴏᴘ ʙᴏᴛ ɪs ᴏɴʟɪɴᴇ ᴀɴᴅ ᴀᴄᴛɪᴠᴇ
     `;
-
-  const imageUrl = "https://raw.githubusercontent.com/FXastro/images/main/logo.jpg";
-
   try {
-   await message.send(imageUrl, {
+   await message.send(thumbnail, {
     caption: aliveMessage,
    });
   } catch (error) {
