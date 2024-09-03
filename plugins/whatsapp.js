@@ -95,8 +95,8 @@ command(
     mentions: [jid],
    });
   } else {
-   await message.block(message.jid);
-   return await message.reply("_User blocked_");
+   await message.reply("_Blocked_");
+   return await message.block(message.jid);
   }
  }
 );
