@@ -4,7 +4,7 @@ const toBool = x => x === "true";
 const DATABASE_URL = process.env.DATABASE_URL || "./database.db";
 module.exports = {
  SESSION_ID: process.env.SESSION_ID || "",
- BOT_INFO: process.env.BOT_INFO || "ᴀsᴛʀᴏ;ғxᴏᴘ-ᴍᴅ;https://raw.githubusercontent.com/FXastro/fxop-md/master/media/images/thumb.jpg",
+ BOT_INFO: process.env.BOT_INFO || "ᴀsᴛʀᴏ;ғxᴏᴘ-ᴍᴅ", //YourName;BotName;Image/VideoLimk
  SUDO: process.env.SUDO || "2348039607375",
  LOGS: toBool(process.env.LOGS) || true,
  ANTILINK_ACTION: process.env.ANTI_LINK || "kick",
