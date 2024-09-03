@@ -169,10 +169,18 @@ command(
   type: "misc",
  },
  async message => {
-  const alive_message = `
-  ғxᴏᴘ ʙᴏᴛ ɪs ᴏɴʟɪɴᴇ ᴀɴᴅ ᴀᴄᴛɪᴠᴇ
-  `;
+  const aliveMessage = `
+    ғxᴏᴘ ʙᴏᴛ ɪs ᴏɴʟɪɴᴇ ᴀɴᴅ ᴀᴄᴛɪᴠᴇ
+    `;
 
-  return message.sendMessage(message.jid, { text: alive_message }, { quoted: message });
+  const imageUrl = "https://raw.githubusercontent.com/FXastro/images/main/logo.jpg";
+  return message.sendMessage(
+   message.jid,
+   {
+    image: { url: imageUrl }, // Correct format for image with URL
+    caption: aliveMessage, // Add caption
+   },
+   { quoted: message }
+  );
  }
 );
