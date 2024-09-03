@@ -169,31 +169,10 @@ command(
   type: "misc",
  },
  async message => {
-  const start = new Date().getTime();
-  const designs = [
-   async () => {
-    const imageBuffer = await axios.get("https://raw.githubusercontent.com/FXastro/images/main/logo.jpg", {
-     responseType: "arraybuffer",
-    });
+  const alive_message = `
+  ғxᴏᴘ ʙᴏᴛ ɪs ᴏɴʟɪɴᴇ ᴀɴᴅ ᴀᴄᴛɪᴠᴇ
+  `;
 
-    const quoteResponse = await axios.get("https://pure-badlands-26930-091903776676.herokuapp.com/fun/random-joke");
-    const quote = quoteResponse.data;
-    if (!quote || quote.status !== 200) {
-     return await message.reply("*Failed to fetch a quote.*");
-    }
-
-    const quoteText = `\n\n*"${quote.result.setup}"*\n_- ${quote.result.punchline}_`;
-    const end = new Date().getTime();
-    const pingSeconds = (end - start) / 1000;
-    const captionText = `ʀᴇʟᴇᴀsᴇ ᴠ𝟽\n\n*ʀᴇsᴘᴏɴsᴇ ʀᴀᴛᴇ:* ${pingSeconds} seconds${quoteText}`;
-
-    return { image: imageBuffer.data, caption: captionText };
-   },
-  ];
-
-  const randomDesign = designs[0];
-  const messageData = await randomDesign();
-
-  return await message.sendMessage(message.jid, messageData);
+  return message.sendMessage(message.jid, { text: alive_message }, { quoted: message });
  }
 );
