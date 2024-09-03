@@ -33,7 +33,7 @@ command(
 command(
  {
   pattern: "twitter",
-  fromMe: true,
+  fromMe: mode,
   desc: "Downloads Twitter Media",
   type: "download",
  },
@@ -48,7 +48,7 @@ command(
 command(
  {
   pattern: "tiktok",
-  fromMe: true,
+  fromMe: mode,
   desc: "Downloads Tiktok Media",
   type: "download",
  },
@@ -63,7 +63,7 @@ command(
 command(
  {
   pattern: "pinterest",
-  fromMe: true,
+  fromMe: mode,
   desc: "Downloads Pinterest Images",
   type: "download",
  },
@@ -78,7 +78,7 @@ command(
 command(
  {
   pattern: "spotify",
-  fromMe: true,
+  fromMe: mode,
   desc: "Downloads Spotify Music",
   type: "download",
  },
@@ -93,7 +93,7 @@ command(
 command(
  {
   pattern: "ytv",
-  fromeMe: true,
+  fromeMe: mode,
   desc: "Downloads Youtube Videos",
   type: "download",
  },
@@ -108,7 +108,7 @@ command(
 command(
  {
   pattern: "yta",
-  fromMe: true,
+  fromMe: mode,
   desc: "Download Youtube Music Audio",
   type: "download",
  },
