@@ -41,14 +41,17 @@ async function startServer() {
   res.send("Bot Running");
  });
 
- app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
- });
+ app.listen(port, () => {});
+}
+
+async function tempDir() {
+ await fs.mkdir("temp");
 }
 
 async function main() {
  await initialize();
  await startServer();
+ await tempDir();
 }
 
 main();

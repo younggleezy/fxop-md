@@ -157,7 +157,7 @@ command(
  },
  async message => {
   const start = new Date().getTime();
-  const sentMessage = await message.send("```Ping!```");
+  const sentMessage = await message.reply("```Ping!```");
   const end = new Date().getTime();
   const responseTime = end - start;
   await new Promise(resolve => setTimeout(resolve, 100));

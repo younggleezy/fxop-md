@@ -21,6 +21,7 @@
   "axios": "^1.7.7",
   "baileys": "github:FXastro/baileys",
   "browser-id3-writer": "^4.4.0",
+  "canvas": "2.11.2",
   "cheerio": "1.0.0",
   "dotenv": "^16.4.5",
   "express": "4.19.2",

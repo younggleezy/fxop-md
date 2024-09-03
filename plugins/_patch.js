@@ -109,3 +109,4 @@ command(
   return await message.reply(menu);
  }
 );
+module.exports = runtime;

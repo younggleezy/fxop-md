@@ -1,9 +1,9 @@
-const { command, parsedJid, secondsToDHMS } = require("../lib");
+const { command, parsedJid } = require("../lib");
 const { PausedChats, WarnDB } = require("../lib/database");
 const { WARN_COUNT } = require("../config");
 const { saveWarn, resetWarn } = WarnDB;
 const { getFilter, setFilter, deleteFilter } = require("../lib/database/filters");
-
+const runtime = require("./_patch");
 command(
  {
   pattern: "pause",
@@ -97,13 +97,13 @@ command(
 
 command(
  {
-  pattern: "uptime",
+  pattern: "runtime",
   fromMe: true,
   desc: "Check uptime of bot",
   type: "user",
  },
  async (message, match) => {
-  message.reply(`*Uptime:* ${secondsToDHMS(process.uptime())}`);
+  message.reply(`*Uptime: ${runtime(process.uptime())}*`);
  }
 );
 
