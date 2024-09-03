@@ -161,9 +161,7 @@ command(
   const end = new Date().getTime();
   const responseTime = end - start;
   await new Promise(resolve => setTimeout(resolve, 100));
-  await message.edit(`*Pong!*\n \`\`\`${responseTime}\`\`\` *ms*`, {
-   key: sentMessage.key,
-  });
+  await message.edit(`*Pong!*\n \`\`\`${responseTime}\`\`\` *ms*`);
  }
 );
 
