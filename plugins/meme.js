@@ -92,10 +92,10 @@ function splitTextIntoLines(text, ctx, maxWidth) {
 }
 
 const memeCommands = [
- { pattern: "trump", image: "media/images/trump.png", x: 70, y: 150, maxWidth: 700, maxLines: 4 },
- { pattern: "elon", image: "media/images/elon.jpg", x: 60, y: 130, maxWidth: 900, maxLines: 5 },
- { pattern: "mark", image: "media/images/mark.png", x: 30, y: 80, maxWidth: 500, maxLines: 3 },
- { pattern: "ronaldo", image: "media/images/ronaldo.png", x: 50, y: 140, maxWidth: 600, maxLines: 4 },
+ { pattern: "trump", image: "media/meme/trump.png", x: 70, y: 150, maxWidth: 700, maxLines: 4 },
+ { pattern: "elon", image: "media/meme/elon.jpg", x: 60, y: 130, maxWidth: 900, maxLines: 5 },
+ { pattern: "mark", image: "media/meme/mark.png", x: 30, y: 80, maxWidth: 500, maxLines: 3 },
+ { pattern: "ronaldo", image: "media/meme/ronaldo.png", x: 50, y: 140, maxWidth: 600, maxLines: 4 },
 ];
 
 memeCommands.forEach(({ pattern, image, x, y, maxWidth, maxLines }) => {
