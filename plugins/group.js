@@ -345,7 +345,7 @@ command(
  async (message, match) => {
   let replyFn = match ? match : message.reply_text;
   const groupPattern = /https:\/\/chat.whatsapp.com\/([\w-]+)/;
-  const match = replyFn.match(groupPattern);
+  match = replyFn.match(groupPattern);
 
   if (!match) return await message.reply("_Group Link?_");
 
