@@ -158,12 +158,18 @@ command(
   const start = new Date().getTime();
 
   try {
+   // Send initial message
    const sentMessage = await message.send("```Ping!```");
 
    const end = new Date().getTime();
    const responseTime = end - start;
+
+   // Wait a short time to ensure the message has been sent
+   await new Promise(resolve => setTimeout(resolve, 100));
+
+   // Edit the message with the response time
    await message.edit(`*Pong!*\n \`\`\`${responseTime}\`\`\` *ms*`, {
-    key: sentMessage.key,
+    key: sentMessage.key, // Pass the key of the sent message to edit it
    });
   } catch (error) {
    console.error("Error in ping command:", error);
