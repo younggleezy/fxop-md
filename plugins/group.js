@@ -343,12 +343,8 @@ command(
   type: "group",
  },
  async (message, match) => {
-  let replyFn = match ? match : message.reply_text;
-  const groupPattern = /https:\/\/chat.whatsapp.com\/([\w-]+)/;
-  match = replyFn.match(groupPattern);
-
+  match = match ? match : message.reply_text;
   if (!match) return await message.reply("_Group Link?_");
-
   let groupId = match[1].trim();
   const groupInfo = await message.client.groupGetInviteInfo(groupId);
 
