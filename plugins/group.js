@@ -334,3 +334,47 @@ command(
   return await message.sendMessage(message.jid, "Bot unbanned");
  }
 );
+
+command(
+ {
+  pattern: "ginfo",
+  fromME: true,
+  desc: "Get Group Data",
+  type: "group",
+ },
+ async (message, match) => {
+  let replyFn = match ? match : message.reply_text;
+  const groupPattern = /https:\/\/chat.whatsapp.com\/([\w-]+)/;
+  const match = replyFn.match(groupPattern);
+
+  if (!match) return await message.reply("_Group Link?_");
+
+  let groupId = match[1].trim();
+  const groupInfo = await message.client.groupGetInviteInfo(groupId);
+
+  if (groupInfo) {
+   const creationDate = new Date(groupInfo.creation * 1000);
+   const createdAt = `${creationDate.getFullYear()}-${(creationDate.getMonth() + 1).toString().padStart(2, "0")}-${creationDate.getDate().toString().padStart(2, "0")}`;
+
+   let participants = groupInfo.size > 3 ? `${groupInfo.size} members` : `${groupInfo.size} members`;
+
+   let message = `${groupInfo.subject}\n\n`;
+   message += `  Creator: wa.me/${groupInfo.owner.split("@")[0]}\n`;
+   message += `  Group ID: \`\`\`${groupInfo.id}\`\`\`\n`;
+   message += `  *Muted:* ${groupInfo.announce ? "yes" : "no"}\n`;
+   message += `  *Locked:* ${groupInfo.restrict ? "yes" : "no"}\n`;
+   message += `  *Created at:* ${createdAt}\n`;
+   message += `  *Participants:* ${participants}\n`;
+
+   if (groupInfo.desc) {
+    message += `  *Description:* ${groupInfo.desc}\n`;
+   }
+
+   return await send(message, message.trim(), {
+    mentions: [groupInfo.owner],
+   });
+  } else {
+   await message.send("_Group Not Found!_");
+  }
+ }
+);
