@@ -52,10 +52,10 @@ command(
 
 command(
  {
-  pattern: "mp3",
+  pattern: "tomp3",
   fromMe: mode,
   desc: "converts video/voice to mp3",
-  type: "downloader",
+  type: "converter",
  },
  async (message, match, m) => {
   let buff = await m.quoted.download();
@@ -68,10 +68,10 @@ command(
 
 command(
  {
-  pattern: "mp4",
+  pattern: "tomp4",
   fromMe: mode,
   desc: "converts video/voice to mp4",
-  type: "downloader",
+  type: "converter",
  },
  async (message, match, m) => {
   if (!message.reply_message.video || !message.reply_message.sticker || !message.reply_message.audio) return await message.reply("_Reply to a sticker/audio/video_");
