@@ -1,4 +1,5 @@
 const fs = require("fs-extra");
+const path = require("path");
 const { createCanvas, loadImage } = require("canvas");
 const { sleep, command } = require("../lib");
 async function generateImageWithText(imagePath, outputPath, text, x, y, maxWidth, maxLines, fontSize = "30") {
@@ -61,10 +62,10 @@ function splitTextIntoLines(text, ctx, maxWidth) {
 }
 
 const memeCommands = [
- { pattern: "trump", image: "../media/meme/trump.png", x: 70, y: 150, maxWidth: 700, maxLines: 4 },
- { pattern: "elon", image: "../media/meme/elon.jpg", x: 60, y: 130, maxWidth: 900, maxLines: 5 },
- { pattern: "mark", image: "../media/meme/mark.png", x: 30, y: 80, maxWidth: 500, maxLines: 3 },
- { pattern: "ronaldo", image: "../media/meme/ronaldo.png", x: 50, y: 140, maxWidth: 600, maxLines: 4 },
+ { pattern: "trump", image: path.resolve(__dirname, "../media/meme/trump.png"), x: 70, y: 150, maxWidth: 700, maxLines: 4 },
+ { pattern: "elon", image: path.resolve(__dirname, "../media/meme/elon.jpg"), x: 60, y: 130, maxWidth: 900, maxLines: 5 },
+ { pattern: "mark", image: path.resolve(__dirname, "../media/meme/mark.png"), x: 30, y: 80, maxWidth: 500, maxLines: 3 },
+ { pattern: "ronaldo", image: path.resolve(__dirname, "../media/meme/ronaldo.png"), x: 50, y: 140, maxWidth: 600, maxLines: 4 },
 ];
 
 memeCommands.forEach(({ pattern, image, x, y, maxWidth, maxLines }) => {
