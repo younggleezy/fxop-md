@@ -174,13 +174,15 @@ command(
     `;
 
   const imageUrl = "https://raw.githubusercontent.com/FXastro/images/main/logo.jpg";
-  return message.sendMessage(
-   message.jid,
-   {
-    image: { url: imageUrl }, // Correct format for image with URL
-    caption: aliveMessage, // Add caption
-   },
-   { quoted: message }
-  );
+
+  try {
+   await message.send(imageUrl, {
+    caption: aliveMessage,
+    // The type will be automatically detected as 'image' based on the URL
+   });
+  } catch (error) {
+   console.error("Error sending alive message:", error);
+   await message.reply("An error occurred while sending the alive message. Please try again later.");
+  }
  }
 );
