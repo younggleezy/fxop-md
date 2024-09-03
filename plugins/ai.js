@@ -30,3 +30,18 @@ command(
   return await message.send(processedMsg);
  }
 );
+
+command(
+ {
+  pattern: "lamda",
+  fromMe: true,
+  desc: "Chat With Lamda AI Model",
+  type: "ai",
+ },
+ async (message, match) => {
+  if (!match) return await message.sendReply("_Hmm Commo'n type something_");
+  await message.reply("_Thinking_");
+  const processedMsg = await aiResponse.lamda(match);
+  return await message.send(processedMsg);
+ }
+);
