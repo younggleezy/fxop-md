@@ -162,18 +162,20 @@ command(
  }
 );
 
+const numToJid = num => num + '@s.whatsapp.net';
+
 command(
  {
-  pattern: "fd",
+  pattern: "forward",
   fromMe: mode,
   desc: "Forwards the replied Message",
-  type: "Util",
+  type: "whatsapp",
  },
  async (message, match, m) => {
   if (!m.quoted) return message.reply("Reply to something");
   let jids = parsedJid(match);
   for (let i of jids) {
-   await message.forward(i, message.reply_message.message);
+   await message.send(i, message.reply_message.message);
   }
  }
 );
@@ -183,8 +185,9 @@ command(
   pattern: "quoted",
   fromMe: mode,
   desc: "quoted message",
+  type: "whatsapp",
  },
- async (message, match) => {
+ async message => {
   if (!message.reply_message) return await message.reply("*Reply to a message*");
   let key = message.reply_message.key;
   let msg = await loadMessage(key.id);
