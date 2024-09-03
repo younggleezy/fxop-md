@@ -97,7 +97,7 @@ command(
   pattern: "qr",
   fromMe: mode,
   desc: "Read/Write Qr.",
-  type: "Tool",
+  type: "misc",
  },
  async (message, match, m) => {
   match = match || message.reply_message.text;
@@ -126,9 +126,9 @@ command(
   pattern: "rmbg",
   fromMe: mode,
   desc: "Remove background of an image",
-  type: "image",
+  type: "misc",
  },
- async (message, match, m) => {
+ async (message, m) => {
   if (!config.REMOVEBG) return await message.sendMessage(message.jid, "Set RemoveBg API Key in config.js \n Get it from https://www.remove.bg/api");
   if (!message.reply_message && !message.reply_message.image) return await message.reply("Reply to an image");
   let buff = await m.quoted.download();
@@ -154,7 +154,7 @@ command(
   desc: "To check ping",
   type: "misc",
  },
- async (message, match) => {
+ async message => {
   const start = new Date().getTime();
   await message.sendMessage(message.jid, "```Ping!```");
   const end = new Date().getTime();
