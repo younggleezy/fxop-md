@@ -156,9 +156,19 @@ command(
  },
  async message => {
   const start = new Date().getTime();
-  await message.sendMessage(message.jid, "```Ping!```");
-  const end = new Date().getTime();
-  return await message.sendMessage(message.jid, "*Pong!*\n ```" + (end - start) + "``` *ms*");
+
+  try {
+   const sentMessage = await message.send("```Ping!```");
+
+   const end = new Date().getTime();
+   const responseTime = end - start;
+   await message.edit(`*Pong!*\n \`\`\`${responseTime}\`\`\` *ms*`, {
+    key: sentMessage.key,
+   });
+  } catch (error) {
+   console.error("Error in ping command:", error);
+   await message.reply("An error occurred while processing the ping command. Please try again later.");
+  }
  }
 );
 
