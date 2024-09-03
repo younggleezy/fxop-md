@@ -1,8 +1,13 @@
+const os = require("os");
+const axios = require("axios");
 const plugins = require("../lib/plugins");
 const { command, mode, tiny, formatBytes } = require("../lib");
 const { BOT_INFO } = require("../config");
-const os = require("os");
 
+async function getBuffer(url) {
+ const response = await axios.get(url, { responseType: "arraybuffer" });
+ return Buffer.from(response.data);
+}
 const runtime = function (seconds) {
  seconds = Number(seconds);
  var d = Math.floor(seconds / (3600 * 24));
@@ -74,10 +79,11 @@ Description: ${i.desc}\`\`\``);
 
    menu += `\n`;
    const menuMedia = BOT_INFO.split(";")[2];
+   const buff = await getBuffer(menuMedia);
    if (!menuMedia) {
     return message.send(menu);
    } else {
-    return message.send(menuMedia, { caption: menu });
+    return message.send(buff, { caption: menu });
    }
   }
  }
