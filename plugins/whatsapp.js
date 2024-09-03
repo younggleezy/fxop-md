@@ -10,8 +10,6 @@ command(
   type: "whatsapp",
  },
  async (message, match, m) => {
-  m = m.quoted
-  if(!m) return await message.sendReply('_Reply Viewonce Message_')
   let buff = await m.quoted.download();
   return await message.sendFile(buff);
  }
