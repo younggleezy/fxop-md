@@ -7,64 +7,46 @@ const { buffThumb } = require("../media");
 function getAbsolutePath(relativePath) {
  const projectRoot = path.resolve(__dirname, "..");
  const absolutePath = path.join(projectRoot, relativePath);
- console.log(`Resolved path: ${absolutePath}`);
  return absolutePath;
 }
 
 async function checkFileExists(filePath) {
- try {
-  await fs.access(filePath, fs.constants.F_OK);
-  console.log(`File exists: ${filePath}`);
-  return true;
- } catch (error) {
-  console.error(`File does not exist: ${filePath}`);
-  return false;
- }
+ await fs.access(filePath, fs.constants.F_OK);
+ return true;
 }
 
 async function generateImageWithText(imagePath, outputPath, text, x, y, maxWidth, maxLines, fontSize = "30") {
- console.log("Input Image Path:", imagePath);
- console.log("Output Image Path:", outputPath);
-
- try {
-  await fs.ensureDir(path.dirname(outputPath));
-
-  if (!(await checkFileExists(imagePath))) {
-   throw new Error(`Input image not found: ${imagePath}`);
-  }
-
-  const image = await loadImage(imagePath);
-  const canvas = createCanvas(image.width, image.height);
-  const ctx = canvas.getContext("2d");
-
-  ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
-  ctx.font = `${fontSize}px Arial`;
-  ctx.fillStyle = "black";
-  ctx.textAlign = "left";
-  ctx.textBaseline = "top";
-
-  const lines = splitTextIntoLines(text, ctx, maxWidth);
-
-  if (lines.length > maxLines) {
-   lines.splice(maxLines);
-   const lastLine = lines[maxLines - 1];
-   const truncatedLine = lastLine.slice(0, lastLine.length - 10) + "...Read More";
-   lines[maxLines - 1] = truncatedLine;
-  }
-
-  lines.forEach((line, index) => {
-   ctx.fillText(line, x, y + index * 25);
-  });
-
-  const buffer = canvas.toBuffer("image/png");
-  await fs.writeFile(outputPath, buffer);
-
-  console.log("Image with text created:", outputPath);
-  return outputPath;
- } catch (error) {
-  console.error("Error in generateImageWithText:", error);
-  throw error;
+ await fs.ensureDir(path.dirname(outputPath));
+ if (!(await checkFileExists(imagePath))) {
+  throw new Error(`Input image not found: ${imagePath}`);
  }
+ const image = await loadImage(imagePath);
+ const canvas = createCanvas(image.width, image.height);
+ const ctx = canvas.getContext("2d");
+
+ ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+ ctx.font = `${fontSize}px Arial`;
+ ctx.fillStyle = "black";
+ ctx.textAlign = "left";
+ ctx.textBaseline = "top";
+
+ const lines = splitTextIntoLines(text, ctx, maxWidth);
+
+ if (lines.length > maxLines) {
+  lines.splice(maxLines);
+  const lastLine = lines[maxLines - 1];
+  const truncatedLine = lastLine.slice(0, lastLine.length - 10) + "...Read More";
+  lines[maxLines - 1] = truncatedLine;
+ }
+
+ lines.forEach((line, index) => {
+  ctx.fillText(line, x, y + index * 25);
+ });
+
+ const buffer = canvas.toBuffer("image/png");
+ await fs.writeFile(outputPath, buffer);
+
+ return outputPath;
 }
 
 function splitTextIntoLines(text, ctx, maxWidth) {
