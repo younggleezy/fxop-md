@@ -118,3 +118,26 @@ command(
   });
  }
 );
+
+command(
+  {
+   pattern: "shutdown",
+   fromeMe: true,
+   desc: "Shutdown the bot",
+   type: "system",
+  },
+  async message => {
+   await message.sendReply("*_Restarting, hold on_*");
+   exec("npm restart", (error, stdout, stderr) => {
+    if (error) {
+     console.error(`Error restarting process: ${error.message}`);
+     return;
+    }
+    if (stderr) {
+     console.error(`stderr: ${stderr}`);
+     return;
+    }
+    console.log(`stdout: ${stdout}`);
+   });
+  }
+ );
