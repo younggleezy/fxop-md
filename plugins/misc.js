@@ -157,7 +157,7 @@ command(
  },
  async message => {
   const start = new Date().getTime();
-  await sleep(1);
+  await message.reply("_speed test!_")
   const end = new Date().getTime();
   const responseTime = end - start;
   await new Promise(resolve => setTimeout(resolve, 100));
