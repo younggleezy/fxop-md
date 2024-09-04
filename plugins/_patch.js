@@ -1,8 +1,8 @@
 const os = require("os");
 const axios = require("axios");
 const plugins = require("../lib/plugins");
-const { command, mode, tiny, formatBytes } = require("../lib");
-const { BOT_INFO } = require("../config");
+const { command, tiny, formatBytes } = require("../lib");
+const { BOT_INFO, TIME_ZONE } = require("../config");
 
 async function getBuffer(url) {
  const response = await axios.get(url, { responseType: "arraybuffer" });
@@ -39,7 +39,7 @@ Description: ${i.desc}\`\`\``);
    }
   } else {
    let { prefix } = message;
-   let [date, time] = new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" }).split(",");
+   let [date, time] = new Date().toLocaleString("en-IN", { timeZone: TIME_ZONE }).split(",");
    let menu = `\`\`\`╭━━━ ${BOT_INFO.split(";")[1]} ━━━┈⊷
 ││ User:  ${message.pushName}
 ││ Prefix: ${prefix}

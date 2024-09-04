@@ -4,12 +4,13 @@ const toBool = x => x === "true";
 const DATABASE_URL = process.env.DATABASE_URL || "./database.db";
 module.exports = {
  SESSION_ID: process.env.SESSION_ID || "",
+ HANDLERS: process.env.HANDLER === "false" || process.env.HANDLER === "null" ? "^" : "[.]",
  BOT_INFO: process.env.BOT_INFO || "ᴀsᴛʀᴏ;ғxᴏᴘ-ᴍᴅ", //YourName;BotName;Image/VideoLimk
  SUDO: process.env.SUDO || "2348039607375",
+ TIME_ZONE: process.env.TIME_ZONE || "Africa/Lagos",
  LOGS: toBool(process.env.LOGS) || true,
  ANTILINK_ACTION: process.env.ANTI_LINK || "kick",
  LANG: process.env.LANG || "EN",
- HANDLERS: process.env.HANDLER === "false" || process.env.HANDLER === "null" ? "^" : "[.]",
  BRANCH: "master",
  WARN_COUNT: 3,
  AUTHOR: process.env.AUTHOR || "ғxᴏᴘ-ᴍᴅ",
