@@ -1,7 +1,7 @@
 const fs = require("fs-extra");
 const path = require("path");
 const { createCanvas, loadImage } = require("canvas");
-const { sleep, command } = require("../lib");
+const { sleep, command, mode } = require("../lib");
 const { buffThumb } = require("../media");
 
 function getAbsolutePath(relativePath) {
@@ -84,6 +84,7 @@ memeCommands.forEach(({ pattern, image, x, y, maxWidth, maxLines }) => {
  command(
   {
    pattern,
+   fromMe: mode,
    desc: "Generates a meme with provided text",
    type: "memies",
   },

@@ -1,4 +1,4 @@
-const { command, Ephoto360API } = require("../lib");
+const { command, Ephoto360API, mode } = require("../lib");
 command(
  {
   pattern: "ep1",

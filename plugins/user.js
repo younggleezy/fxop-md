@@ -1,4 +1,4 @@
-const { command, parsedJid } = require("../lib");
+const { command, parsedJid, mode } = require("../lib");
 const { PausedChats, WarnDB } = require("../lib/database");
 const { WARN_COUNT } = require("../config");
 const { saveWarn, resetWarn } = WarnDB;

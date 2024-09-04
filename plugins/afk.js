@@ -1,4 +1,4 @@
-const { command } = require('../lib/')
+const { command, mode } = require('../lib/')
 
 var AFK = {
  isAfk: false,

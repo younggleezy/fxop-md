@@ -1,4 +1,4 @@
-const { command, getBuffer } = require("../lib");
+const { command, getBuffer, mode } = require("../lib");
 const axios = require("axios");
 const cheerio = require("cheerio");
 
