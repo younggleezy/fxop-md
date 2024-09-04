@@ -120,14 +120,11 @@ command(
    .filter(user => user && user !== "null")
    .map(user => user.trim());
 
-  const sudoMessage = sudoList.map((user, index) => `  ${index + 1} 〄 @${user}\n\n`).join("");
-
-  const mentions = [message.sender, ...sudoList.map(user => user + "@s.whatsapp.net")];
-
+  const sudoMessage = sudoList.map((user, index) => `  ${index + 1} @${user}\n\n`).join("");
   if (!sudoMessage) {
    return await message.sendReply("*_NO SUDO NUMBERS_*");
   }
-  const replyText = `\n*_SUDO NUMBERS_*\n${sudoMessage}\n\n${mentions}`.trim();
+  const replyText = `\n*_SUDO NUMBERS_*\n${sudoMessage}\n`.trim();
   await message.send(replyText);
  }
 );
