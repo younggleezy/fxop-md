@@ -143,8 +143,10 @@ command(
   type: "whatsapp",
  },
  async (message, match, m, client) => {
-  if (message.isGroup) {
-   client.sendMessage(message.jid, { delete: message.reply_message.key });
+  if (message.reply_message) {
+   await client.sendMessage(message.jid, { delete: message.reply_message.key });
+  } else {
+   await message.reply("Please reply to a message to delete it.");
   }
  }
 );
