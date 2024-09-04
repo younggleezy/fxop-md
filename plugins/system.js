@@ -29,10 +29,8 @@ async function updateNow() {
  }
 }
 
-const restartCommand = require("../package.json").scripts.restart;
-
 const restart = () => {
- exec(restartCommand, (error, stdout, stderr) => {
+ exec("npm restart", (error, stdout, stderr) => {
   if (error) {
    console.error(`Error restarting process: ${error.message}`);
    return;
