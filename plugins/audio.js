@@ -85,7 +85,7 @@ effects.forEach(effect => {
    let getAudio = await m.quoted.download();
    try {
     getAudio = await processAudio(getAudio, effect);
-    return await message.sendMessage(message.jid, getAudio, { mimetype: "audio/mpeg" }, "audio");
+    return await message.sendFile(getAudio);
    } catch (error) {
     console.error("Failed to send processed audio:", error.message || error);
     return message.sendReply("_Failed to process audio!_");
