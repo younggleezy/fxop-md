@@ -34,9 +34,13 @@ function editAudio(audioBuffer, effect = "bass") {
   ffmpeg(inputStream)
    .inputFormat("mp3")
    .audioFilters(filter)
+   .audioCodec("libmp3lame") // Explicitly set codec
    .toFormat("mp3")
    .on("error", err => {
     reject(new Error(`FFmpeg processing failed: ${err.message}`));
+   })
+   .on("end", () => {
+    resolve(Buffer.concat(outputBuffers));
    })
    .pipe(outputStream);
 
