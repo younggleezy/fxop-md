@@ -75,11 +75,11 @@ command(
 
   if (chatData.enabled) {
    // Get group metadata
-   const groupMetadata = await message.client.groupMetadata(message.jid);
+   const groupMetadata = await message.groupMetadata(message.jid);
    const adminJids = groupMetadata.participants.filter(participant => participant.admin).map(participant => participant.jid);
 
    // Check if the bot is an admin
-   const botJid = await client.user.jid;
+   const botJid = await message.user.jid;
    const isBotAdmin = adminJids.includes(botJid);
 
    if (!isBotAdmin) {
@@ -103,7 +103,7 @@ command(
     if (chatData.action === "kick") {
      await message.reply("_Link detected and action 'kick' performed_");
      const jid = parsedJid(message.participant);
-     return await message.client.groupParticipantsUpdate(message.jid, jid, "remove");
+     return await message.groupParticipantsUpdate(message.jid, jid, "remove");
     }
 
     if (chatData.action === "warn") {
