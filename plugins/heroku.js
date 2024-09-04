@@ -127,10 +127,7 @@ command(
   if (!sudoMessage) {
    return await message.sendReply("*_NO SUDO NUMBERS_*");
   }
-  const replyText = `\n*_SUDO NUMBERS_*\n${sudoMessage}`.trim();
-  await message.send({
-   caption: replyText,
-   mentions,
-  });
+  const replyText = `\n*_SUDO NUMBERS_*\n${sudoMessage}\n\n${mentions}`.trim();
+  await message.send(replyText);
  }
 );
