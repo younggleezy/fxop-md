@@ -176,17 +176,159 @@ command(
 
 command(
  {
-  pattern: "forward",
-  fromMe: mode,
-  desc: "Forwards the replied Message",
+  pattern: "setbio",
+  fromMe: true,
+  desc: "To change your profile status",
   type: "whatsapp",
  },
- async (message, match, m) => {
-  if (!message.reply_message || Object.keys(message.reply_message).length === 0) if (!m.quoted) return message.reply("Reply to something");
+ async (message, match) => {
+  match = match || message.reply_message.text;
+  if (!match) return await message.send("*Need Status!*\n*Example: setbio Hey there! I am using WhatsApp*.");
+  await message.client.updateProfileStatus(match);
+  await message.reply("_Profile bio updated_");
+ }
+);
+
+command(
+ {
+  pattern: "forward",
+  fromMe: true,
+  desc: "Forwards the replied message",
+  type: "whatsapp",
+ },
+ async (message, match) => {
+  if (!message.quoted) return await message.reply("Reply to message");
+  if (!match) return await message.reply("*Provide a JID; use 'jid' command to get JID*");
   let jids = parsedJid(match);
-  for (let nums of jids) {
-   await message.forward(nums, message.reply_message);
+  for (let jid of jids) {
+   await message.client.forwardMessage(jid, message.reply_message.message);
   }
+  await message.reply("_Message forwarded_");
+ }
+);
+
+command(
+ {
+  pattern: "caption ?(.*)",
+  fromMe: true,
+  desc: "Change video or image caption",
+  type: "whatsapp",
+ },
+ async (message, match) => {
+  if (!message.reply_message.video && !message.reply_message.image && !message.image && !message.video) return await message.reply("*_Reply to an image or video_*");
+  if (!match) return await message.reply("*Need a query, e.g., .caption Hello*");
+  await message.client.forwardMessage(message.jid, message.quoted ? message.reply_message.message : message.message, { caption: match });
+ }
+);
+
+command(
+ {
+  pattern: "getprivacy ?(.*)",
+  fromMe: true,
+  desc: "get your privacy settings",
+  type: "whatsapp",
+ },
+ async (message, match) => {
+  const { readreceipts, profile, status, online, last, groupadd, calladd } = await message.client.fetchPrivacySettings(true);
+  const msg = `*♺ my privacy*\n\n*ᝄ name :* ${message.client.user.name}\n*ᝄ online:* ${online}\n*ᝄ profile :* ${profile}\n*ᝄ last seen :* ${last}\n*ᝄ read receipt :* ${readreceipts}\n*ᝄ about seted time :*\n*ᝄ group add settings :* ${groupadd}\n*ᝄ call add settings :* ${calladd}`;
+  let img = await message.client.profilePictureUrl(message.user.jid, "image").catch(() => "https://i.ibb.co/sFjZh7S/6883ac4d6a92.jpg");
+  await message.send(img, { caption: msg }, "image");
+ }
+);
+
+command(
+ {
+  pattern: "lastseen ?(.*)",
+  fromMe: true,
+  desc: "to change lastseen privacy",
+  type: "whatsapp",
+ },
+ async (message, match) => {
+  if (!match) return await message.send(`_*Example:-* ${message.prefix} all_\n_to change last seen privacy settings_`);
+  const available_privacy = ["all", "contacts", "contact_blacklist", "none"];
+  if (!available_privacy.includes(match)) return await message.send(`_action must be *${available_privacy.join("/")}* values_`);
+  await message.client.updateLastSeenPrivacy(match);
+  await message.send(`_Privacy settings *last seen* Updated to *${match}*_`);
+ }
+);
+
+command(
+ {
+  pattern: "online ?(.*)",
+  fromMe: true,
+  desc: "to change online privacy",
+  type: "whatsapp",
+ },
+ async (message, match) => {
+  if (!match) return await message.send(`_*Example:-* ${message.prefix} all_\n_to change *online*  privacy settings_`);
+  const available_privacy = ["all", "match_last_seen"];
+  if (!available_privacy.includes(match)) return await message.send(`_action must be *${available_privacy.join("/")}* values_`);
+  await message.client.updateOnlinePrivacy(match);
+  await message.send(`_Privacy Updated to *${match}*_`);
+ }
+);
+
+command(
+ {
+  pattern: "mypp ?(.*)",
+  fromMe: true,
+  desc: "privacy setting profile picture",
+  type: "whatsapp",
+ },
+ async (message, match) => {
+  if (!match) return await message.send(`_*Example:-* ${message.prefix} all_\n_to change *profile picture*  privacy settings_`);
+  const available_privacy = ["all", "contacts", "contact_blacklist", "none"];
+  if (!available_privacy.includes(match)) return await message.send(`_action must be *${available_privacy.join("/")}* values_`);
+  await message.client.updateProfilePicturePrivacy(match);
+  await message.send(`_Privacy Updated to *${match}*_`);
+ }
+);
+
+command(
+ {
+  pattern: "mystatus ?(.*)",
+  fromMe: true,
+  desc: "privacy for my status",
+  type: "whatsapp",
+ },
+ async (message, match) => {
+  if (!match) return await message.send(`_*Example:-* ${message.prefix} all_\n_to change *status*  privacy settings_`);
+  const available_privacy = ["all", "contacts", "contact_blacklist", "none"];
+  if (!available_privacy.includes(match)) return await message.send(`_action must be *${available_privacy.join("/")}* values_`);
+  await message.client.updateStatusPrivacy(match);
+  await message.send(`_Privacy Updated to *${match}*_`);
+ }
+);
+
+command(
+ {
+  pattern: "read ?(.*)",
+  fromMe: true,
+  desc: "privacy for read message",
+  type: "whatsapp",
+ },
+ async (message, match) => {
+  if (!match) return await message.send(`_*Example:-* ${message.prefix} all_\n_to change *read and receipts message*  privacy settings_`);
+  const available_privacy = ["all", "none"];
+  if (!available_privacy.includes(match)) return await message.send(`_action must be *${available_privacy.join("/")}* values_`);
+  await message.client.updateReadReceiptsPrivacy(match);
+  await message.send(`_Privacy Updated to *${match}*_`);
+ }
+);
+
+command(
+ {
+  pattern: "groupadd ?(.*)",
+  fromMe: true,
+  desc: "privacy for group add",
+  type: "whatsapp",
+ },
+ async (message, match) => {
+  if (!match) return await message.send(`_*Example:-* ${message.prefix} all_\n_to change *group add*  privacy settings_`);
+  const available_privacy = ["all", "contacts", "contact_blacklist", "none"];
+  if (!available_privacy.includes(match)) return await message.send(`_action must be *${available_privacy.join("/")}* values_`);
+  await message.client.updateGroupsAddPrivacy(match);
+  await message.send(`_Privacy Updated to *${match}*_`);
  }
 );
 
