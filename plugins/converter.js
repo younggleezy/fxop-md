@@ -29,8 +29,8 @@ command(
  },
  async (message, match, m) => {
   if (!message.reply_message.sticker) return await message.reply("_Reply to a sticker_");
-  const packname = match.split(";")[0] || config.PACKNAME;
-  const author = match.split(";")[1] || config.AUTHOR;
+  const packname = config.PACKNAME;
+  const author = config.AUTHOR;
   let buff = await m.quoted.download();
   message.sendMessage(message.jid, buff, { packname, author }, "sticker");
  }
