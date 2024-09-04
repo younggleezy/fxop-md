@@ -4,7 +4,7 @@ const ScrapeSrc = require("../lib/scraper");
 command(
  {
   pattern: "lyrics",
-  fromMe: true,
+  fromMe: mode,
   desc: "Search and Get Song Lyrics",
   type: "search",
  },

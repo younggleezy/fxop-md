@@ -51,7 +51,7 @@ command(
 command(
  {
   on: 'text',
-  fromMe: true,
+  fromMe: mode,
  },
  async (message, match) => {
   if (AFK.isAfk && !message.id.startsWith('3EB0')) {
@@ -66,7 +66,7 @@ command(
 command(
  {
   pattern: 'afk ?(.*)',
-  fromMe: true,
+  fromMe: mode,
   desc: 'Sets your status as away from keyboard (AFK).',
  },
  async (message, match) => {

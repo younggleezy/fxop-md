@@ -8,7 +8,7 @@ const { PluginDB, installPlugin } = require("../lib/database").Plugins;
 command(
  {
   pattern: "install",
-  fromMe: true,
+  fromMe: mode,
   desc: "Installs External plugins",
   type: "misc",
  },
@@ -57,7 +57,7 @@ command(
  }
 );
 
-command({ pattern: "plugin", fromMe: true, desc: "plugin list", type: "misc" }, async (message, match) => {
+command({ pattern: "plugin", fromMe: mode, desc: "plugin list", type: "misc" }, async (message, match) => {
  var mesaj = "";
  var plugins = await PluginDB.findAll();
  if (plugins.length < 1) {
@@ -73,7 +73,7 @@ command({ pattern: "plugin", fromMe: true, desc: "plugin list", type: "misc" }, 
 command(
  {
   pattern: "remove",
-  fromMe: true,
+  fromMe: mode,
   desc: "Remove external plugins",
   type: "misc",
  },
@@ -96,7 +96,7 @@ command(
 command(
  {
   pattern: "qr",
-  fromMe: true,
+  fromMe: mode,
   desc: "Read/Write Qr.",
   type: "misc",
  },
@@ -125,7 +125,7 @@ command(
 command(
  {
   pattern: "rmbg",
-  fromMe: true,
+  fromMe: mode,
   desc: "Remove background of an image",
   type: "misc",
  },
@@ -151,7 +151,7 @@ command(
 command(
  {
   pattern: "ping",
-  fromMe: true,
+  fromMe: mode,
   desc: "To check ping",
   type: "misc",
  },

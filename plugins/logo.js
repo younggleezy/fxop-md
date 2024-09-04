@@ -2,7 +2,7 @@ const { command, Ephoto360API } = require("../lib");
 command(
  {
   pattern: "ep1",
-  fromMe: true,
+  fromMe: mode,
   desc: "Logo Maker",
   type: "eps",
  },

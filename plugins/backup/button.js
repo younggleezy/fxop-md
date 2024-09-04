@@ -3,7 +3,7 @@
 // command(
 //  {
 //   pattern: 'button',
-//   fromMe: true,
+//   fromMe: mode,
 //   desc: 'send a button message',
 //   usage: '#button',
 //   type: 'message',

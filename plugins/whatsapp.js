@@ -5,7 +5,7 @@ const { loadMessage, getName } = require("../lib/database/StoreDb");
 command(
  {
   pattern: "vv",
-  fromMe: true,
+  fromMe: mode,
   desc: "Forwards The View once messsage",
   type: "whatsapp",
  },
@@ -37,7 +37,7 @@ command(
 command(
  {
   pattern: "setpp",
-  fromMe: true,
+  fromMe: mode,
   desc: "Set profile picture",
   type: "whatsapp",
  },
@@ -52,7 +52,7 @@ command(
 command(
  {
   pattern: "rpp",
-  fromMe: true,
+  fromMe: mode,
   desc: "Removes Profile picture",
   type: "whatsapp",
  },
@@ -65,7 +65,7 @@ command(
 command(
  {
   pattern: "setname",
-  fromMe: true,
+  fromMe: mode,
   desc: "Set User name",
   type: "whatsapp",
  },
@@ -79,7 +79,7 @@ command(
 command(
  {
   pattern: "block",
-  fromMe: true,
+  fromMe: mode,
   desc: "Block a person",
   type: "whatsapp",
  },
@@ -101,7 +101,7 @@ command(
 command(
  {
   pattern: "unblock",
-  fromMe: true,
+  fromMe: mode,
   desc: "Unblock a person",
   type: "whatsapp",
  },
@@ -123,7 +123,7 @@ command(
 command(
  {
   pattern: "jid",
-  fromMe: true,
+  fromMe: mode,
   desc: "Give jid of chat/user",
   type: "whatsapp",
  },
@@ -135,7 +135,7 @@ command(
 command(
  {
   pattern: "dlt",
-  fromMe: true,
+  fromMe: mode,
   desc: "deletes a message",
   type: "whatsapp",
  },
@@ -179,7 +179,7 @@ const numToJid = num => num + "@s.whatsapp.net";
 command(
  {
   pattern: "forward",
-  fromMe: true,
+  fromMe: mode,
   desc: "Forwards the replied Message",
   type: "whatsapp",
  },
@@ -195,7 +195,7 @@ command(
 command(
  {
   pattern: "quoted",
-  fromMe: true,
+  fromMe: mode,
   desc: "quoted message",
   type: "whatsapp",
  },

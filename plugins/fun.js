@@ -6,7 +6,7 @@ let triviaGames = {};
 command(
   {
     pattern: "trivia",
-    fromMe: true,
+    fromMe: mode,
     desc: "Start a trivia game.",
     type: "game",
   },
@@ -33,7 +33,7 @@ command(
 command(
   {
     on: "text",
-    fromMe: true,
+    fromMe: mode,
     pattern: false,
     dontAddCommandList: true,
   },
@@ -143,7 +143,7 @@ async function endTriviaGame(message, userId) {
 command(
   {
     pattern: "xkcd",
-    fromMe: true,
+    fromMe: mode,
     desc: "Send a random XKCD comic.",
     type: "misc",
   },
@@ -171,7 +171,7 @@ command(
 command(
   {
     pattern: "joke",
-    fromMe: true,
+    fromMe: mode,
     desc: "Fetch a random joke",
     dontAddCommandList: false,
   },
@@ -208,7 +208,7 @@ command(
 command(
   {
     pattern: "delttt",
-    fromMe: true,
+    fromMe: mode,
     desc: "delete TicTacToe running game.",
     type: "game",
     dontAddCommandList:true

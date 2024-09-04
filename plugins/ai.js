@@ -4,7 +4,7 @@ const aiResponse = require("../lib/scraper");
 command(
  {
   pattern: "codeai",
-  fromMe: true,
+  fromMe: mode,
   desc: "Code With Copliot Mirror",
   type: "ai",
  },
@@ -19,7 +19,7 @@ command(
 command(
  {
   pattern: "gpt4",
-  fromMe: true,
+  fromMe: mode,
   desc: "Chat With Gpt4 AI Model",
   type: "ai",
  },
@@ -34,7 +34,7 @@ command(
 command(
  {
   pattern: "lamda",
-  fromMe: true,
+  fromMe: mode,
   desc: "Chat With Lamda AI Model",
   type: "ai",
  },
@@ -49,7 +49,7 @@ command(
 command(
  {
   pattern: "sdimg",
-  fromMe: true,
+  fromMe: mode,
   desc: "Stable Diffusion Image",
   type: "ai",
  },
@@ -68,7 +68,7 @@ command(
 command(
  {
   pattern: "hd",
-  fromMe: true,
+  fromMe: mode,
   desc: "Enhance Image",
   type: "ai",
  },

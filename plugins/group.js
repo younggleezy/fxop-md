@@ -4,7 +4,7 @@ const { banUser, unbanUser, isBanned } = require("../lib/database/ban");
 command(
  {
   pattern: "add",
-  fromMe: true,
+  fromMe: mode,
   desc: "add a person to group",
   type: "group",
  },
@@ -30,7 +30,7 @@ command(
 command(
  {
   pattern: "kick",
-  fromMe: true,
+  fromMe: mode,
   desc: "kicks a person from group",
   type: "group",
  },
@@ -55,7 +55,7 @@ command(
 command(
  {
   pattern: "promote",
-  fromMe: true,
+  fromMe: mode,
   desc: "promote to admin",
   type: "group",
  },
@@ -80,7 +80,7 @@ command(
 command(
  {
   pattern: "demote",
-  fromMe: true,
+  fromMe: mode,
   desc: "demote from admin",
   type: "group",
  },
@@ -106,7 +106,7 @@ command(
 command(
  {
   pattern: "mute",
-  fromMe: true,
+  fromMe: mode,
   desc: "nute group",
   type: "group",
  },
@@ -121,7 +121,7 @@ command(
 command(
  {
   pattern: "unmute",
-  fromMe: true,
+  fromMe: mode,
   desc: "unmute group",
   type: "group",
  },
@@ -136,7 +136,7 @@ command(
 command(
  {
   pattern: "gjid",
-  fromMe: true,
+  fromMe: mode,
   desc: "gets jid of all group members",
   type: "group",
  },
@@ -156,7 +156,7 @@ command(
 command(
  {
   pattern: "tagall",
-  fromMe: true,
+  fromMe: mode,
   desc: "mention all users in group",
   type: "group",
  },
@@ -176,7 +176,7 @@ command(
 command(
  {
   pattern: "tag",
-  fromMe: true,
+  fromMe: mode,
   desc: "mention all users in group",
   type: "group",
  },
@@ -195,7 +195,7 @@ command(
 command(
  {
   pattern: "welcome",
-  fromMe: true,
+  fromMe: mode,
   desc: "description",
   type: "group",
  },
@@ -243,7 +243,7 @@ command(
 command(
  {
   pattern: "goodbye",
-  fromMe: true,
+  fromMe: mode,
   desc: "description",
   type: "group",
  },
@@ -286,7 +286,7 @@ command(
 command(
  {
   on: "message",
-  fromMe: true,
+  fromMe: mode,
   dontAddCommandList: true,
  },
  async (message, match) => {
@@ -302,7 +302,7 @@ command(
 command(
  {
   pattern: "banbot",
-  fromMe: true,
+  fromMe: mode,
   desc: "ban bot from a chat",
   type: "",
  },
@@ -320,7 +320,7 @@ command(
 command(
  {
   pattern: "unbanbot",
-  fromMe: true,
+  fromMe: mode,
   desc: "Unban bot from a chat",
   type: "user",
  },
@@ -338,7 +338,7 @@ command(
 command(
  {
   pattern: "ginfo",
-  fromME: true,
+  fromMe: mode,
   desc: "Get Group Data",
   type: "group",
  },

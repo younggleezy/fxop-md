@@ -3,7 +3,7 @@ const { command, mode, toAudio, webp2mp4, textToImg, listall } = require("../lib
 command(
  {
   pattern: "sticker",
-  fromMe: true,
+  fromMe: mode,
   desc: "Converts Photo/video/text to sticker",
   type: "converter",
  },
@@ -23,7 +23,7 @@ command(
 command(
  {
   pattern: "take",
-  fromMe: true,
+  fromMe: mode,
   desc: "Converts Photo or video to sticker",
   type: "converter",
  },
@@ -39,7 +39,7 @@ command(
 command(
  {
   pattern: "photo",
-  fromMe: true,
+  fromMe: mode,
   desc: "Changes sticker to Photo",
   type: "converter",
  },
@@ -53,7 +53,7 @@ command(
 command(
  {
   pattern: "tomp3",
-  fromMe: true,
+  fromMe: mode,
   desc: "converts video/voice to mp3",
   type: "converter",
  },
@@ -70,7 +70,7 @@ command(
 command(
  {
   pattern: "tomp4",
-  fromMe: true,
+  fromMe: mode,
   desc: "converts video/voice to mp4",
   type: "converter",
  },
@@ -89,7 +89,7 @@ command(
 command(
  {
   pattern: "img",
-  fromMe: true,
+  fromMe: mode,
   desc: "Converts Sticker to image",
   type: "converter",
  },
@@ -103,7 +103,7 @@ command(
 command(
  {
   pattern: "fancy",
-  fromMe: true,
+  fromMe: mode,
   desc: "converts text to fancy text",
   type: "converter",
  },

@@ -46,7 +46,7 @@ const restart = () => {
 command(
  {
   pattern: "update",
-  fromMe: true,
+  fromMe: mode,
   info: "Check for updates",
   type: "system",
  },
@@ -75,7 +75,7 @@ command(
 command(
  {
   pattern: "upgrade",
-  fromMe: true,
+  fromMe: mode,
   desc: "Upgrade project dependencies",
   type: "system",
  },

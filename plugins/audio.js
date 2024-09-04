@@ -1,6 +1,7 @@
+const { command } = require("../lib");
 const ffmpeg = require("fluent-ffmpeg");
 const { Readable } = require("stream");
-const {command,} = require('../lib')
+
 /**
  * Processes audio with the specified effect using ffmpeg.
  * @param {Buffer} audioBuffer - The input audio as a buffer.
@@ -52,28 +53,27 @@ async function editAudio(audioBuffer, effect = "bass") {
     break;
   }
 
+  const inputStream = Readable.from(audioBuffer); // Convert buffer to readable stream
   const outputBuffers = [];
-  const inputStream = Readable.from(audioBuffer);
 
   // Run ffmpeg processing
   ffmpeg(inputStream)
    .inputFormat("mp3") // Ensure input format
-   .audioFilters(filter)
-   .format("mp3") // Set output format
-   .on("data", chunk => {
-    outputBuffers.push(chunk);
-   })
-   .on("end", () => {
-    resolve(Buffer.concat(outputBuffers));
-   })
+   .audioFilters(filter) // Apply the filter
+   .format("mp3") // Output format
    .on("error", err => {
     reject(new Error(`FFmpeg processing failed: ${err.message}`));
    })
-   .run();
+   .on("end", () => {
+    resolve(Buffer.concat(outputBuffers)); // Return the buffer
+   })
+   .on("data", chunk => {
+    outputBuffers.push(chunk); // Collect data chunks
+   })
+   .pipe(); // Pipe to buffer stream
  });
 }
 
-// Define audio effect commands
 const effects = ["bass", "blown", "deep", "earrape", "fast", "fat", "nightcore", "reverse", "robot", "slow", "smooth", "tupai"];
 effects.forEach(effect => {
  command(
@@ -88,14 +88,10 @@ effects.forEach(effect => {
    }
 
    try {
-    // Download the replied audio as a buffer
     const audioBuffer = await m.quoted.download();
-
-    // Process the audio using the editAudio function
     const processedAudio = await editAudio(audioBuffer, effect);
-
-    // Send the processed audio back
-    return await message.send(
+    return await message.sendMessage(
+     message.jid,
      {
       audio: processedAudio,
       mimetype: "audio/mpeg",
@@ -103,7 +99,6 @@ effects.forEach(effect => {
      },
      {
       quoted: message,
-      messageId: message.bot.messageId(),
      }
     );
    } catch (error) {

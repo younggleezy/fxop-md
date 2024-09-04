@@ -7,7 +7,7 @@ const runtime = require("./_patch");
 command(
  {
   pattern: "pause",
-  fromMe: true,
+  fromMe: mode,
   desc: "Pause the chat",
   type: "user",
  },
@@ -26,7 +26,7 @@ command(
 command(
  {
   pattern: "resume",
-  fromMe: true,
+  fromMe: mode,
   desc: "Resume the paused chat",
   type: "user",
  },
@@ -54,7 +54,7 @@ command(
 command(
  {
   pattern: "warn",
-  fromMe: true,
+  fromMe: mode,
   desc: "Warn a user",
   type: "user",
  },
@@ -81,7 +81,7 @@ command(
 command(
  {
   pattern: "rwarn",
-  fromMe: true,
+  fromMe: mode,
   desc: "Reset warnings for a user",
   type: "user",
  },
@@ -98,7 +98,7 @@ command(
 command(
  {
   pattern: "runtime",
-  fromMe: true,
+  fromMe: mode,
   desc: "Check uptime of bot",
   type: "user",
  },
@@ -110,7 +110,7 @@ command(
 command(
  {
   pattern: "filter",
-  fromMe: true,
+  fromMe: mode,
   desc: "Adds a filter. When someone triggers the filter, it sends the corresponding response. To view your filter list, use `.filter`.",
   usage: ".filter keyword:message",
   type: "user",
@@ -142,7 +142,7 @@ command(
 command(
  {
   pattern: "stop",
-  fromMe: true,
+  fromMe: mode,
   desc: "Stops a previously added filter.",
   usage: '.stop "hello"',
   type: "user",
