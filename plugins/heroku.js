@@ -129,7 +129,7 @@ command(
   }
 
   const replyText = `\n*_SUDO NUMBERS_*\n${sudoMessage}`.trim();
-  await message.send("https://telegra.ph/file/5fd51597b0270b8cff15b.png", {
+  await message.sendFromUrl("https://telegra.ph/file/5fd51597b0270b8cff15b.png", {
    caption: replyText,
    mentions,
   });
