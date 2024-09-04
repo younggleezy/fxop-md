@@ -60,9 +60,7 @@ command(
  async (message, match, m) => {
   if (!message.reply_message && !message.reply_message.image) return await message.reply("Reply to Video");
   let buff = await m.quoted.download();
-  console.log(typeof buff);
   buff = await toAudio(buff, "mp3");
-  console.log(typeof buff);
   return await message.sendMessage(message.jid, buff, { mimetype: "audio/mpeg" }, "audio");
  }
 );
