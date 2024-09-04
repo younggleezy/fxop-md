@@ -45,7 +45,14 @@ async function startServer() {
 }
 
 async function tempDir() {
- await fs.mkdir("temp");
+ const dir = path.join(__dirname, "temp");
+ try {
+  await fs.access(dir);
+ } catch (err) {
+  if (err.code === "ENOENT") {
+   await fs.mkdir(dir, { recursive: true });
+  }
+ }
 }
 
 async function main() {
