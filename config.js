@@ -19,7 +19,7 @@ module.exports = {
  ANTILINK: toBool(process.env.ANTI_LINK) || false,
  HEROKU: toBool(process.env.HEROKU) || false,
  AUTO_READ: toBool(process.env.AUTO_READ) || false,
- RMBG_KEY: process.env.RMBG_KEY || false,
+ RMBG_KEY: process.env.RMBG_KEY || "",
  AUTO_STATUS_READ: toBool(process.env.AUTO_STATUS_READ) || false,
  WORK_TYPE: process.env.WORK_TYPE || "private",
  DELETED_LOG: toBool(process.env.DELETED_LOG) || false,
