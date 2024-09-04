@@ -129,7 +129,7 @@ command(
  },
  async (message, match, client) => {
   // Get group metadata
-  const groupMetadata = await client.groupMetadata(message.jid);
+  const groupMetadata = await message.groupMetadata(message.jid);
   const adminJids = groupMetadata.participants.filter(participant => participant.admin).map(participant => participant.jid);
 
   // Check if the bot is an admin
