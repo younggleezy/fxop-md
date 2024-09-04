@@ -76,17 +76,18 @@ command(
   if (!message.reply_message && !message.reply_image) {
    return await message.sendReply("*_Reply to an Image Only!_*");
   }
-  const img = await m.quoted.download();
-  const upscaler = await askAi("upscale", img);
+  const imgBuffer = await m.quoted.download();
+  const upscaledBuffer = await askAi("upscale", imgBuffer);
+
   const upscaleMsg = `*_UPSCALED BY FXOP_*`;
-  return await message.send(upscaler, {
+  return await message.send(upscaledBuffer, {
    caption: upscaleMsg,
    contextInfo: {
     forwardingScore: 1,
     isForwarded: true,
     forwardedNewsletterMessageInfo: {
      newsletterJid: "120363327841612745@newsletter",
-     newsletterName: "sᴛᴀʙʟᴇ ᴅɪғғᴜsɪᴏɴ",
+     newsletterName: "ɪᴍᴀɢᴇ ᴇɴʜᴀɴᴄᴇʀ",
     },
    },
   });
