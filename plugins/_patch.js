@@ -1,7 +1,7 @@
 const os = require("os");
 const axios = require("axios");
 const plugins = require("../lib/plugins");
-const { command, tiny, formatBytes } = require("../lib");
+const { command, tiny, formatBytes, mode } = require("../lib");
 const { BOT_INFO, TIME_ZONE } = require("../config");
 
 async function getBuffer(url) {
