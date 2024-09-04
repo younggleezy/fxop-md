@@ -10,7 +10,6 @@ module.exports = {
  TIME_ZONE: process.env.TIME_ZONE || "Africa/Lagos",
  LOGS: toBool(process.env.LOGS) || true,
  ANTILINK_ACTION: process.env.ANTI_LINK || "kick",
- LANG: process.env.LANG || "EN",
  BRANCH: "master",
  WARN_COUNT: 3,
  AUTHOR: process.env.AUTHOR || "ғxᴏᴘ-ᴍᴅ",
