@@ -1,7 +1,6 @@
 const { command, mode } = require("../lib");
-
 const ffmpeg = require("fluent-ffmpeg");
-const { Readable } = require("stream");
+const { Readable, PassThrough } = require("stream");
 
 /**
  * Processes audio with the specified effect using ffmpeg.
@@ -30,21 +29,24 @@ function editAudio(audioBuffer, effect = "bass") {
  return new Promise((resolve, reject) => {
   const outputBuffers = [];
   const inputStream = Readable.from(audioBuffer);
+  const outputStream = new PassThrough();
 
   ffmpeg(inputStream)
-   .inputFormat("mp3") // Use inputFormat only if necessary
+   .inputFormat("mp3")
    .audioFilters(filter)
    .toFormat("mp3")
-   .on("data", chunk => {
-    outputBuffers.push(chunk);
-   })
-   .on("end", () => {
-    resolve(Buffer.concat(outputBuffers));
-   })
    .on("error", err => {
     reject(new Error(`FFmpeg processing failed: ${err.message}`));
    })
-   .run();
+   .pipe(outputStream);
+
+  outputStream.on("data", chunk => {
+   outputBuffers.push(chunk);
+  });
+
+  outputStream.on("end", () => {
+   resolve(Buffer.concat(outputBuffers));
+  });
  });
 }
 
@@ -59,7 +61,7 @@ async function processAudio(inputBuffer, effect = "bass") {
   const processedBuffer = await editAudio(inputBuffer, effect);
   return processedBuffer;
  } catch (error) {
-  console.error("Error processing audio:", error);
+  console.error("Error processing audio:", error.message || error); // Improve error logging
   throw error;
  }
 }
@@ -77,8 +79,13 @@ effects.forEach(effect => {
    if (!message.reply_message.audio) return message.sendReply("_Reply An Audio Only!_");
    await message.sendReply("_Processing Audio file!_");
    let getAudio = await m.quoted.download();
-   getAudio = await processAudio(getAudio, effect);
-   return await message.sendMessage(message.jid, getAudio, { mimetype: "audio/mpeg" }, "audio");
+   try {
+    getAudio = await processAudio(getAudio, effect);
+    return await message.sendMessage(message.jid, getAudio, { mimetype: "audio/mpeg" }, "audio");
+   } catch (error) {
+    console.error("Failed to send processed audio:", error.message || error);
+    return message.sendReply("_Failed to process audio!_");
+   }
   }
  );
 });
