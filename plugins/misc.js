@@ -157,11 +157,23 @@ command(
  },
  async message => {
   const start = new Date().getTime();
-  await message.reply("_speed test!_")
+  const sentMessage = await message.reply("_speed test!");
   const end = new Date().getTime();
   const responseTime = end - start;
   await new Promise(resolve => setTimeout(resolve, 100));
-  await message.edit(`*Pong!*\n \`\`\`${responseTime}\`\`\` *ms*`);
+  await message.client.relayMessage(
+   sentMessage.jid,
+   {
+    protocolMessage: {
+     key: sentMessage.key,
+     type: 14,
+     editedMessage: {
+      conversation: `*Pong!*\n \`\`\`${responseTime}\`\`\` *ms*`,
+     },
+    },
+   },
+   {}
+  );
  }
 );
 
