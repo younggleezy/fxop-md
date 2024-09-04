@@ -76,6 +76,7 @@ command(
   if (!message.reply_message && !message.reply_image) {
    return await message.sendReply("*_Reply to an Image Only!_*");
   }
+  await message.sendReply("_Enhancing Image Wait_")
   const imgBuffer = await m.quoted.download();
   const upscaledBuffer = await askAi("upscale", imgBuffer);
 
