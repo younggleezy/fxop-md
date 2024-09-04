@@ -69,17 +69,26 @@ command(
  {
   pattern: "hd",
   fromMe: true,
-  desc: "Enchance Image",
+  desc: "Enhance Image",
   type: "ai",
  },
  async (message, match, m) => {
-  if (!message.reply_message && !message.reply_image) return await message.sendReply("*_Reply An Image Only!_");
-  const img = m.quoted.download();
+  if (!message.reply_message && !message.reply_image) {
+   return await message.sendReply("*_Reply to an Image Only!_*");
+  }
+  const img = await m.quoted.download();
   const upscaler = await askAi("upscale", img);
   const upscaleMsg = `*_UPSCALED BY FXOP_*`;
   return await message.send(upscaler, {
    caption: upscaleMsg,
-   contextInfo: { forwardingScore: 1, isForwarded: true, forwardedNewsletterMessageInfo: { newsletterJid: "120363327841612745@newsletter", newsletterName: "sᴛᴀʙʟᴇ ᴅɪғғᴜsɪᴏɴ" } },
+   contextInfo: {
+    forwardingScore: 1,
+    isForwarded: true,
+    forwardedNewsletterMessageInfo: {
+     newsletterJid: "120363327841612745@newsletter",
+     newsletterName: "sᴛᴀʙʟᴇ ᴅɪғғᴜsɪᴏɴ",
+    },
+   },
   });
  }
 );
