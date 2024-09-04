@@ -5,11 +5,11 @@ const { command, editAudio } = require("../lib");
  * @param {Object} message - The message object.
  * @param {string} effectName - The effect to apply.
  */
-async function effectAudio(message, effectName) {
+async function effectAudio(message, effectName, m) {
  if (!message.reply_message || !message.reply_message.audio) {
   return await message.send("_Reply Audio/Voice Note Only!_");
  }
- const audioBuffer = await message.quoted.download();
+ const audioBuffer = await m.quoted.download();
  const processedAudio = await editAudio(audioBuffer, effectName);
  await message.sendMessage(
   message.jid,
