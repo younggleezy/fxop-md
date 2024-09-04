@@ -182,7 +182,7 @@ command(
   type: "whatsapp",
  },
  async (message, match, m) => {
-  if (!m.quoted) return message.reply("Reply to something");
+  if (!message.reply_message || Object.keys(message.reply_message).length === 0) if (!m.quoted) return message.reply("Reply to something");
   let jids = parsedJid(match);
   for (let nums of jids) {
    await message.forward(nums, message.reply_message);
