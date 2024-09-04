@@ -4,7 +4,7 @@ const aiResponse = require("../lib/scraper");
 command(
  {
   pattern: "codeai",
-  fromMe: mode,
+  fromMe: true,
   desc: "Code With Copliot Mirror",
   type: "ai",
  },

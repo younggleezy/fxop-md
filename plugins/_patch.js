@@ -24,7 +24,7 @@ const runtime = function (seconds) {
 command(
  {
   pattern: "menu",
-  fromMe: mode,
+  fromMe: true,
   desc: "Show All Commands",
   type: "user",
  },
@@ -92,7 +92,7 @@ Description: ${i.desc}\`\`\``);
 command(
  {
   pattern: "list",
-  fromMe: mode,
+  fromMe: true,
   desc: "Show All Commands",
   dontAddCommandList: true,
  },

@@ -96,7 +96,7 @@ command(
 command(
  {
   pattern: "qr",
-  fromMe: mode,
+  fromMe: true,
   desc: "Read/Write Qr.",
   type: "misc",
  },
@@ -125,7 +125,7 @@ command(
 command(
  {
   pattern: "rmbg",
-  fromMe: mode,
+  fromMe: true,
   desc: "Remove background of an image",
   type: "misc",
  },
@@ -151,7 +151,7 @@ command(
 command(
  {
   pattern: "ping",
-  fromMe: mode,
+  fromMe: true,
   desc: "To check ping",
   type: "misc",
  },

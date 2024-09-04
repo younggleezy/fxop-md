@@ -5,7 +5,7 @@ const { loadMessage, getName } = require("../lib/database/StoreDb");
 command(
  {
   pattern: "vv",
-  fromMe: mode,
+  fromMe: true,
   desc: "Forwards The View once messsage",
   type: "whatsapp",
  },
@@ -180,7 +180,7 @@ const numToJid = num => num + "@s.whatsapp.net";
 command(
  {
   pattern: "forward",
-  fromMe: mode,
+  fromMe: true,
   desc: "Forwards the replied Message",
   type: "whatsapp",
  },
@@ -196,7 +196,7 @@ command(
 command(
  {
   pattern: "quoted",
-  fromMe: mode,
+  fromMe: true,
   desc: "quoted message",
   type: "whatsapp",
  },
