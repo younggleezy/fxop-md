@@ -116,8 +116,7 @@ command(
   type: "heroku",
  },
  async message => {
-  const sudoList = global.sudo
-   .split(",")
+  const sudoList = config.SUDO.split(",")
    .filter(user => user && user !== "null")
    .map(user => user.trim());
 
