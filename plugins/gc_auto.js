@@ -3,34 +3,35 @@ const antiwordDb = require("../lib/database/antiword");
 const antilinkDb = require("../lib/database/antilink");
 const antibotDb = require("../lib/database/antibot");
 
-command(
- {
-  pattern: "antiword ?(.*)",
+command({
+  pattern: 'antiword ?(.*)',
   fromMe: true,
-  desc: "set antiword",
-  type: "group",
- },
- async (message, match) => {
-  const chatData = (await antiwordDb.findOne({ where: { chatid: message.chat } })) || { word: ["fuck"], enabled: false };
-  if (!match) return await message.send("*Need input!*\n_Example: antiword fek,myr..._\n_antiword on/off_");
-  if (match === "list") {
-   if (!chatData.enabled) {
-    return await message.reply("_You don't set the Antiword yet.!_\n__To set:__ ```.antiword fek,myr...```");
-   }
-   return await message.reply(chatData.word.join(","));
+  onlyGroup: true,
+  desc: 'set antiword',
+  type: 'group'
+}, async (message, match) => {
+  const chatData = await antiwordDb.findOne({ where: { chatid: message.chat } }) || { word: JSON.stringify(['fuck']), enabled: false };
+  const words = JSON.parse(chatData.word);
+  
+  if (!match) return await message.send('*Need input!*\n_Example: antiword fek,myr..._\n_antiword on/off_');
+  if (match === 'list') {
+    if (!chatData.enabled) {
+      return await message.reply("_You don't set the Antiword yet.!_\n__To set:__ ```.antiword fek,myr...```");
+    }
+    return await message.reply(words.join(','));
   }
-  if (match === "on" || match === "off") {
-   chatData.enabled = match === "on";
-   await antiwordDb.upsert({ chatid: message.chat, ...chatData });
-   return await message.reply(`_Antiword ${match === "on" ? "Activated" : "Deactivated"}_`);
+  if (match === 'on' || match === 'off') {
+    chatData.enabled = match === 'on';
+    await antiwordDb.upsert({ chatid: message.chat, word: JSON.stringify(words), enabled: chatData.enabled });
+    return await message.reply(`_Antiword ${match === 'on' ? 'Activated' : 'Deactivated'}_`);
   }
-  const antiwords = match.split(",");
-  chatData.word = antiwords;
+  const antiwords = match.split(',');
+  chatData.word = JSON.stringify(antiwords);
   chatData.enabled = true;
-  await antiwordDb.upsert({ chatid: message.chat, ...chatData });
-  return await message.reply("_Antiword Updated_");
- }
-);
+  await antiwordDb.upsert({ chatid: message.chat, word: chatData.word, enabled: chatData.enabled });
+  return await message.reply('_Antiword Updated_');
+});
+
 
 command(
  {
