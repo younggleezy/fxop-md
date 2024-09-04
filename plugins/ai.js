@@ -1,4 +1,4 @@
-const { command, mode, askAi } = require("../lib");
+const { command, mode, askAi, dalle } = require("../lib");
 const aiResponse = require("../lib/scraper");
 
 command(
