@@ -1,5 +1,6 @@
 {
  "name": "fxop",
+ "logo": "https://avatars.githubusercontent.com/u/176591771?v=4",
  "success_url": "/",
  "stack": "container",
  "env": {
