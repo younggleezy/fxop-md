@@ -120,7 +120,7 @@ command(
    .filter(user => user && user !== "null")
    .map(user => user.trim());
 
-  const sudoMessage = sudoList.map((user, index) => `  ${index + 1} @${user}\n\n`).join("");
+  const sudoMessage = sudoList.map((user, index) => `  ${index + 1} ${user}\n\n`).join("");
   if (!sudoMessage) {
    return await message.sendReply("*_NO SUDO NUMBERS_*");
   }
