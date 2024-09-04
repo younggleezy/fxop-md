@@ -1,4 +1,4 @@
-const { command, mode, askAi, dalle } = require("../lib");
+const { command, mode, askAi, dalle, bing } = require("../lib");
 const aiResponse = require("../lib/scraper");
 
 command(
@@ -118,5 +118,20 @@ command(
     },
    },
   });
+ }
+);
+
+command(
+ {
+  pattern: "bing",
+  fromMe: mode,
+  desc: "Chat with MS Bing Copliot",
+  type: "ai",
+ },
+ async (message, match) => {
+  if (!match) return message.sendReply("_Hey You Gave Me An Empty Prompt_");
+  await message.sendReply("_Processing Request_");
+  const bingResponse = await bing(match);
+  return message.send(bingResponse, { contextInfo: { forwardingScore: 1, isForwarded: true, forwardedNewsletterMessageInfo: { newsletterJid: "120363327841612745@newsletter", newsletterName: "ʙɪɴɢ ᴀɪ" } } });
  }
 );
