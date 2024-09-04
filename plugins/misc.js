@@ -150,30 +150,17 @@ command(
 
 command(
  {
-  pattern: "ping",
+  pattern: "ping ?(.*)",
   fromMe: mode,
-  desc: "To check ping",
-  type: "misc",
+  desc: "Bot response in milliseconds.",
+  type: "system",
  },
  async message => {
   const start = new Date().getTime();
-  const sentMessage = await message.reply("_speed test!");
+  const msg = await message.reply("*ᴩɪɴɢ...*");
   const end = new Date().getTime();
-  const responseTime = end - start;
-  await new Promise(resolve => setTimeout(resolve, 100));
-  await message.client.relayMessage(
-   sentMessage.jid,
-   {
-    protocolMessage: {
-     key: sentMessage.key,
-     type: 14,
-     editedMessage: {
-      conversation: `*Pong!*\n \`\`\`${responseTime}\`\`\` *ms*`,
-     },
-    },
-   },
-   {}
-  );
+  const responseTime = (end - start) / 1000;
+  await msg.edit(`*ʀᴇsᴘᴏɴsᴇ ʀᴀᴛᴇ ${responseTime} secs*`);
  }
 );
 

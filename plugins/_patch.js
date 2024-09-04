@@ -79,7 +79,7 @@ command(
     contextInfo: {
      forwardingScore: 1,
      isForwarded: true,
-     forwardedNewsletterMessageInfo: { newsletterJid: "120363327841612745@newsletter", newsletterName: "ᴘᴀᴛᴄʜ 𝟸.𝟻.𝟶" },
+     forwardedNewsletterMessageInfo: { newsletterJid: "120363327841612745@newsletter", newsletterName: `Version ${require("../package.json").version}` },
     },
    });
   } else {
@@ -90,7 +90,7 @@ command(
      contextInfo: {
       forwardingScore: 1,
       isForwarded: true,
-      forwardedNewsletterMessageInfo: { newsletterJid: "120363327841612745@newsletter", newsletterName: "ᴘᴀᴛᴄʜ 𝟸.𝟻.𝟶" },
+      forwardedNewsletterMessageInfo: { newsletterJid: "120363327841612745@newsletter", newsletterName: `Version ${require("../package.json").version}` },
      },
     });
    } catch (error) {
