@@ -127,9 +127,8 @@ command(
   if (!sudoMessage) {
    return await message.sendReply("*_NO SUDO NUMBERS_*");
   }
-
   const replyText = `\n*_SUDO NUMBERS_*\n${sudoMessage}`.trim();
-  await message.sendFromUrl("https://telegra.ph/file/5fd51597b0270b8cff15b.png", {
+  await message.send({
    caption: replyText,
    mentions,
   });
