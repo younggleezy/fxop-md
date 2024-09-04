@@ -9,10 +9,10 @@ async function effectAudio(message, effectName) {
  if (!message.reply_message || !message.reply_message.audio) {
   return await message.send("_Reply Audio/Voice Note Only!_");
  }
- const audioBuffer = await message.client.download(message.quoted);
+ const audioBuffer = await message.quoted.download();
  const processedAudio = await editAudio(audioBuffer, effectName);
- await message.bot.sendMessage(
-  message.chat,
+ await message.sendMessage(
+  message.jid,
   {
    audio: processedAudio,
    mimetype: "audio/mpeg",
@@ -20,7 +20,6 @@ async function effectAudio(message, effectName) {
   },
   {
    quoted: message,
-   messageId: message.bot.messageId(),
   }
  );
 }
