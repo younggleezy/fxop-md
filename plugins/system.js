@@ -29,7 +29,7 @@ async function updateNow() {
  }
 }
 
-const restartCommand = "pm2 restart fxop";
+const restartCommand = require("../package.json").scripts.restart;
 
 const restart = () => {
  exec(restartCommand, (error, stdout, stderr) => {
@@ -64,7 +64,7 @@ command(
   const updateSuccess = await updateNow();
 
   if (updateSuccess) {
-   await message.send("Bot updated. Now restarting in 3 seconds...");
+   await message.send("```Updated, Restarting```");
    setTimeout(() => {
     restart();
    }, 3000);
