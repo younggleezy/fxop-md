@@ -135,3 +135,18 @@ command(
   return message.send(bingResponse, { contextInfo: { forwardingScore: 1, isForwarded: true, forwardedNewsletterMessageInfo: { newsletterJid: "120363327841612745@newsletter", newsletterName: "ʙɪɴɢ ᴀɪ" } } });
  }
 );
+
+command(
+ {
+  pattern: "elabs",
+  fromMe: mode,
+  desc: "Generate Audio with Ai",
+  type: "ai",
+ },
+ async (message, match) => {
+  if (!match) return message.sendReply("_provide text_");
+  await message.sendReply("_Wait_");
+  const audio = await aiResponse.elevenlabs(match);
+  return message.sendFile(audio);
+ }
+);
