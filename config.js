@@ -5,7 +5,7 @@ const DATABASE_URL = process.env.DATABASE_URL || "./database.db";
 module.exports = {
  SESSION_ID: process.env.SESSION_ID || "",
  HANDLERS: process.env.HANDLER === "false" || process.env.HANDLER === "null" ? "^" : "[.]",
- BOT_INFO: process.env.BOT_INFO || "ᴀsᴛʀᴏ;ғxᴏᴘ-ᴍᴅ", //YourName;BotName;Image/VideoLimk
+ BOT_INFO: process.env.BOT_INFO || "ᴀsᴛʀᴏ;ғxᴏᴘ-ᴍᴅ", //YourName;BotName;Image/VideoLink
  SUDO: process.env.SUDO || "2348039607375,2349162411207",
  TIME_ZONE: process.env.TIME_ZONE || "Africa/Lagos",
  LOGS: toBool(process.env.LOGS) || true,
