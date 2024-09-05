@@ -2,7 +2,7 @@ const fs = require("fs").promises;
 const path = require("path");
 const express = require("express");
 const config = require("./config");
-const { connect, writeSession, patch } = require("./lib");
+const { connect, writeSession, patch, PM2KILL } = require("./lib");
 const { getandRequirePlugins } = require("./lib/database/plugins");
 global.__basedir = __dirname;
 
@@ -29,7 +29,7 @@ async function initialize() {
   return await connect();
  } catch (error) {
   console.error("Initialization error:", error);
-  return process.exit(1);
+  return await PM2KILL();
  }
 }
 
@@ -56,9 +56,14 @@ async function tempDir() {
 }
 
 async function main() {
- await initialize();
- await startServer();
- await tempDir();
+ try {
+  await initialize();
+  await startServer();
+  await tempDir();
+ } catch (error) {
+  console.warn("BOT SYSTEM FAILED");
+  await PM2KILL();
+ }
 }
 
 main();
