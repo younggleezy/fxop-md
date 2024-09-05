@@ -13,43 +13,56 @@
         <img alt='SESSION' src='https://img.shields.io/badge/Get%20Session%20ID-100000?style=for-the-badge&logo=scan&logoColor=white&labelColor=black&color=blue'/>
     </a>
      <a href="https://whatsapp.com/channel/0029VambPbJ2f3ERs37HvM2J">
-        <img alt="WhatsApp" src="https://img.shields.io/badge/-Whatsapp%20Channel-white?style=for-the-badge&logo=whatsapp&logoColor=blue"/>
+        <img alt="WhatsApp" src="https://img.shields.io/badge/-Whatsapp%20Channel-green?style=for-the-badge&logo=whatsapp&logoColor=black"/>
     </a>
 </p>
 
 ---
 
-<h2 align="center">Deployments Platforms</h2>
+## Deployments Support
 
-<p align="center">
-   <a href="https://www.heroku.com/deploy?template=https://github.com/FXastro/fxop-md">
-        <img alt="Heroku" src="https://img.shields.io/badge/-Heroku-430098?style=for-the-badge&logo=heroku&logoColor=white"/>
-    </a>
-    <a href="https://app.koyeb.com/services/deploy?type=docker&image=docker.io/fxastro/fxop-md&name=fxop-md-demo&env[SESSION_ID]=Session~&env[BOT_INFO]=ᴀsᴛʀᴏ;ғxᴏᴘ-ᴍᴅ&env[SUDO]=2348039607375&env[ANTILINK]=true&env[PORT]=8000&service_type=worker">
-    <img alt="Koyeb" src="https://img.shields.io/badge/-Koyeb-1DA1F2?style=for-the-badge&logo=koyeb&logoColor=white"/>
-</a>
-    <a href="https://whatsapp.com/channel/0029VambPbJ2f3ERs37HvM2J">
-        <img alt="Render" src="https://img.shields.io/badge/-Render-003d2b?style=for-the-badge&logo=render&logoColor=white"/>
-    </a>
-    <a href="https://whatsapp.com/channel/0029VambPbJ2f3ERs37HvM2J">
-        <img alt="Railway" src="https://img.shields.io/badge/-Railway-0B0D0E?style=for-the-badge&logo=railway&logoColor=white"/>
-    </a>
-    <a href="https://whatsapp.com/channel/0029VambPbJ2f3ERs37HvM2J">
-        <img alt="Termux" src="https://img.shields.io/badge/-Termux-2CA5E0?style=for-the-badge&logo=shell&logoColor=white"/>
-    </a>
-    <a href="https://whatsapp.com/channel/0029VambPbJ2f3ERs37HvM2J">
-        <img alt="Panel" src="https://img.shields.io/badge/-Panel-FF7139?style=for-the-badge&logo=pterodactyl&logoColor=white"/>
-    </a>
-</p>
+### Heroku Deployment
+[![Deploy on Heroku](https://img.shields.io/badge/Deploy%20on-Heroku-430098?style=for-the-badge&logo=heroku&logoColor=white)](https://www.heroku.com/deploy?template=https://github.com/FXastro/fxop-md)
+
+Deploy to Heroku for a quick and easy setup. Click the button above to deploy directly using the Heroku platform.
+
+---
+
+### Koyeb Deployment
+[![Deploy on Koyeb](https://img.shields.io/badge/Deploy%20on-Koyeb-1DA1F2?style=for-the-badge&logo=koyeb&logoColor=white)](https://app.koyeb.com/services/deploy?type=docker&image=docker.io/fxastro/fxop-md&name=fxop-md-demo&env[SESSION_ID]=Session~&env[BOT_INFO]=ᴀsᴛʀᴏ;ғxᴏᴘ-ᴍᴅ&env[SUDO]=2348039607375&env[ANTILINK]=true&env[PORT]=8000&service_type=worker)
+
+Deploy to Koyeb using Docker images for more control over the environment configuration.
+
+---
+
+### Render Deployment
+[![Deploy on Render](https://img.shields.io/badge/Deploy%20on-Render-003d2b?style=for-the-badge&logo=render&logoColor=white)](https://render.com/deploy?repo=https://github.com/FXastro/fxop-md&env=SESSION_ID,BOT_INFO)
+
+Use Render for deployment to take advantage of auto-scaling and global distribution.
+
+---
+
+### Railway Deployment
+[![Deploy on Railway](https://img.shields.io/badge/Deploy%20on-Railway-0B0D0E?style=for-the-badge&logo=railway&logoColor=white)](https://railway.app/new/template?template=https://github.com/FXastro/fxop-md&envs=SESSION_ID,BOT_INFO)
+
+
+Deploy to Railway for a serverless experience and ease of use with GitHub integration.
+
+---
+
+### Termux Deployment
+[![Deploy on Termux](https://img.shields.io/badge/Deploy%20on-Termux-2CA5E0?style=for-the-badge&logo=shell&logoColor=white)]()
+
+For a more hands-on approach, deploy using Termux on Android for local control and offline capability.
+
+---
+
+### Pterodactyl Panel Deployment
+[![Deploy on Panel](https://img.shields.io/badge/Deploy%20on-Panel-FF7139?style=for-the-badge&logo=pterodactyl&logoColor=white)](https://cpanel.net/)
+
+Deploy using the Pterodactyl panel for an intuitive interface to manage multiple servers easily.
+
 
 ## Warning
 
 This project is **NOT open source** and is **NOT for sale**. Any unauthorized distribution, copying, or use of this project’s code, assets, or any related content is strictly prohibited I keep my oath I do not have access and I will not steal your personal infomation.
-
-If you come across any unauthorized or cheap copy of this project, please report it immediately to **xstrofx010@gmail.com**.
-
-All rights are reserved, and we take any violation seriously, including pursuing legal action to protect our work.
-
-Use this bot at your own risk, WhatsApp will ban you if you use it for spamming.
-
-Thank you for choosing fx-md
