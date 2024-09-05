@@ -24,21 +24,21 @@
 ### Heroku Deployment
 [![Deploy on Heroku](https://img.shields.io/badge/Deploy%20on-Heroku-430098?style=for-the-badge&logo=heroku&logoColor=white)](https://www.heroku.com/deploy?template=https://github.com/FXastro/fxop-md)
 
-Deploy to Heroku for a quick and easy setup. Click the button above to deploy directly using the Heroku platform.
+Deploy to Heroku for a quick and easy setup, [Create Account](https://signup.heroku.com/login) if you don't have one
 
 ---
 
 ### Koyeb Deployment
 [![Deploy on Koyeb](https://img.shields.io/badge/Deploy%20on-Koyeb-1DA1F2?style=for-the-badge&logo=koyeb&logoColor=white)](https://app.koyeb.com/services/deploy?type=docker&image=docker.io/fxastro/fxop-md&name=fxop-md-demo&env[SESSION_ID]=Session~&env[BOT_INFO]=ᴀsᴛʀᴏ;ғxᴏᴘ-ᴍᴅ&env[SUDO]=2348039607375&env[ANTILINK]=true&env[PORT]=8000&service_type=worker)
 
-Deploy to Koyeb using Docker images for more control over the environment configuration.
+Deploy to Koyeb using Docker images for more control over the environment configuration. [Create Account](https://app.koyeb.com/auth/signup)
 
 ---
 
 ### Render Deployment
 [![Deploy on Render](https://img.shields.io/badge/Deploy%20on-Render-003d2b?style=for-the-badge&logo=render&logoColor=white)](https://render.com/deploy?repo=https://github.com/FXastro/fxop-md&env=SESSION_ID,BOT_INFO)
 
-Use Render for deployment to take advantage of auto-scaling and global distribution.
+Use Render for deployment to take advantage of auto-scaling and global distribution. [Create Account](https://render.com/)
 
 ---
 
@@ -46,7 +46,7 @@ Use Render for deployment to take advantage of auto-scaling and global distribut
 [![Deploy on Railway](https://img.shields.io/badge/Deploy%20on-Railway-0B0D0E?style=for-the-badge&logo=railway&logoColor=white)](https://railway.app/new/template?template=https://github.com/FXastro/fxop-md&envs=SESSION_ID,BOT_INFO)
 
 
-Deploy to Railway for a serverless experience and ease of use with GitHub integration.
+Deploy to Railway for a serverless experience and ease of use with GitHub integration. [Create Account](https://railway.app/)
 
 ---
 
