@@ -13,6 +13,7 @@ module.exports = {
  BRANCH: "master",
  WARN_COUNT: 3,
  AUTHOR: process.env.AUTHOR || "ғxᴏᴘ-ᴍᴅ",
+ ANTIWORDS: process.env.ANTIWORDS || "badword1,badword2,badword3",
  PACKNAME: process.env.PACKNAME || "ғxᴏᴘ-ᴍᴅ",
  WELCOME_MSG: process.env.WELCOME_MSG || "Hi @user Welcome to @gname",
  GOODBYE_MSG: process.env.GOODBYE_MSG || "Hi @user It was Nice Seeing you",
