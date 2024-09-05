@@ -39,7 +39,7 @@ command(
 command(
  {
   pattern: "google",
-  fromMe: true,
+  fromMe: mode,
   desc: "Search Google",
   type: "search",
  },
@@ -48,5 +48,18 @@ command(
   await message.send("_Searching google_");
   const results = await ScrapeSrc.google(match);
   return message.send(results, { contextInfo: { forwardingScore: 1, isForwarded: true, forwardedNewsletterMessageInfo: { newsletterJid: "120363327841612745@newsletter", newsletterName: "ɢᴏᴏɢʟᴇ sᴇᴀʀᴄʜ" } } });
+ }
+);
+
+command(
+ {
+  pattern: "tgs",
+  fromMe: mode,
+  desc: "Download Telegram Stickers",
+  type: "search",
+ },
+ async (message, match, m) => {
+  if (!match) return await message.send("_Provide telegram Sticker link!_");
+  await message.send("_Fetching Stickers_");
  }
 );
