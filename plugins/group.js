@@ -374,3 +374,298 @@ command(
   }
  }
 );
+
+command(
+ {
+  pattern: "groupname",
+  fromMe: mode,
+  desc: "Change the group name",
+  type: "group",
+ },
+ async (message, match) => {
+  if (!message.isGroup) return await message.reply("_This command is for groups only_");
+  if (!isAdmin(message.jid, message.user, message.client)) return await message.reply("_I'm not admin_");
+  if (!match) return await message.reply("_Provide a new group name_");
+
+  await message.client.groupUpdateSubject(message.jid, match);
+  return await message.reply(`_Group name changed to "${match}"_`);
+ }
+);
+
+command(
+ {
+  pattern: "groupdesc",
+  fromMe: mode,
+  desc: "Change the group description",
+  type: "group",
+ },
+ async (message, match) => {
+  if (!message.isGroup) return await message.reply("_This command is for groups only_");
+  if (!isAdmin(message.jid, message.user, message.client)) return await message.reply("_I'm not admin_");
+  if (!match) return await message.reply("_Provide a new group description_");
+
+  await message.client.groupUpdateDescription(message.jid, match);
+  return await message.reply("_Group description updated_");
+ }
+);
+
+command(
+ {
+  pattern: "grouppic",
+  fromMe: mode,
+  desc: "Change the group profile picture",
+  type: "group",
+ },
+ async (message, match) => {
+  if (!message.isGroup) return await message.reply("_This command is for groups only_");
+  if (!isAdmin(message.jid, message.user, message.client)) return await message.reply("_I'm not admin_");
+  if (!message.reply_message || !message.reply_message.image) return await message.reply("_Reply to an image to set as group picture_");
+
+  const media = await message.reply_message.download();
+  await message.client.updateProfilePicture(message.jid, media);
+  return await message.reply("_Group picture updated_");
+ }
+);
+
+command(
+ {
+  pattern: "revoke",
+  fromMe: mode,
+  desc: "Revoke group invite link",
+  type: "group",
+ },
+ async (message, match) => {
+  if (!message.isGroup) return await message.reply("_This command is for groups only_");
+  if (!isAdmin(message.jid, message.user, message.client)) return await message.reply("_I'm not admin_");
+
+  await message.client.groupRevokeInvite(message.jid);
+  return await message.reply("_Group invite link revoked_");
+ }
+);
+
+command(
+ {
+  pattern: "invite",
+  fromMe: mode,
+  desc: "Get group invite link",
+  type: "group",
+ },
+ async (message, match) => {
+  if (!message.isGroup) return await message.reply("_This command is for groups only_");
+  if (!isAdmin(message.jid, message.user, message.client)) return await message.reply("_I'm not admin_");
+
+  const inviteCode = await message.client.groupInviteCode(message.jid);
+  return await message.reply(`https://chat.whatsapp.com/${inviteCode}`);
+ }
+);
+
+command(
+ {
+  pattern: "groupinfo",
+  fromMe: mode,
+  desc: "Get detailed group information",
+  type: "group",
+ },
+ async (message, match) => {
+  if (!message.isGroup) return await message.reply("_This command is for groups only_");
+
+  const groupMetadata = await message.client.groupMetadata(message.jid);
+  const admins = groupMetadata.participants.filter(p => p.admin).map(p => p.id);
+
+  let info = `*Group Name:* ${groupMetadata.subject}\n`;
+  info += `*Group ID:* ${groupMetadata.id}\n`;
+  info += `*Created On:* ${new Date(groupMetadata.creation * 1000).toLocaleString()}\n`;
+  info += `*Created By:* @${groupMetadata.owner.split("@")[0]}\n`;
+  info += `*Participant Count:* ${groupMetadata.participants.length}\n`;
+  info += `*Admin Count:* ${admins.length}\n`;
+  info += `*Description:* ${groupMetadata.desc || "No description"}\n`;
+
+  return await message.reply(info, { mentions: [groupMetadata.owner, ...admins] });
+ }
+);
+
+command(
+ {
+  pattern: "requests",
+  fromMe: mode,
+  desc: "View pending join requests",
+  type: "group",
+ },
+ async (message, match) => {
+  if (!message.isGroup) return await message.reply("_This command is for groups only_");
+  if (!isAdmin(message.jid, message.user, message.client)) return await message.reply("_I'm not admin_");
+
+  const requests = await message.client.groupRequestParticipantsList(message.jid);
+  if (requests.length === 0) return await message.reply("_No pending join requests_");
+
+  let msg = "_Pending Join Requests:_\n\n";
+  requests.forEach((request, index) => {
+   msg += `${index + 1}. @${request.jid.split("@")[0]}\n`;
+  });
+
+  return await message.reply(msg, { mentions: requests.map(r => r.jid) });
+ }
+);
+
+command(
+ {
+  pattern: "accept",
+  fromMe: mode,
+  desc: "Accept group join request(s)",
+  type: "group",
+ },
+ async (message, match) => {
+  if (!message.isGroup) return await message.reply("_This command is for groups only_");
+  if (!isAdmin(message.jid, message.user, message.client)) return await message.reply("_I'm not admin_");
+
+  const requests = await message.client.groupRequestParticipantsList(message.jid);
+  if (requests.length === 0) return await message.reply("_No pending join requests_");
+
+  if (!match) return await message.reply("_Provide the number(s) of the request(s) to accept, separated by commas_");
+
+  const indexes = match.split(",").map(num => parseInt(num.trim()) - 1);
+  const validIndexes = indexes.filter(index => index >= 0 && index < requests.length);
+
+  if (validIndexes.length === 0) return await message.reply("_Invalid request number(s)_");
+
+  for (let index of validIndexes) {
+   await message.client.groupRequestParticipantsUpdate(message.jid, [requests[index].jid], "accept");
+  }
+
+  return await message.reply(`_Accepted ${validIndexes.length} join request(s)_`);
+ }
+);
+
+command(
+ {
+  pattern: "reject",
+  fromMe: mode,
+  desc: "Reject group join request(s)",
+  type: "group",
+ },
+ async (message, match) => {
+  if (!message.isGroup) return await message.reply("_This command is for groups only_");
+  if (!isAdmin(message.jid, message.user, message.client)) return await message.reply("_I'm not admin_");
+
+  const requests = await message.client.groupRequestParticipantsList(message.jid);
+  if (requests.length === 0) return await message.reply("_No pending join requests_");
+
+  if (!match) return await message.reply("_Provide the number(s) of the request(s) to reject, separated by commas_");
+
+  const indexes = match.split(",").map(num => parseInt(num.trim()) - 1);
+  const validIndexes = indexes.filter(index => index >= 0 && index < requests.length);
+
+  if (validIndexes.length === 0) return await message.reply("_Invalid request number(s)_");
+
+  for (let index of validIndexes) {
+   await message.client.groupRequestParticipantsUpdate(message.jid, [requests[index].jid], "reject");
+  }
+
+  return await message.reply(`_Rejected ${validIndexes.length} join request(s)_`);
+ }
+);
+
+command(
+ {
+  pattern: "leave",
+  fromMe: mode,
+  desc: "Leave the group",
+  type: "group",
+ },
+ async (message, match) => {
+  if (!message.isGroup) return await message.reply("_This command is for groups only_");
+
+  await message.reply("_Goodbye! Leaving the group..._");
+  return await message.client.groupLeave(message.jid);
+ }
+);
+
+command(
+ {
+  pattern: "groupsettings",
+  fromMe: mode,
+  desc: "Change group settings",
+  type: "group",
+ },
+ async (message, match) => {
+  if (!message.isGroup) return await message.reply("_This command is for groups only_");
+  if (!isAdmin(message.jid, message.user, message.client)) return await message.reply("_I'm not admin_");
+
+  if (!match) return await message.reply("_Provide a setting to change: 'announcement' or 'locked' or 'unlocked'_");
+
+  let setting;
+  if (match === "announcement") setting = "announcement";
+  else if (match === "locked") setting = "locked";
+  else if (match === "unlocked") setting = "unlocked";
+  else return await message.reply("_Invalid setting. Use 'announcement', 'locked', or 'unlocked'_");
+
+  await message.client.groupSettingUpdate(message.jid, setting);
+  return await message.reply(`_Group settings updated to ${setting}_`);
+ }
+);
+
+command(
+ {
+  pattern: "admins",
+  fromMe: mode,
+  desc: "Tag all group admins",
+  type: "group",
+ },
+ async (message, match) => {
+  if (!message.isGroup) return await message.reply("_This command is for groups only_");
+
+  const groupMetadata = await message.client.groupMetadata(message.jid);
+  const admins = groupMetadata.participants.filter(p => p.admin).map(p => p.id);
+
+  let msg = "_Group Admins:_\n\n";
+  admins.forEach((admin, index) => {
+   msg += `${index + 1}. @${admin.split("@")[0]}\n`;
+  });
+
+  return await message.reply(msg, { mentions: admins });
+ }
+);
+
+command(
+ {
+  pattern: "grouplink",
+  fromMe: mode,
+  desc: "Get or reset group invite link",
+  type: "group",
+ },
+ async (message, match) => {
+  if (!message.isGroup) return await message.reply("_This command is for groups only_");
+  if (!isAdmin(message.jid, message.user, message.client)) return await message.reply("_I'm not admin_");
+
+  if (match === "reset") {
+   await message.client.groupRevokeInvite(message.jid);
+   await message.reply("_Group invite link has been reset_");
+  }
+
+  const inviteCode = await message.client.groupInviteCode(message.jid);
+  return await message.reply(`https://chat.whatsapp.com/${inviteCode}`);
+ }
+);
+
+command(
+ {
+  pattern: "poll",
+  fromMe: mode,
+  desc: "Create a poll",
+  type: "group",
+ },
+ async (message, match) => {
+  if (!message.isGroup) return await message.reply("_This command is for groups only_");
+
+  const [question, ...options] = match.split("|").map(item => item.trim());
+  if (!question || options.length < 2) return await message.reply("_Usage: .poll Question | Option1 | Option2 | ..._");
+
+  const poll = {
+   name: question,
+   values: options,
+   selectableCount: 1,
+  };
+
+  await message.client.sendMessage(message.jid, { poll });
+ }
+);
