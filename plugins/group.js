@@ -1,6 +1,8 @@
 const { command, mode, parsedJid, isAdmin } = require("../lib/");
 const { setMessage, getMessage, delMessage, getStatus, toggleStatus } = require("../lib/database").Greetings;
 const { banUser, unbanUser, isBanned } = require("../lib/database/ban");
+const { setAntiPromote, getAntiPromote, setAntiDemote, getAntiDemote } = require("../lib/database/groupSettings.js");
+
 command(
  {
   pattern: "add",
@@ -667,5 +669,125 @@ command(
   };
 
   await message.client.sendMessage(message.jid, { poll });
+ }
+);
+
+command(
+ {
+  pattern: "kickall",
+  fromMe: mode,
+  desc: "Kick all participants except admins and bot",
+  type: "group",
+ },
+ async (message, match) => {
+  if (!message.isGroup) return await message.reply("_This command is for groups only_");
+  if (!isAdmin(message.jid, message.user, message.client)) return await message.reply("_I'm not admin_");
+  await message.reply("_This action will remove all non-admin participants from the group. Are you sure? Reply with 'yes' to confirm._");
+
+  const confirmation = await message.client.waitForMessage(message.jid, message.sender, 30000);
+  if (!confirmation || confirmation.text.toLowerCase() !== "yes") {
+   return await message.reply("_Kickall command cancelled._");
+  }
+
+  const groupMetadata = await message.client.groupMetadata(message.jid);
+  const participants = groupMetadata.participants;
+  const admins = participants.filter(p => p.admin).map(p => p.id);
+  const botId = message.client.user.id.split(":")[0] + "@s.whatsapp.net";
+
+  const toRemove = participants.filter(p => !p.admin && p.id !== botId).map(p => p.id);
+
+  if (toRemove.length === 0) {
+   return await message.reply("_No non-admin participants to remove._");
+  }
+
+  await message.reply(`_Removing ${toRemove.length} participants..._`);
+
+  const batchSize = 5;
+  for (let i = 0; i < toRemove.length; i += batchSize) {
+   const batch = toRemove.slice(i, i + batchSize);
+   await message.client.groupParticipantsUpdate(message.jid, batch, "remove");
+   await new Promise(resolve => setTimeout(resolve, 1000));
+  }
+
+  return await message.reply(`_Successfully removed ${toRemove.length} participants._`);
+ }
+);
+
+command(
+ {
+  pattern: "antipromote",
+  fromMe: mode,
+  desc: "Toggle anti-promote feature",
+  type: "group",
+ },
+ async (message, match) => {
+  if (!message.isGroup) return await message.reply("_This command is for groups only_");
+  if (!isAdmin(message.jid, message.user, message.client)) return await message.reply("_I'm not admin_");
+
+  const currentStatus = await getAntiPromote(message.jid);
+  const newStatus = !currentStatus;
+  await setAntiPromote(message.jid, newStatus);
+
+  return await message.reply(`_Anti-promote has been ${newStatus ? "enabled" : "disabled"} for this group._`);
+ }
+);
+
+command(
+ {
+  pattern: "antidemote",
+  fromMe: mode,
+  desc: "Toggle anti-demote feature",
+  type: "group",
+ },
+ async (message, match) => {
+  if (!message.isGroup) return await message.reply("_This command is for groups only_");
+  if (!isAdmin(message.jid, message.user, message.client)) return await message.reply("_I'm not admin_");
+
+  const currentStatus = await getAntiDemote(message.jid);
+  const newStatus = !currentStatus;
+  await setAntiDemote(message.jid, newStatus);
+
+  return await message.reply(`_Anti-demote has been ${newStatus ? "enabled" : "disabled"} for this group._`);
+ }
+);
+
+command(
+ {
+  on: "group_update",
+ },
+ async message => {
+  if (message.update === "promote" || message.update === "demote") {
+   const groupJid = message.jid;
+   const actor = message.actor;
+   const participants = message.participants;
+
+   if (message.update === "promote") {
+    const antiPromoteEnabled = await getAntiPromote(groupJid);
+    if (antiPromoteEnabled) {
+     const botClient = message.client;
+     const botIsAdmin = await isAdmin(groupJid, botClient.user.id.split(":")[0] + "@s.whatsapp.net", botClient);
+
+     if (botIsAdmin) {
+      for (let participant of participants) {
+       await botClient.groupParticipantsUpdate(groupJid, [participant], "demote");
+      }
+      await message.reply(`_Unauthorized promotion detected. User(s) have been demoted._`);
+     }
+    }
+   } else if (message.update === "demote") {
+    const antiDemoteEnabled = await getAntiDemote(groupJid);
+    if (antiDemoteEnabled) {
+     const botClient = message.client;
+     const botIsAdmin = await isAdmin(groupJid, botClient.user.id.split(":")[0] + "@s.whatsapp.net", botClient);
+
+     if (botIsAdmin) {
+      for (let participant of participants) {
+       await botClient.groupParticipantsUpdate(groupJid, [participant], "promote");
+      }
+      await message.reply(`_Unauthorized demotion detected. User(s) have been re-promoted._`);
+     }
+    }
+   }
+  }
  }
 );
