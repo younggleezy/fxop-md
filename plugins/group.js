@@ -2,7 +2,7 @@ const { command, mode, parsedJid, isAdmin } = require("../lib/");
 const { setMessage, getMessage, delMessage, getStatus, toggleStatus } = require("../lib/database").Greetings;
 const { banUser, unbanUser, isBanned } = require("../lib/database/ban");
 const { setAntiPromote, getAntiPromote, setAntiDemote, getAntiDemote } = require("../lib/database/groupSettings.js");
-
+const { getAntiWords, addStrike, resetStrikes, getStrikes } = require("../lib/database/antiword");
 command(
  {
   pattern: "add",
@@ -787,6 +787,71 @@ command(
       await message.reply(`_Unauthorized demotion detected. User(s) have been re-promoted._`);
      }
     }
+   }
+  }
+ }
+);
+command(
+ {
+  pattern: "strikes ?(.*)",
+  fromMe: true,
+  desc: "Check or reset user strikes",
+  type: "group",
+ },
+ async (message, match) => {
+  if (!message.isGroup) return await message.reply("_This command is for groups only_");
+
+  const [action, mentionedJid] = match[1].split(" ");
+  const userId = mentionedJid || (message.reply_message ? message.reply_message.sender : null);
+
+  if (!userId) return await message.reply("_Please mention a user or reply to their message_");
+
+  switch (action.toLowerCase()) {
+   case "check":
+    const strikes = await getStrikes(message.jid, userId);
+    return await message.reply(`_User @${userId.split("@")[0]} has ${strikes} strike(s)._`);
+
+   case "reset":
+    await resetStrikes(message.jid, userId);
+    return await message.reply(`_Strikes reset for user @${userId.split("@")[0]}._`);
+
+   default:
+    return await message.reply("_Invalid action. Use 'check' or 'reset'_");
+  }
+ }
+);
+
+const MAX_STRIKES = 3; // Number of strikes before action is taken
+
+command(
+ {
+  on: "text",
+  fromMe: false,
+ },
+ async message => {
+  if (!message.isGroup) return; // Only check in groups
+
+  const antiWords = await getAntiWords(message.jid);
+  if (antiWords.length === 0) return; 
+
+  const lowerCaseMessage = message.text.toLowerCase();
+  const containsAntiWord = antiWords.some(word => lowerCaseMessage.includes(word));
+
+  if (containsAntiWord) {
+   await message.delete();
+   const strikes = await addStrike(message.jid, message.sender);
+
+   if (strikes < MAX_STRIKES) {
+    await message.reply(`_Warning: Your message was deleted because it contained a prohibited word. You have ${strikes} strike(s). At ${MAX_STRIKES} strikes, you will be removed from the group._`);
+   } else {
+    try {
+     await message.client.groupParticipantsUpdate(message.jid, [message.sender], "remove");
+     await message.reply(`_User @${message.sender.split("@")[0]} has been removed from the group for repeated violations._`);
+    } catch (error) {
+     console.error("Failed to remove user:", error);
+     await message.reply("_Failed to remove user. Please ensure the bot has admin privileges._");
+    }
+    await resetStrikes(message.jid, message.sender);
    }
   }
  }

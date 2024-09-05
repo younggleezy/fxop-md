@@ -1,26 +1,38 @@
-const { setWord, getWord } = require("../lib/database/antilink");
-const { command, mode } = require("../lib");
-const actions = ["null", "warn", "kick"];
+const { command, mode, isAdmin } = require("../lib/");
+const { addAntiWord, removeAntiWord, getAntiWords } = require("../lib/database/antiword");
 
 command(
  {
   pattern: "antiword ?(.*)",
   fromMe: mode,
-  desc: "filter the group chat",
+  desc: "Manage antiword settings",
   type: "group",
  },
  async (message, match) => {
-  if (!match || (match != "on" && match != "off" && !match.startsWith("action"))) {
-   const { enabled, action } = await getWord(message.jid);
-   return await message.send(`_Antiword is ${enabled ? "on" : "off"} (${action})_\n*Example :*\nantiword action/(kick|warn|null)\nantiword on | off\nsetvar ANTIWORDS:word1,word2`);
+  if (!message.isGroup) return await message.reply("_This command is for groups only_");
+  if (!isAdmin(message.jid, message.user, message.client)) return await message.reply("_I'm not admin_");
+
+  const [action, ...words] = match[1].split(" ");
+  const word = words.join(" ");
+
+  switch (action.toLowerCase()) {
+   case "add":
+    if (!word) return await message.reply("_Please provide a word to add_");
+    await addAntiWord(message.jid, word);
+    return await message.reply(`_Added "${word}" to antiword list_`);
+
+   case "remove":
+    if (!word) return await message.reply("_Please provide a word to remove_");
+    await removeAntiWord(message.jid, word);
+    return await message.reply(`_Removed "${word}" from antiword list_`);
+
+   case "list":
+    const antiWords = await getAntiWords(message.jid);
+    if (antiWords.length === 0) return await message.reply("_No words in antiword list_");
+    return await message.reply(`_Antiwords: ${antiWords.join(", ")}_`);
+
+   default:
+    return await message.reply("_Invalid action. Use 'add', 'remove', or 'list'_");
   }
-  if (match.startsWith("action/")) {
-   const action = match.replace("action/", "");
-   if (!actions.includes(action)) return await message.send(`${action} _is a invalid action_`);
-   await setWord(message.jid, action);
-   return await message.send(`_antiword action updated as ${action}_`);
-  }
-  await setWord(message.jid, match == "on");
-  await message.send(`_AntiWord ${match == "on" ? "activated" : "deactivated."}_`);
  }
 );
