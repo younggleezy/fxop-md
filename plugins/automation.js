@@ -1,4 +1,4 @@
-const { command, createDB, fetchDB, parseDB } = require("../lib/misc");
+const { command, createDB, fetchDB, parseDB } = require("../lib");
 const { makeInDb } = require("../lib/database/makeDB");
 const actions = ["kick", "warn", "null"];
 
