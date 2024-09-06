@@ -9,7 +9,6 @@
  "author": "FXastro",
  "scripts": {
   "start": "pm2 start index.js --deep-monitoring --attach --name fx-md",
-  "restart": "pm2 restart fx-md",
   "stop": "pm2 stop fx-md"
  },
  "devDependencies": {
