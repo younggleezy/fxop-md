@@ -1,3 +1,4 @@
+const { command } = require("../lib");
 command(
  {
   on: "text",
