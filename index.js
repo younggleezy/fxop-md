@@ -29,7 +29,7 @@ async function initialize() {
   return await connect();
  } catch (error) {
   console.error("Initialization error:", error);
-  return await PM2KILL();
+  return PM2KILL();
  }
 }
 
@@ -62,7 +62,7 @@ async function main() {
   await tempDir();
  } catch (error) {
   console.warn("BOT SYSTEM FAILED");
-  await PM2KILL();
+  PM2KILL();
  }
 }
 
