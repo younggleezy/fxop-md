@@ -1,4 +1,4 @@
-const { command, mode, toAudio } = require("../lib");
+const { command, mode, toAudio, IronMan } = require("../lib");
 const ScrapeDl = require("../lib/scraper");
 command(
  {
@@ -119,4 +119,23 @@ command(
   const buff = await ScrapeDl.ytmp3(match);
   return await message.sendFile(buff);
  }
+);
+
+command(
+  {
+    pattern: "story",
+    fromMe: mode,
+    desc: "Downloads Instagram stories",
+    type: "download",
+  },
+  async (message, match) => {
+    if (!match) return message.reply("_Provide a valid Instagram username_");
+    await message.reply(`_Downloading stories of ${match}..._`);
+    const res = await fetch(IronMan(`ironman/ig/story?user=${match}`));
+    const data = await res.json();
+    if (!data.status || !data.media.length) return message.reply("_No stories found for this user or this account is private_");
+    for (const dl of data.media) {
+    await message.sendFile(dl);
+    }
+  }
 );
