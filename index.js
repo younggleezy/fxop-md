@@ -2,19 +2,9 @@ const fs = require("fs").promises;
 const path = require("path");
 const express = require("express");
 const config = require("./config");
-const { connect, writeSession, patch, PM2KILL } = require("./lib");
+const { connect, writeSession, patch, parseDir } = require("./lib");
 const { getandRequirePlugins } = require("./lib/database/plugins");
 global.__basedir = __dirname;
-
-const parseDir = async directory => {
- try {
-  const files = await fs.readdir(directory);
-  return Promise.all(files.filter(file => path.extname(file).toLowerCase() === ".js").map(file => require(path.join(directory, file))));
- } catch (error) {
-  console.error("Error reading and requiring files:", error);
-  throw error;
- }
-};
 
 async function initialize() {
  try {
