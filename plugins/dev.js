@@ -6,9 +6,9 @@ command(
   dontAddCommandList: true,
  },
  async (message, match) => {
-  if (message.message.startsWith("$") || message.message.startsWith(">")) {
-   const code = message.message.slice(1).trim();
-
+  const messageText = message.text || message.message?.text || "";
+  if (messageText.startsWith("$") || messageText.startsWith(">")) {
+   const code = messageText.slice(1).trim();
    try {
     const result = eval(code);
     const output = typeof result === "string" ? result : JSON.stringify(result, null, 2);
