@@ -1,7 +1,7 @@
 <p align="center">
     <img src="https://github.com/user-attachments/assets/1952f21e-2152-4097-b8c2-9d06bed8aa8c" alt="logo" width="350"/>
 </p>
-
+<h2> UPDATE IN PROGRESS</h2>
 <h3 align="center">A Simple WhatsApp Bot</h3>
 
 <p align="center">
