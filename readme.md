@@ -10,7 +10,7 @@
 
 <p align="center">
   <a href="https://fx-session-966bdc8172d5.herokuapp.com/code">
-    <img src="https://img.shields.io/badge/Get%20Session%20ID-4A90E2?style=for-the-badge&logo=whatsapp&logoColor=white" alt="Get Session ID"/>
+    <img src="https://img.shields.io/badge/Get%20Session%20ID-000?style=for-the-badge&logo=server&logoColor=white" alt="Get Session ID"/>
   </a>
   <a href="https://whatsapp.com/channel/0029VambPbJ2f3ERs37HvM2J">
     <img src="https://img.shields.io/badge/WhatsApp%20Channel-25D366?style=for-the-badge&logo=whatsapp&logoColor=white" alt="WhatsApp Channel"/>
