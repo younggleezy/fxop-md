@@ -155,6 +155,6 @@ command(
       await msg.sendReply("_Downloading_");
       let audio = await ScrapeDl["play"](cont);
       audio = await toAudio(audio, "mp3");
-      return await msg.sendMessage(message.jid, audio, { mimetype: "audio/mpeg" }, "audio");
+      return await msg.sendMessage(msg.jid, audio, { mimetype: "audio/mpeg" }, "audio");
    }
 );
