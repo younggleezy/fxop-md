@@ -16,16 +16,15 @@ command(
       let { data } = await axios.get("https://api.github.com/repos/FXastro/fxop-md");
       let mssg = `
 \`\`\`FXOP-MD Repo Stat\`\`\`\n
-╭════════════════❐
+╭══════════❐
 ┃ *Owner*: _*FXastro*_
 ┃ *Repo*: _https://github.com/FXastro/fxop-md_
 ┃ *Stars*: _${data.stargazers_count}_
 ┃ *Forks*: _${data.forks}_
 ┃ *Code*: _${data.language}_
-╰════════════════❐
-> *FXastro 2024*
+╰══════════❐
     `;
-      mssg += `> Stars: ${data.stargazers_count}\n> Forks: ${data.forks}`;
+      mssg += `\n> Stars: ${data.stargazers_count}\n> Forks: ${data.forks}`;
       const thumbnailPath = "../media/images/thumb.jpg";
       const thumbnail = await buffpath(thumbnailPath);
       return await message.send(thumbnail, {
