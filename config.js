@@ -8,7 +8,7 @@ module.exports = {
    BOT_INFO: process.env.BOT_INFO || "ᴀsᴛʀᴏ;ғxᴏᴘ-ᴍᴅ", //YourName;BotName;Image/VideoLink
    SUDO: process.env.SUDO || "2348039607375,2349162411207,4915252819677",
    ANTICALL: process.env.ANTICALL || false,
-   PPRESENCE: process.env.PRESENCE || "available", // "unavailable", "available", "composing", "recording", "paused"
+   PRESENCE: process.env.PRESENCE || "available", // "unavailable", "available", "composing", "recording", "paused"
    TIME_ZONE: process.env.TIME_ZONE || "Africa/Lagos",
    LOGS: toBool(process.env.LOGS) || true,
    ANTILINK_ACTION: process.env.ANTI_LINK || "kick",
