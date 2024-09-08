@@ -9,7 +9,7 @@
 </p>
 
 <p align="center">
-  <a href="https://fx-session-966bdc8172d5.herokuapp.com/code">
+  <a href="https://fx-session.vercel.app/">
     <img src="https://img.shields.io/badge/Get%20Session%20ID-000?style=for-the-badge&logo=server&logoColor=white" alt="Get Session ID"/>
   </a>
 </p>
