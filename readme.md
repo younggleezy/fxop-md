@@ -26,29 +26,39 @@
 
 <div align="center">
   <a href="https://www.heroku.com/deploy?template=https://github.com/FXastro/fxop-md">
-    <img src="https://www.herokucdn.com/deploy/button.svg" alt="Deploy to Heroku" height="32">
+    <img src="https://img.shields.io/badge/Heroku-430098?style=for-the-badge&logo=heroku&logoColor=white&labelColor=430098" alt="Deploy to Heroku" height="32">
   </a>
   &nbsp;&nbsp;
   <a href="https://app.koyeb.com/services/deploy?type=docker&image=docker.io/fxastro/fxop-md&name=fxop-md-demo&env[SESSION_ID]=Session~&env[BOT_INFO]=ᴀsᴛʀᴏ;ғxᴏᴘ-ᴍᴅ&env[SUDO]=2348039607375&env[ANTILINK]=true&env[PORT]=8000&service_type=worker">
-    <img src="https://www.koyeb.com/static/images/deploy/button.svg" alt="Deploy to Koyeb" height="32">
+    <img src="https://img.shields.io/badge/Koyeb-2B2D2F?style=for-the-badge&logo=koyeb&logoColor=white&labelColor=2B2D2F" alt="Deploy to Koyeb" height="32">
   </a>
   &nbsp;&nbsp;
   <a href="https://render.com/deploy?repo=https://github.com/FXastro/fxop-md&env=SESSION_ID,BOT_INFO">
-    <img src="https://render.com/images/deploy-to-render-button.svg" alt="Deploy to Render" height="32">
+    <img src="https://img.shields.io/badge/Render-1F1F1F?style=for-the-badge&logo=render&logoColor=purple&labelColor=1F1F1F" alt="Deploy to Render" height="32">
   </a>
   &nbsp;&nbsp;
   <a href="https://railway.app/new/template?template=https://github.com/FXastro/fxop-md&envs=SESSION_ID,BOT_INFO">
-    <img src="https://railway.app/button.svg" alt="Deploy on Railway" height="32">
+    <img src="https://img.shields.io/badge/Railway-4D1F3F?style=for-the-badge&logo=railway&logoColor=white&labelColor=4D1F3F" alt="Deploy on Railway" height="32">
   </a>
   &nbsp;&nbsp;
   <a href="https://github.com/FXastro/fxop-md/blob/master/media/termux.md">
-    <img src="https://img.shields.io/badge/Deploy%20on-Termux-1bb91f.svg?style=for-the-badge" alt="Deploy on Termux" height="32">
+    <img src="https://img.shields.io/badge/Termux-000000?style=for-the-badge&logo=termux&logoColor=white&labelColor=000000" alt="Deploy on Termux" height="32">
   </a>
   &nbsp;&nbsp;
   <a href="https://cpanel.net/">
-    <img src="https://img.shields.io/badge/Deploy%20on-Pterodactyl-7289da.svg?style=for-the-badge" alt="Deploy on Pterodactyl" height="32">
+    <img src="https://img.shields.io/badge/Pterodactyl-FE6C00?style=for-the-badge&logo=pterodactyl&logoColor=white&labelColor=FE6C00" alt="Deploy on Pterodactyl" height="32">
+  </a>
+  &nbsp;&nbsp;
+  <a href="https://github.com/codespaces/new?skip_quickstart=true&machine=standardLinux32gb&repo=843557699&ref=master&devcontainer_path=.devcontainer%2Fdevcontainer.json&geo=EuropeWest">
+    <img src="https://img.shields.io/badge/Codespaces-000000?style=for-the-badge&logo=github&logoColor=white&labelColor=000000" alt="Deploy on Codespaces" height="32">
+  </a>
+  &nbsp;&nbsp;
+  <a href="https://replit.com/~">
+    <img src="https://img.shields.io/badge/Replit-0F0F0F?style=for-the-badge&logo=replit&logoColor=orange&labelColor=0F0F0F" alt="Deploy on Replit" height="32">
   </a>
 </div>
+
+
 
 ### Configurations
 
