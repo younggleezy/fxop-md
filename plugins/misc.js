@@ -15,17 +15,14 @@ command(
    async (message, match, client) => {
       let { data } = await axios.get("https://api.github.com/repos/FXastro/fxop-md");
       let mssg = `
+\t\`\`\`SCRIPT\`\`\`\n
 ╭──────────────
-│\t\`\`\`SCRIPT\`\`\`\n
-│╭──────────────
-││ *Owner:* _*FXastro*_
-││ *Repo:* _https://github.com/FXastro/fxop-md_
-││ *Stars:* _${data.stargazers_count}_
-││ *Forks:* _${data.forks}_
-││ *Code:* _${data.language}_
-││ *Stars:* ${data.stargazers_count}
-││ *Forks:* ${data.forks}
-│╰───────────
+│ *Owner:* _*FXastro*_
+│ *Repo:* _https://github.com/FXastro/fxop-md_
+│ *Stars:* _${data.stargazers_count}_
+│ *Forks:* _${data.forks}_
+│ *Code:* _${data.language}_
+│ *Stars:* ${data.stargazers_count}
 ╰──────────────
     `;
       const thumbnailPath = "../media/images/thumb.jpg";
