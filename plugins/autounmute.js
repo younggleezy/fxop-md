@@ -1,4 +1,4 @@
-const { command, mode } = require('../lib/');
+const { command, mode, isAdmin } = require('../lib/');
 const moment = require('moment');
 
 command(
@@ -45,12 +45,8 @@ command(
     }
   }
 );
-const isBotAdmin = async (message) => {
-  const groupMetadata = await message.client.groupMetadata(message.jid);
-  const participants = groupMetadata.participants;
-  const groupAdmins = participants.filter(v => v.admin !== null).map(v => v.id);
-  return groupAdmins.includes(message.pushName);
-};
+
+const participants = groupMetadata.participants;
 let x_astrial = true;
 command(
   {
