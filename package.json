@@ -8,7 +8,7 @@
    },
    "author": "FXastro",
    "scripts": {
-      "start": "pm2 start index.js --deep-monitoring --attach --name fx-md",
+      "start": "pm2 start index.js --deep-monitoring --attach --name fx-md -f",
       "stop": "pm2 stop fx-md"
    },
    "devDependencies": {
