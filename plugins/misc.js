@@ -12,38 +12,34 @@ command(
       desc: "Repo",
       type: "misc",
    },
-   async (message, match) => {
+   async (message, match, client) => {
       let { data } = await axios.get("https://api.github.com/repos/FXastro/fxop-md");
       let mssg = `
-    \`\`\`FXOP-MD Repo Stat\`\`\`\
-    ╭════════════════❐
-    ┃*Owner*: _*FXastro*_
-    ┃*Repo*: _https://github.com/FXastro/fxop-md_
-    ┃*Stars*: _${data.stargazers_count}_
-    ┃*Forks*: _${data.forks}_
-    ┃*Code*: _${data.Language}_
-    ┃*Channel*: _https://whatsapp.com/channel/0029VambPbJ2f3ERs37HvM2J_
-    ╰════════════════❐
-    > *FXastro 2024*
+\`\`\`FXOP-MD Repo Stat\`\`\`\
+╭════════════════❐
+┃*Owner*: _*FXastro*_
+┃*Repo*: _https://github.com/FXastro/fxop-md_
+┃*Stars*: _${data.stargazers_count}_
+┃*Forks*: _${data.forks}_
+┃*Code*: _${data.Language}_
+┃*Channel*: _https://whatsapp.com/channel/0029VambPbJ2f3ERs37HvM2J_
+╰════════════════❐
+> *FXastro 2024*
     `;
-      let joined = `Stars: ${data.stargazers_count}\nForks: ${data.forks}`;
-      let button = {
-         image: { url: "https://ibb.co/Srw3jhW" },
+      mssg += `Stars: ${data.stargazers_count}\nForks: ${data.forks}`;
+      const thumbnailPath = "../media/images/thumb.jpg";
+      const thumbnail = await buffpath(thumbnailPath);
+      return await message.send(thumbnail, {
          caption: mssg,
          contextInfo: {
-            externalAdReply: {
-               title: "fxop-md",
-               body: joined,
-               showAdAttribution: true,
-               thumbnail: fs.readFileSync("./thumb.jpg"),
-               mediaType: 4,
-               MediaUrl: `https://whatsapp.com/channel/0029VambPbJ2f3ERs37HvM2J`,
-               sourceUrl: `https://whatsapp.com/channel/0029VambPbJ2f3ERs37HvM2J`,
+            forwardingScore: 999,
+            isForwarded: true,
+            forwardedNewsletterMessageInfo: {
+               newsletterJid: "120363327841612745@newsletter",
+               newsletterName: "ғx-ʀᴇᴘᴏɪsᴛᴏʀʏ",
             },
          },
-      };
-
-      await message.sendMessage(message.jid, button, { quoted: message });
+      });
    }
 );
 
