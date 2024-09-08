@@ -6,15 +6,16 @@ command(
     pattern: "autounmute",
     fromMe: mode,
     dontAddCommandList: true,
+    type: 'group',
   },
   async (message, match) => {
-    if (!message.isGroup) return;
+    if (!message.isGroup) return message.reply('This command can be used in group');;
     const isAdmin = await isBotAdmin(message);
-    if (!isAdmin) {
-      await message.reply("_Youre not an admin_");
-      return;
+    if (!isAdmin) { 
+     return await message.reply("_Youre not an admin_");
+    }
       const meow = /autounmute\s*(on|off)?\s*([0-9]{2}:[0-9]{2})?/i;
-    } const [_, toggle, time] = match.match(meow) || [];
+      const [_, toggle, time] = match.match(meow) || [];
     if (toggle === 'on') {
       await message.reply("Auto-unmute_enabled");
       return;
