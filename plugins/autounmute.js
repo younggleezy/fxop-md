@@ -3,7 +3,7 @@ const moment = require('moment');
 
 command(
   {
-    pattern: "autounmute(?:\\s+(on|off)|\\s+([0-9]{2}:[0-9]{2}))",
+    pattern: "autounmute",
     fromMe: mode,
     dontAddCommandList: true,
   },
@@ -13,7 +13,8 @@ command(
     if (!isAdmin) {
       await message.reply("_Youre not an admin_");
       return;
-    } const [_, toggle, time] = match.split(/\s+/);
+      const meow = /autounmute\s*(on|off)?\s*([0-9]{2}:[0-9]{2})?/i;
+    } const [_, toggle, time] = match.match(meow) || [];
     if (toggle === 'on') {
       await message.reply("Auto-unmute_enabled");
       return;
