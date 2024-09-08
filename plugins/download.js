@@ -88,8 +88,8 @@ command(
       if (!match) return message.reply("_provide me spotify url_");
       await message.reply("_Downloading_");
       const buff = await ScrapeDl.spotify(match);
-      const audio = await toAudio(buff);
-      return await message.sendFile(audio);
+      const audio = await toAudio(buff, "mp3");
+      return await msg.sendMessage(msg.jid, audio, { mimetype: "audio/mpeg" }, "audio");
    }
 );
 
