@@ -17,12 +17,11 @@ command(
       let mssg = `
 \`\`\`FXOP-MD Repo Stat\`\`\`\n
 ╭════════════════❐
-┃*Owner*: _*FXastro*_
-┃*Repo*: _https://github.com/FXastro/fxop-md_
-┃*Stars*: _${data.stargazers_count}_
-┃*Forks*: _${data.forks}_
-┃*Code*: _${data.language}_
-┃*Channel*: _https://whatsapp.com/channel/0029VambPbJ2f3ERs37HvM2J_
+┃ *Owner*: _*FXastro*_
+┃ *Repo*: _https://github.com/FXastro/fxop-md_
+┃ *Stars*: _${data.stargazers_count}_
+┃ *Forks*: _${data.forks}_
+┃ *Code*: _${data.language}_
 ╰════════════════❐
 > *FXastro 2024*
     `;
