@@ -13,7 +13,7 @@ command(
       type: "misc",
    },
    async (message, match) => {
-      let { fxop } = await axios.get("https://api.github.com/repos/FXastro/fxop-md");
+      let { data } = await axios.get("https://api.github.com/repos/FXastro/fxop-md");
       let mssg = `
     \`\`\`FXOP-MD Repo Stat\`\`\`\
     ╭════════════════❐
@@ -35,7 +35,7 @@ command(
                title: "fxop-md",
                body: joined,
                showAdAttribution: true,
-               thumbnail: fs.readFileSync("../media/images/thumb1.jpg"),
+               thumbnail: fs.readFileSync("../media/images/thumb.jpg"),
                mediaType: 4,
                MediaUrl: `https://whatsapp.com/channel/0029VambPbJ2f3ERs37HvM2J`,
                sourceUrl: `https://whatsapp.com/channel/0029VambPbJ2f3ERs37HvM2J`,
