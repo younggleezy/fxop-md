@@ -49,6 +49,6 @@
       "sqlite3": "^5.1.7",
       "stream": "^0.0.3",
       "stream-buffers": "^3.0.2",
-      "winston": "3.14.2"
+      "yt-search": "2.12.1"
    }
 }
