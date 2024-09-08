@@ -9,16 +9,17 @@ command(
     type: 'group',
   },
   async (message, match) => {
-    if (!message.isGroup) return message.reply('This command can be used in group');;
-        if (!isAdmin) { 
-     return await message.reply("_Youre not an admin_");
+    if (!message.isGroup) return message.reply('This command can be used in group');
+    if (!isAdmin) {
+      return await message.reply("_You're not an admin_");
     }
-      const meow = /autounmute\s*(on|off)?\s*([0-9]{2}:[0-9]{2})?/i;
-      const [_, toggle, time] = match.match(meow) || [];
+    const meow = /autounmute\s*(on|off)?\s*([0-9]{2}:[0-9]{2})?/i;
+    const [_, toggle, time] = match.match(meow) || [];
     if (toggle === 'on') {
       await message.reply("Auto-unmute_enabled");
       return;
-    }   if (toggle === 'off') {
+    }
+    if (toggle === 'off') {
       await message.reply("Auto-unmute_disabled");
       return;
     }
@@ -27,7 +28,8 @@ command(
       if (isNaN(hour) || isNaN(minute) || hour < 0 || hour > 23 || minute < 0 || minute > 59) {
         await message.reply("*use*: HH:MM.");
         return;
-      } const now = moment();
+      }
+      const now = moment();
       const naxor_ser = moment().hours(hour).minutes(minute).seconds(0);
       if (naxor_ser.isBefore(now)) {
         await message.reply("Please use_future *time*");
@@ -36,7 +38,7 @@ command(
       const delay = naxor_ser.diff(now);
       setTimeout(async () => {
         await message.client.groupSettingUpdate(message.jid, 'not_announcement');
-        await message.reply('*utomatically unmuted*');
+        await message.reply('*automatically unmuted*');
       }, delay);
       await message.reply(`Gc will be unmuted at ${time}`);
     } else {
@@ -45,7 +47,6 @@ command(
   }
 );
 
-const participants = groupMetadata.participants;
 let x_astrial = true;
 command(
   {
@@ -55,10 +56,11 @@ command(
   },
   async (message, match) => {
     if (!message.isGroup) return;
-        if (!isAdmin) {
-      await message.reply("Youre not an admin");
+    if (!isAdmin) {
+      await message.reply("You're not an admin");
       return;
-    } const action = match.trim().toLowerCase();
+    }
+    const action = match.trim().toLowerCase();
     if (action === 'on') {
       x_astrial = true;
       await message.reply("Admin protection enabled");
@@ -78,19 +80,21 @@ command(
     dontAddCommandList: true,
   },
   async (message) => {
-    const { action, participants } = message;
+    if (!message.isGroup) return;
     if (!x_astrial) return;
-    if (action === 'promote' || action === 'demote') {
-            if (!isAdmin) return;
-      const groupMetadata = await message.client.groupMetadata(message.jid);
-      const PAST_TEST = groupMetadata.participants.filter(v => v.admin !== null).map(v => v.id);
-      for (const participant of participants) {
-        if (action === 'promote' && !PAST_TEST.includes(participant)) {
-          await message.client.groupParticipantsUpdate(message.jid, [participant], 'promote');
-        } if (action === 'demote' && PAST_TEST.includes(participant)) {
-          await message.client.groupParticipantsUpdate(message.jid, [participant], 'demote');
-        }
+    if (!isAdmin) return;
+
+    const { action, participants } = message;
+    const groupMetadata = await message.client.groupMetadata(message.jid);
+    const PAST_TEST = groupMetadata.participants.filter(v => v.admin !== null).map(v => v.id);
+    for (const participant of participants) {
+      if (action === 'promote' && !PAST_TEST.includes(participant)) {
+        await message.client.groupParticipantsUpdate(message.jid, [participant], 'promote');
+      }
+      if (action === 'demote' && PAST_TEST.includes(participant)) {
+        await message.client.groupParticipantsUpdate(message.jid, [participant], 'demote');
       }
     }
   }
 );
+        
