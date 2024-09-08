@@ -24,8 +24,11 @@ command(
 ┃ *Forks*: _${data.forks}_
 ┃ *Code*: _${data.language}_
 ╰══════════❐
+
+ > *FXastro 2024*
+ > *Stars: ${data.stargazers_count}*
+ > *Forks: ${data.forks}*
     `;
-      mssg += `\n> Stars: ${data.stargazers_count}\n> Forks: ${data.forks}`;
       const thumbnailPath = "../media/images/thumb.jpg";
       const thumbnail = await buffpath(thumbnailPath);
       return await message.send(thumbnail, {
