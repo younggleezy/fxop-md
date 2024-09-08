@@ -2,7 +2,6 @@ const { command, mode, parsedJid, isAdmin } = require("../lib/");
 const { setMessage, getMessage, delMessage, getStatus, toggleStatus } = require("../lib/database").Greetings;
 const { banUser, unbanUser, isBanned } = require("../lib/database/ban");
 const { setAntiPromote, getAntiPromote, setAntiDemote, getAntiDemote } = require("../lib/database/groupSettings.js");
-const { getAntiWords, addStrike, resetStrikes, getStrikes } = require("../lib/database/antiword");
 command(
    {
       pattern: "add",
@@ -115,8 +114,8 @@ command(
    async (message, match, m, client) => {
       if (!message.isGroup) return await message.reply("_This command is for groups_");
       if (!isAdmin(message.jid, message.user, message.client)) return await message.reply("_I'm not admin_");
-      await message.reply("_Muting_");
-      return await client.groupSettingUpdate(message.jid, "announcement");
+      await client.groupSettingUpdate(message.jid, "announcement");
+      await message.sendReply("_Group Muted!_");
    }
 );
 
@@ -130,8 +129,8 @@ command(
    async (message, match, m, client) => {
       if (!message.isGroup) return await message.reply("_This command is for groups_");
       if (!isAdmin(message.jid, message.user, message.client)) return await message.reply("_I'm not admin_");
-      await message.reply("_Unmuting_");
-      return await client.groupSettingUpdate(message.jid, "not_announcement");
+      await client.groupSettingUpdate(message.jid, "not_announcement");
+      await message.sendReply("_Group Unmuted!_");
    }
 );
 
@@ -287,6 +286,37 @@ command(
 
 command(
    {
+      pattern: "antibot ?(on|off)?",
+      fromMe: mode,
+      desc: "Turn antibot on or off, or manage bot ban status",
+      type: "admin",
+   },
+   async (message, match) => {
+      const chatid = message.jid;
+      const isban = await isBanned(chatid);
+
+      if (!match[1]) {
+         return await message.reply(`Antibot is currently ${isban ? "on" : "off"}. Use 'antibot on' to enable or 'antibot off' to disable.`);
+      }
+
+      if (match[1].toLowerCase() === "on") {
+         if (isban) {
+            return await message.reply("Antibot is already on in this chat.");
+         }
+         await banUser(chatid);
+         return await message.reply("Antibot turned on. Bot will be removed if it sends a message.");
+      } else if (match[1].toLowerCase() === "off") {
+         if (!isban) {
+            return await message.reply("Antibot is already off in this chat.");
+         }
+         await unbanUser(chatid);
+         return await message.reply("Antibot turned off. Bot is now allowed in this chat.");
+      }
+   }
+);
+
+command(
+   {
       on: "message",
       fromMe: mode,
       dontAddCommandList: true,
@@ -295,45 +325,9 @@ command(
       if (!message.isBaileys) return;
       const isban = await isBanned(message.jid);
       if (!isban) return;
-      await message.reply("_Bot is banned in this chat_");
+      await message.reply("_Bot detected and will be removed from this chat_");
       const jid = parsedJid(message.participant);
       return await message.client.groupParticipantsUpdate(message.jid, jid, "remove");
-   }
-);
-
-command(
-   {
-      pattern: "banbot",
-      fromMe: mode,
-      desc: "ban bot from a chat",
-      type: "",
-   },
-   async (message, match) => {
-      const chatid = message.jid;
-      const isban = await isBanned(chatid);
-      if (isban) {
-         return await message.sendMessage(message.jid, "Bot is already banned");
-      }
-      await banUser(chatid);
-      return await message.sendMessage(message.jid, "Bot banned");
-   }
-);
-
-command(
-   {
-      pattern: "unbanbot",
-      fromMe: mode,
-      desc: "Unban bot from a chat",
-      type: "user",
-   },
-   async (message, match) => {
-      const chatid = message.jid;
-      const isban = await isBanned(chatid);
-      if (!isban) {
-         return await message.sendMessage(message.jid, "Bot is not banned");
-      }
-      await unbanUser(chatid);
-      return await message.sendMessage(message.jid, "Bot unbanned");
    }
 );
 
@@ -379,7 +373,7 @@ command(
 
 command(
    {
-      pattern: "groupname",
+      pattern: "gname",
       fromMe: mode,
       desc: "Change the group name",
       type: "group",
@@ -396,7 +390,7 @@ command(
 
 command(
    {
-      pattern: "groupdesc",
+      pattern: "gdesc",
       fromMe: mode,
       desc: "Change the group description",
       type: "group",
@@ -413,7 +407,7 @@ command(
 
 command(
    {
-      pattern: "grouppic",
+      pattern: "gpp",
       fromMe: mode,
       desc: "Change the group profile picture",
       type: "group",
@@ -458,33 +452,6 @@ command(
 
       const inviteCode = await message.client.groupInviteCode(message.jid);
       return await message.reply(`https://chat.whatsapp.com/${inviteCode}`);
-   }
-);
-
-command(
-   {
-      pattern: "ginfo",
-      fromMe: mode,
-      desc: "Get detailed group information",
-      type: "group",
-   },
-   async (message, match) => {
-      if (!message.isGroup) return await message.reply("_This command is for groups only_");
-
-      const groupMetadata = await message.client.groupMetadata(message.jid);
-      const admins = groupMetadata.participants.filter(p => p.admin).map(p => p.id);
-
-      let info = `*Group Name:* ${groupMetadata.subject}\n`;
-      info += `*Group ID:* ${groupMetadata.id}\n`;
-      info += `*Created On:* ${new Date(groupMetadata.creation * 1000).toLocaleString()}\n`;
-      info += `*Created By:* @${groupMetadata.owner.split("@")[0]}\n`;
-      info += `*Participant Count:* ${groupMetadata.participants.length}\n`;
-      info += `*Admin Count:* ${admins.length}\n`;
-      info += `*Description:* ${groupMetadata.desc || "No description"}\n`;
-
-      return await message.reply(info, {
-         mentions: [groupMetadata.owner, ...admins],
-      });
    }
 );
 
@@ -789,71 +756,6 @@ command(
                   await message.reply(`_Unauthorized demotion detected. User(s) have been re-promoted._`);
                }
             }
-         }
-      }
-   }
-);
-command(
-   {
-      pattern: "strikes ?(.*)",
-      fromMe: true,
-      desc: "Check or reset user strikes",
-      type: "group",
-   },
-   async (message, match) => {
-      if (!message.isGroup) return await message.reply("_This command is for groups only_");
-
-      const [action, mentionedJid] = match[1].split(" ");
-      const userId = mentionedJid || (message.reply_message ? message.reply_message.sender : null);
-
-      if (!userId) return await message.reply("_Please mention a user or reply to their message_");
-
-      switch (action.toLowerCase()) {
-         case "check":
-            const strikes = await getStrikes(message.jid, userId);
-            return await message.reply(`_User @${userId.split("@")[0]} has ${strikes} strike(s)._`);
-
-         case "reset":
-            await resetStrikes(message.jid, userId);
-            return await message.reply(`_Strikes reset for user @${userId.split("@")[0]}._`);
-
-         default:
-            return await message.reply("_Invalid action. Use 'check' or 'reset'_");
-      }
-   }
-);
-
-const MAX_STRIKES = 3; // Number of strikes before action is taken
-
-command(
-   {
-      on: "text",
-      fromMe: false,
-   },
-   async message => {
-      if (!message.isGroup) return; // Only check in groups
-
-      const antiWords = await getAntiWords(message.jid);
-      if (antiWords.length === 0) return;
-
-      const lowerCaseMessage = message.text.toLowerCase();
-      const containsAntiWord = antiWords.some(word => lowerCaseMessage.includes(word));
-
-      if (containsAntiWord) {
-         await message.delete();
-         const strikes = await addStrike(message.jid, message.sender);
-
-         if (strikes < MAX_STRIKES) {
-            await message.reply(`_Warning: Your message was deleted because it contained a prohibited word. You have ${strikes} strike(s). At ${MAX_STRIKES} strikes, you will be removed from the group._`);
-         } else {
-            try {
-               await message.client.groupParticipantsUpdate(message.jid, [message.sender], "remove");
-               await message.reply(`_User @${message.sender.split("@")[0]} has been removed from the group for repeated violations._`);
-            } catch (error) {
-               console.error("Failed to remove user:", error);
-               await message.reply("_Failed to remove user. Please ensure the bot has admin privileges._");
-            }
-            await resetStrikes(message.jid, message.sender);
          }
       }
    }
