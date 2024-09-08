@@ -9,6 +9,7 @@ module.exports = {
    SUDO: process.env.SUDO || "2348039607375,2349162411207,4915252819677",
    ANTICALL: process.env.ANTICALL || false,
    PRESENCE: process.env.PRESENCE || "available", // "unavailable", "available", "composing", "recording", "paused"
+   CAPTION: process.env.CAPTION || "© ғxᴏᴘ ᴍᴅ",
    TIME_ZONE: process.env.TIME_ZONE || "Africa/Lagos",
    LOGS: toBool(process.env.LOGS) || true,
    ANTILINK_ACTION: process.env.ANTI_LINK || "kick",
