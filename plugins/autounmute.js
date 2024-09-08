@@ -10,8 +10,7 @@ command(
   },
   async (message, match) => {
     if (!message.isGroup) return message.reply('This command can be used in group');;
-    const isAdmin = await isBotAdmin(message);
-    if (!isAdmin) { 
+        if (!isAdmin) { 
      return await message.reply("_Youre not an admin_");
     }
       const meow = /autounmute\s*(on|off)?\s*([0-9]{2}:[0-9]{2})?/i;
@@ -56,8 +55,7 @@ command(
   },
   async (message, match) => {
     if (!message.isGroup) return;
-    const isAdmin = await isBotAdmin(message);
-    if (!isAdmin) {
+        if (!isAdmin) {
       await message.reply("Youre not an admin");
       return;
     } const action = match.trim().toLowerCase();
@@ -83,8 +81,7 @@ command(
     const { action, participants } = message;
     if (!x_astrial) return;
     if (action === 'promote' || action === 'demote') {
-      const isAdmin = await isBotAdmin(message);
-      if (!isAdmin) return;
+            if (!isAdmin) return;
       const groupMetadata = await message.client.groupMetadata(message.jid);
       const PAST_TEST = groupMetadata.participants.filter(v => v.admin !== null).map(v => v.id);
       for (const participant of participants) {
