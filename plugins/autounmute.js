@@ -50,4 +50,53 @@ const isBotAdmin = async (message) => {
   const groupAdmins = participants.filter(v => v.admin !== null).map(v => v.id);
   return groupAdmins.includes(message.pushName);
 };
-      
+let x_astrial = true;
+command(
+  {
+    pattern: "protect",
+    fromMe: mode,
+    dontAddCommandList: true,
+  },
+  async (message, match) => {
+    if (!message.isGroup) return;
+    const isAdmin = await isBotAdmin(message);
+    if (!isAdmin) {
+      await message.reply("Youre not an admin");
+      return;
+    } const action = match.trim().toLowerCase();
+    if (action === 'on') {
+      x_astrial = true;
+      await message.reply("Admin protection enabled");
+    } else if (action === 'off') {
+      x_astrial = false;
+      await message.reply("Admin protection disabled");
+    } else {
+      await message.reply("e.g protect on/off");
+    }
+  }
+);
+
+command(
+  {
+    on: 'gcupdate',
+    fromMe: mode,
+    dontAddCommandList: true,
+  },
+  async (message) => {
+    const { action, participants } = message;
+    if (!x_astrial) return;
+    if (action === 'promote' || action === 'demote') {
+      const isAdmin = await isBotAdmin(message);
+      if (!isAdmin) return;
+      const groupMetadata = await message.client.groupMetadata(message.jid);
+      const PAST_TEST = groupMetadata.participants.filter(v => v.admin !== null).map(v => v.id);
+      for (const participant of participants) {
+        if (action === 'promote' && !PAST_TEST.includes(participant)) {
+          await message.client.groupParticipantsUpdate(message.jid, [participant], 'promote');
+        } if (action === 'demote' && PAST_TEST.includes(participant)) {
+          await message.client.groupParticipantsUpdate(message.jid, [participant], 'demote');
+        }
+      }
+    }
+  }
+);
