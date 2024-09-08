@@ -153,7 +153,8 @@ command(
       const { prefix } = msg.prefix;
       if (!cont) return await msg.sendReply(`_Provide Me Song Name_\n\n${prefix} play Just the two of us`);
       await msg.sendReply("_Downloading_");
-      const audio = await ScrapeDl["play"](cont);
-      return await msg.sendFile(audio);
+      let audio = await ScrapeDl["play"](cont);
+      audio = await toAudio(audio, "mp3");
+      return await msg.sendMessage(message.jid, audio, { mimetype: "audio/mpeg" }, "audio");
    }
 );
