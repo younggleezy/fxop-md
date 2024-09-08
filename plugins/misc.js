@@ -35,7 +35,7 @@ command(
                title: "fxop-md",
                body: joined,
                showAdAttribution: true,
-               thumbnail: fs.readFileSync("../media/images/thumb.jpg"),
+               thumbnail: fs.readFileSync("./thumb.jpg"),
                mediaType: 4,
                MediaUrl: `https://whatsapp.com/channel/0029VambPbJ2f3ERs37HvM2J`,
                sourceUrl: `https://whatsapp.com/channel/0029VambPbJ2f3ERs37HvM2J`,
