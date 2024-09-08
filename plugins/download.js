@@ -153,7 +153,7 @@ command(
       const { prefix } = msg.prefix;
       if (!cont) return await msg.sendReply(`_Provide Me Song Name_\n\n${prefix} play Just the two of us`);
       await msg.sendReply("_Downloading_");
-      const audio = ScrapeDl["play"](cont);
+      const audio = await ScrapeDl["play"](cont);
       return await msg.sendFile(audio);
    }
 );
