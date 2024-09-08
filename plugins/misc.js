@@ -16,7 +16,7 @@ command(
       let { data } = await axios.get("https://api.github.com/repos/FXastro/fxop-md");
       let mssg = `
 ╭──────────────
-│\t\`\`\`SCRIPT\`\`\`\
+│\t\`\`\`SCRIPT\`\`\`\n
 │╭──────────────
 ││ *Owner:* _*FXastro*_
 ││ *Repo:* _https://github.com/FXastro/fxop-md_
