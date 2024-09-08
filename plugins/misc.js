@@ -11,6 +11,47 @@ const {
 } = require("../lib/");
 const { buffpath } = require("../media");
 const { PluginDB, installPlugin } = require("../lib/database").Plugins;
+const fs = require("fs")
+
+
+command(
+  { 
+    pattern: "repo",
+    fromMe: mode,
+    desc: "Repo",
+    type: "misc"
+  }, async (message, match) => {
+    let { fxop } = await axios.get('https://api.github.com/repos/FXastro/fxop-md')
+    let mssg = `
+    \`\`\`FXOP-MD Repo Stat\`\`\`\
+    ╭════════════════❐
+    ┃*Owner*: _*FXastro*_
+    ┃*Repo*: _https://github.com/FXastro/fxop-md_
+    ┃*Stars*: _${data.stargazers_count}_
+    ┃*Forks*: _${data.forks}_
+    ┃*Code*: _${data.Language}_
+    ┃*Channel*: _https://whatsapp.com/channel/0029VambPbJ2f3ERs37HvM2J_
+    ╰════════════════❐
+    > *FXastro 2024*
+    `
+    let joined = `Stars: ${data.stargazers_count}\nForks: ${data.forks}`
+    let button = {
+image: { url: "https://ibb.co/Srw3jhW" },
+caption: mssg,
+contextInfo:{externalAdReply:{
+title: 'fxop-md',
+body: joined,
+showAdAttribution: true,
+thumbnail: fs.readFileSync("../media/images/thumb1.jpg"),
+mediaType: 4,
+MediaUrl:`https://whatsapp.com/channel/0029VambPbJ2f3ERs37HvM2J`,
+sourceUrl:`https://whatsapp.com/channel/0029VambPbJ2f3ERs37HvM2J`,
+}}
+};
+
+    await message.sendMessage(message.jid, button, { quoted: message })
+  })
+
 
 command(
   {
