@@ -69,10 +69,6 @@
    - `SUDO`: Administrator contact number (e.g., `+1234567890`).
    - `WORKTYPE`: Operational mode, either "public" or "private".
 
-### Contributions
-
-We welcome community contributions. Please review our [Contribution Guidelines](CONTRIBUTING.md) before submitting pull requests.
-
 ### Support
 
 For technical assistance and updates, join our [official WhatsApp channel](https://whatsapp.com/channel/0029VambPbJ2f3ERs37HvM2J).
