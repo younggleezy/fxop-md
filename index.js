@@ -53,7 +53,8 @@ class BotSystem {
 session
 .env
 package-lock.json
-database.db`;
+database.db
+temp`;
 
       fs.writeFile(".gitignore", content, err => {
          if (err) {
