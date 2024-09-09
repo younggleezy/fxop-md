@@ -1,143 +1,341 @@
-const { command, mode } = require("../lib");
+const os = require("os");
+const fs = require("fs");
+const axios = require("axios");
+const plugins = require("../lib/plugins");
+const { command, mode, getBuffer, runtime, tiny, formatBytes, buffpath } = require("../lib");
 const { exec } = require("child_process");
-const simpleGit = require("simple-git");
-const git = simpleGit();
-
-async function checkForUpdates() {
-  try {
-    await git.fetch();
-    const status = await git.status();
-    return status.behind > 0;
-  } catch (error) {
-    console.error("Error checking for updates:", error);
-    return false;
-  }
-}
-
-async function updateNow() {
-  try {
-    console.log("Stashing local changes...");
-    await git.stash();
-
-    console.log("Pulling latest changes...");
-    await git.pull();
-
-    return true;
-  } catch (error) {
-    console.error("Error during update:", error);
-    return false;
-  }
-}
-
-const restart = () => {
-  exec("npm restart", (error, stdout, stderr) => {
-    if (error) {
-      console.error(`Error restarting process: ${error.message}`);
-      return;
-    }
-    if (stderr) {
-      console.error(`stderr: ${stderr}`);
-      return;
-    }
-    console.log(`stdout: ${stdout}`);
-  });
-};
+const { PluginDB, installPlugin } = require("../lib/database").Plugins;
+const { BOT_INFO, TIME_ZONE } = require("../config");
 
 command(
-  {
-    pattern: "update",
-    fromMe: mode,
-    info: "Check for updates",
-    type: "system",
-  },
-  async (message) => {
-    const hasUpdates = await checkForUpdates();
-
-    if (!hasUpdates) {
-      await message.send("You are on the latest version.");
-      return;
-    }
-
-    await message.send("Updating...");
-    const updateSuccess = await updateNow();
-
-    if (updateSuccess) {
-      await message.send("```Updated, Restarting```");
-      setTimeout(() => {
-        restart();
-      }, 3000);
-    } else {
-      await message.send("Update failed. Please try again later.");
-    }
-  },
+   {
+      pattern: "runtime",
+      fromMe: mode,
+      desc: "Check uptime of bot",
+      type: "whatsapp",
+   },
+   async (message, match) => {
+      message.reply(`*Uptime: ${runtime(process.uptime())}*`);
+   }
 );
 
 command(
-  {
-    pattern: "upgrade",
-    fromMe: mode,
-    desc: "Upgrade project dependencies",
-    type: "system",
-  },
-  async (message, match) => {
-    await message.reply("Upgrading dependencies... Please wait.");
-
-    exec("npm install && npm upgrade", (error, stdout, stderr) => {
-      if (error) {
-        message.reply(`Upgrade failed: ${error.message}`);
-        return;
-      }
-      if (stderr) {
-        message.reply(`Upgrade process encountered some issues: ${stderr}`);
-        return;
-      }
-      message.reply(`Successfully upgraded dependencies:\n\n${stdout}`);
-    });
-  },
+   {
+      pattern: "restart",
+      fromeMe: true,
+      desc: "Restart's the bot",
+      type: "system",
+   },
+   async message => {
+      await message.sendReply("*_Restarting, hold on_*");
+      exec("npm restart all", (error, stdout, stderr) => {
+         if (error) {
+            console.error(`Error restarting process: ${error.message}`);
+            return;
+         }
+         if (stderr) {
+            console.error(`stderr: ${stderr}`);
+            return;
+         }
+         console.log(`stdout: ${stdout}`);
+      });
+   }
 );
 
 command(
-  {
-    pattern: "restart",
-    fromeMe: true,
-    desc: "Restart's the bot",
-    type: "system",
-  },
-  async (message) => {
-    await message.sendReply("*_Restarting, hold on_*");
-    exec("npm restart", (error, stdout, stderr) => {
-      if (error) {
-        console.error(`Error restarting process: ${error.message}`);
-        return;
-      }
-      if (stderr) {
-        console.error(`stderr: ${stderr}`);
-        return;
-      }
-      console.log(`stdout: ${stdout}`);
-    });
-  },
+   {
+      pattern: "shutdown",
+      fromeMe: true,
+      desc: "Shutdown the bot",
+      type: "system",
+   },
+   async message => {
+      await message.sendReply("_Shutting Down_");
+      exec("npm stop all", (error, stdout, stderr) => {
+         if (error) {
+            console.error(`Error restarting process: ${error.message}`);
+            return;
+         }
+         if (stderr) {
+            console.error(`stderr: ${stderr}`);
+            return;
+         }
+         console.log(`stdout: ${stdout}`);
+      });
+   }
 );
 
 command(
-  {
-    pattern: "shutdown",
-    fromeMe: true,
-    desc: "Shutdown the bot",
-    type: "system",
-  },
-  async (message) => {
-    await message.sendReply("*_Restarting, hold on_*");
-    exec("npm restart", (error, stdout, stderr) => {
-      if (error) {
-        console.error(`Error restarting process: ${error.message}`);
-        return;
+   {
+      pattern: "ping ?(.*)",
+      fromMe: mode,
+      desc: "Bot response in milliseconds.",
+      type: "system",
+   },
+   async message => {
+      const start = new Date().getTime();
+      const msg = await message.reply("Checking");
+      const end = new Date().getTime();
+      const responseTime = (end - start) / 1000;
+      await msg.edit(`*ʀᴇsᴘᴏɴsᴇ ʀᴀᴛᴇ ${responseTime} secs*`);
+   }
+);
+
+command(
+   {
+      pattern: "alive",
+      fromMe: mode,
+      desc: "Shows system status with different designs.",
+      type: "misc",
+   },
+   async message => {
+      const aliveMessage = `
+    ғxᴏᴘ ʙᴏᴛ ɪs ᴏɴʟɪɴᴇ ᴀɴᴅ ᴀᴄᴛɪᴠᴇ
+    `;
+      const thumbnailPath = "../media/images/thumb.jpg";
+      const thumbnail = await buffpath(thumbnailPath);
+      try {
+         await message.send(thumbnail, {
+            caption: aliveMessage,
+            contextInfo: {
+               forwardingScore: 1,
+               isForwarded: true,
+               forwardedNewsletterMessageInfo: {
+                  newsletterJid: "120363327841612745@newsletter",
+                  newsletterName: "ᴀʟɪᴠᴇ ᴍsɢ",
+               },
+            },
+         });
+      } catch (error) {
+         console.error("Error sending alive message:", error);
+         await message.reply("An error occurred while sending the alive message. Please try again later.");
       }
-      if (stderr) {
-        console.error(`stderr: ${stderr}`);
-        return;
+   }
+);
+
+command(
+   {
+      pattern: "install",
+      fromMe: mode,
+      desc: "Installs External plugins",
+      type: "system",
+   },
+   async (message, match) => {
+      if (!match) return await message.sendMessage(message.jid, "_Send a plugin url_");
+
+      try {
+         var url = new URL(match);
+      } catch (e) {
+         console.log(e);
+         return await message.sendMessage(message.jid, "_Invalid Url_");
       }
-      console.log(`stdout: ${stdout}`);
-    });
-  },
+
+      if (url.host === "gist.github.com") {
+         url.host = "gist.githubusercontent.com";
+         url = url.toString() + "/raw";
+      } else {
+         url = url.toString();
+      }
+
+      var plugin_name;
+      try {
+         const { data, status } = await axios.get(url);
+         if (status === 200) {
+            var comand = data.match(/(?<=pattern:) ["'](.*?)["']/);
+            plugin_name = comand[0].replace(/["']/g, "").trim().split(" ")[0];
+            if (!plugin_name) {
+               plugin_name = "__" + Math.random().toString(36).substring(8);
+            }
+            fs.writeFileSync(__dirname + "/" + plugin_name + ".js", data);
+            try {
+               require("./" + plugin_name);
+            } catch (e) {
+               fs.unlinkSync(__dirname + "/" + plugin_name + ".js");
+               return await message.sendMessage(message.jid, "Invalid Plugin\n ```" + e + "```");
+            }
+
+            await installPlugin(url, plugin_name);
+
+            await message.sendMessage(message.jid, `_New plugin installed : ${plugin_name}_`);
+         }
+      } catch (error) {
+         console.error(error);
+         return await message.sendMessage(message.jid, "Failed to fetch plugin");
+      }
+   }
+);
+
+command(
+   {
+      pattern: "plugin",
+      fromMe: mode,
+      desc: "plugin list",
+      type: "system",
+   },
+   async (message, match) => {
+      var mesaj = "";
+      var plugins = await PluginDB.findAll();
+      if (plugins.length < 1) {
+         return await message.sendMessage(message.jid, "_No external plugins installed_");
+      } else {
+         plugins.map(plugin => {
+            mesaj += "```" + plugin.dataValues.name + "```: " + plugin.dataValues.url + "\n";
+         });
+         return await message.sendMessage(message.jid, mesaj);
+      }
+   }
+);
+
+command(
+   {
+      pattern: "remove",
+      fromMe: mode,
+      desc: "Remove external plugins",
+      type: "misc",
+   },
+   async (message, match) => {
+      if (!match) return await message.sendMessage(message.jid, "_Need a plugin name_");
+
+      var plugin = await PluginDB.findAll({ where: { name: match } });
+
+      if (plugin.length < 1) {
+         return await message.sendMessage(message.jid, "_Plugin not found_");
+      } else {
+         await plugin[0].destroy();
+         delete require.cache[require.resolve("./" + match + ".js")];
+         fs.unlinkSync(__dirname + "/" + match + ".js");
+         await message.sendMessage(message.jid, `Plugin ${match} deleted`);
+      }
+   }
+);
+
+command(
+   {
+      pattern: "menu",
+      fromMe: mode,
+      desc: "Show All Commands",
+      type: "user",
+   },
+   async (message, match) => {
+      if (match) {
+         const matchedCommands = plugins.commands.filter(i => i.pattern instanceof RegExp && i.pattern.test(message.prefix + match));
+         matchedCommands.forEach(i => {
+            const cmdName = i.pattern.toString().split(/\W+/)[1];
+            message.reply(`\`\`\`Command: ${message.prefix}${cmdName.trim()}\nDescription: ${i.desc}\`\`\``);
+         });
+         return;
+      }
+
+      const { prefix } = message;
+      const [date, time] = new Date().toLocaleString("en-IN", { timeZone: TIME_ZONE }).split(",");
+      let menu = `\`\`\`╭━━━ ${BOT_INFO.split(";")[1]} ━━━┈⊷
+││ User:  ${message.pushName}
+││ Prefix: ${prefix}
+││ Date: ${date}
+││ Time: ${time}
+││ Plugins: ${plugins.commands.length} 
+││ Uptime: ${runtime(process.uptime())} 
+││ Ram: ${formatBytes(os.totalmem() - os.freemem())} / ${formatBytes(os.totalmem())}
+││ Version: ${require("../package.json").version}
+│╰──────────────
+╰━━━━━━━━━━━━━━━┈⊷\`\`\`\n`;
+
+      const categorizedCommands = plugins.commands.reduce((acc, command) => {
+         if (command.pattern instanceof RegExp && !command.dontAddCommandList) {
+            const cmd = command.pattern.toString().split(/\W+/)[1];
+            const type = (command.type || "misc").toLowerCase();
+            if (!acc[type]) acc[type] = [];
+            acc[type].push(tiny(cmd));
+         }
+         return acc;
+      }, {});
+
+      Object.keys(categorizedCommands)
+         .sort()
+         .forEach(category => {
+            menu += `\n╭── *${tiny(category)}* ━━──⊷\n│╭──────────────\n`;
+            categorizedCommands[category].forEach(cmd => {
+               menu += `││ ${cmd}\n`;
+            });
+            menu += `│╰───────────\n╰━━━━━━━━━━━━━──⊷\n`;
+         });
+
+      const menuMedia = BOT_INFO.split(";")[2];
+      if (!menuMedia) {
+         message.send(menu, {
+            contextInfo: {
+               forwardingScore: 1,
+               isForwarded: true,
+               forwardedNewsletterMessageInfo: {
+                  newsletterJid: "120363327841612745@newsletter",
+                  newsletterName: `Version ${require("../package.json").version}`,
+               },
+            },
+         });
+      } else {
+         try {
+            const buff = await getBuffer(menuMedia);
+            message.send(buff, {
+               caption: menu,
+               contextInfo: {
+                  forwardingScore: 1,
+                  isForwarded: true,
+                  forwardedNewsletterMessageInfo: {
+                     newsletterJid: "120363327841612745@newsletter",
+                     newsletterName: `Version ${require("../package.json").version}`,
+                  },
+               },
+            });
+         } catch (error) {
+            console.error("Failed to send media:", error);
+            message.send(menu);
+         }
+      }
+   }
+);
+
+command(
+   {
+      pattern: "list",
+      fromMe: mode,
+      desc: "Show All Commands",
+      dontAddCommandList: true,
+   },
+   async (message, match, { prefix }) => {
+      let menu = "\t\t```Command List```\n";
+      const commands = plugins.commands
+         .filter(command => command.pattern && !command.dontAddCommandList)
+         .map(command => ({
+            cmd: command.pattern.toString().split(/\W+/)[1],
+            desc: command.desc || "",
+         }))
+         .sort((a, b) => a.cmd.localeCompare(b.cmd));
+
+      commands.forEach(({ cmd, desc }, index) => {
+         menu += `\`\`\`${index + 1} ${cmd.trim()}\`\`\`\n`;
+         if (desc) menu += `Use: \`\`\`${desc}\`\`\`\n\n`;
+      });
+
+      await message.reply(menu);
+   }
+);
+command(
+   {
+      on: "text",
+      fromMe: true,
+      dontAddCommandList: true,
+   },
+   async (message, match) => {
+      const messageText = message.text || message.message?.text || "";
+      if (messageText.startsWith("$") || messageText.startsWith(">")) {
+         const code = messageText.slice(1).trim();
+         try {
+            const result = eval(code);
+            const output = typeof result === "string" ? result : JSON.stringify(result, null, 2);
+            await message.reply(`Execution Result:\n\`\`\`\n${output}\n\`\`\``);
+         } catch (error) {
+            await message.reply(`Error:\n\`\`\`\n${error.message}\n\`\`\``);
+         }
+      }
+   }
 );

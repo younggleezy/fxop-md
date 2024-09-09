@@ -1,5 +1,5 @@
 const { command, mode, toAudio, IronMan } = require("../lib");
-const ScrapeDl = require("../lib/scraper");
+const scraper = require("../lib/scraper");
 command(
    {
       pattern: "fb",
@@ -10,7 +10,7 @@ command(
    async (message, match) => {
       if (!match) return message.reply("_provide vaild facebook link_");
       await message.reply("_Downloading_");
-      const buff = await ScrapeDl.facebook(match);
+      const buff = await scraper.facebook(match);
       return message.sendFile(buff);
    }
 );
@@ -25,7 +25,7 @@ command(
    async (message, match) => {
       if (!match) return message.reply("_provide vaild instagram link_");
       await message.reply("_Downloading_");
-      const buff = await ScrapeDl.instagram(match);
+      const buff = await scraper.instagram(match);
       return message.sendFile(buff);
    }
 );
@@ -40,7 +40,7 @@ command(
    async (message, match) => {
       if (!match) return message.reply("_provide vaild twitter url_");
       await message.reply("_Downloading_");
-      const buff = await ScrapeDl.twitter(match);
+      const buff = await scraper.twitter(match);
       return await message.sendFile(buff);
    }
 );
@@ -55,7 +55,7 @@ command(
    async (message, match) => {
       if (!match) return await message.reply("_provide tiktok url_");
       await message.reply("_Downloading_");
-      const buff = await ScrapeDl.tiktok(match);
+      const buff = await scraper.tiktok(match);
       return await message.sendFile(buff);
    }
 );
@@ -70,7 +70,7 @@ command(
    async (message, match) => {
       if (!match) return message.reply("_provide me a searching option_");
       await message.reply("_Searching_");
-      const buffers = await ScrapeDl.pinterest(match);
+      const buffers = await scraper.pinterest(match);
       for (const buffer of buffers) {
          await message.sendFile(buffer);
       }
@@ -87,7 +87,7 @@ command(
    async (message, match) => {
       if (!match) return message.reply("_provide me spotify url_");
       await message.reply("_Downloading_");
-      const buff = await ScrapeDl.spotify(match);
+      const buff = await scraper.spotify(match);
       const audio = await toAudio(buff, "mp3");
       return await msg.sendMessage(msg.jid, audio, { mimetype: "audio/mpeg" }, "audio");
    }
@@ -103,7 +103,7 @@ command(
    async (message, match) => {
       if (!match) return message.reply("_provide youtube url_");
       await message.reply("_Downloading_");
-      const buff = await ScrapeDl.youtube(match);
+      const buff = await scraper.youtube(match);
       return await message.sendFile(buff);
    }
 );
@@ -118,7 +118,7 @@ command(
    async (message, match) => {
       if (!match) return await message.reply("_provide youtube music_");
       await message.reply("_Downloading_");
-      const buff = await ScrapeDl.ytmp3(match);
+      const buff = await scraper.ytmp3(match);
       return await message.sendFile(buff);
    }
 );
@@ -153,7 +153,7 @@ command(
       const { prefix } = msg.prefix;
       if (!cont) return await msg.sendReply(`_Provide Me Song Name_\n\n${prefix} play Just the two of us`);
       await msg.sendReply("_Downloading_");
-      let audio = await ScrapeDl["play"](cont);
+      let audio = await scraper["play"](cont);
       audio = await toAudio(audio, "mp3");
       return await msg.sendMessage(msg.jid, audio, { mimetype: "audio/mpeg" }, "audio");
    }
