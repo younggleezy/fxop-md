@@ -1,4 +1,4 @@
-const { command, serialize, parsedJid, parsedJid } = require("../lib/");
+const { command, serialize, parsedJid } = require("../lib/");
 const { DELETED_LOG_CHAT, DELETED_LOG, STATUS_SAVER } = require("../config");
 const { loadMessage, getName } = require("../lib/database/StoreDb");
 const { PausedChats, WarnDB } = require("../lib/database");
