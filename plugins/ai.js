@@ -1,4 +1,4 @@
-const { command, mode, askAi, toAudio } = require("../lib");
+const { command, mode, askAi, toPTT } = require("../lib");
 const aiResponse = require("../lib/scraper");
 const config = require("../config");
 
@@ -191,7 +191,7 @@ command(
       if (!match) return message.sendReply("_provide text_");
       await message.sendReply("_Wait_");
       let audio = await aiResponse.elevenlabs(match);
-      audio = await toAudio(audio, "mp3");
+      audio = await toPTT(audio, "mp3");
       return await msg.sendMessage(msg.jid, audio, { mimetype: "audio/mpeg" }, "audio");
    }
 );
