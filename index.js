@@ -2,7 +2,7 @@ const fs = require("fs").promises;
 const path = require("path");
 const express = require("express");
 const config = require("./config");
-const { connect, writeSession, patch, parseDir } = require("./lib");
+const { connect, writeSession, patch, parseDir, sleep } = require("./lib");
 const { getandRequirePlugins } = require("./lib/database/plugins");
 
 class BotSystem {
@@ -16,6 +16,7 @@ class BotSystem {
       try {
          await patch();
          await writeSession();
+         await sleep(2000)
          await parseDir(path.join(__dirname, "/lib/database/"));
          console.log("Syncing Database");
          await config.DATABASE.sync();
