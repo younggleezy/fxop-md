@@ -1,7 +1,7 @@
 const fs = require("fs");
 const axios = require("axios");
 const config = require("../config");
-const { command, qrcode, mode, readQr, removeBg, shortenUrl } = require("../lib/");
+const { command, qrcode, mode, readQr, removeBg, shortenUrl, gtts } = require("../lib/");
 const { buffpath } = require("../media");
 const { PluginDB, installPlugin } = require("../lib/database").Plugins;
 
@@ -236,5 +236,20 @@ command(
       const url = await shortenUrl(match);
       const msg = `_Here's your link *${url}*_`;
       return await message.send(msg);
+   }
+);
+
+command(
+   {
+      pattern: "tts",
+      fromMe: mode,
+      desc: "Google Text to Speech",
+      type: "misc",
+   },
+   async (m, match) => {
+      if (!match) return await m.sendReply("_Provide me text_");
+      await m.send("_processing_");
+      const request = await gtts(match);
+      return await m.sendFile(request);
    }
 );
