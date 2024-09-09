@@ -15,7 +15,7 @@ command(
       const processedMsg = await aiResponse.coderAi(match);
       return await message.send(processedMsg, {
          contextInfo: {
-            forwardingScore: 1,
+            forwardingScore: 999,
             isForwarded: true,
             forwardedNewsletterMessageInfo: {
                newsletterJid: "120363327841612745@newsletter",
@@ -35,11 +35,11 @@ command(
    },
    async (message, match) => {
       if (!match) return await message.sendReply("_Hello How Can I Assist You Today?_");
-      await message.reply("_Hold On!_");
+      await message.reply("_Thinking_");
       const processedMsg = await aiResponse.gpt4(match);
       return await message.send(processedMsg, {
          contextInfo: {
-            forwardingScore: 1,
+            forwardingScore: 999,
             isForwarded: true,
             forwardedNewsletterMessageInfo: {
                newsletterJid: "120363327841612745@newsletter",
@@ -63,7 +63,7 @@ command(
       const processedMsg = await aiResponse.lamda(match);
       return await message.send(processedMsg, {
          contextInfo: {
-            forwardingScore: 1,
+            forwardingScore: 999,
             isForwarded: true,
             forwardedNewsletterMessageInfo: {
                newsletterJid: "120363327841612745@newsletter",
@@ -89,7 +89,7 @@ command(
       return await message.send(processedImg, {
          caption: ImgMessage,
          contextInfo: {
-            forwardingScore: 1,
+            forwardingScore: 999,
             isForwarded: true,
             forwardedNewsletterMessageInfo: {
                newsletterJid: "120363327841612745@newsletter",
@@ -119,7 +119,7 @@ command(
       return await message.send(upscaledBuffer, {
          caption: upscaleMsg,
          contextInfo: {
-            forwardingScore: 1,
+            forwardingScore: 999,
             isForwarded: true,
             forwardedNewsletterMessageInfo: {
                newsletterJid: "120363327841612745@newsletter",
@@ -139,13 +139,13 @@ command(
    },
    async (msg, match) => {
       if (!match) return await msg.send("_Provide me query!_");
-      await msg.sendReply("_Generating Images!_");
+      await msg.sendReply("_Generating Image!_");
       const dalleImg = await aiResponse.dalle(match);
       const dalleMsg = config.CAPTION;
       return msg.send(dalleImg, {
          caption: dalleMsg,
          contextInfo: {
-            forwardingScore: 1,
+            forwardingScore: 999,
             isForwarded: true,
             forwardedNewsletterMessageInfo: {
                newsletterJid: "120363327841612745@newsletter",
@@ -169,7 +169,7 @@ command(
       const bingResponse = await aiResponse.bing(match);
       return message.send(bingResponse, {
          contextInfo: {
-            forwardingScore: 1,
+            forwardingScore: 999,
             isForwarded: true,
             forwardedNewsletterMessageInfo: {
                newsletterJid: "120363327841612745@newsletter",

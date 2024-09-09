@@ -98,7 +98,7 @@ command(
          await message.send(thumbnail, {
             caption: aliveMessage,
             contextInfo: {
-               forwardingScore: 1,
+               forwardingScore: 999,
                isForwarded: true,
                forwardedNewsletterMessageInfo: {
                   newsletterJid: "120363327841612745@newsletter",
@@ -264,7 +264,7 @@ command(
       if (!menuMedia) {
          message.send(menu, {
             contextInfo: {
-               forwardingScore: 1,
+               forwardingScore: 999,
                isForwarded: true,
                forwardedNewsletterMessageInfo: {
                   newsletterJid: "120363327841612745@newsletter",
@@ -278,7 +278,7 @@ command(
             message.send(buff, {
                caption: menu,
                contextInfo: {
-                  forwardingScore: 1,
+                  forwardingScore: 999,
                   isForwarded: true,
                   forwardedNewsletterMessageInfo: {
                      newsletterJid: "120363327841612745@newsletter",

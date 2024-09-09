@@ -143,7 +143,7 @@ command(
       const img = await logo.glossysilver(match);
       return m.send(img, {
          contextInfo: {
-            forwardingScore: 1,
+            forwardingScore: 999,
             isForwarded: true,
             forwardedNewsletterMessageInfo: {
                newsletterJid: "120363327841612745@newsletter",
@@ -168,7 +168,7 @@ command(
       const img = await logo.writetext(match);
       return m.send(img, {
          contextInfo: {
-            forwardingScore: 1,
+            forwardingScore: 999,
             isForwarded: true,
             forwardedNewsletterMessageInfo: {
                newsletterJid: "120363327841612745@newsletter",
@@ -193,7 +193,7 @@ command(
       const img = await logo.blackpinklogo(match);
       return m.send(img, {
          contextInfo: {
-            forwardingScore: 1,
+            forwardingScore: 999,
             isForwarded: true,
             forwardedNewsletterMessageInfo: {
                newsletterJid: "120363327841612745@newsletter",
@@ -218,7 +218,7 @@ command(
       const img = await logo.glitchtext(match);
       return m.send(img, {
          contextInfo: {
-            forwardingScore: 1,
+            forwardingScore: 999,
             isForwarded: true,
             forwardedNewsletterMessageInfo: {
                newsletterJid: "120363327841612745@newsletter",
@@ -243,7 +243,7 @@ command(
       const img = await logo.advancedglow(match);
       return m.send(img, {
          contextInfo: {
-            forwardingScore: 1,
+            forwardingScore: 999,
             isForwarded: true,
             forwardedNewsletterMessageInfo: {
                newsletterJid: "120363327841612745@newsletter",
@@ -268,7 +268,7 @@ command(
       const img = await logo.typographytext(match);
       return m.send(img, {
          contextInfo: {
-            forwardingScore: 1,
+            forwardingScore: 999,
             isForwarded: true,
             forwardedNewsletterMessageInfo: {
                newsletterJid: "120363327841612745@newsletter",
@@ -293,7 +293,7 @@ command(
       const img = await logo.pixelglitch(match);
       return m.send(img, {
          contextInfo: {
-            forwardingScore: 1,
+            forwardingScore: 999,
             isForwarded: true,
             forwardedNewsletterMessageInfo: {
                newsletterJid: "120363327841612745@newsletter",
@@ -318,7 +318,7 @@ command(
       const img = await logo.neonglitch(match);
       return m.send(img, {
          contextInfo: {
-            forwardingScore: 1,
+            forwardingScore: 999,
             isForwarded: true,
             forwardedNewsletterMessageInfo: {
                newsletterJid: "120363327841612745@newsletter",
@@ -343,7 +343,7 @@ command(
       const img = await logo.nigerianflag(match);
       return m.send(img, {
          contextInfo: {
-            forwardingScore: 1,
+            forwardingScore: 999,
             isForwarded: true,
             forwardedNewsletterMessageInfo: {
                newsletterJid: "120363327841612745@newsletter",
@@ -368,7 +368,7 @@ command(
       const img = await logo.americanflag(match);
       return m.send(img, {
          contextInfo: {
-            forwardingScore: 1,
+            forwardingScore: 999,
             isForwarded: true,
             forwardedNewsletterMessageInfo: {
                newsletterJid: "120363327841612745@newsletter",
@@ -393,7 +393,7 @@ command(
       const img = await logo.deletingtext(match);
       return m.send(img, {
          contextInfo: {
-            forwardingScore: 1,
+            forwardingScore: 999,
             isForwarded: true,
             forwardedNewsletterMessageInfo: {
                newsletterJid: "120363327841612745@newsletter",
@@ -418,7 +418,7 @@ command(
       const img = await logo.blackpinkstyle(match);
       return m.send(img, {
          contextInfo: {
-            forwardingScore: 1,
+            forwardingScore: 999,
             isForwarded: true,
             forwardedNewsletterMessageInfo: {
                newsletterJid: "120363327841612745@newsletter",
@@ -443,7 +443,7 @@ command(
       const img = await logo.glowingtext(match);
       return m.send(img, {
          contextInfo: {
-            forwardingScore: 1,
+            forwardingScore: 999,
             isForwarded: true,
             forwardedNewsletterMessageInfo: {
                newsletterJid: "120363327841612745@newsletter",
@@ -468,7 +468,7 @@ command(
       const img = await logo.underwater(match);
       return m.send(img, {
          contextInfo: {
-            forwardingScore: 1,
+            forwardingScore: 999,
             isForwarded: true,
             forwardedNewsletterMessageInfo: {
                newsletterJid: "120363327841612745@newsletter",
@@ -493,7 +493,7 @@ command(
       const img = await logo.logomaker(match);
       return m.send(img, {
          contextInfo: {
-            forwardingScore: 1,
+            forwardingScore: 999,
             isForwarded: true,
             forwardedNewsletterMessageInfo: {
                newsletterJid: "120363327841612745@newsletter",
@@ -518,7 +518,7 @@ command(
       const img = await logo.cartoonstyle(match);
       return m.send(img, {
          contextInfo: {
-            forwardingScore: 1,
+            forwardingScore: 999,
             isForwarded: true,
             forwardedNewsletterMessageInfo: {
                newsletterJid: "120363327841612745@newsletter",
@@ -543,7 +543,7 @@ command(
       const img = await logo.papercut(match);
       return m.send(img, {
          contextInfo: {
-            forwardingScore: 1,
+            forwardingScore: 999,
             isForwarded: true,
             forwardedNewsletterMessageInfo: {
                newsletterJid: "120363327841612745@newsletter",
@@ -568,7 +568,7 @@ command(
       const img = await logo.watercolor(match);
       return m.send(img, {
          contextInfo: {
-            forwardingScore: 1,
+            forwardingScore: 999,
             isForwarded: true,
             forwardedNewsletterMessageInfo: {
                newsletterJid: "120363327841612745@newsletter",
@@ -593,7 +593,7 @@ command(
       const img = await logo.effectclouds(match);
       return m.send(img, {
          contextInfo: {
-            forwardingScore: 1,
+            forwardingScore: 999,
             isForwarded: true,
             forwardedNewsletterMessageInfo: {
                newsletterJid: "120363327841612745@newsletter",
@@ -618,7 +618,7 @@ command(
       const img = await logo.gradienttext(match);
       return m.send(img, {
          contextInfo: {
-            forwardingScore: 1,
+            forwardingScore: 999,
             isForwarded: true,
             forwardedNewsletterMessageInfo: {
                newsletterJid: "120363327841612745@newsletter",
@@ -643,7 +643,7 @@ command(
       const img = await logo.summerbeach(match);
       return m.send(img, {
          contextInfo: {
-            forwardingScore: 1,
+            forwardingScore: 999,
             isForwarded: true,
             forwardedNewsletterMessageInfo: {
                newsletterJid: "120363327841612745@newsletter",
@@ -668,7 +668,7 @@ command(
       const img = await logo.luxurygold(match);
       return m.send(img, {
          contextInfo: {
-            forwardingScore: 1,
+            forwardingScore: 999,
             isForwarded: true,
             forwardedNewsletterMessageInfo: {
                newsletterJid: "120363327841612745@newsletter",
@@ -693,7 +693,7 @@ command(
       const img = await logo.multicolored(match);
       return m.send(img, {
          contextInfo: {
-            forwardingScore: 1,
+            forwardingScore: 999,
             isForwarded: true,
             forwardedNewsletterMessageInfo: {
                newsletterJid: "120363327841612745@newsletter",
@@ -718,7 +718,7 @@ command(
       const img = await logo.sandsummer(match);
       return m.send(img, {
          contextInfo: {
-            forwardingScore: 1,
+            forwardingScore: 999,
             isForwarded: true,
             forwardedNewsletterMessageInfo: {
                newsletterJid: "120363327841612745@newsletter",
@@ -743,7 +743,7 @@ command(
       const img = await logo.sandsummer(match);
       return m.send(img, {
          contextInfo: {
-            forwardingScore: 1,
+            forwardingScore: 999,
             isForwarded: true,
             forwardedNewsletterMessageInfo: {
                newsletterJid: "120363327841612745@newsletter",
@@ -768,7 +768,7 @@ command(
       const img = await logo.galaxy(match);
       return m.send(img, {
          contextInfo: {
-            forwardingScore: 1,
+            forwardingScore: 999,
             isForwarded: true,
             forwardedNewsletterMessageInfo: {
                newsletterJid: "120363327841612745@newsletter",
@@ -793,7 +793,7 @@ command(
       const img = await logo.nineteenseventeen(match);
       return m.send(img, {
          contextInfo: {
-            forwardingScore: 1,
+            forwardingScore: 999,
             isForwarded: true,
             forwardedNewsletterMessageInfo: {
                newsletterJid: "120363327841612745@newsletter",
@@ -818,7 +818,7 @@ command(
       const img = await logo.makingneon(match);
       return m.send(img, {
          contextInfo: {
-            forwardingScore: 1,
+            forwardingScore: 999,
             isForwarded: true,
             forwardedNewsletterMessageInfo: {
                newsletterJid: "120363327841612745@newsletter",
@@ -843,7 +843,7 @@ command(
       const img = await logo.texteffect(match);
       return m.send(img, {
          contextInfo: {
-            forwardingScore: 1,
+            forwardingScore: 999,
             isForwarded: true,
             forwardedNewsletterMessageInfo: {
                newsletterJid: "120363327841612745@newsletter",
@@ -868,7 +868,7 @@ command(
       const img = await logo.galaxystyle(match);
       return m.send(img, {
          contextInfo: {
-            forwardingScore: 1,
+            forwardingScore: 999,
             isForwarded: true,
             forwardedNewsletterMessageInfo: {
                newsletterJid: "120363327841612745@newsletter",
@@ -893,7 +893,7 @@ command(
       const img = await logo.blackpinkstyle(match);
       return m.send(img, {
          contextInfo: {
-            forwardingScore: 1,
+            forwardingScore: 999,
             isForwarded: true,
             forwardedNewsletterMessageInfo: {
                newsletterJid: "120363327841612745@newsletter",
@@ -918,7 +918,7 @@ command(
       const img = await logo.glowingtext(match);
       return m.send(img, {
          contextInfo: {
-            forwardingScore: 1,
+            forwardingScore: 999,
             isForwarded: true,
             forwardedNewsletterMessageInfo: {
                newsletterJid: "120363327841612745@newsletter",
@@ -943,7 +943,7 @@ command(
       const img = await logo.advancedglow(match);
       return m.send(img, {
          contextInfo: {
-            forwardingScore: 1,
+            forwardingScore: 999,
             isForwarded: true,
             forwardedNewsletterMessageInfo: {
                newsletterJid: "120363327841612745@newsletter",
@@ -968,7 +968,7 @@ command(
       const img = await logo.glossysilver(match);
       return m.send(img, {
          contextInfo: {
-            forwardingScore: 1,
+            forwardingScore: 999,
             isForwarded: true,
             forwardedNewsletterMessageInfo: {
                newsletterJid: "120363327841612745@newsletter",
@@ -993,7 +993,7 @@ command(
       const img = await logo.writetext(match);
       return m.send(img, {
          contextInfo: {
-            forwardingScore: 1,
+            forwardingScore: 999,
             isForwarded: true,
             forwardedNewsletterMessageInfo: {
                newsletterJid: "120363327841612745@newsletter",
@@ -1018,7 +1018,7 @@ command(
       const img = await logo.blackpinklogo(match);
       return m.send(img, {
          contextInfo: {
-            forwardingScore: 1,
+            forwardingScore: 999,
             isForwarded: true,
             forwardedNewsletterMessageInfo: {
                newsletterJid: "120363327841612745@newsletter",

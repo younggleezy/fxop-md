@@ -17,7 +17,7 @@ command(
       const lyricsMsg = await search.lyrics(match);
       return await m.send(lyricsMsg, {
          contextInfo: {
-            forwardingScore: 1,
+            forwardingScore: 999,
             isForwarded: true,
             forwardedNewsletterMessageInfo: {
                newsletterJid: "120363327841612745@newsletter",
@@ -58,7 +58,7 @@ command(
       const results = await search.google(match);
       return message.send(results, {
          contextInfo: {
-            forwardingScore: 1,
+            forwardingScore: 999,
             isForwarded: true,
             forwardedNewsletterMessageInfo: {
                newsletterJid: "120363327841612745@newsletter",
