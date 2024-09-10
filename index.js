@@ -29,7 +29,6 @@ class BotSystem {
 
    startServer() {
       this.app.get("/", (req, res) => res.send("Bot Running"));
-      this.app.listen(this.port, () => console.log(`Server running on port ${this.port}`));
    }
 
    async ensureTempDir() {
@@ -46,7 +45,6 @@ package-lock.json
 database.db
 temp`;
       await fs.writeFile(".gitignore", content);
-      console.log(".gitignore file created successfully!");
    }
 
    async main() {
