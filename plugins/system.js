@@ -255,9 +255,9 @@ command(
          .forEach(category => {
             menu += `\n╭── *${tiny(category)}* ──────⊷\n`;
             categorizedCommands[category].forEach(cmd => {
-               menu += `│ ${cmd}\n`;
+               menu += `│◌ ${cmd}\n`;
             });
-            menu += `╰───────────\n╰──────────────⊷\n`;
+            menu += `╰──────────────⊷\n`;
          });
 
       const menuMedia = BOT_INFO.split(";")[2];
