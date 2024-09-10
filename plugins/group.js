@@ -1,6 +1,5 @@
 const { command, mode, parsedJid, isAdmin } = require("../lib/");
 const { setMessage, getMessage, delMessage, getStatus, toggleStatus } = require("../lib/database").Greetings;
-const { banUser, unbanUser, isBanned } = require("../lib/database/ban");
 const { setAntiPromote, getAntiPromote, setAntiDemote, getAntiDemote } = require("../lib/database/groupSettings.js");
 const { setAntiLink, getAntiLink } = require("../lib/database/antilink");
 const moment = require("moment");
@@ -319,53 +318,6 @@ command(
 
 command(
    {
-      pattern: "antibot ?(on|off)?",
-      fromMe: mode,
-      desc: "Turn antibot on or off, or manage bot ban status",
-      type: "admin",
-   },
-   async (message, match) => {
-      const chatid = message.jid;
-      const isban = await isBanned(chatid);
-
-      if (!match[1]) {
-         return await message.reply(`Antibot is currently ${isban ? "on" : "off"}. Use 'antibot on' to enable or 'antibot off' to disable.`);
-      }
-
-      if (match[1].toLowerCase() === "on") {
-         if (isban) {
-            return await message.reply("Antibot is already on in this chat.");
-         }
-         await banUser(chatid);
-         return await message.reply("Antibot turned on. Bot will be removed if it sends a message.");
-      } else if (match[1].toLowerCase() === "off") {
-         if (!isban) {
-            return await message.reply("Antibot is already off in this chat.");
-         }
-         await unbanUser(chatid);
-         return await message.reply("Antibot turned off. Bot is now allowed in this chat.");
-      }
-   }
-);
-
-command(
-   {
-      on: "message",
-      fromMe: mode,
-      dontAddCommandList: true,
-   },
-   async (message, match) => {
-      if (!message.isBaileys) return;
-      const isban = await isBanned(message.jid);
-      if (!isban) return;
-      await message.reply("_Bot detected and will be removed from this chat_");
-      const jid = parsedJid(message.participant);
-      return await message.client.groupParticipantsUpdate(message.jid, jid, "remove");
-   }
-);
-
-command(
-   {
       pattern: "ginfo",
       fromMe: mode,
       desc: "Get Group Data",
@@ -581,30 +533,6 @@ command(
 
       await message.reply("_Goodbye! Leaving the group..._");
       return await message.client.groupLeave(message.jid);
-   }
-);
-
-command(
-   {
-      pattern: "gcsets",
-      fromMe: mode,
-      desc: "Change group settings",
-      type: "group",
-   },
-   async (message, match) => {
-      if (!message.isGroup) return await message.reply("_This command is for groups only_");
-      if (!isAdmin(message.jid, message.user, message.client)) return await message.reply("_I'm not admin_");
-
-      if (!match) return await message.reply("_Provide a setting to change: 'announcement' or 'locked' or 'unlocked'_");
-
-      let setting;
-      if (match === "announcement") setting = "announcement";
-      else if (match === "locked") setting = "locked";
-      else if (match === "unlocked") setting = "unlocked";
-      else return await message.reply("_Invalid setting. Use 'announcement', 'locked', or 'unlocked'_");
-
-      await message.client.groupSettingUpdate(message.jid, setting);
-      return await message.reply(`_Group settings updated to ${setting}_`);
    }
 );
 
