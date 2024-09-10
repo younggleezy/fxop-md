@@ -14,13 +14,11 @@ class BotSystem {
 
    async initialize() {
       try {
-         await patch();
-         await writeSession();
-         await sleep(2000)
-         await parseDir(path.join(__dirname, "/lib/database/"));
+         await Promise.all([patch(), writeSession(), parseDir(path.join(__dirname, "/lib/database/")), parseDir(path.join(__dirname, "/plugins/")), this.ensureTempDir(), this.createGitignore()]);
+
+         await sleep(2000);
          console.log("Syncing Database");
          await config.DATABASE.sync();
-         await parseDir(path.join(__dirname, "/plugins/"));
          await getandRequirePlugins();
          console.log("External Modules Installed");
          return await connect();
@@ -29,23 +27,14 @@ class BotSystem {
       }
    }
 
-   async startServer() {
-      this.app.get("/", (req, res) => {
-         res.send("Bot Running");
-      });
-
-      this.app.listen(this.port, () => {});
+   startServer() {
+      this.app.get("/", (req, res) => res.send("Bot Running"));
+      this.app.listen(this.port, () => console.log(`Server running on port ${this.port}`));
    }
 
-   async tempDir() {
+   async ensureTempDir() {
       const dir = path.join(__dirname, "temp");
-      try {
-         await fs.access(dir);
-      } catch (err) {
-         if (err.code === "ENOENT") {
-            await fs.mkdir(dir, { recursive: true });
-         }
-      }
+      await fs.mkdir(dir, { recursive: true });
    }
 
    async createGitignore() {
@@ -56,27 +45,18 @@ session
 package-lock.json
 database.db
 temp`;
-
-      fs.writeFile(".gitignore", content, err => {
-         if (err) {
-            console.error("Error creating .gitignore file:", err);
-         } else {
-            console.log(".gitignore file created successfully!");
-         }
-      });
+      await fs.writeFile(".gitignore", content);
+      console.log(".gitignore file created successfully!");
    }
 
    async main() {
       try {
          await this.initialize();
-         await this.startServer();
-         await this.tempDir();
-         await this.createGitignore();
+         this.startServer();
       } catch (error) {
-         console.warn("BOT SYSTEM FAILED");
+         console.warn("BOT SYSTEM FAILED", error);
       }
    }
 }
 
-const botSystem = new BotSystem();
-botSystem.main();
+new BotSystem().main();
