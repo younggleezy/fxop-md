@@ -14,11 +14,12 @@ class BotSystem {
 
    async initialize() {
       try {
-         await Promise.all([patch(), writeSession(), parseDir(path.join(__dirname, "/lib/database/")), parseDir(path.join(__dirname, "/plugins/")), this.ensureTempDir(), this.createGitignore()]);
+         await Promise.all([patch(), parseDir(path.join(__dirname, "/lib/database/")), parseDir(path.join(__dirname, "/plugins/")), this.ensureTempDir(), this.createGitignore()]);
 
          await sleep(2000);
          console.log("Syncing Database");
          await config.DATABASE.sync();
+         await writeSession();
          await getandRequirePlugins();
          console.log("External Modules Installed");
          return await connect();
