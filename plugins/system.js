@@ -90,6 +90,7 @@ command(
    },
    async message => {
       const aliveMessage = `
+      ${message.pushName}
     ғxᴏᴘ ʙᴏᴛ ɪs ᴏɴʟɪɴᴇ ᴀɴᴅ ᴀᴄᴛɪᴠᴇ
     `;
       const thumbnailPath = "../media/images/thumb.jpg";
@@ -228,17 +229,16 @@ command(
 
       const { prefix } = message;
       const [date, time] = new Date().toLocaleString("en-IN", { timeZone: TIME_ZONE }).split(",");
-      let menu = `\`\`\`╭━━━ ${BOT_INFO.split(";")[1]} ━━━┈⊷
-││ User:  ${message.pushName}
-││ Prefix: ${prefix}
-││ Date: ${date}
-││ Time: ${time}
-││ Plugins: ${plugins.commands.length} 
-││ Uptime: ${runtime(process.uptime())} 
-││ Ram: ${formatBytes(os.totalmem() - os.freemem())} / ${formatBytes(os.totalmem())}
-││ Version: ${require("../package.json").version}
-│╰──────────────
-╰━━━━━━━━━━━━━━━┈⊷\`\`\`\n`;
+      let menu = `\`\`\`╭─ ${BOT_INFO.split(";")[1]} ───⊷
+│ User:  ${message.pushName}
+│ Prefix: ${prefix}
+│ Date: ${date}
+│ Time: ${time}
+│ Plugins: ${plugins.commands.length} 
+│ Uptime: ${runtime(process.uptime())} 
+│ Ram: ${formatBytes(os.totalmem() - os.freemem())} / ${formatBytes(os.totalmem())}
+│ Version: ${require("../package.json").version}
+╰────────────────⊷\`\`\`\n`;
 
       const categorizedCommands = plugins.commands.reduce((acc, command) => {
          if (command.pattern instanceof RegExp && !command.dontAddCommandList) {
@@ -253,11 +253,11 @@ command(
       Object.keys(categorizedCommands)
          .sort()
          .forEach(category => {
-            menu += `\n╭── *${tiny(category)}* ━━──⊷\n│╭──────────────\n`;
+            menu += `\n╭── *${tiny(category)}* ──⊷\n╭──────────────\n`;
             categorizedCommands[category].forEach(cmd => {
-               menu += `││ ${cmd}\n`;
+               menu += `│ ${cmd}\n`;
             });
-            menu += `│╰───────────\n╰━━━━━━━━━━━━━──⊷\n`;
+            menu += `╰───────────\n╰──────────────⊷\n`;
          });
 
       const menuMedia = BOT_INFO.split(";")[2];
