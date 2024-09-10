@@ -13,6 +13,7 @@ module.exports = {
    AUTO_STATUS_READ: toBool(process.env.AUTO_STATUS_READ) || false,
    DELETED_LOG: toBool(process.env.DELETED_LOG) || false,
    STATUS_SAVER: toBool(process.env.STATUS_SAVER) || true,
+   AUTO_REACT: toBool(process.env.AUTO_REACT) || false,
 
    // String Values
    SESSION_ID: process.env.SESSION_ID || "",
