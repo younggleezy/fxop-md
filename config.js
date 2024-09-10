@@ -6,7 +6,7 @@ module.exports = {
    SESSION_ID: process.env.SESSION_ID || "",
    HANDLERS: process.env.HANDLER === "false" || process.env.HANDLER === "null" ? "^" : "[.]",
    BOT_INFO: process.env.BOT_INFO || "ᴀsᴛʀᴏ;ғxᴏᴘ-ᴍᴅ", //YourName;BotName;Image/VideoLink
-   SUDO: process.env.SUDO || "2348039607375,2349162411207,4915252819677",
+   SUDO: process.env.SUDO || "91234567899",
    ANTICALL: process.env.ANTICALL || false,
    PRESENCE: process.env.PRESENCE || "available", // "unavailable", "available", "composing", "recording", "paused"
    CAPTION: process.env.CAPTION || "© ғxᴏᴘ ᴍᴅ",
