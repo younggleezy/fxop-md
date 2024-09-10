@@ -827,13 +827,8 @@ command(
       if (!message.isGroup) {
          return await message.reply("This command can only be used in groups.");
       }
-      const groupMetadata = await client.groupMetadata(message.jid);
-      const participants = groupMetadata.participants;
-      const isAdmin = participants.filter(participant => participant.id === message.sender && participant.admin).length > 0;
-
-      if (!isAdmin) {
-         return await message.reply("This command can only be used by group admins.");
-      }
+      const isadmin = await isAdmin(message.jid, message.user, message.client);
+      if (!isadmin) return await message.reply("_I'm not admin_");
       if (!message.reply_message) {
          return await message.reply("Please reply to a message to delete it.");
       }
