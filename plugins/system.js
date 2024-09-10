@@ -253,7 +253,7 @@ command(
       Object.keys(categorizedCommands)
          .sort()
          .forEach(category => {
-            menu += `\n╭── *${tiny(category)}* ──⊷\n╭──────────────\n`;
+            menu += `\n╭── *${tiny(category)}* ──────⊷\n`;
             categorizedCommands[category].forEach(cmd => {
                menu += `│ ${cmd}\n`;
             });
