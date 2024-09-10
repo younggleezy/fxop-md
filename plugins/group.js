@@ -816,3 +816,29 @@ command(
       }
    }
 );
+command(
+   {
+      pattern: "del",
+      fromMe: mode,
+      desc: "Allows admin to delete any participant's message",
+      type: "group",
+   },
+   async (message, match, m, client) => {
+      if (!message.isGroup) {
+         return await message.reply("This command can only be used in groups.");
+      }
+      const groupMetadata = await client.groupMetadata(message.jid);
+      const participants = groupMetadata.participants;
+      const isAdmin = participants.filter(participant => participant.id === message.sender && participant.admin).length > 0;
+
+      if (!isAdmin) {
+         return await message.reply("This command can only be used by group admins.");
+      }
+      if (!message.reply_message) {
+         return await message.reply("Please reply to a message to delete it.");
+      }
+      await client.sendMessage(message.jid, {
+         delete: message.reply_message.key,
+      });
+   }
+);
