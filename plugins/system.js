@@ -262,16 +262,7 @@ command(
 
       const menuMedia = BOT_INFO.split(";")[2];
       if (!menuMedia) {
-         message.send(menu, {
-            contextInfo: {
-               forwardingScore: 999,
-               isForwarded: true,
-               forwardedNewsletterMessageInfo: {
-                  newsletterJid: "120363327841612745@newsletter",
-                  newsletterName: `Version ${require("../package.json").version}`,
-               },
-            },
-         });
+         message.send(menu);
       } else {
          try {
             const buff = await getBuffer(menuMedia);

@@ -8,7 +8,7 @@ command(
       pattern: "trivia",
       fromMe: mode,
       desc: "Start a trivia game.",
-      type: "game",
+      type: "fun",
    },
    async (message, match, m) => {
       const userId = message.sender;
@@ -117,7 +117,7 @@ command(
       pattern: "xkcd",
       fromMe: mode,
       desc: "Send a random XKCD comic.",
-      type: "misc",
+      type: "fun",
    },
    async (message, match, m) => {
       try {
@@ -140,7 +140,7 @@ command(
       pattern: "joke",
       fromMe: mode,
       desc: "Fetch a random joke",
-      dontAddCommandList: false,
+      type: 'fun'
    },
    async (message, match) => {
       try {
@@ -193,7 +193,7 @@ command(
       pattern: "ttt",
       fromMe: false,
       desc: "Play TicTacToe",
-      type: "game",
+      type: "fun",
    },
    async (message, match, m) => {
       {
