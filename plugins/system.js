@@ -12,7 +12,7 @@ command(
       pattern: "runtime",
       fromMe: mode,
       desc: "Check uptime of bot",
-      type: "whatsapp",
+      type: "system",
    },
    async (message, match) => {
       message.reply(`*Uptime: ${runtime(process.uptime())}*`);
@@ -86,7 +86,7 @@ command(
       pattern: "alive",
       fromMe: mode,
       desc: "Shows system status with different designs.",
-      type: "misc",
+      type: "system",
    },
    async message => {
       const aliveMessage = `
@@ -192,7 +192,7 @@ command(
       pattern: "remove",
       fromMe: mode,
       desc: "Remove external plugins",
-      type: "misc",
+      type: "system",
    },
    async (message, match) => {
       if (!match) return await message.sendMessage(message.jid, "_Need a plugin name_");
@@ -215,7 +215,7 @@ command(
       pattern: "menu",
       fromMe: mode,
       desc: "Show All Commands",
-      type: "user",
+      dontAddCommandList: true,
    },
    async (message, match) => {
       if (match) {
