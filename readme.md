@@ -37,7 +37,7 @@ Deploy the project to your preferred platform using the links below:
 3. **`.env` setup**: Copy & Paste
 
 ```.env
-SESSION_ID = "session here"
+SESSION_ID = "Session~ZecMGRzM"
 BOT_INFO = "YourName,YourBotName,YourImage/VideoUrl Optional"
 # Get More from config.js
 ```
