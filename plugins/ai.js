@@ -1,4 +1,4 @@
-const { command, mode, askAi, toPTT } = require("../lib");
+const { command, mode, askAi, toPTT, AIService } = require("../lib");
 const config = require("../config");
 
 command(
@@ -11,8 +11,9 @@ command(
    async (message, match) => {
       if (!match) return await message.sendReply("_Hello What Code Do You Help For?_");
       await message.reply("_Analyzing Request_");
-      const processedMsg = await aiResponse.coderAi(match);
-      return await message.send(processedMsg, {
+      const processedMsg = await new AIService();
+      const response = await processedMsg.coderAi(match);
+      return await message.send(response, {
          contextInfo: {
             forwardingScore: 999,
             isForwarded: true,
