@@ -1,5 +1,4 @@
 const { command, mode, toAudio, IronMan } = require("../lib");
-const scraper = require("../lib/scraper");
 command(
    {
       pattern: "fb",
