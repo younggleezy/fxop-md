@@ -28,7 +28,7 @@ command(
 
 command(
    {
-      pattern: "gpt4",
+      pattern: "gpt",
       fromMe: mode,
       desc: "Chat With Gpt4 AI Model",
       type: "ai",
@@ -36,8 +36,9 @@ command(
    async (message, match) => {
       if (!match) return await message.sendReply("_Hello How Can I Assist You Today?_");
       await message.reply("_Thinking_");
-      const processedMsg = await aiResponse.gpt4(match);
-      return await message.send(processedMsg, {
+      const processedMsg = await new AIService();
+      const response = await processedMsg.gpt4(match);
+      return await message.send(response, {
          contextInfo: {
             forwardingScore: 999,
             isForwarded: true,
@@ -60,8 +61,9 @@ command(
    async (message, match) => {
       if (!match) return await message.sendReply("_Hmm Commo'n type something_");
       await message.reply("_Thinking_");
-      const processedMsg = await aiResponse.lamda(match);
-      return await message.send(processedMsg, {
+      const processedMsg = await new AIService();
+      const response = await processedMsg.lamda(match);
+      return await message.send(response, {
          contextInfo: {
             forwardingScore: 999,
             isForwarded: true,
@@ -84,9 +86,10 @@ command(
    async (message, match) => {
       if (!match) return await message.sendReply("_Provide Me Image to Generate_");
       await message.reply("_Generating Image_");
-      const processedImg = await aiResponse.stableDiff(match);
+      const processedImg = await new AIService();
+      const img = await processedImg.stableDiff(match);
       const ImgMessage = config.CAPTION;
-      return await message.send(processedImg, {
+      return await message.send(img, {
          caption: ImgMessage,
          contextInfo: {
             forwardingScore: 999,
@@ -113,7 +116,8 @@ command(
       }
       await message.sendReply("_Enhancing Image Wait_");
       const imgBuffer = await m.quoted.download();
-      const upscaledBuffer = await askAi("upscale", imgBuffer);
+      const request = await new AIService();
+      const upscaledBuffer = await request.askAi("upscale", imgBuffer);
 
       const upscaleMsg = config.CAPTION;
       return await message.send(upscaledBuffer, {
@@ -140,7 +144,8 @@ command(
    async (msg, match) => {
       if (!match) return await msg.send("_Provide me query!_");
       await msg.sendReply("_Generating Image!_");
-      const dalleImg = await aiResponse.dalle(match);
+      const request = await new AIService();
+      const dalleImg = await request.dalle(match);
       const dalleMsg = config.CAPTION;
       return msg.send(dalleImg, {
          caption: dalleMsg,
@@ -166,7 +171,8 @@ command(
    async (message, match) => {
       if (!match) return message.sendReply("_Hey You Gave Me An Empty Prompt_");
       await message.sendReply("_Processing Request_");
-      const bingResponse = await aiResponse.bing(match);
+      const request = await new AIService();
+      const bingResponse = await request.bing(match);
       return message.send(bingResponse, {
          contextInfo: {
             forwardingScore: 999,
@@ -190,7 +196,8 @@ command(
    async (message, match) => {
       if (!match) return message.sendReply("_provide text_");
       await message.sendReply("_Wait_");
-      let audio = await aiResponse.elevenlabs(match);
+      const request = new AIService();
+      let audio = await request.elevenlabs(match);
       audio = await toPTT(audio, "mp3");
       return await msg.sendMessage(msg.jid, audio, { mimetype: "audio/mpeg" }, "audio");
    }
