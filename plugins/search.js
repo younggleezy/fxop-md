@@ -1,6 +1,5 @@
 const { command, mode, getJson } = require("../lib");
 const moment = require("moment");
-const search = require("../lib/scraper");
 const getFloor = function (number) {
    return Math.floor(number);
 };
