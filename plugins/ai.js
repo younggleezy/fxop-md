@@ -1,5 +1,4 @@
 const { command, mode, askAi, toPTT } = require("../lib");
-const aiResponse = require("../lib/scraper");
 const config = require("../config");
 
 command(
