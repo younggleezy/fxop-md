@@ -19,13 +19,13 @@ Deploy the project to your preferred platform using the links below:
 -  **[Render](https://render.com/deploy?repo=https://github.com/FXastro/fxop-md&env=SESSION_ID,BOT_INFO)**
 -  **[Railway](https://railway.app/new/template?template=https://github.com/FXastro/fxop-md&envs=SESSION_ID,BOT_INFO)**
 -  **[Termux](https://github.com/FXastro/fxop-md/blob/master/media/termux.md)**
--  **[Pterodactyl](https://cpanel.net/)**
+-  **[Panel](https://github.com/FXastro/fxop-md/releases/)**
 -  **[Codespaces](https://github.com/codespaces/new?skip_quickstart=true&machine=standardLinux32gb&repo=843557699&ref=master&devcontainer_path=.devcontainer%2Fdevcontainer.json&geo=EuropeWest)**
 -  **[Replit](https://replit.com/~)**
 
 ### Running on local?
 
-1. **Obtain your `SESSION_ID`** by pairing code [here](https://fx-session-966bdc8172d5.herokuapp.com/code).
+1. **Obtain your `SESSION_ID`** by pairing code [here](https://fx-session.vercel.app/).
 2. **Create An** `.env` file on the root.
 3. **`.env` setup**: Copy & Paste
 
