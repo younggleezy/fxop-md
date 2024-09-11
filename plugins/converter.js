@@ -1,6 +1,6 @@
 const config = require("../config");
-const { command, mode, toAudio, webp2mp4, textToImg, listall, getUrl } = require("../lib/");
-command(
+const { Module, mode, toAudio, webp2mp4, textToImg, listall, getUrl } = require("../lib/");
+Module(
    {
       pattern: "sticker",
       fromMe: mode,
@@ -20,7 +20,7 @@ command(
    }
 );
 
-command(
+Module(
    {
       pattern: "take",
       fromMe: mode,
@@ -36,7 +36,7 @@ command(
    }
 );
 
-command(
+Module(
    {
       pattern: "photo",
       fromMe: mode,
@@ -50,7 +50,7 @@ command(
    }
 );
 
-command(
+Module(
    {
       pattern: "tomp3",
       fromMe: mode,
@@ -65,7 +65,7 @@ command(
    }
 );
 
-command(
+Module(
    {
       pattern: "upload",
       fromMe: mode,
@@ -81,7 +81,7 @@ command(
    }
 );
 
-command(
+Module(
    {
       pattern: "tomp4",
       fromMe: mode,
@@ -100,7 +100,7 @@ command(
    }
 );
 
-command(
+Module(
    {
       pattern: "img",
       fromMe: mode,
@@ -114,7 +114,7 @@ command(
    }
 );
 
-command(
+Module(
    {
       pattern: "fancy",
       fromMe: mode,

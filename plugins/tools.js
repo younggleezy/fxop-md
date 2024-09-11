@@ -1,11 +1,11 @@
-const { command, qrcode, mode, readQr, removeBg, shortenUrl, gtts, getBuffer } = require("../lib/");
+const { Module, qrcode, mode, readQr, removeBg, shortenUrl, gtts, getBuffer } = require("../lib/");
 const axios = require("axios");
 const cheerio = require("cheerio");
 const config = require("../config");
 let placeholderImageUrl = "https://telegra.ph/file/b8e96b599e0fa54d25940.jpg";
 const emailDataStore = {};
 
-command(
+Module(
    {
       pattern: "tempmail",
       info: "Create temporary email address and use it as needed.",
@@ -41,7 +41,7 @@ command(
    }
 );
 
-command(
+Module(
    {
       pattern: "checkmail",
       type: "tools",
@@ -82,7 +82,7 @@ command(
    }
 );
 
-command(
+Module(
    {
       pattern: "delmail",
       type: "tools",
@@ -145,7 +145,7 @@ const tempmail = {
    },
 };
 
-command(
+Module(
    {
       pattern: "qr",
       fromMe: mode,
@@ -174,7 +174,7 @@ command(
    }
 );
 
-command(
+Module(
    {
       pattern: "rmbg",
       fromMe: mode,
@@ -191,7 +191,7 @@ command(
    }
 );
 
-command(
+Module(
    {
       pattern: "url",
       fromMe: mode,
@@ -207,7 +207,7 @@ command(
    }
 );
 
-command(
+Module(
    {
       pattern: "tts",
       fromMe: mode,

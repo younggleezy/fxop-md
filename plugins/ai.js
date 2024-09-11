@@ -1,7 +1,7 @@
-const { command, mode, askAi, toPTT, AIService } = require("../lib");
+const { Module, mode, askAi, toPTT, AIService } = require("../lib");
 const config = require("../config");
 
-command(
+Module(
    {
       pattern: "codeai",
       fromMe: mode,
@@ -26,7 +26,7 @@ command(
    }
 );
 
-command(
+Module(
    {
       pattern: "gpt",
       fromMe: mode,
@@ -51,7 +51,7 @@ command(
    }
 );
 
-command(
+Module(
    {
       pattern: "lamda",
       fromMe: mode,
@@ -76,7 +76,7 @@ command(
    }
 );
 
-command(
+Module(
    {
       pattern: "sdimg",
       fromMe: mode,
@@ -103,7 +103,7 @@ command(
    }
 );
 
-command(
+Module(
    {
       pattern: "hd",
       fromMe: mode,
@@ -134,7 +134,7 @@ command(
    }
 );
 
-command(
+Module(
    {
       pattern: "dalle",
       fromMe: mode,
@@ -161,7 +161,7 @@ command(
    }
 );
 
-command(
+Module(
    {
       pattern: "bing",
       fromMe: mode,
@@ -186,7 +186,7 @@ command(
    }
 );
 
-command(
+Module(
    {
       pattern: "elabs",
       fromMe: mode,

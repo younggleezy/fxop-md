@@ -2,12 +2,12 @@ const os = require("os");
 const fs = require("fs");
 const axios = require("axios");
 const plugins = require("../lib/plugins");
-const { command, mode, getBuffer, runtime, tiny, formatBytes, buffpath } = require("../lib");
+const { Module, mode, getBuffer, runtime, tiny, formatBytes, buffpath } = require("../lib");
 const { exec } = require("child_process");
 const { PluginDB, installPlugin } = require("../lib/db").Plugins;
 const { BOT_INFO, TIME_ZONE } = require("../config");
 
-command(
+Module(
    {
       pattern: "runtime",
       fromMe: mode,
@@ -19,7 +19,7 @@ command(
    }
 );
 
-command(
+Module(
    {
       pattern: "restart",
       fromeMe: true,
@@ -42,7 +42,7 @@ command(
    }
 );
 
-command(
+Module(
    {
       pattern: "shutdown",
       fromeMe: true,
@@ -65,7 +65,7 @@ command(
    }
 );
 
-command(
+Module(
    {
       pattern: "ping ?(.*)",
       fromMe: mode,
@@ -81,7 +81,7 @@ command(
    }
 );
 
-command(
+Module(
    {
       pattern: "alive",
       fromMe: mode,
@@ -114,7 +114,7 @@ command(
    }
 );
 
-command(
+Module(
    {
       pattern: "install",
       fromMe: mode,
@@ -166,7 +166,7 @@ command(
    }
 );
 
-command(
+Module(
    {
       pattern: "plugin",
       fromMe: mode,
@@ -187,7 +187,7 @@ command(
    }
 );
 
-command(
+Module(
    {
       pattern: "remove",
       fromMe: mode,
@@ -210,7 +210,7 @@ command(
    }
 );
 
-command(
+Module(
    {
       pattern: "menu",
       fromMe: mode,
@@ -285,7 +285,7 @@ command(
    }
 );
 
-command(
+Module(
    {
       pattern: "list",
       fromMe: mode,
@@ -310,7 +310,7 @@ command(
       await message.reply(menu);
    }
 );
-command(
+Module(
    {
       on: "text",
       fromMe: true,

@@ -1,9 +1,9 @@
-const { command, mode, XKCDComic, getJson, isAdmin, parseJid } = require("../lib");
+const { Module, mode, XKCDComic, getJson, isAdmin, parseJid } = require("../lib");
 const axios = require("axios");
 
 let triviaGames = {};
 
-command(
+Module(
    {
       pattern: "trivia",
       fromMe: mode,
@@ -30,7 +30,7 @@ command(
    }
 );
 
-command(
+Module(
    {
       on: "text",
       fromMe: mode,
@@ -112,7 +112,7 @@ async function endTriviaGame(message, userId) {
 /**
  *
  */
-command(
+Module(
    {
       pattern: "xkcd",
       fromMe: mode,
@@ -135,7 +135,7 @@ command(
  *
  */
 
-command(
+Module(
    {
       pattern: "joke",
       fromMe: mode,
@@ -166,7 +166,7 @@ command(
       }
    }
 );
-command(
+Module(
    {
       pattern: "delttt",
       fromMe: mode,
@@ -188,7 +188,7 @@ command(
    }
 );
 
-command(
+Module(
    {
       pattern: "ttt",
       fromMe: false,
@@ -248,7 +248,7 @@ Current turn: @${room.game.currentTurn.split("@")[0]}
    }
 );
 
-command(
+Module(
    {
       on: "text",
       fromMe: false,

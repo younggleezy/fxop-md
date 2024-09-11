@@ -1,9 +1,9 @@
-const { command, mode, getJson } = require("../lib");
+const { Module, mode, getJson } = require("../lib");
 const moment = require("moment");
 const getFloor = function (number) {
    return Math.floor(number);
 };
-command(
+Module(
    {
       pattern: "lyrics",
       fromMe: mode,
@@ -27,7 +27,7 @@ command(
    }
 );
 
-command(
+Module(
    {
       pattern: "weather ?(.*)",
       fromMe: mode,
@@ -44,7 +44,7 @@ command(
    }
 );
 
-command(
+Module(
    {
       pattern: "google",
       fromMe: mode,
@@ -68,7 +68,7 @@ command(
    }
 );
 
-// command(
+// Module(
 //    {
 //       pattern: "tgs",
 //       fromMe: mode,

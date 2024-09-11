@@ -1,159 +1,61 @@
-const { command, mode, toAudio, IronMan } = require("../lib");
-command(
-   {
-      pattern: "fb",
-      fromMe: mode,
-      desc: "Downloads Facebook Media",
-      type: "download",
-   },
-   async (message, match) => {
-      if (!match) return message.reply("_provide vaild facebook link_");
-      await message.reply("_Downloading_");
-      const buff = await scraper.facebook(match);
-      return message.sendFile(buff);
-   }
-);
+const { Module, mode, toAudio, IronMan, Facebook, Instagram, Twitter, Tiktok, Pinterest, Spotify, Youtube } = require("../lib");
 
-command(
-   {
-      pattern: "insta",
-      fromMe: mode,
-      desc: "Downloads Instagram Media",
-      type: "download",
-   },
-   async (message, match) => {
-      if (!match) return message.reply("_provide vaild instagram link_");
-      await message.reply("_Downloading_");
-      const buff = await scraper.instagram(match);
-      return message.sendFile(buff);
-   }
-);
+const fetchMedia = async (message, match, service, method) => {
+   if (!match) return message.reply("_provide a valid URL_");
+   await message.reply("_Downloading_");
+   const request = new service();
+   const buff = await request[method](match);
+   return message.sendFile(buff);
+};
 
-command(
-   {
-      pattern: "twitter",
-      fromMe: mode,
-      desc: "Downloads Twitter Media",
-      type: "download",
-   },
-   async (message, match) => {
-      if (!match) return message.reply("_provide vaild twitter url_");
-      await message.reply("_Downloading_");
-      const buff = await scraper.twitter(match);
-      return await message.sendFile(buff);
-   }
-);
+Module({ pattern: "fb", fromMe: mode, desc: "Downloads Facebook Media", type: "download" }, (message, match) => fetchMedia(message, match, Facebook, "fbdl"));
 
-command(
-   {
-      pattern: "tiktok",
-      fromMe: mode,
-      desc: "Downloads Tiktok Media",
-      type: "download",
-   },
-   async (message, match) => {
-      if (!match) return await message.reply("_provide tiktok url_");
-      await message.reply("_Downloading_");
-      const buff = await scraper.tiktok(match);
-      return await message.sendFile(buff);
-   }
-);
+Module({ pattern: "insta", fromMe: mode, desc: "Downloads Instagram Media", type: "download" }, (message, match) => fetchMedia(message, match, Instagram, "igdl"));
 
-command(
-   {
-      pattern: "pinterest",
-      fromMe: mode,
-      desc: "Downloads Pinterest Images",
-      type: "download",
-   },
-   async (message, match) => {
-      if (!match) return message.reply("_provide me a searching option_");
-      await message.reply("_Searching_");
-      const buffers = await scraper.pinterest(match);
-      for (const buffer of buffers) {
-         await message.sendFile(buffer);
-      }
-   }
-);
+Module({ pattern: "twitter", fromMe: mode, desc: "Downloads Twitter Media", type: "download" }, (message, match) => fetchMedia(message, match, Twitter, "twitterdl"));
 
-command(
-   {
-      pattern: "spotify",
-      fromMe: mode,
-      desc: "Downloads Spotify Music",
-      type: "download",
-   },
-   async (message, match) => {
-      if (!match) return message.reply("_provide me spotify url_");
-      await message.reply("_Downloading_");
-      const buff = await scraper.spotify(match);
-      const audio = await toAudio(buff, "mp3");
-      return await msg.sendMessage(msg.jid, audio, { mimetype: "audio/mpeg" }, "audio");
-   }
-);
+Module({ pattern: "tiktok", fromMe: mode, desc: "Downloads Tiktok Media", type: "download" }, (message, match) => fetchMedia(message, match, Tiktok, "tiktok"));
 
-command(
-   {
-      pattern: "ytv",
-      fromeMe: mode,
-      desc: "Downloads Youtube Videos",
-      type: "download",
-   },
-   async (message, match) => {
-      if (!match) return message.reply("_provide youtube url_");
-      await message.reply("_Downloading_");
-      const buff = await scraper.youtube(match);
-      return await message.sendFile(buff);
+Module({ pattern: "pinterest", fromMe: mode, desc: "Downloads Pinterest Images", type: "download" }, async (message, match) => {
+   if (!match) return message.reply("_provide a search query_");
+   await message.reply("_Searching_");
+   const request = new Pinterest();
+   const buffers = await request.pintimgs(match);
+   for (const buffer of buffers) {
+      await message.sendFile(buffer);
    }
-);
+});
 
-command(
-   {
-      pattern: "yta",
-      fromMe: mode,
-      desc: "Download Youtube Music Audio",
-      type: "download",
-   },
-   async (message, match) => {
-      if (!match) return await message.reply("_provide youtube music_");
-      await message.reply("_Downloading_");
-      const buff = await scraper.ytmp3(match);
-      return await message.sendFile(buff);
-   }
-);
+Module({ pattern: "spotify", fromMe: mode, desc: "Downloads Spotify Music", type: "download" }, async (message, match) => {
+   if (!match) return message.reply("_provide Spotify URL_");
+   await message.reply("_Downloading_");
+   const request = new Spotify();
+   const buff = await request.spotify(match);
+   const audio = await toAudio(buff, "mp3");
+   return message.sendMessage(message.jid, audio, { mimetype: "audio/mpeg" }, "audio");
+});
 
-command(
-   {
-      pattern: "story",
-      fromMe: mode,
-      desc: "Downloads Instagram stories",
-      type: "download",
-   },
-   async (message, match) => {
-      if (!match) return message.reply("_Provide a valid Instagram username_");
-      await message.reply(`_Downloading stories of ${match}..._`);
-      const res = await fetch(IronMan(`ironman/ig/story?user=${match}`));
-      const data = await res.json();
-      if (!data.status || !data.media.length) return message.reply("_No stories found for this user or this account is private_");
-      for (const dl of data.media) {
-         await message.sendFile(dl);
-      }
-   }
-);
+Module({ pattern: "ytv", fromMe: mode, desc: "Downloads Youtube Videos", type: "download" }, (message, match) => fetchMedia(message, match, Youtube, "youtube"));
 
-command(
-   {
-      pattern: "play",
-      fromMe: mode,
-      desc: "Fetches Songs",
-      type: "download",
-   },
-   async (msg, cont) => {
-      const { prefix } = msg.prefix;
-      if (!cont) return await msg.sendReply(`_Provide Me Song Name_\n\n${prefix} play Just the two of us`);
-      await msg.sendReply("_Downloading_");
-      let audio = await scraper["play"](cont);
-      audio = await toAudio(audio, "mp3");
-      return await msg.sendMessage(msg.jid, audio, { mimetype: "audio/mpeg" }, "audio");
+Module({ pattern: "yta", fromMe: mode, desc: "Download Youtube Music Audio", type: "download" }, (message, match) => fetchMedia(message, match, Youtube, "ytmp3"));
+
+Module({ pattern: "story", fromMe: mode, desc: "Downloads Instagram stories", type: "download" }, async (message, match) => {
+   if (!match) return message.reply("_Provide a valid Instagram username_");
+   await message.reply(`_Downloading stories of ${match}..._`);
+   const res = await fetch(IronMan(`ironman/ig/story?user=${match}`));
+   const data = await res.json();
+   if (!data.status || !data.media.length) return message.reply("_No stories found or account is private_");
+   for (const dl of data.media) {
+      await message.sendFile(dl);
    }
-);
+});
+
+Module({ pattern: "play", fromMe: mode, desc: "Fetches Songs", type: "download" }, async (msg, cont) => {
+   const { prefix } = msg.prefix;
+   if (!cont) return msg.sendReply(`_Provide song name_\n\n${prefix} play Just the two of us`);
+   await msg.sendReply("_Downloading_");
+   const request = new Youtube();
+   let audio = await request.play(cont);
+   audio = await toAudio(audio, "mp3");
+   return msg.sendMessage(msg.jid, audio, { mimetype: "audio/mpeg" }, "audio");
+});

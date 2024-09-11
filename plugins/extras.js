@@ -2,7 +2,7 @@ const fs = require("fs-extra");
 const path = require("path");
 const { buffThumb } = require("../media");
 const { createCanvas, loadImage } = require("canvas");
-const { command, Ephoto360API, mode, sleep } = require("../lib");
+const { Module, Ephoto360API, mode, sleep } = require("../lib");
 
 function getAbsolutePath(relativePath) {
    const projectRoot = path.resolve(__dirname, "..");
@@ -109,7 +109,7 @@ const memeCommands = [
 ];
 
 memeCommands.forEach(({ pattern, image, x, y, maxWidth, maxLines }) => {
-   command(
+   Module(
       {
          pattern,
          fromMe: mode,
@@ -129,7 +129,7 @@ memeCommands.forEach(({ pattern, image, x, y, maxWidth, maxLines }) => {
    );
 });
 
-command(
+Module(
    {
       pattern: "ep1",
       fromMe: mode,
@@ -154,7 +154,7 @@ command(
    }
 );
 
-command(
+Module(
    {
       pattern: "ep2",
       fromMe: mode,
@@ -179,7 +179,7 @@ command(
    }
 );
 
-command(
+Module(
    {
       pattern: "ep3",
       fromMe: mode,
@@ -204,7 +204,7 @@ command(
    }
 );
 
-command(
+Module(
    {
       pattern: "ep4",
       fromMe: mode,
@@ -229,7 +229,7 @@ command(
    }
 );
 
-command(
+Module(
    {
       pattern: "ep5",
       fromMe: mode,
@@ -254,7 +254,7 @@ command(
    }
 );
 
-command(
+Module(
    {
       pattern: "ep6",
       fromMe: mode,
@@ -279,7 +279,7 @@ command(
    }
 );
 
-command(
+Module(
    {
       pattern: "ep7",
       fromMe: mode,
@@ -304,7 +304,7 @@ command(
    }
 );
 
-command(
+Module(
    {
       pattern: "ep8",
       fromMe: mode,
@@ -329,7 +329,7 @@ command(
    }
 );
 
-command(
+Module(
    {
       pattern: "ep9",
       fromMe: mode,
@@ -354,7 +354,7 @@ command(
    }
 );
 
-command(
+Module(
    {
       pattern: "ep10",
       fromMe: mode,
@@ -379,7 +379,7 @@ command(
    }
 );
 
-command(
+Module(
    {
       pattern: "ep11",
       fromMe: mode,
@@ -404,7 +404,7 @@ command(
    }
 );
 
-command(
+Module(
    {
       pattern: "ep12",
       fromMe: mode,
@@ -429,7 +429,7 @@ command(
    }
 );
 
-command(
+Module(
    {
       pattern: "ep13",
       fromMe: mode,
@@ -454,7 +454,7 @@ command(
    }
 );
 
-command(
+Module(
    {
       pattern: "ep14",
       fromMe: mode,
@@ -479,7 +479,7 @@ command(
    }
 );
 
-command(
+Module(
    {
       pattern: "ep15",
       fromMe: mode,
@@ -504,7 +504,7 @@ command(
    }
 );
 
-command(
+Module(
    {
       pattern: "ep16",
       fromMe: mode,
@@ -529,7 +529,7 @@ command(
    }
 );
 
-command(
+Module(
    {
       pattern: "ep17",
       fromMe: mode,
@@ -554,7 +554,7 @@ command(
    }
 );
 
-command(
+Module(
    {
       pattern: "ep18",
       fromMe: mode,
@@ -579,7 +579,7 @@ command(
    }
 );
 
-command(
+Module(
    {
       pattern: "ep19",
       fromMe: mode,
@@ -604,7 +604,7 @@ command(
    }
 );
 
-command(
+Module(
    {
       pattern: "ep20",
       fromMe: mode,
@@ -629,7 +629,7 @@ command(
    }
 );
 
-command(
+Module(
    {
       pattern: "ep21",
       fromMe: mode,
@@ -654,7 +654,7 @@ command(
    }
 );
 
-command(
+Module(
    {
       pattern: "ep22",
       fromMe: mode,
@@ -679,7 +679,7 @@ command(
    }
 );
 
-command(
+Module(
    {
       pattern: "ep23",
       fromMe: mode,
@@ -704,7 +704,7 @@ command(
    }
 );
 
-command(
+Module(
    {
       pattern: "ep24",
       fromMe: mode,
@@ -729,7 +729,7 @@ command(
    }
 );
 
-command(
+Module(
    {
       pattern: "ep25",
       fromMe: mode,
@@ -754,7 +754,7 @@ command(
    }
 );
 
-command(
+Module(
    {
       pattern: "ep26",
       fromMe: mode,
@@ -779,7 +779,7 @@ command(
    }
 );
 
-command(
+Module(
    {
       pattern: "ep27",
       fromMe: mode,
@@ -804,7 +804,7 @@ command(
    }
 );
 
-command(
+Module(
    {
       pattern: "ep28",
       fromMe: mode,
@@ -829,7 +829,7 @@ command(
    }
 );
 
-command(
+Module(
    {
       pattern: "ep29",
       fromMe: mode,
@@ -854,7 +854,7 @@ command(
    }
 );
 
-command(
+Module(
    {
       pattern: "ep30",
       fromMe: mode,
@@ -879,7 +879,7 @@ command(
    }
 );
 
-command(
+Module(
    {
       pattern: "ep31",
       fromMe: mode,
@@ -904,7 +904,7 @@ command(
    }
 );
 
-command(
+Module(
    {
       pattern: "ep32",
       fromMe: mode,
@@ -929,7 +929,7 @@ command(
    }
 );
 
-command(
+Module(
    {
       pattern: "ep33",
       fromMe: mode,
@@ -954,7 +954,7 @@ command(
    }
 );
 
-command(
+Module(
    {
       pattern: "ep34",
       fromMe: mode,
@@ -979,7 +979,7 @@ command(
    }
 );
 
-command(
+Module(
    {
       pattern: "ep35",
       fromMe: mode,
@@ -1004,7 +1004,7 @@ command(
    }
 );
 
-command(
+Module(
    {
       pattern: "ep36",
       fromMe: mode,

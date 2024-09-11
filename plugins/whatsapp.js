@@ -1,4 +1,4 @@
-const { command, serialize, parsedJid } = require("../lib/");
+const { Module, serialize, parsedJid } = require("../lib/");
 const { DELETED_LOG_CHAT, DELETED_LOG, STATUS_SAVER } = require("../config");
 const { loadMessage, getName } = require("../lib/db/StoreDb");
 const { PausedChats, WarnDB } = require("../lib/db");
@@ -6,7 +6,7 @@ const { WARN_COUNT } = require("../config");
 const { saveWarn, resetWarn } = WarnDB;
 const { getFilter, setFilter, deleteFilter } = require("../lib/db/filters");
 
-command(
+Module(
    {
       pattern: "vv",
       fromMe: true,
@@ -20,7 +20,7 @@ command(
    }
 );
 
-command(
+Module(
    {
       on: "text",
       fromMe: !STATUS_SAVER,
@@ -56,7 +56,7 @@ function parseSecs(d) {
    return hDisplay + mDisplay + sDisplay;
 }
 
-command(
+Module(
    {
       on: "text",
       fromMe: false,
@@ -86,7 +86,7 @@ command(
    }
 );
 
-command(
+Module(
    {
       on: "text",
       fromMe: true,
@@ -101,7 +101,7 @@ command(
    }
 );
 
-command(
+Module(
    {
       pattern: "afk ?(.*)",
       fromMe: true,
@@ -120,7 +120,7 @@ command(
    }
 );
 
-command(
+Module(
    {
       pattern: "pp",
       fromMe: true,
@@ -135,7 +135,7 @@ command(
    }
 );
 
-command(
+Module(
    {
       pattern: "rpp",
       fromMe: true,
@@ -148,7 +148,7 @@ command(
    }
 );
 
-command(
+Module(
    {
       pattern: "setname",
       fromMe: true,
@@ -162,7 +162,7 @@ command(
    }
 );
 
-command(
+Module(
    {
       pattern: "block",
       fromMe: true,
@@ -184,7 +184,7 @@ command(
    }
 );
 
-command(
+Module(
    {
       pattern: "unblock",
       fromMe: true,
@@ -206,7 +206,7 @@ command(
    }
 );
 
-command(
+Module(
    {
       pattern: "jid",
       fromMe: true,
@@ -218,7 +218,7 @@ command(
    }
 );
 
-command(
+Module(
    {
       pattern: "dlt",
       fromMe: true,
@@ -235,7 +235,7 @@ command(
       }
    }
 );
-command(
+Module(
    {
       on: "delete",
       fromMe: false,
@@ -262,7 +262,7 @@ command(
    }
 );
 
-command(
+Module(
    {
       pattern: "bio",
       fromMe: true,
@@ -277,7 +277,7 @@ command(
    }
 );
 
-command(
+Module(
    {
       pattern: "forward",
       fromMe: true,
@@ -295,7 +295,7 @@ command(
    }
 );
 
-command(
+Module(
    {
       pattern: "caption ?(.*)",
       fromMe: true,
@@ -309,7 +309,7 @@ command(
    }
 );
 
-command(
+Module(
    {
       pattern: "getprivacy ?(.*)",
       fromMe: true,
@@ -324,7 +324,7 @@ command(
    }
 );
 
-command(
+Module(
    {
       pattern: "lastseen ?(.*)",
       fromMe: true,
@@ -340,7 +340,7 @@ command(
    }
 );
 
-command(
+Module(
    {
       pattern: "online ?(.*)",
       fromMe: true,
@@ -356,7 +356,7 @@ command(
    }
 );
 
-command(
+Module(
    {
       pattern: "mypp ?(.*)",
       fromMe: true,
@@ -372,7 +372,7 @@ command(
    }
 );
 
-command(
+Module(
    {
       pattern: "mystatus ?(.*)",
       fromMe: true,
@@ -388,7 +388,7 @@ command(
    }
 );
 
-command(
+Module(
    {
       pattern: "read ?(.*)",
       fromMe: true,
@@ -404,7 +404,7 @@ command(
    }
 );
 
-command(
+Module(
    {
       pattern: "groupadd ?(.*)",
       fromMe: true,
@@ -420,7 +420,7 @@ command(
    }
 );
 
-command(
+Module(
    {
       pattern: "quoted",
       fromMe: true,
@@ -438,7 +438,7 @@ command(
    }
 );
 
-command(
+Module(
    {
       pattern: "pause",
       fromMe: true,
@@ -457,7 +457,7 @@ command(
    }
 );
 
-command(
+Module(
    {
       pattern: "resume",
       fromMe: true,
@@ -485,7 +485,7 @@ command(
    }
 );
 
-command(
+Module(
    {
       pattern: "warn",
       fromMe: true,
@@ -512,7 +512,7 @@ command(
    }
 );
 
-command(
+Module(
    {
       pattern: "rwarn",
       fromMe: true,
@@ -529,7 +529,7 @@ command(
    }
 );
 
-command(
+Module(
    {
       pattern: "filter",
       fromMe: true,
@@ -561,7 +561,7 @@ command(
    }
 );
 
-command(
+Module(
    {
       pattern: "stop",
       fromMe: true,
@@ -581,7 +581,7 @@ command(
    }
 );
 
-command({ on: "text", fromMe: false, dontAddCommandList: true }, async (message, match) => {
+Module({ on: "text", fromMe: false, dontAddCommandList: true }, async (message, match) => {
    var filtreler = await getFilter(message.jid);
    if (!filtreler) return;
    filtreler.map(async filter => {

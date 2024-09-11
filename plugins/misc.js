@@ -1,4 +1,4 @@
-const { command, mode } = require("../lib");
+const { Module, mode } = require("../lib");
 const simpleGit = require("simple-git");
 const git = simpleGit();
 const { exec } = require("child_process");
@@ -43,7 +43,7 @@ const restart = () => {
    });
 };
 
-command(
+Module(
    {
       pattern: "update",
       fromMe: mode,
@@ -72,7 +72,7 @@ command(
    }
 );
 
-command(
+Module(
    {
       pattern: "upgrade",
       fromMe: mode,
@@ -96,7 +96,7 @@ command(
    }
 );
 
-command(
+Module(
    {
       pattern: "repo",
       fromMe: mode,

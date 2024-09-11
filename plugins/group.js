@@ -1,10 +1,10 @@
-const { command, mode, parsedJid, isAdmin } = require("../lib/");
+const { Module, mode, parsedJid, isAdmin } = require("../lib/");
 const { setMessage, getMessage, delMessage, getStatus, toggleStatus } = require("../lib/db").Greetings;
 const { setAntiPromote, getAntiPromote, setAntiDemote, getAntiDemote } = require("../lib/db/groupSettings.js");
 const { setAntiLink, getAntiLink } = require("../lib/db/antilink");
 const moment = require("moment");
 
-command(
+Module(
    {
       pattern: "antilink ?(.*)",
       fromMe: mode,
@@ -34,7 +34,7 @@ command(
    }
 );
 
-command(
+Module(
    {
       pattern: "add",
       fromMe: mode,
@@ -60,7 +60,7 @@ command(
    }
 );
 
-command(
+Module(
    {
       pattern: "kick",
       fromMe: mode,
@@ -85,7 +85,7 @@ command(
       });
    }
 );
-command(
+Module(
    {
       pattern: "promote",
       fromMe: mode,
@@ -110,7 +110,7 @@ command(
       });
    }
 );
-command(
+Module(
    {
       pattern: "demote",
       fromMe: mode,
@@ -136,7 +136,7 @@ command(
    }
 );
 
-command(
+Module(
    {
       pattern: "mute",
       fromMe: mode,
@@ -151,7 +151,7 @@ command(
    }
 );
 
-command(
+Module(
    {
       pattern: "unmute",
       fromMe: mode,
@@ -166,7 +166,7 @@ command(
    }
 );
 
-command(
+Module(
    {
       pattern: "gjid",
       fromMe: mode,
@@ -186,7 +186,7 @@ command(
    }
 );
 
-command(
+Module(
    {
       pattern: "tagall",
       fromMe: mode,
@@ -206,7 +206,7 @@ command(
    }
 );
 
-command(
+Module(
    {
       pattern: "tag",
       fromMe: mode,
@@ -225,7 +225,7 @@ command(
    }
 );
 
-command(
+Module(
    {
       pattern: "welcome",
       fromMe: mode,
@@ -273,7 +273,7 @@ command(
    }
 );
 
-command(
+Module(
    {
       pattern: "goodbye",
       fromMe: mode,
@@ -316,7 +316,7 @@ command(
    }
 );
 
-command(
+Module(
    {
       pattern: "ginfo",
       fromMe: mode,
@@ -356,7 +356,7 @@ command(
    }
 );
 
-command(
+Module(
    {
       pattern: "gname",
       fromMe: mode,
@@ -373,7 +373,7 @@ command(
    }
 );
 
-command(
+Module(
    {
       pattern: "gdesc",
       fromMe: mode,
@@ -390,7 +390,7 @@ command(
    }
 );
 
-command(
+Module(
    {
       pattern: "gpp",
       fromMe: mode,
@@ -408,7 +408,7 @@ command(
    }
 );
 
-command(
+Module(
    {
       pattern: "revoke",
       fromMe: mode,
@@ -424,7 +424,7 @@ command(
    }
 );
 
-command(
+Module(
    {
       pattern: "invite",
       fromMe: mode,
@@ -440,7 +440,7 @@ command(
    }
 );
 
-command(
+Module(
    {
       pattern: "requests",
       fromMe: mode,
@@ -463,7 +463,7 @@ command(
    }
 );
 
-command(
+Module(
    {
       pattern: "accept",
       fromMe: mode,
@@ -492,7 +492,7 @@ command(
    }
 );
 
-command(
+Module(
    {
       pattern: "reject",
       fromMe: mode,
@@ -521,7 +521,7 @@ command(
    }
 );
 
-command(
+Module(
    {
       pattern: "leave",
       fromMe: mode,
@@ -536,7 +536,7 @@ command(
    }
 );
 
-command(
+Module(
    {
       pattern: "admins",
       fromMe: mode,
@@ -558,7 +558,7 @@ command(
    }
 );
 
-command(
+Module(
    {
       pattern: "gclink",
       fromMe: mode,
@@ -579,7 +579,7 @@ command(
    }
 );
 
-command(
+Module(
    {
       pattern: "poll",
       fromMe: mode,
@@ -602,7 +602,7 @@ command(
    }
 );
 
-command(
+Module(
    {
       pattern: "kickall",
       fromMe: mode,
@@ -643,7 +643,7 @@ command(
    }
 );
 
-command(
+Module(
    {
       pattern: "antipromote",
       fromMe: mode,
@@ -662,7 +662,7 @@ command(
    }
 );
 
-command(
+Module(
    {
       pattern: "antidemote",
       fromMe: mode,
@@ -681,7 +681,7 @@ command(
    }
 );
 
-command(
+Module(
    {
       on: "group_update",
    },
@@ -723,7 +723,7 @@ command(
 );
 
 let x_astrial = true;
-command(
+Module(
    {
       pattern: "autounmute",
       fromMe: mode,
@@ -767,7 +767,7 @@ command(
    }
 );
 
-command(
+Module(
    {
       pattern: "protect",
       fromMe: mode,
@@ -793,7 +793,7 @@ command(
    }
 );
 
-command(
+Module(
    {
       on: "gcupdate",
       fromMe: mode,
@@ -816,7 +816,7 @@ command(
       }
    }
 );
-command(
+Module(
    {
       pattern: "del",
       fromMe: mode,
