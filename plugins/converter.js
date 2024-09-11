@@ -1,5 +1,5 @@
 const config = require("../config");
-const { Module, mode, toAudio, webp2mp4, textToImg, listall, getUrl } = require("../lib/");
+const { Module, mode, toAudio, webp2mp4, textToImg, listall, upload } = require("../lib/");
 Module(
    {
       pattern: "sticker",
@@ -76,7 +76,7 @@ Module(
       if (!message.reply_message.image) return await message.sendReply("_Reply An Image!_");
       await message.sendReply("_Processing Image_");
       const saveImage = await m.quoted.download();
-      const url = await getUrl(saveImage);
+      const url = await upload(saveImage);
       return await message.send(url);
    }
 );
