@@ -1,6 +1,6 @@
 {
    "name": "fxop-md",
-   "version": "2.5.0",
+   "version": "3.0.0",
    "description": "Simple WhatsApp Bot",
    "main": "index.js",
    "directories": {
