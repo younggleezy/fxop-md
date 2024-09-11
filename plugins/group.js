@@ -1,7 +1,7 @@
 const { command, mode, parsedJid, isAdmin } = require("../lib/");
-const { setMessage, getMessage, delMessage, getStatus, toggleStatus } = require("../lib/database").Greetings;
-const { setAntiPromote, getAntiPromote, setAntiDemote, getAntiDemote } = require("../lib/database/groupSettings.js");
-const { setAntiLink, getAntiLink } = require("../lib/database/antilink");
+const { setMessage, getMessage, delMessage, getStatus, toggleStatus } = require("../lib/db").Greetings;
+const { setAntiPromote, getAntiPromote, setAntiDemote, getAntiDemote } = require("../lib/db/groupSettings.js");
+const { setAntiLink, getAntiLink } = require("../lib/db/antilink");
 const moment = require("moment");
 
 command(

@@ -4,7 +4,7 @@ const axios = require("axios");
 const plugins = require("../lib/plugins");
 const { command, mode, getBuffer, runtime, tiny, formatBytes, buffpath } = require("../lib");
 const { exec } = require("child_process");
-const { PluginDB, installPlugin } = require("../lib/database").Plugins;
+const { PluginDB, installPlugin } = require("../lib/db").Plugins;
 const { BOT_INFO, TIME_ZONE } = require("../config");
 
 command(

@@ -3,7 +3,7 @@ const path = require("path");
 const express = require("express");
 const config = require("./config");
 const { connect, writeSession, patch, parseDir, sleep } = require("./lib");
-const { getandRequirePlugins } = require("./lib/database/plugins");
+const { getandRequirePlugins } = require("./lib/db/plugins");
 
 class BotSystem {
    constructor() {
@@ -14,7 +14,7 @@ class BotSystem {
 
    async initialize() {
       try {
-         await Promise.all([patch(), parseDir(path.join(__dirname, "/lib/database/")), parseDir(path.join(__dirname, "/plugins/")), this.ensureTempDir(), this.createGitignore()]);
+         await Promise.all([patch(), parseDir(path.join(__dirname, "/lib/db/")), parseDir(path.join(__dirname, "/plugins/")), this.ensureTempDir(), this.createGitignore()]);
 
          await sleep(2000);
          console.log("Syncing Database");

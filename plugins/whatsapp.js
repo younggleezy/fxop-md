@@ -1,10 +1,10 @@
 const { command, serialize, parsedJid } = require("../lib/");
 const { DELETED_LOG_CHAT, DELETED_LOG, STATUS_SAVER } = require("../config");
-const { loadMessage, getName } = require("../lib/database/StoreDb");
-const { PausedChats, WarnDB } = require("../lib/database");
+const { loadMessage, getName } = require("../lib/db/StoreDb");
+const { PausedChats, WarnDB } = require("../lib/db");
 const { WARN_COUNT } = require("../config");
 const { saveWarn, resetWarn } = WarnDB;
-const { getFilter, setFilter, deleteFilter } = require("../lib/database/filters");
+const { getFilter, setFilter, deleteFilter } = require("../lib/db/filters");
 
 command(
    {
