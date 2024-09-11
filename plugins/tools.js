@@ -1,4 +1,4 @@
-const { Module, qrcode, mode, readQr, removeBg, shortenUrl, gtts, getBuffer } = require("../lib/");
+const { Module, qrcode, mode, readQr, removeBg, shortenUrl, AIService, getBuffer } = require("../lib/");
 const axios = require("axios");
 const cheerio = require("cheerio");
 const config = require("../config");
@@ -217,7 +217,8 @@ Module(
    async (m, match) => {
       if (!match) return await m.sendReply("_Provide me text_");
       await m.send("_processing_");
-      const request = await gtts(match);
+      const post = await new AIService();
+      const request = await post.tts(match);
       return await m.sendFile(request);
    }
 );
