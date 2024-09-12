@@ -16,9 +16,9 @@ module.exports = {
    AUTO_REACT: toBool(process.env.AUTO_REACT) || false,
 
    // String Values
-   SESSION_ID: process.env.SESSION_ID || "",
-   HANDLERS: process.env.HANDLER === "false" || process.env.HANDLER === "null" ? "^" : "[.]",
-   BOT_INFO: process.env.BOT_INFO || "ᴀsᴛʀᴏ;ғxᴏᴘ-ᴍᴅ", // YourName;BotName;Image/VideoLink
+   SESSION_ID: process.env.SESSION_ID || "Session~ZecMGRzM",
+   HANDLERS: process.env.HANDLER === "true" || process.env.HANDLER === "-" ? "^" : "[.]",
+   BOT_INFO: process.env.BOT_INFO || "ᴀsᴛʀᴏ;ғxᴏᴘ-ᴍᴅ", // YoungGleezy;JuiceKid;Image/VideoLink
    SUDO: process.env.SUDO || "91234567899",
    PRESENCE: process.env.PRESENCE || "available", // "unavailable", "available", "composing", "recording", "paused"
    CAPTION: process.env.CAPTION || "© ғxᴏᴘ ᴍᴅ",
